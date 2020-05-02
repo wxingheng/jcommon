@@ -1,9 +1,3 @@
-const jObjDoubleRanking = function(){
-    console.log('jObjDoubleRanking+++')
-}
-
-
-
 /**
  * asdf asdf
  * asdf asdf asdff
@@ -12,6 +6,3 @@ const jObjDoubleRanking = function(){
 const jArrDoubleRanking = function () {
   console.log('jArrDoubleRanking+++')
 }
-
-
-

@@ -1,11 +1,12 @@
 {
   "name": "jcommon",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "JavaScript常用函数库",
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "copy": "node ./script/build.js"
   },
   "keywords": [
     "jutils",
@@ -15,12 +16,22 @@
   ],
   "author": "wuxh",
   "license": "MIT",
+  "npmName": "jcommon",
+  "npmFileMap": [
+    {
+      "basePath": "src",
+      "files": [
+        "**/*"
+      ]
+    }
+  ],
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-preset-env": "^1.7.0",
+    "copy": "^0.3.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
