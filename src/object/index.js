@@ -1,3 +1,6 @@
-const jObjDoubleRanking = function(){
-    console.log('jObjDoubleRanking+++')
-}
+/** --------------------对象方法----------------------------- */
+
+/**
+ *
+ */
+export const jObjDoubleRanking = function () {}

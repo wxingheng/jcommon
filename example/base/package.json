@@ -18,7 +18,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "jcommon": "^1.0.5",
+    "jcommon": "^1.0.6",
     "rxjs": "^6.5.5"
   }
 }
