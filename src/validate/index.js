@@ -1,10 +1,21 @@
-/** --------------------校验相关----------------------------- */
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-05 15:08:11
+ * @LastEditTime: 2020-05-06 13:57:15
+ * @LastEditors: wuxh
+ * @Description: 校验相关
+ * @FilePath: /jcommon/src/validate/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
 
 /**
- * 身份证号码校验
- * @param {*} e
- * jValUserId('421182199409274710')
- *  ''
+ * @description: 身份证号码校验
+ * @author: wuxh
+ * @Date: 2020-05-06 13:49:58
+ * @param {e}
+ * @return: String<msg> | Boolean
+ * @example: jValUserId('421182199409274710') => ''
+ * jValUserId('421182199409') => '身份证号码长度应该为18位'
  */
 export const jValUserId = function (e) {
   let i,
@@ -114,3 +125,126 @@ export const jValUserId = function (e) {
     18 != e.length ? '' : i != e.toLowerCase() ? '不是合法的身份证号码' : ''
   )
 }
+
+/**
+ * @description: 精准判断数据类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:51:50
+ * @param {data} any
+ * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
+ * @return: Boolean
+ * @example: jValType(123, 'String') => false
+ * jValType('123', 'String') => true
+ */
+export const jValType = (data, type) =>
+  Object.prototype.toString.call(data) === `[object ${type}]`
+
+/**
+ * @description: 判断String类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsString = data => jValType(data, 'String')
+
+/**
+ * @description: 判断Number类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsNumber = data => jValType(data, 'Number')
+
+/**
+ * @description: 判断Boolean类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsBoolean = data => jValType(data, 'Boolean')
+
+/**
+ * @description: 判断Undefined类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsUndefined = data => jValType(data, 'Undefined')
+
+/**
+ * @description: 判断Null类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsNull = data => jValType(data, 'Null')
+
+/**
+ * @description: 判断Function类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsFunc = data => jValType(data, 'Function')
+
+/**
+ * @description: 判断Date类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsDate = data => jValType(data, 'Date')
+
+/**
+ * @description: 判断Array类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsArray = data => jValType(data, 'Array')
+
+/**
+ * @description: 判断RegExp类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsReg = data => jValType(data, 'RegExp')
+
+/**
+ * @description: 判断Error类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsError = data => jValType(data, 'Error')
+
+/**
+ * @description: 判断Object类型
+ * @author: wuxh
+ * @Date: 2020-05-06 13:53:16
+ * @param {data} any
+ * @return: Boolean
+ * @example:
+ */
+export const jValIsObject = data => jValType(data, 'Object')

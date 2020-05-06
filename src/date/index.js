@@ -1,4 +1,12 @@
-/** --------------------时间方法----------------------------- */
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-04 21:24:53
+ * @LastEditTime: 2020-05-06 12:06:49
+ * @LastEditors: wuxh
+ * @Description: 处理时间相关
+ * @FilePath: /jcommon/src/date/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
 
 function addZero (v, size) {
   for (let i = 0, len = size - (v + '').length; i < len; i++) {
@@ -8,11 +16,14 @@ function addZero (v, size) {
 }
 
 /**
- * 获取两个时间的间隔
- * @param {*} st
- * @param {*} et
- * jDateInterval(new Date().getTime(), 1589661011714)
- * 11天13小时46分钟21秒
+ * @description: 获取两个时间的间隔
+ * @author: wuxh
+ * @Date: 2020-05-06 12:04:39
+ * @param {st}
+ * @param {et}
+ * @return: String
+ * @example: jDateInterval(new Date().getTime(), 1589661011714)
+ * => 11天13小时46分钟21秒
  */
 export const jDateInterval = function (st, et) {
   let timeLeft = [0, 0, 0, 0],
@@ -38,11 +49,14 @@ export const jDateInterval = function (st, et) {
 }
 
 /**
- * 时间戳的转换（自定义格式）
- * @param {*} date
- * @param {*} formatStr
- * jDateFormat(new Date(), 'YYYY-MM')
- *  "2020-05"
+ * @description:  时间戳的转换（自定义格式）
+ * @author: wuxh
+ * @Date: 2020-05-06 12:05:28
+ * @param {date}
+ * @param {formatStr}
+ * @return: String
+ * @example: jDateFormat(new Date(), 'YYYY-MM')
+ * => "2020-05"
  */
 export const jDateFormat = function (date, formatStr) {
   const arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
@@ -62,4 +76,21 @@ export const jDateFormat = function (date, formatStr) {
       .replace(/w/g, date.getDay())
       .replace(/W/g, arrWeek[date.getDay()])
   return str
+}
+
+/**
+ * @description: 获取当前月份的天数
+ * @author: wuxh
+ * @Date: 2020-05-06 12:06:24
+ * @param {str} 
+ * @return: Number
+ * @example: jDateMonthDays('2020-05-06')
+ * => 31
+ */ 
+export const jDateMonthDays = str => {
+  const curDate = str ? new Date(str) : new Date()
+  const curMonth = curDate.getMonth()
+  curDate.setMonth(curMonth + 1)
+  curDate.setDate(0)
+  return curDate.getDate()
 }

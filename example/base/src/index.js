@@ -6,7 +6,7 @@
 // import { cArrDoubleRanking } from 'jcommon/array';
 
 console.log('222')
-import { jArrDoubleRanking , jBroGetInfo} from 'jcommon'
+import { jArrDoubleRanking , jBroGetInfo, jOsInfo} from 'jcommon'
 
 
 document.getElementById('root').innerText = '123'
@@ -29,4 +29,6 @@ const data = jArrDoubleRanking(
   console.log('666', data)
 
   console.log('777', jBroGetInfo())
+
+  console.log('888', jOsInfo())
 

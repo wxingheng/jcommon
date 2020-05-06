@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "JavaScript 常用纯函数工具库",
   "main": "./src/index.js",
   "scripts": {
@@ -13,11 +13,10 @@
     "url": "git+https://github.com/wxingheng/jcommon.git"
   },
   "keywords": [
-    "jutils",
+    "jcommon",
     "util",
     "tool",
-    "common-util",
-    "jcommon"
+    "common-util"
   ],
   "author": {
     "name": "wuxh",

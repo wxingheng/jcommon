@@ -1380,10 +1380,10 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-jcommon@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/jcommon/-/jcommon-1.0.6.tgz#6550360827468a0ebbbdd1cdf3a82e9bc4d378c2"
-  integrity sha512-FgC9MoTj1CAQMA1JpB/SZQvI7eQziPUnRGIGZN0/4EykYAnzglr/x3z4JqYT7D2Y4EGhl2HBcozj+vegPZ03sA==
+jcommon@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/jcommon/-/jcommon-1.0.9.tgz#fc4ba342f63bd11a8eaa24041f2b260045229992"
+  integrity sha512-rNack3wePDKoxGQY8mEGHz1tl0adDZpGmUZV/YMlzVVNm+PbhMyaBx0D2+wCuiVkGYEJgJIg4sQUvgLSXNa+tw==
 
 json-parse-better-errors@^1.0.2:
   version "1.0.2"

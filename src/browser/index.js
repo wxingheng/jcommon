@@ -1,5 +1,22 @@
-/** --------------------浏览器方法----------------------------- */
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-04 21:14:00
+ * @LastEditTime: 2020-05-06 11:55:17
+ * @LastEditors: wuxh
+ * @Description: 浏览器相关
+ * @FilePath: /jcommon/src/browser/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
 
+/**
+ * @description: 获取浏览器相关信息
+ * @author: wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: jBroGetInfo()
+ * => {name: "Chrome", version: "81.0.4044.129"}
+ */
 export const jBroGetInfo = function () {
   let e,
     t,
