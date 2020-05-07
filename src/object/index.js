@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-06 22:35:41
+ * @LastEditTime: 2020-05-07 10:37:28
  * @LastEditors: wuxh
  * @Description: 处理对象相关
  * @FilePath: /jcommon/src/object/index.js
@@ -15,7 +15,7 @@
  * @param {...any} args
  * @return: any
  * @example: getV({name: {children: 123}}, 'name', 'children')
- * => 123
+  => 123
  */
 export const jObjGetV = function (...args) {
   return args.length >= 2
@@ -30,7 +30,7 @@ export const jObjGetV = function (...args) {
  * @param {obj}
  * @return: Object
  * @example: jObjClone({name: 123})
- * => {name: 123}
+  => {name: 123}
  */
 export const jObjClone = function (obj) {
   let str,
@@ -56,9 +56,9 @@ export const jObjClone = function (obj) {
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
  * @example:  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
- * jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+  jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
  */
-export const jObjMerge = (oldObj, newObj, keys) => {
+export const jObjMerge = function (oldObj, newObj, keys) {
   keys = keys || []
   for (const key in newObj) {
     if (jValIsObject(newObj[key]) && jValIsObject(oldObj[key])) {

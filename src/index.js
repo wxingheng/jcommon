@@ -1,13 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-06 11:53:23
+ * @LastEditTime: 2020-05-07 10:33:18
  * @LastEditors: wuxh
  * @Description: 数组方法
  * @FilePath: /jcommon/src/array/index.js
  * @https://github.com/wxingheng/jcommon
  */
-
 
 /**
  * @description: 处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
@@ -80,9 +79,9 @@ export const jArrDoubleRanking = function (arr, options) {
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
  * @example: jArrRandomDate(2, ['name', 'value'])
- * => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
- */ 
-export const jArrRandomDate = (num, arr) => {
+  => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
+ */
+export const jArrRandomDate = function (num, arr) {
   const result = []
   for (let i = 0; i < num; i++) {
     const obj = {}
@@ -103,10 +102,10 @@ export const jArrRandomDate = (num, arr) => {
  * @param {v} 对象的value取值，默认是数组的每一个元素作为值
  * @return: Object
  * @example: const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
- * jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
- * jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
+  jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
+  jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
  */
-export const jArrByObj = (arr, key, v = '') => {
+export const jArrByObj = function (arr, key, v = '') {
   const obj = {}
   arr.forEach(function (d) {
     obj[d[key]] = v ? d[v] : d
@@ -120,7 +119,7 @@ export const jArrByObj = (arr, key, v = '') => {
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-06 11:55:17
+ * @LastEditTime: 2020-05-07 10:33:32
  * @LastEditors: wuxh
  * @Description: 浏览器相关
  * @FilePath: /jcommon/src/browser/index.js
@@ -134,7 +133,7 @@ export const jArrByObj = (arr, key, v = '') => {
  * @param {} 
  * @return: Object
  * @example: jBroGetInfo()
- * => {name: "Chrome", version: "81.0.4044.129"}
+  => {name: "Chrome", version: "81.0.4044.129"}
  */
 export const jBroGetInfo = function () {
   let e,
@@ -190,96 +189,8 @@ export const jBroGetInfo = function () {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-04 21:17:39
- * @LastEditTime: 2020-05-06 12:02:37
- * @LastEditors: wuxh
- * @Description: 数据持久化，缓存
- * @FilePath: /jcommon/src/cache/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: localStorage
- * @author: wuxh
- * @Date: 2020-05-06 11:55:58
- * @param {}
- * @return: Object
- */
-
-export const jCaStorage = {
-  /**
-   * @description: 删除
-   * @author: wuxh
-   * @Date: 2020-05-06 11:56:29
-   * @param {key}
-   * @return: undefined
-   * @example: jCaStorage().removeStorage('test')
-   * => undefined
-   */
-
-  removeStorage: function (key) {
-    window.localStorage.removeItem(key)
-  },
-  /**
-   * @description: 保存
-   * @author: wuxh
-   * @Date: 2020-05-06 11:56:29
-   * @param {key}
-   * @param {value}
-   * @param {isJson}
-   * @return: undefined
-   * @example: jCaStorage().saveStorage('test', '001')
-   * => undefined
-   */
-  saveStorage: function (key, value, isJson) {
-    try {
-      window.localStorage.setItem(key, isJson ? JSON.stringify(value) : value)
-    } catch (e) {
-      console.error(e)
-    }
-  },
-  /**
-   * @description: 获取
-   * @author: wuxh
-   * @Date: 2020-05-06 12:00:37
-   * @param {key}
-   * @return: String
-   * @example: jCaStorage().getStorage('test')
-   * => '001'
-   */
-  getStorage: function (key) {
-    return window.localStorage.getItem(key)
-  },
-  /**
-   * @description: 是否支持local
-   * @author: wuxh
-   * @Date: 2020-05-06 12:01:43
-   * @param
-   * @return: Boolean
-   * @example: jCaStorage().isSupportStorage()
-   * => true
-   */
-  isSupportStorage: function () {
-    if (!window.localStorage) {
-      return false
-    }
-    try {
-      window.localStorage.setItem('JUTILS_STOARGE_TEST', true)
-      window.localStorage.removeItem('JUTILS_STOARGE_TEST')
-      return true
-    } catch (e) {
-      return false
-    }
-  }
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-06 21:26:31
+ * @LastEditTime: 2020-05-07 10:34:35
  * @LastEditors: wuxh
  * @Description: 处理时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -294,7 +205,7 @@ export const jCaStorage = {
  * @param {et}
  * @return: String
  * @example: jDateInterval(new Date().getTime(), 1589661011714)
- * => 11天13小时46分钟21秒
+  => 11天13小时46分钟21秒
  */
 export const jDateInterval = function (st, et) {
   let timeLeft = [0, 0, 0, 0],
@@ -327,7 +238,7 @@ export const jDateInterval = function (st, et) {
  * @param {formatStr}
  * @return: String
  * @example: jDateFormat(new Date(), 'YYYY-MM')
- * => "2020-05"
+  => "2020-05"
  */
 export const jDateFormat = function (date, formatStr) {
   function addZero (v, size) {
@@ -363,10 +274,9 @@ export const jDateFormat = function (date, formatStr) {
  * @param {str}
  * @return: Number
  * @example: jDateMonthDays('2020-05-06')
- * => 31
+  => 31
  */
-
-export const jDateMonthDays = str => {
+export const jDateMonthDays = function (str) {
   const curDate = str ? new Date(str) : new Date()
   const curMonth = curDate.getMonth()
   curDate.setMonth(curMonth + 1)
@@ -379,8 +289,86 @@ export const jDateMonthDays = str => {
 
 /*
  * @Author: wuxh
+ * @Date: 2020-05-04 21:17:39
+ * @LastEditTime: 2020-05-07 10:33:48
+ * @LastEditors: wuxh
+ * @Description: 数据持久化，缓存
+ * @FilePath: /jcommon/src/cache/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+
+/**
+ * @description: 删除
+ * @author: wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
+ * @example: jCaStorage().removeStorage('test')
+  => undefined
+ */
+export const jCaRemoveStorage = function (key) {
+  window.localStorage.removeItem(key)
+}
+/**
+ * @description: 保存
+ * @author: wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: jCaStorage().saveStorage('test', '001')
+  => undefined
+ */
+export const jCaSaveStorage = function (key, value, isJson) {
+  try {
+    window.localStorage.setItem(key, isJson ? JSON.stringify(value) : value)
+  } catch (e) {
+    console.error(e)
+  }
+}
+/**
+ * @description: 获取
+ * @author: wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: jCaStorage().getStorage('test')
+  => '001'
+ */
+export const jCaGetStorage = function (key) {
+  return window.localStorage.getItem(key)
+}
+/**
+ * @description: 是否支持local
+ * @author: wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param
+ * @return: Boolean
+ * @example: jCaStorage().isSupportStorage()
+  => true
+ */
+export const jCaIsStorage = function () {
+  if (!window.localStorage) {
+    return false
+  }
+  try {
+    window.localStorage.setItem('JUTILS_STOARGE_TEST', true)
+    window.localStorage.removeItem('JUTILS_STOARGE_TEST')
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+
+
+
+/*
+ * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2020-05-06 12:08:08
+ * @LastEditTime: 2020-05-07 10:34:46
  * @LastEditors: wuxh
  * @Description: 用户设备相关
  * @FilePath: /jcommon/src/devices/index.js
@@ -394,7 +382,7 @@ export const jDateMonthDays = str => {
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
  * @example: jOsInfo()
- * => {os: "mac", version: "10.15.3"}
+  => {os: "mac", version: "10.15.3"}
  */
 export const jOsInfo = function (e) {
   e = e || navigator.userAgent
@@ -434,7 +422,7 @@ export const jOsInfo = function (e) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2020-05-06 12:10:17
+ * @LastEditTime: 2020-05-07 10:34:57
  * @LastEditors: wuxh
  * @Description: 数字处理相关
  * @FilePath: /jcommon/src/math/index.js
@@ -449,10 +437,11 @@ export const jOsInfo = function (e) {
  * @param {end}
  * @return: Number
  * @example: jMathRandom(1, 10)
- * => 3
+  => 3
  */
-export const jMathRandom = (str, end) =>
-  Math.floor(Math.random() * (end - str) + str)
+export const jMathRandom = function (str, end) {
+  return Math.floor(Math.random() * (end - str) + str)
+}
 
 
 
@@ -460,7 +449,7 @@ export const jMathRandom = (str, end) =>
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-06 12:12:33
+ * @LastEditTime: 2020-05-07 10:36:37
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -474,7 +463,7 @@ export const jMathRandom = (str, end) =>
  * @param
  * @return: Boolean
  * @example: jMobIsQQ()
- * => false
+  => false
  */
 export const jMobIsQQ = function () {
   if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
@@ -490,7 +479,7 @@ export const jMobIsQQ = function () {
  * @param
  * @return: Boolean
  * @example: jMobIsWX()
- * => false
+  => false
  */
 export const jMobIsWX = function () {
   if (/MicroMessenger/i.test(navigator.userAgent)) {
@@ -505,7 +494,8 @@ export const jMobIsWX = function () {
  * @Date: 2020-05-06 12:11:39
  * @param {}
  * @return:
- * @example:
+ * @example: jMobOperator()
+  => 移动
  */
 export const jMobOperator = function () {}
 
@@ -515,7 +505,7 @@ export const jMobOperator = function () {}
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-06 13:43:45
+ * @LastEditTime: 2020-05-07 10:37:28
  * @LastEditors: wuxh
  * @Description: 处理对象相关
  * @FilePath: /jcommon/src/object/index.js
@@ -529,12 +519,13 @@ export const jMobOperator = function () {}
  * @param {...any} args
  * @return: any
  * @example: getV({name: {children: 123}}, 'name', 'children')
- * => 123
+  => 123
  */
-export const jObjGetV = (...args) =>
-  args.length >= 2
+export const jObjGetV = function (...args) {
+  return args.length >= 2
     ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
     : ''
+}
 
 /**
  * @description: 对象克隆
@@ -543,7 +534,7 @@ export const jObjGetV = (...args) =>
  * @param {obj}
  * @return: Object
  * @example: jObjClone({name: 123})
- * => {name: 123}
+  => {name: 123}
  */
 export const jObjClone = function (obj) {
   let str,
@@ -569,9 +560,9 @@ export const jObjClone = function (obj) {
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
  * @example:  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
- * jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+  jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
  */
-export const jObjMerge = (oldObj, newObj, keys) => {
+export const jObjMerge = function (oldObj, newObj, keys) {
   keys = keys || []
   for (const key in newObj) {
     if (jValIsObject(newObj[key]) && jValIsObject(oldObj[key])) {
@@ -595,7 +586,7 @@ export const jObjMerge = (oldObj, newObj, keys) => {
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-05-06 13:45:18
+ * @LastEditTime: 2020-05-07 10:37:40
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -610,7 +601,7 @@ export const jObjMerge = (oldObj, newObj, keys) => {
  * @param {global} Boolean
  * @return: String
  * @example: jStrTrim('   1 1 1   ') => '1 1 1'
- * jStrTrim('   1 1 1   ', true) => '111'
+  jStrTrim('   1 1 1   ', true) => '111'
  */ 
 export const jStrTrim = function (str, global) {
   let result = str.replace(/(^\s+)|(\s+$)/g, '')
@@ -626,7 +617,7 @@ export const jStrTrim = function (str, global) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:15:36
- * @LastEditTime: 2020-05-06 13:46:12
+ * @LastEditTime: 2020-05-07 10:39:45
  * @LastEditors: wuxh
  * @Description: 模版文件（需要新增类型的时候，复制本文件）
  * @FilePath: /jcommon/src/template/index.js
@@ -634,15 +625,29 @@ export const jStrTrim = function (str, global) {
  */
 
 /**
- * @description:
+ * @description: description template
  * @author: wuxh
  * @Date: 2020-05-06 13:46:00
  * @param {type}
- * @return:
- * @example:
+ * @return: Boolean
+ * @example: jTempFunc()
+  => true
  */
 export const jTempFunc = function () {
   console.log('模版文件')
+}
+
+/**
+ * @description: description template2
+ * @author: wuxh
+ * @Date: 2020-05-06 13:46:00
+ * @param {type}
+ * @return: Boolean
+ * @example: jTempFunc2()
+  => true
+ */
+export const jTempFunc2 = function () {
+  console.log('模版文件2')
 }
 
 
@@ -651,7 +656,7 @@ export const jTempFunc = function () {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-06 13:49:43
+ * @LastEditTime: 2020-05-07 11:01:00
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.js
@@ -665,7 +670,7 @@ export const jTempFunc = function () {
  * @param {name}
  * @return: String
  * @example: jUrlGetQuery(age)
- * => 25
+  => 25
  */
 export const jUrlGetQuery = function (name) {
   const u = arguments[1] || window.location.search,
@@ -681,7 +686,7 @@ export const jUrlGetQuery = function (name) {
  * @param {obj}
  * @return: String
  * @example: jObjToQuery({name: 1, value: 123})
- * =>  "name=1&value=123"
+  =>  "name=1&value=123"
  */
 export const jUrlObjByStr = function (obj) {
   let str = ''
@@ -712,9 +717,9 @@ export const jUrlObjByStr = function (obj) {
  * @param {params}
  * @return: Object
  * @example: jUrlByObj(?ie=UTF-8&wd=asd)
- *  => {ie: UTF-8, wd: asd}
+   => {ie: UTF-8, wd: asd}
  */
-export const jUrlByObj = params => {
+export const jUrlByObj = function (params) {
   const obj = {}
   const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
   const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
@@ -740,7 +745,7 @@ export const jUrlByObj = params => {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-06 13:57:15
+ * @LastEditTime: 2020-05-07 11:03:13
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -754,7 +759,7 @@ export const jUrlByObj = params => {
  * @param {e}
  * @return: String<msg> | Boolean
  * @example: jValUserId('421182199409274710') => ''
- * jValUserId('421182199409') => '身份证号码长度应该为18位'
+  jValUserId('421182199409') => '身份证号码长度应该为18位'
  */
 export const jValUserId = function (e) {
   let i,
@@ -873,11 +878,11 @@ export const jValUserId = function (e) {
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
  * @return: Boolean
  * @example: jValType(123, 'String') => false
- * jValType('123', 'String') => true
+  jValType('123', 'String') => true
  */
-export const jValType = (data, type) =>
+export const jValType = function (data, type) {
   Object.prototype.toString.call(data) === `[object ${type}]`
-
+}
 /**
  * @description: 判断String类型
  * @author: wuxh
@@ -886,7 +891,9 @@ export const jValType = (data, type) =>
  * @return: Boolean
  * @example:
  */
-export const jValIsString = data => jValType(data, 'String')
+export const jValIsString = function (data) {
+  jValType(data, 'String')
+}
 
 /**
  * @description: 判断Number类型
@@ -896,7 +903,9 @@ export const jValIsString = data => jValType(data, 'String')
  * @return: Boolean
  * @example:
  */
-export const jValIsNumber = data => jValType(data, 'Number')
+export const jValIsNumber = function (data) {
+  jValType(data, 'Number')
+}
 
 /**
  * @description: 判断Boolean类型
@@ -906,7 +915,9 @@ export const jValIsNumber = data => jValType(data, 'Number')
  * @return: Boolean
  * @example:
  */
-export const jValIsBoolean = data => jValType(data, 'Boolean')
+export const jValIsBoolean = function (data) {
+  jValType(data, 'Boolean')
+}
 
 /**
  * @description: 判断Undefined类型
@@ -916,7 +927,9 @@ export const jValIsBoolean = data => jValType(data, 'Boolean')
  * @return: Boolean
  * @example:
  */
-export const jValIsUndefined = data => jValType(data, 'Undefined')
+export const jValIsUndefined = function (data) {
+  jValType(data, 'Undefined')
+}
 
 /**
  * @description: 判断Null类型
@@ -926,7 +939,9 @@ export const jValIsUndefined = data => jValType(data, 'Undefined')
  * @return: Boolean
  * @example:
  */
-export const jValIsNull = data => jValType(data, 'Null')
+export const jValIsNull = function (data) {
+  jValType(data, 'Null')
+}
 
 /**
  * @description: 判断Function类型
@@ -936,7 +951,9 @@ export const jValIsNull = data => jValType(data, 'Null')
  * @return: Boolean
  * @example:
  */
-export const jValIsFunc = data => jValType(data, 'Function')
+export const jValIsFunc = function (data) {
+  jValType(data, 'Function')
+}
 
 /**
  * @description: 判断Date类型
@@ -946,7 +963,9 @@ export const jValIsFunc = data => jValType(data, 'Function')
  * @return: Boolean
  * @example:
  */
-export const jValIsDate = data => jValType(data, 'Date')
+export const jValIsDate = function (data) {
+  jValType(data, 'Date')
+}
 
 /**
  * @description: 判断Array类型
@@ -956,7 +975,9 @@ export const jValIsDate = data => jValType(data, 'Date')
  * @return: Boolean
  * @example:
  */
-export const jValIsArray = data => jValType(data, 'Array')
+export const jValIsArray = function (data) {
+  jValType(data, 'Array')
+}
 
 /**
  * @description: 判断RegExp类型
@@ -966,7 +987,9 @@ export const jValIsArray = data => jValType(data, 'Array')
  * @return: Boolean
  * @example:
  */
-export const jValIsReg = data => jValType(data, 'RegExp')
+export const jValIsReg = function (data) {
+  jValType(data, 'RegExp')
+}
 
 /**
  * @description: 判断Error类型
@@ -976,7 +999,9 @@ export const jValIsReg = data => jValType(data, 'RegExp')
  * @return: Boolean
  * @example:
  */
-export const jValIsError = data => jValType(data, 'Error')
+export const jValIsError = function (data) {
+  jValType(data, 'Error')
+}
 
 /**
  * @description: 判断Object类型
@@ -986,7 +1011,9 @@ export const jValIsError = data => jValType(data, 'Error')
  * @return: Boolean
  * @example:
  */
-export const jValIsObject = data => jValType(data, 'Object')
+export const jValIsObject = function (data) {
+  jValType(data, 'Object')
+}
 
 
 

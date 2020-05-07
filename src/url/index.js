@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-06 13:49:43
+ * @LastEditTime: 2020-05-07 11:01:00
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.js
@@ -15,7 +15,7 @@
  * @param {name}
  * @return: String
  * @example: jUrlGetQuery(age)
- * => 25
+  => 25
  */
 export const jUrlGetQuery = function (name) {
   const u = arguments[1] || window.location.search,
@@ -31,7 +31,7 @@ export const jUrlGetQuery = function (name) {
  * @param {obj}
  * @return: String
  * @example: jObjToQuery({name: 1, value: 123})
- * =>  "name=1&value=123"
+  =>  "name=1&value=123"
  */
 export const jUrlObjByStr = function (obj) {
   let str = ''
@@ -62,9 +62,9 @@ export const jUrlObjByStr = function (obj) {
  * @param {params}
  * @return: Object
  * @example: jUrlByObj(?ie=UTF-8&wd=asd)
- *  => {ie: UTF-8, wd: asd}
+   => {ie: UTF-8, wd: asd}
  */
-export const jUrlByObj = params => {
+export const jUrlByObj = function (params) {
   const obj = {}
   const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
   const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。

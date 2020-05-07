@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-06 21:26:31
+ * @LastEditTime: 2020-05-07 10:34:35
  * @LastEditors: wuxh
  * @Description: 处理时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -16,7 +16,7 @@
  * @param {et}
  * @return: String
  * @example: jDateInterval(new Date().getTime(), 1589661011714)
- * => 11天13小时46分钟21秒
+  => 11天13小时46分钟21秒
  */
 export const jDateInterval = function (st, et) {
   let timeLeft = [0, 0, 0, 0],
@@ -49,7 +49,7 @@ export const jDateInterval = function (st, et) {
  * @param {formatStr}
  * @return: String
  * @example: jDateFormat(new Date(), 'YYYY-MM')
- * => "2020-05"
+  => "2020-05"
  */
 export const jDateFormat = function (date, formatStr) {
   function addZero (v, size) {
@@ -85,10 +85,9 @@ export const jDateFormat = function (date, formatStr) {
  * @param {str}
  * @return: Number
  * @example: jDateMonthDays('2020-05-06')
- * => 31
+  => 31
  */
-
-export const jDateMonthDays = str => {
+export const jDateMonthDays = function (str) {
   const curDate = str ? new Date(str) : new Date()
   const curMonth = curDate.getMonth()
   curDate.setMonth(curMonth + 1)

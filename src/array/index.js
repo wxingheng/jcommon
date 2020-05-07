@@ -1,13 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-06 11:53:23
+ * @LastEditTime: 2020-05-07 10:33:18
  * @LastEditors: wuxh
  * @Description: 数组方法
  * @FilePath: /jcommon/src/array/index.js
  * @https://github.com/wxingheng/jcommon
  */
-
 
 /**
  * @description: 处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
@@ -80,9 +79,9 @@ export const jArrDoubleRanking = function (arr, options) {
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
  * @example: jArrRandomDate(2, ['name', 'value'])
- * => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
- */ 
-export const jArrRandomDate = (num, arr) => {
+  => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
+ */
+export const jArrRandomDate = function (num, arr) {
   const result = []
   for (let i = 0; i < num; i++) {
     const obj = {}
@@ -103,10 +102,10 @@ export const jArrRandomDate = (num, arr) => {
  * @param {v} 对象的value取值，默认是数组的每一个元素作为值
  * @return: Object
  * @example: const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
- * jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
- * jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
+  jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
+  jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
  */
-export const jArrByObj = (arr, key, v = '') => {
+export const jArrByObj = function (arr, key, v = '') {
   const obj = {}
   arr.forEach(function (d) {
     obj[d[key]] = v ? d[v] : d

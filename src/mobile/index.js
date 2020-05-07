@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-06 12:12:33
+ * @LastEditTime: 2020-05-07 10:36:37
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -15,7 +15,7 @@
  * @param
  * @return: Boolean
  * @example: jMobIsQQ()
- * => false
+  => false
  */
 export const jMobIsQQ = function () {
   if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
@@ -31,7 +31,7 @@ export const jMobIsQQ = function () {
  * @param
  * @return: Boolean
  * @example: jMobIsWX()
- * => false
+  => false
  */
 export const jMobIsWX = function () {
   if (/MicroMessenger/i.test(navigator.userAgent)) {
@@ -46,6 +46,7 @@ export const jMobIsWX = function () {
  * @Date: 2020-05-06 12:11:39
  * @param {}
  * @return:
- * @example:
+ * @example: jMobOperator()
+  => 移动
  */
 export const jMobOperator = function () {}
