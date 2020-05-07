@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2020-05-06 12:10:17
+ * @LastEditTime: 2020-05-06 22:39:58
  * @LastEditors: wuxh
  * @Description: 数字处理相关
  * @FilePath: /jcommon/src/math/index.js
@@ -18,5 +18,6 @@
  * @example: jMathRandom(1, 10)
  * => 3
  */
-export const jMathRandom = (str, end) =>
-  Math.floor(Math.random() * (end - str) + str)
+export const jMathRandom = function (str, end) {
+  return Math.floor(Math.random() * (end - str) + str)
+}

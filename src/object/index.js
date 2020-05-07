@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-06 13:43:45
+ * @LastEditTime: 2020-05-06 22:35:41
  * @LastEditors: wuxh
  * @Description: 处理对象相关
  * @FilePath: /jcommon/src/object/index.js
@@ -17,10 +17,11 @@
  * @example: getV({name: {children: 123}}, 'name', 'children')
  * => 123
  */
-export const jObjGetV = (...args) =>
-  args.length >= 2
+export const jObjGetV = function (...args) {
+  return args.length >= 2
     ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
     : ''
+}
 
 /**
  * @description: 对象克隆

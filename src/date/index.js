@@ -1,19 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-06 12:06:49
+ * @LastEditTime: 2020-05-06 21:26:31
  * @LastEditors: wuxh
  * @Description: 处理时间相关
  * @FilePath: /jcommon/src/date/index.js
  * @https://github.com/wxingheng/jcommon
  */
-
-function addZero (v, size) {
-  for (let i = 0, len = size - (v + '').length; i < len; i++) {
-    v = '0' + v
-  }
-  return v + ''
-}
 
 /**
  * @description: 获取两个时间的间隔
@@ -59,6 +52,13 @@ export const jDateInterval = function (st, et) {
  * => "2020-05"
  */
 export const jDateFormat = function (date, formatStr) {
+  function addZero (v, size) {
+    for (let i = 0, len = size - (v + '').length; i < len; i++) {
+      v = '0' + v
+    }
+    return v + ''
+  }
+
   const arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
     str = formatStr
       .replace(/yyyy|YYYY/, date.getFullYear())
@@ -82,11 +82,12 @@ export const jDateFormat = function (date, formatStr) {
  * @description: 获取当前月份的天数
  * @author: wuxh
  * @Date: 2020-05-06 12:06:24
- * @param {str} 
+ * @param {str}
  * @return: Number
  * @example: jDateMonthDays('2020-05-06')
  * => 31
- */ 
+ */
+
 export const jDateMonthDays = str => {
   const curDate = str ? new Date(str) : new Date()
   const curMonth = curDate.getMonth()
