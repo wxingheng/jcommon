@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-07 11:03:13
+ * @LastEditTime: 2020-05-07 22:41:32
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -9,12 +9,13 @@
  */
 
 /**
- * @description: 身份证号码校验
+ * @description: 身份证号码校验（精准）
  * @author: wuxh
  * @Date: 2020-05-06 13:49:58
  * @param {e}
  * @return: String<msg> | Boolean
- * @example: jValUserId('421182199409274710') => ''
+ * @example: 
+  jValUserId('421182199409274710') => ''
   jValUserId('421182199409') => '身份证号码长度应该为18位'
  */
 export const jValUserId = function (e) {
@@ -133,7 +134,8 @@ export const jValUserId = function (e) {
  * @param {data} any
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
  * @return: Boolean
- * @example: jValType(123, 'String') => false
+ * @example: 
+  jValType(123, 'String') => false
   jValType('123', 'String') => true
  */
 export const jValType = function (data, type) {
@@ -146,6 +148,8 @@ export const jValType = function (data, type) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsString(123) => false
+  jValIsString('') => true
  */
 export const jValIsString = function (data) {
   jValType(data, 'String')
@@ -158,6 +162,8 @@ export const jValIsString = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsString(123) => true
+  jValIsString('') => false
  */
 export const jValIsNumber = function (data) {
   jValType(data, 'Number')
@@ -170,6 +176,8 @@ export const jValIsNumber = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsBoolean(false) => true
+  jValIsBoolean('false') => false
  */
 export const jValIsBoolean = function (data) {
   jValType(data, 'Boolean')
@@ -182,6 +190,8 @@ export const jValIsBoolean = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsUndefined(undefined) => true
+  jValIsUndefined('undefined') => false
  */
 export const jValIsUndefined = function (data) {
   jValType(data, 'Undefined')
@@ -194,6 +204,8 @@ export const jValIsUndefined = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsNull(null) => true
+  jValIsNull('null') => false
  */
 export const jValIsNull = function (data) {
   jValType(data, 'Null')
@@ -206,6 +218,8 @@ export const jValIsNull = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsFunc(() => 123) => true
+  jValIsFunc(123) => false
  */
 export const jValIsFunc = function (data) {
   jValType(data, 'Function')
@@ -218,6 +232,8 @@ export const jValIsFunc = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsDate(() => new Date()) => false
+  jValIsDate(new Date()) => true
  */
 export const jValIsDate = function (data) {
   jValType(data, 'Date')
@@ -230,6 +246,8 @@ export const jValIsDate = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsDate([]) => true
+  jValIsDate(![]) => false
  */
 export const jValIsArray = function (data) {
   jValType(data, 'Array')
@@ -242,6 +260,8 @@ export const jValIsArray = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsReg(new RegExp()) => true
+  jValIsReg(![]) => false
  */
 export const jValIsReg = function (data) {
   jValType(data, 'RegExp')
@@ -254,6 +274,8 @@ export const jValIsReg = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsError(new Error()) => true
+  jValIsError(![]) => false
  */
 export const jValIsError = function (data) {
   jValType(data, 'Error')
@@ -266,6 +288,8 @@ export const jValIsError = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsError({}) => true
+  jValIsError(![]) => false
  */
 export const jValIsObject = function (data) {
   jValType(data, 'Object')

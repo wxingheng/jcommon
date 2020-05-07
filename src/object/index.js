@@ -1,20 +1,21 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-07 10:37:28
+ * @LastEditTime: 2020-05-07 22:32:09
  * @LastEditors: wuxh
- * @Description: 处理对象相关
+ * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
 
 /**
- * @description: 获取多级数据避免出错
+ * @description: 获取多级数据避免出错（超级好用）
  * @author: wuxh
  * @Date: 2020-05-06 12:13:59
  * @param {...any} args
  * @return: any
- * @example: getV({name: {children: 123}}, 'name', 'children')
+ * @example: 
+  getV({name: {children: 123}}, 'name', 'children')
   => 123
  */
 export const jObjGetV = function (...args) {
@@ -24,12 +25,13 @@ export const jObjGetV = function (...args) {
 }
 
 /**
- * @description: 对象克隆
+ * @description: 对象克隆（只包含可遍历属性<常用>）
  * @author: wuxh
  * @Date: 2020-05-06 12:14:45
  * @param {obj}
  * @return: Object
- * @example: jObjClone({name: 123})
+ * @example: 
+  jObjClone({name: 123})
   => {name: 123}
  */
 export const jObjClone = function (obj) {
@@ -55,7 +57,8 @@ export const jObjClone = function (obj) {
  * @param {newObj}
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
- * @example:  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+ * @example:  
+  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
   jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
  */
 export const jObjMerge = function (oldObj, newObj, keys) {

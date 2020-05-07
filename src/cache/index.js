@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
- * @LastEditTime: 2020-05-07 10:33:48
+ * @LastEditTime: 2020-05-07 22:27:43
  * @LastEditors: wuxh
  * @Description: 数据持久化，缓存
  * @FilePath: /jcommon/src/cache/index.js
@@ -15,7 +15,8 @@
  * @Date: 2020-05-06 11:56:29
  * @param {key}
  * @return: undefined
- * @example: jCaStorage().removeStorage('test')
+ * @example: 
+  jCaStorage().removeStorage('test')
   => undefined
  */
 export const jCaRemoveStorage = function (key) {
@@ -29,7 +30,8 @@ export const jCaRemoveStorage = function (key) {
  * @param {value}
  * @param {isJson}
  * @return: undefined
- * @example: jCaStorage().saveStorage('test', '001')
+ * @example: 
+  jCaStorage().saveStorage('test', '001')
   => undefined
  */
 export const jCaSaveStorage = function (key, value, isJson) {
@@ -45,7 +47,8 @@ export const jCaSaveStorage = function (key, value, isJson) {
  * @Date: 2020-05-06 12:00:37
  * @param {key}
  * @return: String
- * @example: jCaStorage().getStorage('test')
+ * @example: 
+  jCaStorage().getStorage('test')
   => '001'
  */
 export const jCaGetStorage = function (key) {
@@ -55,9 +58,10 @@ export const jCaGetStorage = function (key) {
  * @description: 是否支持local
  * @author: wuxh
  * @Date: 2020-05-06 12:01:43
- * @param
+ * @param 
  * @return: Boolean
- * @example: jCaStorage().isSupportStorage()
+ * @example: 
+  jCaStorage().isSupportStorage()
   => true
  */
 export const jCaIsStorage = function () {

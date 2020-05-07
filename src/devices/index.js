@@ -1,9 +1,9 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2020-05-07 10:34:46
+ * @LastEditTime: 2020-05-07 22:28:16
  * @LastEditors: wuxh
- * @Description: 用户设备相关
+ * @Description: 用户设备相关（客户端系统）
  * @FilePath: /jcommon/src/devices/index.js
  * @https://github.com/wxingheng/jcommon
  */
@@ -14,7 +14,8 @@
  * @Date: 2020-05-06 12:07:03
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
- * @example: jOsInfo()
+ * @example: 
+  jOsInfo()
   => {os: "mac", version: "10.15.3"}
  */
 export const jOsInfo = function (e) {

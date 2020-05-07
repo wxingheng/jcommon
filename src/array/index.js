@@ -1,9 +1,9 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-07 10:33:18
+ * @LastEditTime: 2020-05-07 22:16:30
  * @LastEditors: wuxh
- * @Description: 数组方法
+ * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.js
  * @https://github.com/wxingheng/jcommon
  */
@@ -13,9 +13,10 @@
  * @author: wuxh 
  * @Date: 2020-05-06 11:37:17
  * @param {arr} 需要处理的数组
- * @param {arr} 额外参数
+ * @param {options} 额外参数
  * @return: {Array} [排序后的数组]
- * @example: ArrDoubleRanking(
+ * @example: 
+   ArrDoubleRanking(
       [
         {education: '本科', age: 26},
         {education: '小学', age: 25},
@@ -78,7 +79,8 @@ export const jArrDoubleRanking = function (arr, options) {
  * @param {num} 数量
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
- * @example: jArrRandomDate(2, ['name', 'value'])
+ * @example: 
+  jArrRandomDate(2, ['name', 'value'])
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
  */
 export const jArrRandomDate = function (num, arr) {
@@ -94,14 +96,15 @@ export const jArrRandomDate = function (num, arr) {
 }
 
 /**
- * @description: 数值转对象 （常用于处理后台返回的枚举转换）
+ * @description: 数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
  * @author: wuxh
  * @Date: 2020-05-06 11:51:49
  * @param {arr} 需要转换的数组
  * @param {key} 需要作为转换后对象的key
  * @param {v} 对象的value取值，默认是数组的每一个元素作为值
  * @return: Object
- * @example: const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
+ * @example: 
+  const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
   jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
   jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
  */

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-07 11:01:00
+ * @LastEditTime: 2020-05-07 22:33:33
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.js
@@ -14,7 +14,8 @@
  * @Date: 2020-05-06 13:46:28
  * @param {name}
  * @return: String
- * @example: jUrlGetQuery(age)
+ * @example: 
+  jUrlGetQuery(age)
   => 25
  */
 export const jUrlGetQuery = function (name) {
@@ -30,7 +31,8 @@ export const jUrlGetQuery = function (name) {
  * @Date: 2020-05-06 13:47:40
  * @param {obj}
  * @return: String
- * @example: jObjToQuery({name: 1, value: 123})
+ * @example: 
+  jObjToQuery({name: 1, value: 123})
   =>  "name=1&value=123"
  */
 export const jUrlObjByStr = function (obj) {
@@ -61,8 +63,9 @@ export const jUrlObjByStr = function (obj) {
  * @Date: 2020-05-06 13:48:36
  * @param {params}
  * @return: Object
- * @example: jUrlByObj(?ie=UTF-8&wd=asd)
-   => {ie: UTF-8, wd: asd}
+ * @example: 
+  jUrlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
  */
 export const jUrlByObj = function (params) {
   const obj = {}

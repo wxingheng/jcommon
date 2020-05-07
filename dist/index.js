@@ -1,9 +1,9 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-07 10:33:18
+ * @LastEditTime: 2020-05-07 22:16:30
  * @LastEditors: wuxh
- * @Description: 数组方法
+ * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.js
  * @https://github.com/wxingheng/jcommon
  */
@@ -13,9 +13,10 @@
  * @author: wuxh 
  * @Date: 2020-05-06 11:37:17
  * @param {arr} 需要处理的数组
- * @param {arr} 额外参数
+ * @param {options} 额外参数
  * @return: {Array} [排序后的数组]
- * @example: ArrDoubleRanking(
+ * @example: 
+   ArrDoubleRanking(
       [
         {education: '本科', age: 26},
         {education: '小学', age: 25},
@@ -78,7 +79,8 @@ export const jArrDoubleRanking = function (arr, options) {
  * @param {num} 数量
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
- * @example: jArrRandomDate(2, ['name', 'value'])
+ * @example: 
+  jArrRandomDate(2, ['name', 'value'])
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
  */
 export const jArrRandomDate = function (num, arr) {
@@ -94,14 +96,15 @@ export const jArrRandomDate = function (num, arr) {
 }
 
 /**
- * @description: 数值转对象 （常用于处理后台返回的枚举转换）
+ * @description: 数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
  * @author: wuxh
  * @Date: 2020-05-06 11:51:49
  * @param {arr} 需要转换的数组
  * @param {key} 需要作为转换后对象的key
  * @param {v} 对象的value取值，默认是数组的每一个元素作为值
  * @return: Object
- * @example: const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
+ * @example: 
+  const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
   jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
   jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
  */
@@ -119,7 +122,7 @@ export const jArrByObj = function (arr, key, v = '') {
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-07 10:33:32
+ * @LastEditTime: 2020-05-07 22:25:47
  * @LastEditors: wuxh
  * @Description: 浏览器相关
  * @FilePath: /jcommon/src/browser/index.js
@@ -132,7 +135,8 @@ export const jArrByObj = function (arr, key, v = '') {
  * @Date: 2020-05-06 11:53:35
  * @param {} 
  * @return: Object
- * @example: jBroGetInfo()
+ * @example: 
+  jBroGetInfo()
   => {name: "Chrome", version: "81.0.4044.129"}
  */
 export const jBroGetInfo = function () {
@@ -190,9 +194,9 @@ export const jBroGetInfo = function () {
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-07 10:34:35
+ * @LastEditTime: 2020-05-07 22:27:04
  * @LastEditors: wuxh
- * @Description: 处理时间相关
+ * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.js
  * @https://github.com/wxingheng/jcommon
  */
@@ -204,7 +208,8 @@ export const jBroGetInfo = function () {
  * @param {st}
  * @param {et}
  * @return: String
- * @example: jDateInterval(new Date().getTime(), 1589661011714)
+ * @example: 
+  jDateInterval(new Date().getTime(), 1589661011714)
   => 11天13小时46分钟21秒
  */
 export const jDateInterval = function (st, et) {
@@ -237,7 +242,8 @@ export const jDateInterval = function (st, et) {
  * @param {date}
  * @param {formatStr}
  * @return: String
- * @example: jDateFormat(new Date(), 'YYYY-MM')
+ * @example: 
+  jDateFormat(new Date(), 'YYYY-MM')
   => "2020-05"
  */
 export const jDateFormat = function (date, formatStr) {
@@ -273,7 +279,8 @@ export const jDateFormat = function (date, formatStr) {
  * @Date: 2020-05-06 12:06:24
  * @param {str}
  * @return: Number
- * @example: jDateMonthDays('2020-05-06')
+ * @example: 
+  jDateMonthDays('2020-05-06')
   => 31
  */
 export const jDateMonthDays = function (str) {
@@ -290,7 +297,7 @@ export const jDateMonthDays = function (str) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
- * @LastEditTime: 2020-05-07 10:33:48
+ * @LastEditTime: 2020-05-07 22:27:43
  * @LastEditors: wuxh
  * @Description: 数据持久化，缓存
  * @FilePath: /jcommon/src/cache/index.js
@@ -304,7 +311,8 @@ export const jDateMonthDays = function (str) {
  * @Date: 2020-05-06 11:56:29
  * @param {key}
  * @return: undefined
- * @example: jCaStorage().removeStorage('test')
+ * @example: 
+  jCaStorage().removeStorage('test')
   => undefined
  */
 export const jCaRemoveStorage = function (key) {
@@ -318,7 +326,8 @@ export const jCaRemoveStorage = function (key) {
  * @param {value}
  * @param {isJson}
  * @return: undefined
- * @example: jCaStorage().saveStorage('test', '001')
+ * @example: 
+  jCaStorage().saveStorage('test', '001')
   => undefined
  */
 export const jCaSaveStorage = function (key, value, isJson) {
@@ -334,7 +343,8 @@ export const jCaSaveStorage = function (key, value, isJson) {
  * @Date: 2020-05-06 12:00:37
  * @param {key}
  * @return: String
- * @example: jCaStorage().getStorage('test')
+ * @example: 
+  jCaStorage().getStorage('test')
   => '001'
  */
 export const jCaGetStorage = function (key) {
@@ -344,9 +354,10 @@ export const jCaGetStorage = function (key) {
  * @description: 是否支持local
  * @author: wuxh
  * @Date: 2020-05-06 12:01:43
- * @param
+ * @param 
  * @return: Boolean
- * @example: jCaStorage().isSupportStorage()
+ * @example: 
+  jCaStorage().isSupportStorage()
   => true
  */
 export const jCaIsStorage = function () {
@@ -368,9 +379,9 @@ export const jCaIsStorage = function () {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2020-05-07 10:34:46
+ * @LastEditTime: 2020-05-07 22:28:16
  * @LastEditors: wuxh
- * @Description: 用户设备相关
+ * @Description: 用户设备相关（客户端系统）
  * @FilePath: /jcommon/src/devices/index.js
  * @https://github.com/wxingheng/jcommon
  */
@@ -381,7 +392,8 @@ export const jCaIsStorage = function () {
  * @Date: 2020-05-06 12:07:03
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
- * @example: jOsInfo()
+ * @example: 
+  jOsInfo()
   => {os: "mac", version: "10.15.3"}
  */
 export const jOsInfo = function (e) {
@@ -422,21 +434,22 @@ export const jOsInfo = function (e) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2020-05-07 10:34:57
+ * @LastEditTime: 2020-05-07 22:28:47
  * @LastEditors: wuxh
- * @Description: 数字处理相关
+ * @Description: 数处理相
  * @FilePath: /jcommon/src/math/index.js
  * @https://github.com/wxingheng/jcommon
  */
 
 /**
- * @description: 随机整数
+ * @description: 范围随机整数
  * @author: wuxh
  * @Date: 2020-05-06 12:09:34
  * @param {str}
  * @param {end}
  * @return: Number
- * @example: jMathRandom(1, 10)
+ * @example: 
+  jMathRandom(1, 10)
   => 3
  */
 export const jMathRandom = function (str, end) {
@@ -449,7 +462,7 @@ export const jMathRandom = function (str, end) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-07 10:36:37
+ * @LastEditTime: 2020-05-07 22:29:14
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -462,7 +475,8 @@ export const jMathRandom = function (str, end) {
  * @Date: 2020-05-06 12:10:41
  * @param
  * @return: Boolean
- * @example: jMobIsQQ()
+ * @example: 
+  jMobIsQQ()
   => false
  */
 export const jMobIsQQ = function () {
@@ -478,7 +492,8 @@ export const jMobIsQQ = function () {
  * @Date: 2020-05-06 12:10:41
  * @param
  * @return: Boolean
- * @example: jMobIsWX()
+ * @example: 
+  jMobIsWX()
   => false
  */
 export const jMobIsWX = function () {
@@ -494,7 +509,8 @@ export const jMobIsWX = function () {
  * @Date: 2020-05-06 12:11:39
  * @param {}
  * @return:
- * @example: jMobOperator()
+ * @example: 
+  jMobOperator()
   => 移动
  */
 export const jMobOperator = function () {}
@@ -505,20 +521,21 @@ export const jMobOperator = function () {}
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-07 10:37:28
+ * @LastEditTime: 2020-05-07 22:32:09
  * @LastEditors: wuxh
- * @Description: 处理对象相关
+ * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
 
 /**
- * @description: 获取多级数据避免出错
+ * @description: 获取多级数据避免出错（超级好用）
  * @author: wuxh
  * @Date: 2020-05-06 12:13:59
  * @param {...any} args
  * @return: any
- * @example: getV({name: {children: 123}}, 'name', 'children')
+ * @example: 
+  getV({name: {children: 123}}, 'name', 'children')
   => 123
  */
 export const jObjGetV = function (...args) {
@@ -528,12 +545,13 @@ export const jObjGetV = function (...args) {
 }
 
 /**
- * @description: 对象克隆
+ * @description: 对象克隆（只包含可遍历属性<常用>）
  * @author: wuxh
  * @Date: 2020-05-06 12:14:45
  * @param {obj}
  * @return: Object
- * @example: jObjClone({name: 123})
+ * @example: 
+  jObjClone({name: 123})
   => {name: 123}
  */
 export const jObjClone = function (obj) {
@@ -559,7 +577,8 @@ export const jObjClone = function (obj) {
  * @param {newObj}
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
- * @example:  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+ * @example:  
+  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
   jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
  */
 export const jObjMerge = function (oldObj, newObj, keys) {
@@ -586,7 +605,7 @@ export const jObjMerge = function (oldObj, newObj, keys) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-05-07 10:37:40
+ * @LastEditTime: 2020-05-07 22:32:33
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -594,15 +613,16 @@ export const jObjMerge = function (oldObj, newObj, keys) {
  */
 
 /**
- * @description: 去除字符串空格, 默认去除前后空格
+ * @description: 去除字符串空格, 默认去除前后空格 （常用）
  * @author: wuxh
  * @Date: 2020-05-06 13:43:52
  * @param {str} String
  * @param {global} Boolean
  * @return: String
- * @example: jStrTrim('   1 1 1   ') => '1 1 1'
+ * @example: 
+  jStrTrim('   1 1 1   ') => '1 1 1'
   jStrTrim('   1 1 1   ', true) => '111'
- */ 
+ */
 export const jStrTrim = function (str, global) {
   let result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (global) {
@@ -616,136 +636,8 @@ export const jStrTrim = function (str, global) {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-04 21:15:36
- * @LastEditTime: 2020-05-07 10:39:45
- * @LastEditors: wuxh
- * @Description: 模版文件（需要新增类型的时候，复制本文件）
- * @FilePath: /jcommon/src/template/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: description template
- * @author: wuxh
- * @Date: 2020-05-06 13:46:00
- * @param {type}
- * @return: Boolean
- * @example: jTempFunc()
-  => true
- */
-export const jTempFunc = function () {
-  console.log('模版文件')
-}
-
-/**
- * @description: description template2
- * @author: wuxh
- * @Date: 2020-05-06 13:46:00
- * @param {type}
- * @return: Boolean
- * @example: jTempFunc2()
-  => true
- */
-export const jTempFunc2 = function () {
-  console.log('模版文件2')
-}
-
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-07 11:01:00
- * @LastEditors: wuxh
- * @Description: url处理相关
- * @FilePath: /jcommon/src/url/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 获取浏览器url中的一个参数
- * @author: wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: jUrlGetQuery(age)
-  => 25
- */
-export const jUrlGetQuery = function (name) {
-  const u = arguments[1] || window.location.search,
-    reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
-    r = u.substr(u.indexOf('?') + 1).match(reg)
-  return r != null ? r[2] : ''
-}
-
-/**
- * @description: 格式化GET请求的请求头
- * @author: wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: jObjToQuery({name: 1, value: 123})
-  =>  "name=1&value=123"
- */
-export const jUrlObjByStr = function (obj) {
-  let str = ''
-  if (Object.prototype.toString.call(obj) === '[object Object]') {
-    for (const key in obj) {
-      if (Array.isArray(obj[key])) {
-        obj[key].forEach(function (elem) {
-          str = str + key + '=' + elem + '&'
-        })
-      } else {
-        if (obj[key]) {
-          str = str + key + '=' + obj[key] + '&'
-        }
-      }
-    }
-  }
-  if (str.length > 0) {
-    return str.substring(0, str.length - 1)
-  } else {
-    return ''
-  }
-}
-
-/**
- * @description: 处理url参数(window.location.search)转换为 {key: value}
- * @author: wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: jUrlByObj(?ie=UTF-8&wd=asd)
-   => {ie: UTF-8, wd: asd}
- */
-export const jUrlByObj = function (params) {
-  const obj = {}
-  const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
-  const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
-  // arr数组形式 ['?id=12345','&a=b']
-  if (arr) {
-    arr.forEach(item => {
-      /**
-       * tempArr数组    ['id','12345']和['a','b']
-       * 第一个是key，第二个是value
-       * */
-      const tempArr = item.substring(1).split('=')
-      const key = decodeURIComponent(tempArr[0])
-      const val = decodeURIComponent(tempArr[1])
-      obj[key] = val
-    })
-  }
-  return obj
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-07 11:03:13
+ * @LastEditTime: 2020-05-07 22:41:32
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -753,12 +645,13 @@ export const jUrlByObj = function (params) {
  */
 
 /**
- * @description: 身份证号码校验
+ * @description: 身份证号码校验（精准）
  * @author: wuxh
  * @Date: 2020-05-06 13:49:58
  * @param {e}
  * @return: String<msg> | Boolean
- * @example: jValUserId('421182199409274710') => ''
+ * @example: 
+  jValUserId('421182199409274710') => ''
   jValUserId('421182199409') => '身份证号码长度应该为18位'
  */
 export const jValUserId = function (e) {
@@ -877,7 +770,8 @@ export const jValUserId = function (e) {
  * @param {data} any
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
  * @return: Boolean
- * @example: jValType(123, 'String') => false
+ * @example: 
+  jValType(123, 'String') => false
   jValType('123', 'String') => true
  */
 export const jValType = function (data, type) {
@@ -890,6 +784,8 @@ export const jValType = function (data, type) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsString(123) => false
+  jValIsString('') => true
  */
 export const jValIsString = function (data) {
   jValType(data, 'String')
@@ -902,6 +798,8 @@ export const jValIsString = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsString(123) => true
+  jValIsString('') => false
  */
 export const jValIsNumber = function (data) {
   jValType(data, 'Number')
@@ -914,6 +812,8 @@ export const jValIsNumber = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsBoolean(false) => true
+  jValIsBoolean('false') => false
  */
 export const jValIsBoolean = function (data) {
   jValType(data, 'Boolean')
@@ -926,6 +826,8 @@ export const jValIsBoolean = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsUndefined(undefined) => true
+  jValIsUndefined('undefined') => false
  */
 export const jValIsUndefined = function (data) {
   jValType(data, 'Undefined')
@@ -938,6 +840,8 @@ export const jValIsUndefined = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsNull(null) => true
+  jValIsNull('null') => false
  */
 export const jValIsNull = function (data) {
   jValType(data, 'Null')
@@ -950,6 +854,8 @@ export const jValIsNull = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsFunc(() => 123) => true
+  jValIsFunc(123) => false
  */
 export const jValIsFunc = function (data) {
   jValType(data, 'Function')
@@ -962,6 +868,8 @@ export const jValIsFunc = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsDate(() => new Date()) => false
+  jValIsDate(new Date()) => true
  */
 export const jValIsDate = function (data) {
   jValType(data, 'Date')
@@ -974,6 +882,8 @@ export const jValIsDate = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsDate([]) => true
+  jValIsDate(![]) => false
  */
 export const jValIsArray = function (data) {
   jValType(data, 'Array')
@@ -986,6 +896,8 @@ export const jValIsArray = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsReg(new RegExp()) => true
+  jValIsReg(![]) => false
  */
 export const jValIsReg = function (data) {
   jValType(data, 'RegExp')
@@ -998,6 +910,8 @@ export const jValIsReg = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsError(new Error()) => true
+  jValIsError(![]) => false
  */
 export const jValIsError = function (data) {
   jValType(data, 'Error')
@@ -1010,9 +924,103 @@ export const jValIsError = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
+  jValIsError({}) => true
+  jValIsError(![]) => false
  */
 export const jValIsObject = function (data) {
   jValType(data, 'Object')
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-05 15:02:02
+ * @LastEditTime: 2020-05-07 22:33:33
+ * @LastEditors: wuxh
+ * @Description: url处理相关
+ * @FilePath: /jcommon/src/url/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 获取浏览器url中的一个参数
+ * @author: wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  jUrlGetQuery(age)
+  => 25
+ */
+export const jUrlGetQuery = function (name) {
+  const u = arguments[1] || window.location.search,
+    reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
+    r = u.substr(u.indexOf('?') + 1).match(reg)
+  return r != null ? r[2] : ''
+}
+
+/**
+ * @description: 格式化GET请求的请求头
+ * @author: wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  jObjToQuery({name: 1, value: 123})
+  =>  "name=1&value=123"
+ */
+export const jUrlObjByStr = function (obj) {
+  let str = ''
+  if (Object.prototype.toString.call(obj) === '[object Object]') {
+    for (const key in obj) {
+      if (Array.isArray(obj[key])) {
+        obj[key].forEach(function (elem) {
+          str = str + key + '=' + elem + '&'
+        })
+      } else {
+        if (obj[key]) {
+          str = str + key + '=' + obj[key] + '&'
+        }
+      }
+    }
+  }
+  if (str.length > 0) {
+    return str.substring(0, str.length - 1)
+  } else {
+    return ''
+  }
+}
+
+/**
+ * @description: 处理url参数(window.location.search)转换为 {key: value}
+ * @author: wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  jUrlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
+ */
+export const jUrlByObj = function (params) {
+  const obj = {}
+  const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
+  const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+  // arr数组形式 ['?id=12345','&a=b']
+  if (arr) {
+    arr.forEach(item => {
+      /**
+       * tempArr数组    ['id','12345']和['a','b']
+       * 第一个是key，第二个是value
+       * */
+      const tempArr = item.substring(1).split('=')
+      const key = decodeURIComponent(tempArr[0])
+      const val = decodeURIComponent(tempArr[1])
+      obj[key] = val
+    })
+  }
+  return obj
 }
 
 
