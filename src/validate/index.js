@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-07 22:41:32
+ * @LastEditTime: 2020-05-08 09:24:57
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -15,10 +15,10 @@
  * @param {e}
  * @return: String<msg> | Boolean
  * @example: 
-  jValUserId('421182199409274710') => ''
-  jValUserId('421182199409') => '身份证号码长度应该为18位'
+  isUserId('421182199409274710') => ''
+  isUserId('421182199409') => '身份证号码长度应该为18位'
  */
-export const jValUserId = function (e) {
+export const isUserId = function (e) {
   let i,
     t,
     a,
@@ -135,10 +135,10 @@ export const jValUserId = function (e) {
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
  * @return: Boolean
  * @example: 
-  jValType(123, 'String') => false
-  jValType('123', 'String') => true
+  isType(123, 'String') => false
+  isType('123', 'String') => true
  */
-export const jValType = function (data, type) {
+export const isType = function (data, type) {
   Object.prototype.toString.call(data) === `[object ${type}]`
 }
 /**
@@ -148,11 +148,11 @@ export const jValType = function (data, type) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsString(123) => false
-  jValIsString('') => true
+  isString(123) => false
+  isString('') => true
  */
-export const jValIsString = function (data) {
-  jValType(data, 'String')
+export const isString = function (data) {
+  isType(data, 'String')
 }
 
 /**
@@ -162,11 +162,11 @@ export const jValIsString = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsString(123) => true
-  jValIsString('') => false
+  isNumber(123) => true
+  isNumber('') => false
  */
-export const jValIsNumber = function (data) {
-  jValType(data, 'Number')
+export const isNumber = function (data) {
+  isType(data, 'Number')
 }
 
 /**
@@ -176,11 +176,11 @@ export const jValIsNumber = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsBoolean(false) => true
-  jValIsBoolean('false') => false
+  isBoolean(false) => true
+  isBoolean('false') => false
  */
-export const jValIsBoolean = function (data) {
-  jValType(data, 'Boolean')
+export const isBoolean = function (data) {
+  isType(data, 'Boolean')
 }
 
 /**
@@ -190,11 +190,11 @@ export const jValIsBoolean = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsUndefined(undefined) => true
-  jValIsUndefined('undefined') => false
+  isUndefined(undefined) => true
+  isUndefined('undefined') => false
  */
-export const jValIsUndefined = function (data) {
-  jValType(data, 'Undefined')
+export const isUndefined = function (data) {
+  isType(data, 'Undefined')
 }
 
 /**
@@ -204,11 +204,11 @@ export const jValIsUndefined = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsNull(null) => true
-  jValIsNull('null') => false
+  isNull(null) => true
+  isNull('null') => false
  */
-export const jValIsNull = function (data) {
-  jValType(data, 'Null')
+export const isNull = function (data) {
+  isType(data, 'Null')
 }
 
 /**
@@ -218,11 +218,11 @@ export const jValIsNull = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsFunc(() => 123) => true
-  jValIsFunc(123) => false
+  isFunc(() => 123) => true
+  isFunc(123) => false
  */
-export const jValIsFunc = function (data) {
-  jValType(data, 'Function')
+export const isFunc = function (data) {
+  isType(data, 'Function')
 }
 
 /**
@@ -232,11 +232,11 @@ export const jValIsFunc = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsDate(() => new Date()) => false
-  jValIsDate(new Date()) => true
+  isDate(() => new Date()) => false
+  isDate(new Date()) => true
  */
-export const jValIsDate = function (data) {
-  jValType(data, 'Date')
+export const isDate = function (data) {
+  isType(data, 'Date')
 }
 
 /**
@@ -246,11 +246,11 @@ export const jValIsDate = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsDate([]) => true
-  jValIsDate(![]) => false
+  isArray([]) => true
+  isArray(![]) => false
  */
-export const jValIsArray = function (data) {
-  jValType(data, 'Array')
+export const isArray = function (data) {
+  isType(data, 'Array')
 }
 
 /**
@@ -260,11 +260,11 @@ export const jValIsArray = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsReg(new RegExp()) => true
-  jValIsReg(![]) => false
+  isReg(new RegExp()) => true
+  isReg(![]) => false
  */
-export const jValIsReg = function (data) {
-  jValType(data, 'RegExp')
+export const isReg = function (data) {
+  isType(data, 'RegExp')
 }
 
 /**
@@ -274,11 +274,11 @@ export const jValIsReg = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsError(new Error()) => true
-  jValIsError(![]) => false
+  isError(new Error()) => true
+  isError(![]) => false
  */
-export const jValIsError = function (data) {
-  jValType(data, 'Error')
+export const isError = function (data) {
+  isType(data, 'Error')
 }
 
 /**
@@ -288,9 +288,9 @@ export const jValIsError = function (data) {
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsError({}) => true
-  jValIsError(![]) => false
+  isObject({}) => true
+  isObject(![]) => false
  */
-export const jValIsObject = function (data) {
-  jValType(data, 'Object')
+export const isObject = function (data) {
+  isType(data, 'Object')
 }

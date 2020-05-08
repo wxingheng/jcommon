@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-07 22:32:09
+ * @LastEditTime: 2020-05-08 09:20:12
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
@@ -58,10 +58,10 @@ export const jObjClone = function (obj) {
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
  * @example:  
-  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
  */
-export const jObjMerge = function (oldObj, newObj, keys) {
+export const mergeObj = function (oldObj, newObj, keys) {
   keys = keys || []
   for (const key in newObj) {
     if (jValIsObject(newObj[key]) && jValIsObject(oldObj[key])) {

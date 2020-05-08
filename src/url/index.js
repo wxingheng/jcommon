@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-07 22:33:33
+ * @LastEditTime: 2020-05-08 09:21:51
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.js
@@ -15,10 +15,10 @@
  * @param {name}
  * @return: String
  * @example: 
-  jUrlGetQuery(age)
+  getUrlQuery(age)
   => 25
  */
-export const jUrlGetQuery = function (name) {
+export const getUrlQuery = function (name) {
   const u = arguments[1] || window.location.search,
     reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
     r = u.substr(u.indexOf('?') + 1).match(reg)
@@ -32,10 +32,10 @@ export const jUrlGetQuery = function (name) {
  * @param {obj}
  * @return: String
  * @example: 
-  jObjToQuery({name: 1, value: 123})
+  objByUrlStr({name: 1, value: 123})
   =>  "name=1&value=123"
  */
-export const jUrlObjByStr = function (obj) {
+export const objByUrlStr = function (obj) {
   let str = ''
   if (Object.prototype.toString.call(obj) === '[object Object]') {
     for (const key in obj) {
@@ -64,10 +64,10 @@ export const jUrlObjByStr = function (obj) {
  * @param {params}
  * @return: Object
  * @example: 
-  jUrlByObj(?ie=UTF-8&wd=asd)
+  urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
  */
-export const jUrlByObj = function (params) {
+export const urlByObj = function (params) {
   const obj = {}
   const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
   const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2020-05-07 22:28:16
+ * @LastEditTime: 2020-05-08 09:17:49
  * @LastEditors: wuxh
  * @Description: 用户设备相关（客户端系统）
  * @FilePath: /jcommon/src/devices/index.js
@@ -15,10 +15,10 @@
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
  * @example: 
-  jOsInfo()
+  osInfo()
   => {os: "mac", version: "10.15.3"}
  */
-export const jOsInfo = function (e) {
+export const osInfo = function (e) {
   e = e || navigator.userAgent
   let t = {
       os: 'other',

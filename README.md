@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2020-05-07 22:48:06
+ * @LastEditTime: 2020-05-08 09:25:19
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -25,8 +25,8 @@ JavaScript 常用纯函数工具库 （当前版本已在项目中使用，后�
 # 最新稳定版
 $ npm install jcommon
 
-# 判断数据类型是不是对象（所有的方法都是这样引用）
-import { jValIsObject } from 'jcommon'
+# 比如判断数据类型是不是对象（所有的方法都是这样引用...）
+import { isObject, isArray } from 'jcommon'
 ```
 
 ## 项目特点
@@ -41,78 +41,78 @@ import { jValIsObject } from 'jcommon'
 
 ## API 目录
 
-###  数组方法 Array
-
-- [jArrDoubleRanking](#jArrDoubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
-- [jArrRandomDate](#jArrRandomDate)  产生随机数据
-- [jArrByObj](#jArrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
-
 ###  浏览器相关
 
-- [jBroGetInfo](#jBroGetInfo)  获取浏览器相关信息
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
-###  用户设备相关（客户端系统）
+###  数组方法 Array
 
-- [jOsInfo](#jOsInfo)  获取用户系统平台信息
+- [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
+- [randomData](#randomData)  产生随机数据
+- [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
 ###  时间相关
 
-- [jDateInterval](#jDateInterval)  获取两个时间的间隔
-- [jDateFormat](#jDateFormat)   时间戳的转换（自定义格式）
-- [jDateMonthDays](#jDateMonthDays)  获取当前月份的天数
+- [dateInterval](#dateInterval)  获取两个时间的间隔
+- [dateFormat](#dateFormat)   时间戳的转换（自定义格式）
+- [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 
 ###  数据持久化，缓存
 
-- [jCaRemoveStorage](#jCaRemoveStorage)  删除
-- [jCaSaveStorage](#jCaSaveStorage)  保存
-- [jCaGetStorage](#jCaGetStorage)  获取
-- [jCaIsStorage](#jCaIsStorage)  是否支持local
+- [removeStorage](#removeStorage)  删除
+- [saveStorage](#saveStorage)  保存
+- [getStorage](#getStorage)  获取
+- [isSupportStorage](#isSupportStorage)  是否支持local
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
 
 ###  数处理相
 
-- [jMathRandom](#jMathRandom)  范围随机整数
+- [scopeRandom](#scopeRandom)  范围随机整数
 
 ###  移动端相关
 
 - [jMobIsQQ](#jMobIsQQ)  是否是QQ平台
 - [jMobIsWX](#jMobIsWX)  是否是微信平台
-- [jMobOperator](#jMobOperator)  获取手机运营商 (开发中)
+- [operattelecom](#operattelecom)  获取手机运营商 (开发中)
 
 ###  对象相关（Object处理）
 
 - [jObjGetV](#jObjGetV)  获取多级数据避免出错（超级好用）
 - [jObjClone](#jObjClone)  对象克隆（只包含可遍历属性<常用>）
-- [jObjMerge](#jObjMerge)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
-###  字符串处理相关
-
-- [jStrTrim](#jStrTrim)  去除字符串空格, 默认去除前后空格 （常用）
-
-###  url处理相关
-
-- [jUrlGetQuery](#jUrlGetQuery)  获取浏览器url中的一个参数
-- [jUrlObjByStr](#jUrlObjByStr)  格式化GET请求的请求头
-- [jUrlByObj](#jUrlByObj)  处理url参数(window.location.search)转换为 {key: value}
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 
 ###  校验相关
 
-- [jValUserId](#jValUserId)  身份证号码校验（精准）
-- [jValType](#jValType)  精准判断数据类型
-- [jValIsString](#jValIsString)  判断String类型
-- [jValIsNumber](#jValIsNumber)  判断Number类型
-- [jValIsBoolean](#jValIsBoolean)  判断Boolean类型
-- [jValIsUndefined](#jValIsUndefined)  判断Undefined类型
-- [jValIsNull](#jValIsNull)  判断Null类型
-- [jValIsFunc](#jValIsFunc)  判断Function类型
-- [jValIsDate](#jValIsDate)  判断Date类型
-- [jValIsArray](#jValIsArray)  判断Array类型
-- [jValIsReg](#jValIsReg)  判断RegExp类型
-- [jValIsError](#jValIsError)  判断Error类型
-- [jValIsObject](#jValIsObject)  判断Object类型
+- [isUserId](#isUserId)  身份证号码校验（精准）
+- [isType](#isType)  精准判断数据类型
+- [isString](#isString)  判断String类型
+- [isNumber](#isNumber)  判断Number类型
+- [isBoolean](#isBoolean)  判断Boolean类型
+- [isUndefined](#isUndefined)  判断Undefined类型
+- [isNull](#isNull)  判断Null类型
+- [isFunc](#isFunc)  判断Function类型
+- [isDate](#isDate)  判断Date类型
+- [isArray](#isArray)  判断Array类型
+- [isReg](#isReg)  判断RegExp类型
+- [isError](#isError)  判断Error类型
+- [isObject](#isObject)  判断Object类型
+
+###  字符串处理相关
+
+- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [objByUrlStr](#objByUrlStr)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ## API 说明
 
-### jArrDoubleRanking
+### doubleRanking
              
  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 
@@ -123,7 +123,7 @@ wuxh
  * @param {options} 额外参数
  * @return: {Array} [排序后的数组]
  * @example: 
-   ArrDoubleRanking(
+   doubleRanking(
       [
         {education: '本科', age: 26},
         {education: '小学', age: 25},
@@ -145,7 +145,7 @@ wuxh
       ]
 ```
 
-### jArrRandomDate
+### randomData
              
  产生随机数据
 
@@ -156,11 +156,11 @@ wuxh
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
  * @example: 
-  jArrRandomDate(2, ['name', 'value'])
+  randomData(2, ['name', 'value'])
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
 ```
 
-### jArrByObj
+### arrByObj
              
  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
@@ -173,11 +173,69 @@ wuxh
  * @return: Object
  * @example: 
   const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
-  jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
-  jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
+  arrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
+  arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### jCaRemoveStorage
+### getBrowserInfo
+             
+ 获取浏览器相关信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### dateInterval
+             
+ 获取两个时间的间隔
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:04:39
+ * @param {st}
+ * @param {et}
+ * @return: String
+ * @example: 
+  dateInterval(new Date().getTime(), 1589661011714)
+  => 11天13小时46分钟21秒
+```
+
+### dateFormat
+             
+  时间戳的转换（自定义格式）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:05:28
+ * @param {date}
+ * @param {formatStr}
+ * @return: String
+ * @example: 
+  dateFormat(new Date(), 'YYYY-MM')
+  => "2020-05"
+```
+
+### dateMonthDays
+             
+ 获取当前月份的天数
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:06:24
+ * @param {str}
+ * @return: Number
+ * @example: 
+  dateMonthDays('2020-05-06')
+  => 31
+```
+
+### removeStorage
              
  删除
 
@@ -187,11 +245,11 @@ wuxh
  * @param {key}
  * @return: undefined
  * @example: 
-  jCaStorage().removeStorage('test')
+  removeStorage('test')
   => undefined
 ```
 
-### jCaSaveStorage
+### saveStorage
              
  保存
 
@@ -203,11 +261,11 @@ wuxh
  * @param {isJson}
  * @return: undefined
  * @example: 
-  jCaStorage().saveStorage('test', '001')
+  saveStorage('test', '001')
   => undefined
 ```
 
-### jCaGetStorage
+### getStorage
              
  获取
 
@@ -217,11 +275,11 @@ wuxh
  * @param {key}
  * @return: String
  * @example: 
-  jCaStorage().getStorage('test')
+  getStorage('test')
   => '001'
 ```
 
-### jCaIsStorage
+### isSupportStorage
              
  是否支持local
 
@@ -231,69 +289,11 @@ wuxh
  * @param 
  * @return: Boolean
  * @example: 
-  jCaStorage().isSupportStorage()
+  isSupportStorage()
   => true
 ```
 
-### jBroGetInfo
-             
- 获取浏览器相关信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  jBroGetInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
-### jDateInterval
-             
- 获取两个时间的间隔
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:04:39
- * @param {st}
- * @param {et}
- * @return: String
- * @example: 
-  jDateInterval(new Date().getTime(), 1589661011714)
-  => 11天13小时46分钟21秒
-```
-
-### jDateFormat
-             
-  时间戳的转换（自定义格式）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:05:28
- * @param {date}
- * @param {formatStr}
- * @return: String
- * @example: 
-  jDateFormat(new Date(), 'YYYY-MM')
-  => "2020-05"
-```
-
-### jDateMonthDays
-             
- 获取当前月份的天数
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:06:24
- * @param {str}
- * @return: Number
- * @example: 
-  jDateMonthDays('2020-05-06')
-  => 31
-```
-
-### jOsInfo
+### osInfo
              
  获取用户系统平台信息
 
@@ -303,11 +303,11 @@ wuxh
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
  * @example: 
-  jOsInfo()
+  osInfo()
   => {os: "mac", version: "10.15.3"}
 ```
 
-### jMathRandom
+### scopeRandom
              
  范围随机整数
 
@@ -318,7 +318,7 @@ wuxh
  * @param {end}
  * @return: Number
  * @example: 
-  jMathRandom(1, 10)
+  scopeRandom(1, 10)
   => 3
 ```
 
@@ -350,7 +350,7 @@ wuxh
   => false
 ```
 
-### jMobOperator
+### operattelecom
              
  获取手机运营商 (开发中)
 
@@ -360,8 +360,23 @@ wuxh
  * @param {}
  * @return:
  * @example: 
-  jMobOperator()
+  operattelecom()
   => 移动
+```
+
+### trim
+             
+ 去除字符串空格, 默认去除前后空格 （常用）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:43:52
+ * @param {str} String
+ * @param {global} Boolean
+ * @return: String
+ * @example: 
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
 ```
 
 ### jObjGetV
@@ -392,7 +407,7 @@ wuxh
   => {name: 123}
 ```
 
-### jObjMerge
+### mergeObj
              
  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 
@@ -404,26 +419,11 @@ wuxh
  * @param {keys} 强制覆盖属性的key组成的数组
  * @return: Object
  * @example:  
-  jObjMerge({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  jObjMerge({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
 ```
 
-### jStrTrim
-             
- 去除字符串空格, 默认去除前后空格 （常用）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:43:52
- * @param {str} String
- * @param {global} Boolean
- * @return: String
- * @example: 
-  jStrTrim('   1 1 1   ') => '1 1 1'
-  jStrTrim('   1 1 1   ', true) => '111'
-```
-
-### jUrlGetQuery
+### getUrlQuery
              
  获取浏览器url中的一个参数
 
@@ -433,11 +433,11 @@ wuxh
  * @param {name}
  * @return: String
  * @example: 
-  jUrlGetQuery(age)
+  getUrlQuery(age)
   => 25
 ```
 
-### jUrlObjByStr
+### objByUrlStr
              
  格式化GET请求的请求头
 
@@ -447,11 +447,11 @@ wuxh
  * @param {obj}
  * @return: String
  * @example: 
-  jObjToQuery({name: 1, value: 123})
+  objByUrlStr({name: 1, value: 123})
   =>  "name=1&value=123"
 ```
 
-### jUrlByObj
+### urlByObj
              
  处理url参数(window.location.search)转换为 {key: value}
 
@@ -461,11 +461,11 @@ wuxh
  * @param {params}
  * @return: Object
  * @example: 
-  jUrlByObj(?ie=UTF-8&wd=asd)
+  urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
 ```
 
-### jValUserId
+### isUserId
              
  身份证号码校验（精准）
 
@@ -475,11 +475,11 @@ wuxh
  * @param {e}
  * @return: String<msg> | Boolean
  * @example: 
-  jValUserId('421182199409274710') => ''
-  jValUserId('421182199409') => '身份证号码长度应该为18位'
+  isUserId('421182199409274710') => ''
+  isUserId('421182199409') => '身份证号码长度应该为18位'
 ```
 
-### jValType
+### isType
              
  精准判断数据类型
 
@@ -490,11 +490,11 @@ wuxh
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
  * @return: Boolean
  * @example: 
-  jValType(123, 'String') => false
-  jValType('123', 'String') => true
+  isType(123, 'String') => false
+  isType('123', 'String') => true
 ```
 
-### jValIsString
+### isString
              
  判断String类型
 
@@ -504,11 +504,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsString(123) => false
-  jValIsString('') => true
+  isString(123) => false
+  isString('') => true
 ```
 
-### jValIsNumber
+### isNumber
              
  判断Number类型
 
@@ -518,11 +518,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsString(123) => true
-  jValIsString('') => false
+  isNumber(123) => true
+  isNumber('') => false
 ```
 
-### jValIsBoolean
+### isBoolean
              
  判断Boolean类型
 
@@ -532,11 +532,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsBoolean(false) => true
-  jValIsBoolean('false') => false
+  isBoolean(false) => true
+  isBoolean('false') => false
 ```
 
-### jValIsUndefined
+### isUndefined
              
  判断Undefined类型
 
@@ -546,11 +546,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsUndefined(undefined) => true
-  jValIsUndefined('undefined') => false
+  isUndefined(undefined) => true
+  isUndefined('undefined') => false
 ```
 
-### jValIsNull
+### isNull
              
  判断Null类型
 
@@ -560,11 +560,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsNull(null) => true
-  jValIsNull('null') => false
+  isNull(null) => true
+  isNull('null') => false
 ```
 
-### jValIsFunc
+### isFunc
              
  判断Function类型
 
@@ -574,11 +574,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsFunc(() => 123) => true
-  jValIsFunc(123) => false
+  isFunc(() => 123) => true
+  isFunc(123) => false
 ```
 
-### jValIsDate
+### isDate
              
  判断Date类型
 
@@ -588,11 +588,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsDate(() => new Date()) => false
-  jValIsDate(new Date()) => true
+  isDate(() => new Date()) => false
+  isDate(new Date()) => true
 ```
 
-### jValIsArray
+### isArray
              
  判断Array类型
 
@@ -602,11 +602,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsDate([]) => true
-  jValIsDate(![]) => false
+  isArray([]) => true
+  isArray(![]) => false
 ```
 
-### jValIsReg
+### isReg
              
  判断RegExp类型
 
@@ -616,11 +616,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsReg(new RegExp()) => true
-  jValIsReg(![]) => false
+  isReg(new RegExp()) => true
+  isReg(![]) => false
 ```
 
-### jValIsError
+### isError
              
  判断Error类型
 
@@ -630,11 +630,11 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsError(new Error()) => true
-  jValIsError(![]) => false
+  isError(new Error()) => true
+  isError(![]) => false
 ```
 
-### jValIsObject
+### isObject
              
  判断Object类型
 
@@ -644,8 +644,8 @@ wuxh
  * @param {data} any
  * @return: Boolean
  * @example:
-  jValIsError({}) => true
-  jValIsError(![]) => false
+  isObject({}) => true
+  isObject(![]) => false
 ```
 
 ## 建议，交流，推荐，反馈

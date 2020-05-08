@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2020-05-07 22:28:47
+ * @LastEditTime: 2020-05-08 09:18:31
  * @LastEditors: wuxh
  * @Description: 数处理相
  * @FilePath: /jcommon/src/math/index.js
@@ -16,9 +16,9 @@
  * @param {end}
  * @return: Number
  * @example: 
-  jMathRandom(1, 10)
+  scopeRandom(1, 10)
   => 3
  */
-export const jMathRandom = function (str, end) {
+export const scopeRandom = function (str, end) {
   return Math.floor(Math.random() * (end - str) + str)
 }

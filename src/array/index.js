@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-07 22:16:30
+ * @LastEditTime: 2020-05-08 09:15:36
  * @LastEditors: wuxh
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.js
@@ -16,7 +16,7 @@
  * @param {options} 额外参数
  * @return: {Array} [排序后的数组]
  * @example: 
-   ArrDoubleRanking(
+   doubleRanking(
       [
         {education: '本科', age: 26},
         {education: '小学', age: 25},
@@ -37,7 +37,7 @@
         {education: '本科', age: 25},
       ]
 */
-export const jArrDoubleRanking = function (arr, options) {
+export const doubleRanking = function (arr, options) {
   const defOptions = {
     filterRuleKey: '', // 一级过滤和排序的key,
     rule: [], // 一级排序规则,
@@ -80,10 +80,10 @@ export const jArrDoubleRanking = function (arr, options) {
  * @param {arr} 每个元素对象的keys
  * @return: {Array} 
  * @example: 
-  jArrRandomDate(2, ['name', 'value'])
+  randomData(2, ['name', 'value'])
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
  */
-export const jArrRandomDate = function (num, arr) {
+export const randomData = function (num, arr) {
   const result = []
   for (let i = 0; i < num; i++) {
     const obj = {}
@@ -105,10 +105,10 @@ export const jArrRandomDate = function (num, arr) {
  * @return: Object
  * @example: 
   const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
-  jArrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
-  jArrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
+  arrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
+  arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
  */
-export const jArrByObj = function (arr, key, v = '') {
+export const arrByObj = function (arr, key, v = '') {
   const obj = {}
   arr.forEach(function (d) {
     obj[d[key]] = v ? d[v] : d

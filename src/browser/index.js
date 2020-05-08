@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-07 22:25:47
+ * @LastEditTime: 2020-05-08 09:15:57
  * @LastEditors: wuxh
  * @Description: 浏览器相关
  * @FilePath: /jcommon/src/browser/index.js
@@ -15,10 +15,10 @@
  * @param {} 
  * @return: Object
  * @example: 
-  jBroGetInfo()
+  getBrowserInfo()
   => {name: "Chrome", version: "81.0.4044.129"}
  */
-export const jBroGetInfo = function () {
+export const getBrowserInfo = function () {
   let e,
     t,
     r,

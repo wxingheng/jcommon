@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-05-07 22:32:33
+ * @LastEditTime: 2020-05-08 09:20:32
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -16,10 +16,10 @@
  * @param {global} Boolean
  * @return: String
  * @example: 
-  jStrTrim('   1 1 1   ') => '1 1 1'
-  jStrTrim('   1 1 1   ', true) => '111'
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
  */
-export const jStrTrim = function (str, global) {
+export const trim = function (str, global) {
   let result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (global) {
     result = result.replace(/\s/g, '')

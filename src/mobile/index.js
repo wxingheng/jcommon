@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-07 22:29:14
+ * @LastEditTime: 2020-05-08 09:19:53
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -49,7 +49,7 @@ export const jMobIsWX = function () {
  * @param {}
  * @return:
  * @example: 
-  jMobOperator()
+  operattelecom()
   => 移动
  */
-export const jMobOperator = function () {}
+export const operattelecom = function () {}
