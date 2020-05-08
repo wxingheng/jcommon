@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-08 09:20:12
+ * @LastEditTime: 2020-05-08 09:30:40
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
@@ -18,7 +18,7 @@
   getV({name: {children: 123}}, 'name', 'children')
   => 123
  */
-export const jObjGetV = function (...args) {
+export const getV = function (...args) {
   return args.length >= 2
     ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
     : ''
@@ -31,10 +31,10 @@ export const jObjGetV = function (...args) {
  * @param {obj}
  * @return: Object
  * @example: 
-  jObjClone({name: 123})
+  clone({name: 123})
   => {name: 123}
  */
-export const jObjClone = function (obj) {
+export const clone = function (obj) {
   let str,
     newobj = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {

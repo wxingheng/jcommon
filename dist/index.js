@@ -121,78 +121,6 @@ export const arrByObj = function (arr, key, v = '') {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-08 09:15:57
- * @LastEditors: wuxh
- * @Description: 浏览器相关
- * @FilePath: /jcommon/src/browser/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 获取浏览器相关信息
- * @author: wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
- */
-export const getBrowserInfo = function () {
-  let e,
-    t,
-    r,
-    o = {
-      name: 'other',
-      version: '0'
-    },
-    i = navigator.userAgent.toLowerCase()
-  for (
-    t = [
-      ['WeiXin', /micromessenger\/([^\s]+)/],
-      ['QQ', /qq\/([^\s]+)/],
-      ['QQBrowser', /(?:qqbrowser|qqlivebrowser)\/([^\s]+)/],
-      ['JDAPP', /jdapp;/],
-      ['QIHU', /qihu|360se/],
-      ['LieBao', /(?:lbbrowser|liebaofast)\/?([\d\.]+)?/],
-      ['Sogou', /(?:metasr|sogou[\w]*)[ \/]([\d\.]+)/],
-      ['Opera', /(?:opera|opr|oupeng)\/([\d\.]+)/],
-      ['BaiduBrowser', /(?:bidubrowser|baidubrowser)[\/ ]?([\d\.\w]+)/],
-      ['BaiduBox', /baiduboxapp|baiduboxpad/],
-      ['UC', /(?:ucweb|ucbrowser)\/?([\d\.]+)/],
-      ['Maxthon', /maxthon\/([\d\.]+)/],
-      ['Samsung', /samsungbrowser\/([\d\.]+)/],
-      ['Dolphin', /aphone|apad/],
-      ['2345', /2345/],
-      ['Miui', /miuibrowser\/([\d\.]+)/],
-      ['OppoBrowser', /oppobrowser\/([\d\.]+)/],
-      ['MeiZu', /mz-/],
-      ['Weibo', /weibo/],
-      ['Youku', /youku/],
-      ['NewsApp', /newsapp/],
-      ['AliApp', /aliapp/],
-      ['Firefox', /firefox\/([\d\.\w]+)/],
-      ['Chrome', /chrome\/([\d\.]+)/],
-      ['IE', /msie[ ](\d+\.\d+)/],
-      ['Safari', /safari\/([\d\.]+)/]
-    ],
-      e = 0;
-    e < t.length;
-    e++
-  )
-    if ((r = i.match(t[e][1]))) {
-      ;(o.name = t[e][0]), (o.version = r[1] || '0')
-      break
-    }
-  return o
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
  * @LastEditTime: 2020-05-08 09:17:00
  * @LastEditors: wuxh
@@ -267,6 +195,78 @@ export const isSupportStorage = function () {
   } catch (e) {
     return false
   }
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-04 21:14:00
+ * @LastEditTime: 2020-05-08 09:15:57
+ * @LastEditors: wuxh
+ * @Description: 浏览器相关
+ * @FilePath: /jcommon/src/browser/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 获取浏览器相关信息
+ * @author: wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+ */
+export const getBrowserInfo = function () {
+  let e,
+    t,
+    r,
+    o = {
+      name: 'other',
+      version: '0'
+    },
+    i = navigator.userAgent.toLowerCase()
+  for (
+    t = [
+      ['WeiXin', /micromessenger\/([^\s]+)/],
+      ['QQ', /qq\/([^\s]+)/],
+      ['QQBrowser', /(?:qqbrowser|qqlivebrowser)\/([^\s]+)/],
+      ['JDAPP', /jdapp;/],
+      ['QIHU', /qihu|360se/],
+      ['LieBao', /(?:lbbrowser|liebaofast)\/?([\d\.]+)?/],
+      ['Sogou', /(?:metasr|sogou[\w]*)[ \/]([\d\.]+)/],
+      ['Opera', /(?:opera|opr|oupeng)\/([\d\.]+)/],
+      ['BaiduBrowser', /(?:bidubrowser|baidubrowser)[\/ ]?([\d\.\w]+)/],
+      ['BaiduBox', /baiduboxapp|baiduboxpad/],
+      ['UC', /(?:ucweb|ucbrowser)\/?([\d\.]+)/],
+      ['Maxthon', /maxthon\/([\d\.]+)/],
+      ['Samsung', /samsungbrowser\/([\d\.]+)/],
+      ['Dolphin', /aphone|apad/],
+      ['2345', /2345/],
+      ['Miui', /miuibrowser\/([\d\.]+)/],
+      ['OppoBrowser', /oppobrowser\/([\d\.]+)/],
+      ['MeiZu', /mz-/],
+      ['Weibo', /weibo/],
+      ['Youku', /youku/],
+      ['NewsApp', /newsapp/],
+      ['AliApp', /aliapp/],
+      ['Firefox', /firefox\/([\d\.\w]+)/],
+      ['Chrome', /chrome\/([\d\.]+)/],
+      ['IE', /msie[ ](\d+\.\d+)/],
+      ['Safari', /safari\/([\d\.]+)/]
+    ],
+      e = 0;
+    e < t.length;
+    e++
+  )
+    if ((r = i.match(t[e][1]))) {
+      ;(o.name = t[e][0]), (o.version = r[1] || '0')
+      break
+    }
+  return o
 }
 
 
@@ -461,7 +461,7 @@ export const scopeRandom = function (str, end) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-08 09:19:53
+ * @LastEditTime: 2020-05-08 09:30:03
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -475,10 +475,10 @@ export const scopeRandom = function (str, end) {
  * @param
  * @return: Boolean
  * @example: 
-  jMobIsQQ()
+  isQQ()
   => false
  */
-export const jMobIsQQ = function () {
+export const isQQ = function () {
   if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
     return true
   }
@@ -492,10 +492,10 @@ export const jMobIsQQ = function () {
  * @param
  * @return: Boolean
  * @example: 
-  jMobIsWX()
+  isWX()
   => false
  */
-export const jMobIsWX = function () {
+export const isWX = function () {
   if (/MicroMessenger/i.test(navigator.userAgent)) {
     return true
   }
@@ -520,7 +520,7 @@ export const operattelecom = function () {}
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-08 09:20:12
+ * @LastEditTime: 2020-05-08 09:30:40
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
@@ -537,7 +537,7 @@ export const operattelecom = function () {}
   getV({name: {children: 123}}, 'name', 'children')
   => 123
  */
-export const jObjGetV = function (...args) {
+export const getV = function (...args) {
   return args.length >= 2
     ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
     : ''
@@ -550,10 +550,10 @@ export const jObjGetV = function (...args) {
  * @param {obj}
  * @return: Object
  * @example: 
-  jObjClone({name: 123})
+  clone({name: 123})
   => {name: 123}
  */
-export const jObjClone = function (obj) {
+export const clone = function (obj) {
   let str,
     newobj = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {

@@ -41,21 +41,25 @@ import { isObject, isArray } from 'jcommon'
 
 ## API 目录
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ###  数组方法 Array
 
 - [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
 ###  时间相关
 
 - [dateInterval](#dateInterval)  获取两个时间的间隔
 - [dateFormat](#dateFormat)   时间戳的转换（自定义格式）
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
 
 ###  数据持久化，缓存
 
@@ -64,25 +68,31 @@ import { isObject, isArray } from 'jcommon'
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
 
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
-
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
 
 ###  移动端相关
 
-- [jMobIsQQ](#jMobIsQQ)  是否是QQ平台
-- [jMobIsWX](#jMobIsWX)  是否是微信平台
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
 - [operattelecom](#operattelecom)  获取手机运营商 (开发中)
 
 ###  对象相关（Object处理）
 
-- [jObjGetV](#jObjGetV)  获取多级数据避免出错（超级好用）
-- [jObjClone](#jObjClone)  对象克隆（只包含可遍历属性<常用>）
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
 - [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+
+###  字符串处理相关
+
+- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [objByUrlStr](#objByUrlStr)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ###  校验相关
 
@@ -99,16 +109,6 @@ import { isObject, isArray } from 'jcommon'
 - [isReg](#isReg)  判断RegExp类型
 - [isError](#isError)  判断Error类型
 - [isObject](#isObject)  判断Object类型
-
-###  字符串处理相关
-
-- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
-
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [objByUrlStr](#objByUrlStr)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ## API 说明
 
@@ -235,6 +235,20 @@ wuxh
   => 31
 ```
 
+### osInfo
+             
+ 获取用户系统平台信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
 ### removeStorage
              
  删除
@@ -293,20 +307,6 @@ wuxh
   => true
 ```
 
-### osInfo
-             
- 获取用户系统平台信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
-```
-
 ### scopeRandom
              
  范围随机整数
@@ -322,7 +322,7 @@ wuxh
   => 3
 ```
 
-### jMobIsQQ
+### isQQ
              
  是否是QQ平台
 
@@ -332,11 +332,11 @@ wuxh
  * @param
  * @return: Boolean
  * @example: 
-  jMobIsQQ()
+  isQQ()
   => false
 ```
 
-### jMobIsWX
+### isWX
              
  是否是微信平台
 
@@ -346,7 +346,7 @@ wuxh
  * @param
  * @return: Boolean
  * @example: 
-  jMobIsWX()
+  isWX()
   => false
 ```
 
@@ -364,22 +364,7 @@ wuxh
   => 移动
 ```
 
-### trim
-             
- 去除字符串空格, 默认去除前后空格 （常用）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:43:52
- * @param {str} String
- * @param {global} Boolean
- * @return: String
- * @example: 
-  trim('   1 1 1   ') => '1 1 1'
-  trim('   1 1 1   ', true) => '111'
-```
-
-### jObjGetV
+### getV
              
  获取多级数据避免出错（超级好用）
 
@@ -393,7 +378,7 @@ wuxh
   => 123
 ```
 
-### jObjClone
+### clone
              
  对象克隆（只包含可遍历属性<常用>）
 
@@ -403,7 +388,7 @@ wuxh
  * @param {obj}
  * @return: Object
  * @example: 
-  jObjClone({name: 123})
+  clone({name: 123})
   => {name: 123}
 ```
 
@@ -646,6 +631,21 @@ wuxh
  * @example:
   isObject({}) => true
   isObject(![]) => false
+```
+
+### trim
+             
+ 去除字符串空格, 默认去除前后空格 （常用）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:43:52
+ * @param {str} String
+ * @param {global} Boolean
+ * @return: String
+ * @example: 
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
 ```
 
 ## 建议，交流，推荐，反馈
