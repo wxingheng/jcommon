@@ -47,20 +47,6 @@ import { isObject, isArray } from 'jcommon'
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-###  时间相关
-
-- [dateInterval](#dateInterval)  获取两个时间的间隔
-- [dateFormat](#dateFormat)   时间戳的转换（自定义格式）
-- [dateMonthDays](#dateMonthDays)  获取当前月份的天数
-
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
@@ -68,21 +54,36 @@ import { isObject, isArray } from 'jcommon'
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
 
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
+###  时间相关
+
+- [dateInterval](#dateInterval)  获取两个时间的间隔
+- [addZero](#addZero)  字符串补0，目前提供给dateFormat使用
+- [dateFormat](#dateFormat)   时间的转换（目前支持 年，月，日，时，分，秒，星期）
+- [dateMonthDays](#dateMonthDays)  获取当前月份的天数
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
+
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商 (开发中)
 
 ###  对象相关（Object处理）
 
 - [getV](#getV)  获取多级数据避免出错（超级好用）
 - [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
 - [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商 (开发中)
 
 ###  字符串处理相关
 
@@ -191,64 +192,6 @@ wuxh
   => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
-### dateInterval
-             
- 获取两个时间的间隔
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:04:39
- * @param {st}
- * @param {et}
- * @return: String
- * @example: 
-  dateInterval(new Date().getTime(), 1589661011714)
-  => 11天13小时46分钟21秒
-```
-
-### dateFormat
-             
-  时间戳的转换（自定义格式）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:05:28
- * @param {date}
- * @param {formatStr}
- * @return: String
- * @example: 
-  dateFormat(new Date(), 'YYYY-MM')
-  => "2020-05"
-```
-
-### dateMonthDays
-             
- 获取当前月份的天数
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:06:24
- * @param {str}
- * @return: Number
- * @example: 
-  dateMonthDays('2020-05-06')
-  => 31
-```
-
-### osInfo
-             
- 获取用户系统平台信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
-```
-
 ### removeStorage
              
  删除
@@ -307,6 +250,80 @@ wuxh
   => true
 ```
 
+### osInfo
+             
+ 获取用户系统平台信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
+### dateInterval
+             
+ 获取两个时间的间隔
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:04:39
+ * @param {st}
+ * @param {et}
+ * @return: String
+ * @example: 
+  dateInterval(new Date().getTime(), 1589661011714)
+  => 11天13小时46分钟21秒
+```
+
+### addZero
+             
+ 字符串补0，目前提供给dateFormat使用
+
+```javascript
+wuxh
+ * @Date: 2020-05-11 14:01:20
+ * @param {v} 需要处理的数据 String | Number
+ * @param {size} 期望得到的总位数
+ * @return: String
+ * @example: 
+  addZero(12, 1) => 12
+  addZero(12, 2) => 12
+  addZero(12, 3) => 012
+```
+
+### dateFormat
+             
+  时间的转换（目前支持 年，月，日，时，分，秒，星期）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:05:28
+ * @param {date}
+ * @param {formatStr}
+ * @return: String
+ * @example: 
+  dateFormat(new Date(), '当前时间 YY-MM-DD HH:II:SS 星期W')
+  => "当前时间 20-05-11 14:07:02 星期一"
+```
+
+### dateMonthDays
+             
+ 获取当前月份的天数
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:06:24
+ * @param {str}
+ * @return: Number
+ * @example: 
+  dateMonthDays('2020-05-06')
+  => 31
+```
+
 ### scopeRandom
              
  范围随机整数
@@ -320,48 +337,6 @@ wuxh
  * @example: 
   scopeRandom(1, 10)
   => 3
-```
-
-### isQQ
-             
- 是否是QQ平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isQQ()
-  => false
-```
-
-### isWX
-             
- 是否是微信平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isWX()
-  => false
-```
-
-### operattelecom
-             
- 获取手机运营商 (开发中)
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return:
- * @example: 
-  operattelecom()
-  => 移动
 ```
 
 ### getV
@@ -448,6 +423,63 @@ wuxh
  * @example: 
   urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
+```
+
+### trim
+             
+ 去除字符串空格, 默认去除前后空格 （常用）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:43:52
+ * @param {str} String
+ * @param {global} Boolean
+ * @return: String
+ * @example: 
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
+```
+
+### isQQ
+             
+ 是否是QQ平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+```
+
+### isWX
+             
+ 是否是微信平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+```
+
+### operattelecom
+             
+ 获取手机运营商 (开发中)
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return:
+ * @example: 
+  operattelecom()
+  => 移动
 ```
 
 ### isUserId
@@ -631,21 +663,6 @@ wuxh
  * @example:
   isObject({}) => true
   isObject(![]) => false
-```
-
-### trim
-             
- 去除字符串空格, 默认去除前后空格 （常用）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:43:52
- * @param {str} String
- * @param {global} Boolean
- * @return: String
- * @example: 
-  trim('   1 1 1   ') => '1 1 1'
-  trim('   1 1 1   ', true) => '111'
 ```
 
 ## 建议，交流，推荐，反馈

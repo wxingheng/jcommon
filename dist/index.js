@@ -121,6 +121,78 @@ export const arrByObj = function (arr, key, v = '') {
 
 /*
  * @Author: wuxh
+ * @Date: 2020-05-04 21:14:00
+ * @LastEditTime: 2020-05-08 09:15:57
+ * @LastEditors: wuxh
+ * @Description: 浏览器相关
+ * @FilePath: /jcommon/src/browser/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 获取浏览器相关信息
+ * @author: wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+ */
+export const getBrowserInfo = function () {
+  let e,
+    t,
+    r,
+    o = {
+      name: 'other',
+      version: '0'
+    },
+    i = navigator.userAgent.toLowerCase()
+  for (
+    t = [
+      ['WeiXin', /micromessenger\/([^\s]+)/],
+      ['QQ', /qq\/([^\s]+)/],
+      ['QQBrowser', /(?:qqbrowser|qqlivebrowser)\/([^\s]+)/],
+      ['JDAPP', /jdapp;/],
+      ['QIHU', /qihu|360se/],
+      ['LieBao', /(?:lbbrowser|liebaofast)\/?([\d\.]+)?/],
+      ['Sogou', /(?:metasr|sogou[\w]*)[ \/]([\d\.]+)/],
+      ['Opera', /(?:opera|opr|oupeng)\/([\d\.]+)/],
+      ['BaiduBrowser', /(?:bidubrowser|baidubrowser)[\/ ]?([\d\.\w]+)/],
+      ['BaiduBox', /baiduboxapp|baiduboxpad/],
+      ['UC', /(?:ucweb|ucbrowser)\/?([\d\.]+)/],
+      ['Maxthon', /maxthon\/([\d\.]+)/],
+      ['Samsung', /samsungbrowser\/([\d\.]+)/],
+      ['Dolphin', /aphone|apad/],
+      ['2345', /2345/],
+      ['Miui', /miuibrowser\/([\d\.]+)/],
+      ['OppoBrowser', /oppobrowser\/([\d\.]+)/],
+      ['MeiZu', /mz-/],
+      ['Weibo', /weibo/],
+      ['Youku', /youku/],
+      ['NewsApp', /newsapp/],
+      ['AliApp', /aliapp/],
+      ['Firefox', /firefox\/([\d\.\w]+)/],
+      ['Chrome', /chrome\/([\d\.]+)/],
+      ['IE', /msie[ ](\d+\.\d+)/],
+      ['Safari', /safari\/([\d\.]+)/]
+    ],
+      e = 0;
+    e < t.length;
+    e++
+  )
+    if ((r = i.match(t[e][1]))) {
+      ;(o.name = t[e][0]), (o.version = r[1] || '0')
+      break
+    }
+  return o
+}
+
+
+
+
+/*
+ * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
  * @LastEditTime: 2020-05-08 09:17:00
  * @LastEditors: wuxh
@@ -202,80 +274,8 @@ export const isSupportStorage = function () {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-08 09:15:57
- * @LastEditors: wuxh
- * @Description: 浏览器相关
- * @FilePath: /jcommon/src/browser/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 获取浏览器相关信息
- * @author: wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
- */
-export const getBrowserInfo = function () {
-  let e,
-    t,
-    r,
-    o = {
-      name: 'other',
-      version: '0'
-    },
-    i = navigator.userAgent.toLowerCase()
-  for (
-    t = [
-      ['WeiXin', /micromessenger\/([^\s]+)/],
-      ['QQ', /qq\/([^\s]+)/],
-      ['QQBrowser', /(?:qqbrowser|qqlivebrowser)\/([^\s]+)/],
-      ['JDAPP', /jdapp;/],
-      ['QIHU', /qihu|360se/],
-      ['LieBao', /(?:lbbrowser|liebaofast)\/?([\d\.]+)?/],
-      ['Sogou', /(?:metasr|sogou[\w]*)[ \/]([\d\.]+)/],
-      ['Opera', /(?:opera|opr|oupeng)\/([\d\.]+)/],
-      ['BaiduBrowser', /(?:bidubrowser|baidubrowser)[\/ ]?([\d\.\w]+)/],
-      ['BaiduBox', /baiduboxapp|baiduboxpad/],
-      ['UC', /(?:ucweb|ucbrowser)\/?([\d\.]+)/],
-      ['Maxthon', /maxthon\/([\d\.]+)/],
-      ['Samsung', /samsungbrowser\/([\d\.]+)/],
-      ['Dolphin', /aphone|apad/],
-      ['2345', /2345/],
-      ['Miui', /miuibrowser\/([\d\.]+)/],
-      ['OppoBrowser', /oppobrowser\/([\d\.]+)/],
-      ['MeiZu', /mz-/],
-      ['Weibo', /weibo/],
-      ['Youku', /youku/],
-      ['NewsApp', /newsapp/],
-      ['AliApp', /aliapp/],
-      ['Firefox', /firefox\/([\d\.\w]+)/],
-      ['Chrome', /chrome\/([\d\.]+)/],
-      ['IE', /msie[ ](\d+\.\d+)/],
-      ['Safari', /safari\/([\d\.]+)/]
-    ],
-      e = 0;
-    e < t.length;
-    e++
-  )
-    if ((r = i.match(t[e][1]))) {
-      ;(o.name = t[e][0]), (o.version = r[1] || '0')
-      break
-    }
-  return o
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-08 09:17:33
+ * @LastEditTime: 2020-05-11 14:09:05
  * @LastEditors: wuxh
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -317,24 +317,36 @@ export const dateInterval = function (st, et) {
 }
 
 /**
- * @description:  时间戳的转换（自定义格式）
+ * @description: 字符串补0，目前提供给dateFormat使用
+ * @author: wuxh
+ * @Date: 2020-05-11 14:01:20
+ * @param {v} 需要处理的数据 String | Number
+ * @param {size} 期望得到的总位数
+ * @return: String
+ * @example: 
+  addZero(12, 1) => 12
+  addZero(12, 2) => 12
+  addZero(12, 3) => 012 
+ */
+export const addZero = function addZero (v, size) {
+  for (let i = 0, len = size - (v + '').length; i < len; i++) {
+    v = '0' + v
+  }
+  return v + ''
+}
+
+/**
+ * @description:  时间的转换（目前支持 年，月，日，时，分，秒，星期）
  * @author: wuxh
  * @Date: 2020-05-06 12:05:28
  * @param {date}
  * @param {formatStr}
  * @return: String
  * @example: 
-  dateFormat(new Date(), 'YYYY-MM')
-  => "2020-05"
+  dateFormat(new Date(), '当前时间 YY-MM-DD HH:II:SS 星期W')
+  => "当前时间 20-05-11 14:07:02 星期一"
  */
 export const dateFormat = function (date, formatStr) {
-  function addZero (v, size) {
-    for (let i = 0, len = size - (v + '').length; i < len; i++) {
-      v = '0' + v
-    }
-    return v + ''
-  }
-
   const arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
     str = formatStr
       .replace(/yyyy|YYYY/, date.getFullYear())
@@ -603,38 +615,6 @@ export const mergeObj = function (oldObj, newObj, keys) {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-05-08 09:20:32
- * @LastEditors: wuxh
- * @Description: 字符串处理相关
- * @FilePath: /jcommon/src/string/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 去除字符串空格, 默认去除前后空格 （常用）
- * @author: wuxh
- * @Date: 2020-05-06 13:43:52
- * @param {str} String
- * @param {global} Boolean
- * @return: String
- * @example: 
-  trim('   1 1 1   ') => '1 1 1'
-  trim('   1 1 1   ', true) => '111'
- */
-export const trim = function (str, global) {
-  let result = str.replace(/(^\s+)|(\s+$)/g, '')
-  if (global) {
-    result = result.replace(/\s/g, '')
-  }
-  return result
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
  * @LastEditTime: 2020-05-08 09:21:51
  * @LastEditors: wuxh
@@ -720,6 +700,38 @@ export const urlByObj = function (params) {
     })
   }
   return obj
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-06 10:10:41
+ * @LastEditTime: 2020-05-08 09:20:32
+ * @LastEditors: wuxh
+ * @Description: 字符串处理相关
+ * @FilePath: /jcommon/src/string/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 去除字符串空格, 默认去除前后空格 （常用）
+ * @author: wuxh
+ * @Date: 2020-05-06 13:43:52
+ * @param {str} String
+ * @param {global} Boolean
+ * @return: String
+ * @example: 
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
+ */
+export const trim = function (str, global) {
+  let result = str.replace(/(^\s+)|(\s+$)/g, '')
+  if (global) {
+    result = result.replace(/\s/g, '')
+  }
+  return result
 }
 
 

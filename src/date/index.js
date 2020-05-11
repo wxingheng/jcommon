@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-08 09:17:33
+ * @LastEditTime: 2020-05-11 14:09:05
  * @LastEditors: wuxh
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -43,24 +43,36 @@ export const dateInterval = function (st, et) {
 }
 
 /**
- * @description:  时间戳的转换（自定义格式）
+ * @description: 字符串补0，目前提供给dateFormat使用
+ * @author: wuxh
+ * @Date: 2020-05-11 14:01:20
+ * @param {v} 需要处理的数据 String | Number
+ * @param {size} 期望得到的总位数
+ * @return: String
+ * @example: 
+  addZero(12, 1) => 12
+  addZero(12, 2) => 12
+  addZero(12, 3) => 012 
+ */
+export const addZero = function addZero (v, size) {
+  for (let i = 0, len = size - (v + '').length; i < len; i++) {
+    v = '0' + v
+  }
+  return v + ''
+}
+
+/**
+ * @description:  时间的转换（目前支持 年，月，日，时，分，秒，星期）
  * @author: wuxh
  * @Date: 2020-05-06 12:05:28
  * @param {date}
  * @param {formatStr}
  * @return: String
  * @example: 
-  dateFormat(new Date(), 'YYYY-MM')
-  => "2020-05"
+  dateFormat(new Date(), '当前时间 YY-MM-DD HH:II:SS 星期W')
+  => "当前时间 20-05-11 14:07:02 星期一"
  */
 export const dateFormat = function (date, formatStr) {
-  function addZero (v, size) {
-    for (let i = 0, len = size - (v + '').length; i < len; i++) {
-      v = '0' + v
-    }
-    return v + ''
-  }
-
   const arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
     str = formatStr
       .replace(/yyyy|YYYY/, date.getFullYear())
