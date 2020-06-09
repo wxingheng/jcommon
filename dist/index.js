@@ -193,6 +193,34 @@ export const getBrowserInfo = function () {
 
 /*
  * @Author: wuxh
+ * @Date: 2020-06-09 09:27:33
+ * @LastEditTime: 2020-06-09 09:45:52
+ * @LastEditors: wuxh
+ * @Description:
+ * @FilePath: /jcommon/src/cookie/index.js
+ */
+
+/**
+ * @description: 获取cookie值
+ * @author: wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+ */
+
+export const getCookie = function (name) {
+  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
+  if (arr != null) return unescape(arr[2])
+  return null
+}
+
+
+
+
+/*
+ * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
  * @LastEditTime: 2020-05-08 09:17:00
  * @LastEditors: wuxh
@@ -267,34 +295,6 @@ export const isSupportStorage = function () {
   } catch (e) {
     return false
   }
-}
-
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2020-06-09 09:27:33
- * @LastEditTime: 2020-06-09 09:45:52
- * @LastEditors: wuxh
- * @Description:
- * @FilePath: /jcommon/src/cookie/index.js
- */
-
-/**
- * @description: 获取cookie值
- * @author: wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
- */
-
-export const getCookie = function (name) {
-  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
-  if (arr != null) return unescape(arr[2])
-  return null
 }
 
 
@@ -653,14 +653,12 @@ export const isAppleMobileDevice = function () {
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-06-09 09:05:08
+ * @LastEditTime: 2020-06-09 15:51:27
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
-
-import { isNull, isUndefined } from '../../dist'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
@@ -669,13 +667,13 @@ import { isNull, isUndefined } from '../../dist'
  * @param {...any} args
  * @return: any
  * @example: 
-  getV({name: {children: 123}}, 'name', 'children')
+  getV('', {name: {children: 123}}, 'name', 'children')
   => 123
  */
-export const getV = function (...args) {
+export const getV = function (def = {}, ...args) {
   return args.length >= 2
-    ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
-    : ''
+    ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : def))
+    : def
 }
 
 /**

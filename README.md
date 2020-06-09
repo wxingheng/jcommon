@@ -47,16 +47,16 @@ import { isObject, isArray } from 'jcommon'
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
-
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ### 
 
@@ -70,10 +70,6 @@ import { isObject, isArray } from 'jcommon'
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
-
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
@@ -85,6 +81,10 @@ import { isObject, isArray } from 'jcommon'
 - [operattelecom](#operattelecom)  获取手机运营商
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
 
 ###  对象相关（Object处理）
 
@@ -263,6 +263,19 @@ wuxh
   => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
+### getCookie
+             
+ 获取cookie值
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+```
+
 ### dateInterval
              
  获取两个时间的间隔
@@ -353,19 +366,6 @@ wuxh
  * @example: 
   osInfo()
   => {os: "mac", version: "10.15.3"}
-```
-
-### getCookie
-             
- 获取cookie值
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
 ```
 
 ### scopeRandom
@@ -460,7 +460,7 @@ wuxh
  * @param {...any} args
  * @return: any
  * @example: 
-  getV({name: {children: 123}}, 'name', 'children')
+  getV('', {name: {children: 123}}, 'name', 'children')
   => 123
 ```
 
@@ -492,6 +492,48 @@ wuxh
  * @example:  
   mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
   mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+```
+
+### getUrlQuery
+             
+ 获取浏览器url中的一个参数
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### objByUrlStr
+             
+ 格式化GET请求的请求头
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  objByUrlStr({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+             
+ 处理url参数(window.location.search)转换为 {key: value}
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
 ```
 
 ### trim
@@ -768,48 +810,6 @@ wuxh
  * @return: boolean
  * @example: 
   isEmail('wxingheng@outlook.com') => true
-```
-
-### getUrlQuery
-             
- 获取浏览器url中的一个参数
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### objByUrlStr
-             
- 格式化GET请求的请求头
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  objByUrlStr({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-             
- 处理url参数(window.location.search)转换为 {key: value}
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈

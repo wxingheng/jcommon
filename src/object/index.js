@@ -1,14 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-06-09 09:05:08
+ * @LastEditTime: 2020-06-09 15:51:27
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
-
-import { isNull, isUndefined } from '../../dist'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
@@ -17,13 +15,13 @@ import { isNull, isUndefined } from '../../dist'
  * @param {...any} args
  * @return: any
  * @example: 
-  getV({name: {children: 123}}, 'name', 'children')
+  getV('', {name: {children: 123}}, 'name', 'children')
   => 123
  */
-export const getV = function (...args) {
+export const getV = function (def = {}, ...args) {
   return args.length >= 2
-    ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : ''))
-    : ''
+    ? args.reduce((a, b) => (a && a.hasOwnProperty(b) ? a[b] : def))
+    : def
 }
 
 /**
