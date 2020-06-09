@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-08 09:24:57
+ * @LastEditTime: 2020-06-09 09:57:05
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -139,7 +139,7 @@ export const isUserId = function (e) {
   isType('123', 'String') => true
  */
 export const isType = function (data, type) {
-  Object.prototype.toString.call(data) === `[object ${type}]`
+  return Object.prototype.toString.call(data) === `[object ${type}]`
 }
 /**
  * @description: 判断String类型
@@ -152,7 +152,7 @@ export const isType = function (data, type) {
   isString('') => true
  */
 export const isString = function (data) {
-  isType(data, 'String')
+  return isType(data, 'String')
 }
 
 /**
@@ -166,7 +166,7 @@ export const isString = function (data) {
   isNumber('') => false
  */
 export const isNumber = function (data) {
-  isType(data, 'Number')
+  return isType(data, 'Number')
 }
 
 /**
@@ -180,7 +180,7 @@ export const isNumber = function (data) {
   isBoolean('false') => false
  */
 export const isBoolean = function (data) {
-  isType(data, 'Boolean')
+  return isType(data, 'Boolean')
 }
 
 /**
@@ -194,7 +194,7 @@ export const isBoolean = function (data) {
   isUndefined('undefined') => false
  */
 export const isUndefined = function (data) {
-  isType(data, 'Undefined')
+  return isType(data, 'Undefined')
 }
 
 /**
@@ -208,7 +208,7 @@ export const isUndefined = function (data) {
   isNull('null') => false
  */
 export const isNull = function (data) {
-  isType(data, 'Null')
+  return isType(data, 'Null')
 }
 
 /**
@@ -222,7 +222,7 @@ export const isNull = function (data) {
   isFunc(123) => false
  */
 export const isFunc = function (data) {
-  isType(data, 'Function')
+  return isType(data, 'Function')
 }
 
 /**
@@ -236,7 +236,7 @@ export const isFunc = function (data) {
   isDate(new Date()) => true
  */
 export const isDate = function (data) {
-  isType(data, 'Date')
+  return isType(data, 'Date')
 }
 
 /**
@@ -250,7 +250,7 @@ export const isDate = function (data) {
   isArray(![]) => false
  */
 export const isArray = function (data) {
-  isType(data, 'Array')
+  return isType(data, 'Array')
 }
 
 /**
@@ -264,7 +264,7 @@ export const isArray = function (data) {
   isReg(![]) => false
  */
 export const isReg = function (data) {
-  isType(data, 'RegExp')
+  return isType(data, 'RegExp')
 }
 
 /**
@@ -278,7 +278,7 @@ export const isReg = function (data) {
   isError(![]) => false
  */
 export const isError = function (data) {
-  isType(data, 'Error')
+  return isType(data, 'Error')
 }
 
 /**
@@ -292,5 +292,35 @@ export const isError = function (data) {
   isObject(![]) => false
  */
 export const isObject = function (data) {
-  isType(data, 'Object')
+  return isType(data, 'Object')
+}
+
+/**
+ * @description: 手机号校验
+ * @author: wuxh
+ * @Date: 2020-06-09 09:21:15
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isPhone('13419595634') => true
+ */
+export const isPhone = function (phone) {
+  if (!phone) {
+    return false
+  }
+  const phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
+  return phoneReg.test(phone)
+}
+
+/**
+ * @description: 校验是否为邮箱地址
+ * @author: wuxh
+ * @Date: 2020-06-09 09:49:29
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isEmail('wxingheng@outlook.com') => true
+ */
+export const isEmail = function (str) {
+  return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str)
 }

@@ -58,12 +58,17 @@ import { isObject, isArray } from 'jcommon'
 
 - [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
+### 
+
+- [getCookie](#getCookie)  获取cookie值
+
 ###  时间相关
 
 - [dateInterval](#dateInterval)  获取两个时间的间隔
 - [addZero](#addZero)  字符串补0，目前提供给dateFormat使用
 - [dateFormat](#dateFormat)   时间的转换（目前支持 年，月，日，时，分，秒，星期）
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
+- [timeFormat](#timeFormat)  时间个性化输出功能
 
 ###  用户设备相关（客户端系统）
 
@@ -73,21 +78,27 @@ import { isObject, isArray } from 'jcommon'
 
 - [scopeRandom](#scopeRandom)  范围随机整数
 
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
+
 ###  对象相关（Object处理）
 
 - [getV](#getV)  获取多级数据避免出错（超级好用）
 - [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
 - [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商 (开发中)
-
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
+- [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
+- [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
+- [hideIdNum](#hideIdNum)  隐藏身份证号码
+- [uniqueId](#uniqueId)  随机数时间戳
 
 ###  url处理相关
 
@@ -110,6 +121,8 @@ import { isObject, isArray } from 'jcommon'
 - [isReg](#isReg)  判断RegExp类型
 - [isError](#isError)  判断Error类型
 - [isObject](#isObject)  判断Object类型
+- [isPhone](#isPhone)  手机号校验
+- [isEmail](#isEmail)  校验是否为邮箱地址
 
 ## API 说明
 
@@ -178,20 +191,6 @@ wuxh
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### getBrowserInfo
-             
- 获取浏览器相关信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
 ### removeStorage
              
  删除
@@ -250,18 +249,18 @@ wuxh
   => true
 ```
 
-### osInfo
+### getBrowserInfo
              
- 获取用户系统平台信息
+ 获取浏览器相关信息
 
 ```javascript
 wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
  * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### dateInterval
@@ -324,6 +323,51 @@ wuxh
   => 31
 ```
 
+### timeFormat
+             
+ 时间个性化输出功能
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:44:23
+ * @param {type} 
+ * @return: string
+ * @example: 
+  1、< 60s, 显示为“刚刚”
+  2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
+  3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
+  4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
+  5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
+  timeFormat(new Date()) => '刚刚'
+```
+
+### osInfo
+             
+ 获取用户系统平台信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
+### getCookie
+             
+ 获取cookie值
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+```
+
 ### scopeRandom
              
  范围随机整数
@@ -337,6 +381,73 @@ wuxh
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### isQQ
+             
+ 是否是QQ平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+```
+
+### isWX
+             
+ 是否是微信平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+```
+
+### operattelecom
+             
+ 获取手机运营商
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return: '移动' | '电信' | '联通' | '未知'
+ * @example: 
+  operattelecom('13419595634') => 移动
+```
+
+### isAndroidMobileDevice
+             
+ 是否是安卓设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+```
+
+### isAppleMobileDevice
+             
+ 是否是苹果设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
 ```
 
 ### getV
@@ -383,48 +494,6 @@ wuxh
   mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
 ```
 
-### getUrlQuery
-             
- 获取浏览器url中的一个参数
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### objByUrlStr
-             
- 格式化GET请求的请求头
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  objByUrlStr({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-             
- 处理url参数(window.location.search)转换为 {key: value}
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
-```
-
 ### trim
              
  去除字符串空格, 默认去除前后空格 （常用）
@@ -440,46 +509,56 @@ wuxh
   trim('   1 1 1   ', true) => '111'
 ```
 
-### isQQ
+### getSexByIdNO
              
- 是否是QQ平台
+ 身份证号码解析性别
 
 ```javascript
 wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
+ * @Date: 2020-06-09 09:16:28
+ * @param {type} 
+ * @return: 'FEMALE' ｜ 'MALE'
  * @example: 
-  isQQ()
-  => false
+   getSexByIdNO('421182199409274710') => MALE
 ```
 
-### isWX
+### getBirthdatByIdNo
              
- 是否是微信平台
+ 身份证号码解析出生日期
 
 ```javascript
 wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
+ * @Date: 2020-06-09 09:17:50
+ * @param {type} 
+ * @return: string
  * @example: 
-  isWX()
-  => false
+  getBirthdatByIdNo('421182199409274710') => '1994-09-27'
 ```
 
-### operattelecom
+### hideIdNum
              
- 获取手机运营商 (开发中)
+ 隐藏身份证号码
 
 ```javascript
 wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return:
+ * @Date: 2020-06-09 09:19:26
+ * @param {type} 
+ * @return: string
  * @example: 
-  operattelecom()
-  => 移动
+  hideIdNum('421182199409274710') => 4****************0
+```
+
+### uniqueId
+             
+ 随机数时间戳
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {type} 
+ * @return: string
+ * @example: 
+  uniqueId() => '1591667193048544'
 ```
 
 ### isUserId
@@ -663,6 +742,74 @@ wuxh
  * @example:
   isObject({}) => true
   isObject(![]) => false
+```
+
+### isPhone
+             
+ 手机号校验
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:21:15
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isPhone('13419595634') => true
+```
+
+### isEmail
+             
+ 校验是否为邮箱地址
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:49:29
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isEmail('wxingheng@outlook.com') => true
+```
+
+### getUrlQuery
+             
+ 获取浏览器url中的一个参数
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### objByUrlStr
+             
+ 格式化GET请求的请求头
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  objByUrlStr({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+             
+ 处理url参数(window.location.search)转换为 {key: value}
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈

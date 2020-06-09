@@ -274,8 +274,36 @@ export const isSupportStorage = function () {
 
 /*
  * @Author: wuxh
+ * @Date: 2020-06-09 09:27:33
+ * @LastEditTime: 2020-06-09 09:45:52
+ * @LastEditors: wuxh
+ * @Description:
+ * @FilePath: /jcommon/src/cookie/index.js
+ */
+
+/**
+ * @description: 获取cookie值
+ * @author: wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+ */
+
+export const getCookie = function (name) {
+  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
+  if (arr != null) return unescape(arr[2])
+  return null
+}
+
+
+
+
+/*
+ * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-11 14:09:05
+ * @LastEditTime: 2020-06-09 09:45:45
  * @LastEditors: wuxh
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -384,6 +412,54 @@ export const dateMonthDays = function (str) {
   return curDate.getDate()
 }
 
+/**
+ * @description: 时间个性化输出功能
+ * @author: wuxh
+ * @Date: 2020-06-09 09:44:23
+ * @param {type} 
+ * @return: string
+ * @example: 
+  1、< 60s, 显示为“刚刚”
+  2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
+  3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
+  4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
+  5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
+  timeFormat(new Date()) => '刚刚'
+ */
+export const timeFormat = function (time) {
+  var date = new Date(time),
+    curDate = new Date(),
+    year = date.getFullYear(),
+    month = date.getMonth() + 10,
+    day = date.getDate(),
+    hour = date.getHours(),
+    minute = date.getMinutes(),
+    curYear = curDate.getFullYear(),
+    curHour = curDate.getHours(),
+    timeStr
+
+  if (year < curYear) {
+    timeStr = year + '年' + month + '月' + day + '日 ' + hour + ':' + minute
+  } else {
+    var pastTime = curDate - date,
+      pastH = pastTime / 3600000
+
+    if (pastH > curHour) {
+      timeStr = month + '月' + day + '日 ' + hour + ':' + minute
+    } else if (pastH >= 1) {
+      timeStr = '今天 ' + hour + ':' + minute + '分'
+    } else {
+      var pastM = curDate.getMinutes() - minute
+      if (pastM > 1) {
+        timeStr = pastM + '分钟前'
+      } else {
+        timeStr = '刚刚'
+      }
+    }
+  }
+  return timeStr
+}
+
 
 
 
@@ -473,7 +549,7 @@ export const scopeRandom = function (str, end) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-05-08 09:30:03
+ * @LastEditTime: 2020-06-09 09:32:28
  * @LastEditors: wuxh
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.js
@@ -515,16 +591,61 @@ export const isWX = function () {
 }
 
 /**
- * @description: 获取手机运营商 (开发中)
+ * @description: 获取手机运营商
  * @author: wuxh
  * @Date: 2020-05-06 12:11:39
  * @param {}
- * @return:
+ * @return: '移动' | '电信' | '联通' | '未知'
  * @example: 
-  operattelecom()
-  => 移动
+  operattelecom('13419595634') => 移动
  */
-export const operattelecom = function () {}
+export const operattelecom = function (e) {
+  var i =
+      '134,135,136,137,138,139,150,151,152,157,158,159,187,188,147,182,183,184,178',
+    n = '130,131,132,155,156,185,186,145,176',
+    a = '133,153,180,181,189,177,173,170',
+    o = e || '',
+    r = o.substring(0, 3),
+    d = o.substring(0, 4),
+    s =
+      !!/^1\d{10}$/.test(o) &&
+      (n.indexOf(r) >= 0
+        ? '联通'
+        : a.indexOf(r) >= 0
+        ? '电信'
+        : '1349' == d
+        ? '电信'
+        : i.indexOf(r) >= 0
+        ? '移动'
+        : '未知')
+  return s
+}
+
+/**
+ * @description: 是否是安卓设备
+ * @author: wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+ */
+export const isAndroidMobileDevice = function () {
+  return /android/i.test(navigator.userAgent.toLowerCase())
+}
+
+/**
+ * @description: 是否是苹果设备
+ * @author: wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
+ */
+export const isAppleMobileDevice = function () {
+  return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase())
+}
 
 
 
@@ -532,12 +653,14 @@ export const operattelecom = function () {}
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-08 09:30:40
+ * @LastEditTime: 2020-06-09 09:05:08
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
+
+import { isNull, isUndefined } from '../../dist'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
@@ -566,6 +689,9 @@ export const getV = function (...args) {
   => {name: 123}
  */
 export const clone = function (obj) {
+  if (isNull(obj) || isUndefined(obj)) {
+    return ''
+  }
   let str,
     newobj = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {
@@ -608,6 +734,118 @@ export const mergeObj = function (oldObj, newObj, keys) {
     }
   }
   return oldObj
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-06 10:10:41
+ * @LastEditTime: 2020-06-09 09:56:47
+ * @LastEditors: wuxh
+ * @Description: 字符串处理相关
+ * @FilePath: /jcommon/src/string/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 去除字符串空格, 默认去除前后空格 （常用）
+ * @author: wuxh
+ * @Date: 2020-05-06 13:43:52
+ * @param {str} String
+ * @param {global} Boolean
+ * @return: String
+ * @example: 
+  trim('   1 1 1   ') => '1 1 1'
+  trim('   1 1 1   ', true) => '111'
+ */
+export const trim = function (str, global) {
+  let result = str.replace(/(^\s+)|(\s+$)/g, '')
+  if (global) {
+    result = result.replace(/\s/g, '')
+  }
+  return result
+}
+
+/**
+ * @description: 身份证号码解析性别
+ * @author: wuxh
+ * @Date: 2020-06-09 09:16:28
+ * @param {type} 
+ * @return: 'FEMALE' ｜ 'MALE'
+ * @example: 
+   getSexByIdNO('421182199409274710') => MALE
+ */
+export const getSexByIdNO = function (IdNO) {
+  if (IdNO.length == 18) {
+    return IdNO.charAt(16) % 2 == 0 ? 'FEMALE' : 'MALE'
+  } else if (IdNO.length == 15) {
+    return IdNO.charAt(14) % 2 == 0 ? 'FEMALE' : 'MALE'
+  } else {
+    return ''
+  }
+}
+
+/**
+ * @description: 身份证号码解析出生日期
+ * @author: wuxh
+ * @Date: 2020-06-09 09:17:50
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getBirthdatByIdNo('421182199409274710') => '1994-09-27'
+ */
+export const getBirthdatByIdNo = function (iIdNo) {
+  let tmpStr = ''
+  if (iIdNo.length == 15) {
+    tmpStr = iIdNo.substring(6, 12)
+    tmpStr = '19' + tmpStr
+    tmpStr =
+      tmpStr.substring(0, 4) +
+      '-' +
+      tmpStr.substring(4, 6) +
+      '-' +
+      tmpStr.substring(6)
+    return tmpStr
+  } else {
+    tmpStr = iIdNo.substring(6, 14)
+    tmpStr =
+      tmpStr.substring(0, 4) +
+      '-' +
+      tmpStr.substring(4, 6) +
+      '-' +
+      tmpStr.substring(6)
+    return tmpStr
+  }
+}
+
+/**
+ * @description: 隐藏身份证号码
+ * @author: wuxh
+ * @Date: 2020-06-09 09:19:26
+ * @param {type} 
+ * @return: string
+ * @example: 
+  hideIdNum('421182199409274710') => 4****************0
+ */
+export const hideIdNum = function (str) {
+  return `${String(str).slice(0, 1)}****************${String(str).slice(17)}`
+}
+
+/**
+ * @description: 随机数时间戳
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {type} 
+ * @return: string
+ * @example: 
+  uniqueId() => '1591667193048544'
+ */
+export const uniqueId = function () {
+  var a = Math.random,
+    b = parseInt
+  return Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
 }
 
 
@@ -707,40 +945,8 @@ export const urlByObj = function (params) {
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-05-08 09:20:32
- * @LastEditors: wuxh
- * @Description: 字符串处理相关
- * @FilePath: /jcommon/src/string/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 去除字符串空格, 默认去除前后空格 （常用）
- * @author: wuxh
- * @Date: 2020-05-06 13:43:52
- * @param {str} String
- * @param {global} Boolean
- * @return: String
- * @example: 
-  trim('   1 1 1   ') => '1 1 1'
-  trim('   1 1 1   ', true) => '111'
- */
-export const trim = function (str, global) {
-  let result = str.replace(/(^\s+)|(\s+$)/g, '')
-  if (global) {
-    result = result.replace(/\s/g, '')
-  }
-  return result
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-05-08 09:24:57
+ * @LastEditTime: 2020-06-09 09:57:05
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.js
@@ -878,7 +1084,7 @@ export const isUserId = function (e) {
   isType('123', 'String') => true
  */
 export const isType = function (data, type) {
-  Object.prototype.toString.call(data) === `[object ${type}]`
+  return Object.prototype.toString.call(data) === `[object ${type}]`
 }
 /**
  * @description: 判断String类型
@@ -891,7 +1097,7 @@ export const isType = function (data, type) {
   isString('') => true
  */
 export const isString = function (data) {
-  isType(data, 'String')
+  return isType(data, 'String')
 }
 
 /**
@@ -905,7 +1111,7 @@ export const isString = function (data) {
   isNumber('') => false
  */
 export const isNumber = function (data) {
-  isType(data, 'Number')
+  return isType(data, 'Number')
 }
 
 /**
@@ -919,7 +1125,7 @@ export const isNumber = function (data) {
   isBoolean('false') => false
  */
 export const isBoolean = function (data) {
-  isType(data, 'Boolean')
+  return isType(data, 'Boolean')
 }
 
 /**
@@ -933,7 +1139,7 @@ export const isBoolean = function (data) {
   isUndefined('undefined') => false
  */
 export const isUndefined = function (data) {
-  isType(data, 'Undefined')
+  return isType(data, 'Undefined')
 }
 
 /**
@@ -947,7 +1153,7 @@ export const isUndefined = function (data) {
   isNull('null') => false
  */
 export const isNull = function (data) {
-  isType(data, 'Null')
+  return isType(data, 'Null')
 }
 
 /**
@@ -961,7 +1167,7 @@ export const isNull = function (data) {
   isFunc(123) => false
  */
 export const isFunc = function (data) {
-  isType(data, 'Function')
+  return isType(data, 'Function')
 }
 
 /**
@@ -975,7 +1181,7 @@ export const isFunc = function (data) {
   isDate(new Date()) => true
  */
 export const isDate = function (data) {
-  isType(data, 'Date')
+  return isType(data, 'Date')
 }
 
 /**
@@ -989,7 +1195,7 @@ export const isDate = function (data) {
   isArray(![]) => false
  */
 export const isArray = function (data) {
-  isType(data, 'Array')
+  return isType(data, 'Array')
 }
 
 /**
@@ -1003,7 +1209,7 @@ export const isArray = function (data) {
   isReg(![]) => false
  */
 export const isReg = function (data) {
-  isType(data, 'RegExp')
+  return isType(data, 'RegExp')
 }
 
 /**
@@ -1017,7 +1223,7 @@ export const isReg = function (data) {
   isError(![]) => false
  */
 export const isError = function (data) {
-  isType(data, 'Error')
+  return isType(data, 'Error')
 }
 
 /**
@@ -1031,7 +1237,37 @@ export const isError = function (data) {
   isObject(![]) => false
  */
 export const isObject = function (data) {
-  isType(data, 'Object')
+  return isType(data, 'Object')
+}
+
+/**
+ * @description: 手机号校验
+ * @author: wuxh
+ * @Date: 2020-06-09 09:21:15
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isPhone('13419595634') => true
+ */
+export const isPhone = function (phone) {
+  if (!phone) {
+    return false
+  }
+  const phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/
+  return phoneReg.test(phone)
+}
+
+/**
+ * @description: 校验是否为邮箱地址
+ * @author: wuxh
+ * @Date: 2020-06-09 09:49:29
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isEmail('wxingheng@outlook.com') => true
+ */
+export const isEmail = function (str) {
+  return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str)
 }
 
 

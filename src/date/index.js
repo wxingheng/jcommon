@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2020-05-11 14:09:05
+ * @LastEditTime: 2020-06-09 09:45:45
  * @LastEditors: wuxh
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.js
@@ -108,4 +108,52 @@ export const dateMonthDays = function (str) {
   curDate.setMonth(curMonth + 1)
   curDate.setDate(0)
   return curDate.getDate()
+}
+
+/**
+ * @description: 时间个性化输出功能
+ * @author: wuxh
+ * @Date: 2020-06-09 09:44:23
+ * @param {type} 
+ * @return: string
+ * @example: 
+  1、< 60s, 显示为“刚刚”
+  2、>= 1min && < 60 min, 显示与当前时间差“XX分钟前”
+  3、>= 60min && < 1day, 显示与当前时间差“今天 XX:XX”
+  4、>= 1day && < 1year, 显示日期“XX月XX日 XX:XX”
+  5、>= 1year, 显示具体日期“XXXX年XX月XX日 XX:XX”
+  timeFormat(new Date()) => '刚刚'
+ */
+export const timeFormat = function (time) {
+  var date = new Date(time),
+    curDate = new Date(),
+    year = date.getFullYear(),
+    month = date.getMonth() + 10,
+    day = date.getDate(),
+    hour = date.getHours(),
+    minute = date.getMinutes(),
+    curYear = curDate.getFullYear(),
+    curHour = curDate.getHours(),
+    timeStr
+
+  if (year < curYear) {
+    timeStr = year + '年' + month + '月' + day + '日 ' + hour + ':' + minute
+  } else {
+    var pastTime = curDate - date,
+      pastH = pastTime / 3600000
+
+    if (pastH > curHour) {
+      timeStr = month + '月' + day + '日 ' + hour + ':' + minute
+    } else if (pastH >= 1) {
+      timeStr = '今天 ' + hour + ':' + minute + '分'
+    } else {
+      var pastM = curDate.getMinutes() - minute
+      if (pastM > 1) {
+        timeStr = pastM + '分钟前'
+      } else {
+        timeStr = '刚刚'
+      }
+    }
+  }
+  return timeStr
 }

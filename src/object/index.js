@@ -1,12 +1,14 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2020-05-08 09:30:40
+ * @LastEditTime: 2020-06-09 09:05:08
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.js
  * @https://github.com/wxingheng/jcommon
  */
+
+import { isNull, isUndefined } from '../../dist'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
@@ -35,6 +37,9 @@ export const getV = function (...args) {
   => {name: 123}
  */
 export const clone = function (obj) {
+  if (isNull(obj) || isUndefined(obj)) {
+    return ''
+  }
   let str,
     newobj = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {

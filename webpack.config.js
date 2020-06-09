@@ -1,10 +1,18 @@
+/*
+ * @Author: wuxh
+ * @Date: 2020-04-28 17:19:07
+ * @LastEditTime: 2020-05-14 14:25:45
+ * @LastEditors: wuxh
+ * @Description: 
+ * @FilePath: /jcommon/webpack.config.js
+ */
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './dist/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.js'
+    filename: 'index.min.js'
   },
   module: {
     rules: [
