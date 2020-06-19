@@ -70,6 +70,10 @@ import { isObject, isArray } from 'jcommon'
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
+
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
@@ -81,10 +85,6 @@ import { isObject, isArray } from 'jcommon'
 - [operattelecom](#operattelecom)  获取手机运营商
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
 
 ###  对象相关（Object处理）
 
@@ -99,12 +99,18 @@ import { isObject, isArray } from 'jcommon'
 - [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数时间戳
+- [ageFormat](#ageFormat)  出生日期计算年龄
 
 ###  url处理相关
 
 - [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
 - [objByUrlStr](#objByUrlStr)  格式化GET请求的请求头
 - [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+
+###  通用工具方法
+
+- [debounce](#debounce)  函数防抖<短时间内多次触发同一事件，只执行最后一次>
+- [throttle](#throttle)  函数节流<指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。节流如字面意思，会稀释函数的执行频率。>
 
 ###  校验相关
 
@@ -383,73 +389,6 @@ wuxh
   => 3
 ```
 
-### isQQ
-             
- 是否是QQ平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isQQ()
-  => false
-```
-
-### isWX
-             
- 是否是微信平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isWX()
-  => false
-```
-
-### operattelecom
-             
- 获取手机运营商
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return: '移动' | '电信' | '联通' | '未知'
- * @example: 
-  operattelecom('13419595634') => 移动
-```
-
-### isAndroidMobileDevice
-             
- 是否是安卓设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:04
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAndroidMobileDevice() => false
-```
-
-### isAppleMobileDevice
-             
- 是否是苹果设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:55
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAppleMobileDevice() => true
-```
-
 ### getV
              
  获取多级数据避免出错（超级好用）
@@ -492,48 +431,6 @@ wuxh
  * @example:  
   mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
   mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
-### getUrlQuery
-             
- 获取浏览器url中的一个参数
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### objByUrlStr
-             
- 格式化GET请求的请求头
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  objByUrlStr({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-             
- 处理url参数(window.location.search)转换为 {key: value}
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
 ```
 
 ### trim
@@ -601,6 +498,167 @@ wuxh
  * @return: string
  * @example: 
   uniqueId() => '1591667193048544'
+```
+
+### ageFormat
+             
+ 出生日期计算年龄
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {type} 
+ * @return: string
+ * @example: 
+  ageFormat('1994-09-27') => '25岁'
+  ageFormat('2020-02-27') => '4个月'
+  ageFormat('2020-06-02') => '15天'
+```
+
+### isQQ
+             
+ 是否是QQ平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+```
+
+### isWX
+             
+ 是否是微信平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+```
+
+### operattelecom
+             
+ 获取手机运营商
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return: '移动' | '电信' | '联通' | '未知'
+ * @example: 
+  operattelecom('13419595634') => 移动
+```
+
+### isAndroidMobileDevice
+             
+ 是否是安卓设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+```
+
+### isAppleMobileDevice
+             
+ 是否是苹果设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
+```
+
+### getUrlQuery
+             
+ 获取浏览器url中的一个参数
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### objByUrlStr
+             
+ 格式化GET请求的请求头
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  objByUrlStr({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+             
+ 处理url参数(window.location.search)转换为 {key: value}
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
+```
+
+### debounce
+             
+ 函数防抖<短时间内多次触发同一事件，只执行最后一次>
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param 
+ * {func<需要防抖的逻辑方法>, wait<等待时间>, immediate<boolean, 是否需要立即执行一次>}
+ * @return: String
+ * @example: 
+  // 比如搜索框input需要做输入搜索防抖处理
+  // 使用debounce方法产生一个防抖方法
+  const search = debounce((value) => console.log, 1000, false)
+  // 在你需要的地方进行绑定产生的search方法
+  // 你的逻辑处理func部分将会按照你设置的防抖参数来执行
+  onChange = {search}
+```
+
+### throttle
+             
+ 函数节流<指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。节流如字面意思，会稀释函数的执行频率。>
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {func<需要防抖的逻辑方法>, wait<间隔时间>, type< 1 | 2 >}
+ * @return: String
+ * @example: 
+  // 比如滚动事件需要做节流处理
+  // 使用debounce方法产生一个防抖方法
+  const scroll = throttle((value) => console.log, 1000, 1)
+  // 在你需要的地方进行绑定产生的search方法
+  // 你的逻辑处理func部分将会按照你设置的防抖参数来执行
+  onScroll = {scroll}
 ```
 
 ### isUserId

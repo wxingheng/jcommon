@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "JavaScript 常用纯函数工具库",
   "main": "./dist/index.js",
   "scripts": {

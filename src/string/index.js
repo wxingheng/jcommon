@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-06-09 09:56:47
+ * @LastEditTime: 2020-06-17 16:15:57
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -106,3 +106,74 @@ export const uniqueId = function () {
     b = parseInt
   return Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
 }
+
+
+/**
+ * @description: 出生日期计算年龄
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {type} 
+ * @return: string
+ * @example: 
+  ageFormat('1994-09-27') => '25岁'
+  ageFormat('2020-02-27') => '4个月'
+  ageFormat('2020-06-02') => '15天'
+ */
+export const ageFormat = function (str) {
+  const birth = new Date(str);
+  const today = new Date();
+  const age = today.getFullYear() - birth.getFullYear();
+  const month = today.getMonth() - birth.getMonth();
+  const day = Math.floor((today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+  if (age === 0) {
+    if (month === 0) {
+      return day + '天';
+    } else if (day >= 31) {
+      return month + '个月';
+    } else {
+      return day + '天';
+    }
+  }
+  if (age === 1) {
+    if (month > 0) {
+      return age + '岁';
+    }
+    if (month < 0 && month !== -11) {
+      if (day < 0) {
+        return month + 11 + '个月';
+      } else {
+        return month + 12 + '个月';
+      }
+    }
+    if (month === 0) {
+      if (day >= 0) {
+        return age + '岁';
+      } else {
+        return month + 12 + '个月';
+      }
+    }
+    if (month === -11) {
+      if (day >= 0) {
+        return month + 12 + '个月';
+      } else {
+        return day + 31 + '天';
+      }
+    }
+  }
+
+  if (age > 1) {
+    if (month === 0) {
+      if (day >= 0) {
+        return age + '岁';
+      } else {
+        return age - 1 + '岁';
+      }
+    } else if (month > 0) {
+      return age + '岁';
+    } else if (month < 0) {
+      return age - 1 + '岁';
+    }
+  }
+};
+
+undefined
