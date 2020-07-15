@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2020-05-08 09:15:36
+ * @LastEditTime: 2020-06-22 18:31:38
  * @LastEditors: wuxh
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.js
@@ -114,4 +114,36 @@ export const arrByObj = function (arr, key, v = '') {
     obj[d[key]] = v ? d[v] : d
   })
   return obj
+}
+
+/**
+ * @description: 一维数组转多维树结构数据
+ * @author: wuxh
+ * @Date: 2020-06-22 17:54:54
+ * @param {arr} 一维数组
+ * @param {id} 根节点id
+ * @return: Array
+ * @example:
+  const arr = [{id: 1, parentId: 2, name: 111}, {id: 3, parentId: 1, name: 222}]
+  arrayToTreeData(arr, 2) => [{id: 1, parentId: 2, name: 111, children: [{id: 3, parentId: 1, name: 222}]}]
+ */
+export const arrayToTreeData = function (arr, id) {
+  if (!arr.length) return []
+  const result = clone(arr)
+  let obj = {}
+  result.map((v, i) => {
+    if (obj[v.parentId]) {
+      if (obj[v.parentId].children) {
+        obj[v.parentId].children.push(v)
+      } else {
+        obj[v.parentId].children = [v]
+      }
+    } else {
+      obj[v.parentId] = {
+        children: [v]
+      }
+    }
+    obj[v.id] = v
+  })
+  return obj[id]['children']
 }

@@ -46,6 +46,7 @@ import { isObject, isArray } from 'jcommon'
 - [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
+- [arrayToTreeData](#arrayToTreeData)  一维数组转多维树结构数据
 
 ###  浏览器相关
 
@@ -70,13 +71,13 @@ import { isObject, isArray } from 'jcommon'
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
-
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
 
 ###  移动端相关
 
@@ -131,6 +132,20 @@ import { isObject, isArray } from 'jcommon'
 - [isEmail](#isEmail)  校验是否为邮箱地址
 
 ## API 说明
+
+### getBrowserInfo
+             
+ 获取浏览器相关信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
 
 ### doubleRanking
              
@@ -197,6 +212,21 @@ wuxh
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
+### arrayToTreeData
+             
+ 一维数组转多维树结构数据
+
+```javascript
+wuxh
+ * @Date: 2020-06-22 17:54:54
+ * @param {arr} 一维数组
+ * @param {id} 根节点id
+ * @return: Array
+ * @example:
+  const arr = [{id: 1, parentId: 2, name: 111}, {id: 3, parentId: 1, name: 222}]
+  arrayToTreeData(arr, 2) => [{id: 1, parentId: 2, name: 111, children: [{id: 3, parentId: 1, name: 222}]}]
+```
+
 ### removeStorage
              
  删除
@@ -253,20 +283,6 @@ wuxh
  * @example: 
   isSupportStorage()
   => true
-```
-
-### getBrowserInfo
-             
- 获取浏览器相关信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### getCookie
@@ -387,6 +403,73 @@ wuxh
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### isQQ
+             
+ 是否是QQ平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+```
+
+### isWX
+             
+ 是否是微信平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+```
+
+### operattelecom
+             
+ 获取手机运营商
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return: '移动' | '电信' | '联通' | '未知'
+ * @example: 
+  operattelecom('13419595634') => 移动
+```
+
+### isAndroidMobileDevice
+             
+ 是否是安卓设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+```
+
+### isAppleMobileDevice
+             
+ 是否是苹果设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
 ```
 
 ### getV
@@ -513,73 +596,6 @@ wuxh
   ageFormat('1994-09-27') => '25岁'
   ageFormat('2020-02-27') => '4个月'
   ageFormat('2020-06-02') => '15天'
-```
-
-### isQQ
-             
- 是否是QQ平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isQQ()
-  => false
-```
-
-### isWX
-             
- 是否是微信平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isWX()
-  => false
-```
-
-### operattelecom
-             
- 获取手机运营商
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return: '移动' | '电信' | '联通' | '未知'
- * @example: 
-  operattelecom('13419595634') => 移动
-```
-
-### isAndroidMobileDevice
-             
- 是否是安卓设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:04
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAndroidMobileDevice() => false
-```
-
-### isAppleMobileDevice
-             
- 是否是苹果设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:55
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAppleMobileDevice() => true
 ```
 
 ### getUrlQuery

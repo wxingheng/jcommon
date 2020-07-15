@@ -46,7 +46,7 @@ export const clone = function (obj) {
     ;(str = JSON.stringify(obj)), (newobj = JSON.parse(str))
   } else {
     for (const i in obj) {
-      newobj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i]
+      newobj[i] = typeof obj[i] === 'object' ? clone(obj[i]) : obj[i]
     }
   }
   return newobj
