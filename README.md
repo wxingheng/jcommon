@@ -71,13 +71,13 @@ import { isObject, isArray } from 'jcommon'
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-
 ###  用户设备相关（客户端系统）
 
 - [osInfo](#osInfo)  获取用户系统平台信息
+
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
 
 ###  移动端相关
 
@@ -112,6 +112,7 @@ import { isObject, isArray } from 'jcommon'
 
 - [debounce](#debounce)  函数防抖<短时间内多次触发同一事件，只执行最后一次>
 - [throttle](#throttle)  函数节流<指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。节流如字面意思，会稀释函数的执行频率。>
+- [promiseTo](#promiseTo)  await 的简单封装（避免重复的 tray catch ）
 
 ###  校验相关
 
@@ -132,20 +133,6 @@ import { isObject, isArray } from 'jcommon'
 - [isEmail](#isEmail)  校验是否为邮箱地址
 
 ## API 说明
-
-### getBrowserInfo
-             
- 获取浏览器相关信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
 
 ### doubleRanking
              
@@ -227,6 +214,33 @@ wuxh
   arrayToTreeData(arr, 2) => [{id: 1, parentId: 2, name: 111, children: [{id: 3, parentId: 1, name: 222}]}]
 ```
 
+### getBrowserInfo
+             
+ 获取浏览器相关信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### getCookie
+             
+ 获取cookie值
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+```
+
 ### removeStorage
              
  删除
@@ -283,19 +297,6 @@ wuxh
  * @example: 
   isSupportStorage()
   => true
-```
-
-### getCookie
-             
- 获取cookie值
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
 ```
 
 ### dateInterval
@@ -675,6 +676,20 @@ wuxh
   // 在你需要的地方进行绑定产生的search方法
   // 你的逻辑处理func部分将会按照你设置的防抖参数来执行
   onScroll = {scroll}
+```
+
+### promiseTo
+             
+ await 的简单封装（避免重复的 tray catch ）
+
+```javascript
+wuxh
+ * @Date: 2020-08-11 16:15:44
+ * @param Promise
+ * @return: Array
+ * @example: 
+  // await 捕获错误则可以这样写
+  let [error, data] = await promiseTo(getUsersMonitor())
 ```
 
 ### isUserId

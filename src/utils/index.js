@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-06-17 16:53:25
+ * @LastEditTime: 2020-08-11 16:15:55
  * @LastEditors: wuxh
  * @Description: 通用工具方法
  * @FilePath: /jcommon/src/utils/index.js
@@ -83,4 +83,18 @@ export const throttle = function (func, wait, type) {
       }
     }
   }
+}
+
+/**
+ * @description: await 的简单封装（避免重复的 tray catch ）
+ * @author: wuxh
+ * @Date: 2020-08-11 16:15:44
+ * @param Promise
+ * @return: Array
+ * @example: 
+  // await 捕获错误则可以这样写
+  let [error, data] = await promiseTo(getUsersMonitor())
+ */
+export const promiseTo = function (promise) {
+  return promise.then(res => [null, res]).catch(error => [error])
 }
