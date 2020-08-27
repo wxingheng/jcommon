@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-08 09:21:51
+ * @LastEditTime: 2020-08-27 10:49:58
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.js
@@ -9,7 +9,7 @@
  */
 
 /**
- * @description: 获取浏览器url中的一个参数
+ * @description: 获取浏览器url中的一个参数(兼容browser和hash)
  * @author: wuxh
  * @Date: 2020-05-06 13:46:28
  * @param {name}
@@ -18,11 +18,20 @@
   getUrlQuery(age)
   => 25
  */
-export const getUrlQuery = function (name) {
-  const u = arguments[1] || window.location.search,
-    reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
-    r = u.substr(u.indexOf('?') + 1).match(reg)
-  return r != null ? r[2] : ''
+export const getUrlQuery = function (name, decodeURIComponent = true) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const r =
+    window.location.search.substr(1).match(reg) ||
+    window.location.hash
+      .substring(window.location.hash.search(/\?/) + 1)
+      .match(reg)
+  if (r != null) {
+    if (decodeURIComponent) {
+      return decodeURIComponent(r[2])
+    } else {
+      return r[2]
+    }
+  }
 }
 
 /**

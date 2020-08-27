@@ -225,34 +225,6 @@ export const getBrowserInfo = function () {
 
 /*
  * @Author: wuxh
- * @Date: 2020-06-09 09:27:33
- * @LastEditTime: 2020-06-09 09:45:52
- * @LastEditors: wuxh
- * @Description:
- * @FilePath: /jcommon/src/cookie/index.js
- */
-
-/**
- * @description: 获取cookie值
- * @author: wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
- */
-
-export const getCookie = function (name) {
-  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
-  if (arr != null) return unescape(arr[2])
-  return null
-}
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
  * @LastEditTime: 2020-05-08 09:17:00
  * @LastEditors: wuxh
@@ -327,6 +299,34 @@ export const isSupportStorage = function () {
   } catch (e) {
     return false
   }
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-06-09 09:27:33
+ * @LastEditTime: 2020-06-09 09:45:52
+ * @LastEditors: wuxh
+ * @Description:
+ * @FilePath: /jcommon/src/cookie/index.js
+ */
+
+/**
+ * @description: 获取cookie值
+ * @author: wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+ */
+
+export const getCookie = function (name) {
+  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
+  if (arr != null) return unescape(arr[2])
+  return null
 }
 
 
@@ -772,7 +772,7 @@ export const mergeObj = function (oldObj, newObj, keys) {
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-06-17 16:15:57
+ * @LastEditTime: 2020-08-27 10:57:13
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -878,7 +878,6 @@ export const uniqueId = function () {
   return Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
 }
 
-
 /**
  * @description: 出生日期计算年龄
  * @author: wuxh
@@ -891,43 +890,45 @@ export const uniqueId = function () {
   ageFormat('2020-06-02') => '15天'
  */
 export const ageFormat = function (str) {
-  const birth = new Date(str);
-  const today = new Date();
-  const age = today.getFullYear() - birth.getFullYear();
-  const month = today.getMonth() - birth.getMonth();
-  const day = Math.floor((today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+  const birth = new Date(str)
+  const today = new Date()
+  const age = today.getFullYear() - birth.getFullYear()
+  const month = today.getMonth() - birth.getMonth()
+  const day = Math.floor(
+    (today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24)
+  )
   if (age === 0) {
     if (month === 0) {
-      return day + '天';
+      return day + '天'
     } else if (day >= 31) {
-      return month + '个月';
+      return month + '个月'
     } else {
-      return day + '天';
+      return day + '天'
     }
   }
   if (age === 1) {
     if (month > 0) {
-      return age + '岁';
+      return age + '岁'
     }
     if (month < 0 && month !== -11) {
       if (day < 0) {
-        return month + 11 + '个月';
+        return month + 11 + '个月'
       } else {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       }
     }
     if (month === 0) {
       if (day >= 0) {
-        return age + '岁';
+        return age + '岁'
       } else {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       }
     }
     if (month === -11) {
       if (day >= 0) {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       } else {
-        return day + 31 + '天';
+        return day + 31 + '天'
       }
     }
   }
@@ -935,19 +936,153 @@ export const ageFormat = function (str) {
   if (age > 1) {
     if (month === 0) {
       if (day >= 0) {
-        return age + '岁';
+        return age + '岁'
       } else {
-        return age - 1 + '岁';
+        return age - 1 + '岁'
       }
     } else if (month > 0) {
-      return age + '岁';
+      return age + '岁'
     } else if (month < 0) {
-      return age - 1 + '岁';
+      return age - 1 + '岁'
     }
   }
-};
+}
 
-undefined
+/**
+ * @description: 对字符串进行加密
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {code} 
+ * @return: string
+ * @example: 
+  compileStr(123) => string
+ */
+export const compileStr = function (code) {
+  var c = String.fromCharCode(code.charCodeAt(0) + code.length)
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1))
+  }
+  return escape(c)
+}
+
+/**
+ * @description: 字符串进行解密
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {code} 
+ * @return: string
+ * @example: 
+  uncompileStr(123) => string
+ */
+export const uncompileStr = function (code) {
+  code = unescape(code)
+  var c = String.fromCharCode(code.charCodeAt(0) - code.length)
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1))
+  }
+  return c
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-05 15:02:02
+ * @LastEditTime: 2020-08-27 10:49:58
+ * @LastEditors: wuxh
+ * @Description: url处理相关
+ * @FilePath: /jcommon/src/url/index.js
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 获取浏览器url中的一个参数(兼容browser和hash)
+ * @author: wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+ */
+export const getUrlQuery = function (name, decodeURIComponent = true) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const r =
+    window.location.search.substr(1).match(reg) ||
+    window.location.hash
+      .substring(window.location.hash.search(/\?/) + 1)
+      .match(reg)
+  if (r != null) {
+    if (decodeURIComponent) {
+      return decodeURIComponent(r[2])
+    } else {
+      return r[2]
+    }
+  }
+}
+
+/**
+ * @description: 格式化GET请求的请求头
+ * @author: wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  objByUrlStr({name: 1, value: 123})
+  =>  "name=1&value=123"
+ */
+export const objByUrlStr = function (obj) {
+  let str = ''
+  if (Object.prototype.toString.call(obj) === '[object Object]') {
+    for (const key in obj) {
+      if (Array.isArray(obj[key])) {
+        obj[key].forEach(function (elem) {
+          str = str + key + '=' + elem + '&'
+        })
+      } else {
+        if (obj[key]) {
+          str = str + key + '=' + obj[key] + '&'
+        }
+      }
+    }
+  }
+  if (str.length > 0) {
+    return str.substring(0, str.length - 1)
+  } else {
+    return ''
+  }
+}
+
+/**
+ * @description: 处理url参数(window.location.search)转换为 {key: value}
+ * @author: wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
+ */
+export const urlByObj = function (params) {
+  const obj = {}
+  const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
+  const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+  // arr数组形式 ['?id=12345','&a=b']
+  if (arr) {
+    arr.forEach(item => {
+      /**
+       * tempArr数组    ['id','12345']和['a','b']
+       * 第一个是key，第二个是value
+       * */
+      const tempArr = item.substring(1).split('=')
+      const key = decodeURIComponent(tempArr[0])
+      const val = decodeURIComponent(tempArr[1])
+      obj[key] = val
+    })
+  }
+  return obj
+}
 
 
 
@@ -1051,98 +1186,6 @@ export const throttle = function (func, wait, type) {
  */
 export const promiseTo = function (promise) {
   return promise.then(res => [null, res]).catch(error => [error])
-}
-
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-08 09:21:51
- * @LastEditors: wuxh
- * @Description: url处理相关
- * @FilePath: /jcommon/src/url/index.js
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 获取浏览器url中的一个参数
- * @author: wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
- */
-export const getUrlQuery = function (name) {
-  const u = arguments[1] || window.location.search,
-    reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
-    r = u.substr(u.indexOf('?') + 1).match(reg)
-  return r != null ? r[2] : ''
-}
-
-/**
- * @description: 格式化GET请求的请求头
- * @author: wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  objByUrlStr({name: 1, value: 123})
-  =>  "name=1&value=123"
- */
-export const objByUrlStr = function (obj) {
-  let str = ''
-  if (Object.prototype.toString.call(obj) === '[object Object]') {
-    for (const key in obj) {
-      if (Array.isArray(obj[key])) {
-        obj[key].forEach(function (elem) {
-          str = str + key + '=' + elem + '&'
-        })
-      } else {
-        if (obj[key]) {
-          str = str + key + '=' + obj[key] + '&'
-        }
-      }
-    }
-  }
-  if (str.length > 0) {
-    return str.substring(0, str.length - 1)
-  } else {
-    return ''
-  }
-}
-
-/**
- * @description: 处理url参数(window.location.search)转换为 {key: value}
- * @author: wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
- */
-export const urlByObj = function (params) {
-  const obj = {}
-  const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
-  const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
-  // arr数组形式 ['?id=12345','&a=b']
-  if (arr) {
-    arr.forEach(item => {
-      /**
-       * tempArr数组    ['id','12345']和['a','b']
-       * 第一个是key，第二个是value
-       * */
-      const tempArr = item.substring(1).split('=')
-      const key = decodeURIComponent(tempArr[0])
-      const val = decodeURIComponent(tempArr[1])
-      obj[key] = val
-    })
-  }
-  return obj
 }
 
 

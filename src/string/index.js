@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-06-17 16:15:57
+ * @LastEditTime: 2020-08-27 10:57:13
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.js
@@ -107,7 +107,6 @@ export const uniqueId = function () {
   return Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
 }
 
-
 /**
  * @description: 出生日期计算年龄
  * @author: wuxh
@@ -120,43 +119,45 @@ export const uniqueId = function () {
   ageFormat('2020-06-02') => '15天'
  */
 export const ageFormat = function (str) {
-  const birth = new Date(str);
-  const today = new Date();
-  const age = today.getFullYear() - birth.getFullYear();
-  const month = today.getMonth() - birth.getMonth();
-  const day = Math.floor((today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24));
+  const birth = new Date(str)
+  const today = new Date()
+  const age = today.getFullYear() - birth.getFullYear()
+  const month = today.getMonth() - birth.getMonth()
+  const day = Math.floor(
+    (today.getTime() - birth.getTime()) / (1000 * 60 * 60 * 24)
+  )
   if (age === 0) {
     if (month === 0) {
-      return day + '天';
+      return day + '天'
     } else if (day >= 31) {
-      return month + '个月';
+      return month + '个月'
     } else {
-      return day + '天';
+      return day + '天'
     }
   }
   if (age === 1) {
     if (month > 0) {
-      return age + '岁';
+      return age + '岁'
     }
     if (month < 0 && month !== -11) {
       if (day < 0) {
-        return month + 11 + '个月';
+        return month + 11 + '个月'
       } else {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       }
     }
     if (month === 0) {
       if (day >= 0) {
-        return age + '岁';
+        return age + '岁'
       } else {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       }
     }
     if (month === -11) {
       if (day >= 0) {
-        return month + 12 + '个月';
+        return month + 12 + '个月'
       } else {
-        return day + 31 + '天';
+        return day + 31 + '天'
       }
     }
   }
@@ -164,16 +165,49 @@ export const ageFormat = function (str) {
   if (age > 1) {
     if (month === 0) {
       if (day >= 0) {
-        return age + '岁';
+        return age + '岁'
       } else {
-        return age - 1 + '岁';
+        return age - 1 + '岁'
       }
     } else if (month > 0) {
-      return age + '岁';
+      return age + '岁'
     } else if (month < 0) {
-      return age - 1 + '岁';
+      return age - 1 + '岁'
     }
   }
-};
+}
 
-undefined
+/**
+ * @description: 对字符串进行加密
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {code} 
+ * @return: string
+ * @example: 
+  compileStr(123) => string
+ */
+export const compileStr = function (code) {
+  var c = String.fromCharCode(code.charCodeAt(0) + code.length)
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1))
+  }
+  return escape(c)
+}
+
+/**
+ * @description: 字符串进行解密
+ * @author: wuxh
+ * @Date: 2020-06-09 09:47:34
+ * @param {code} 
+ * @return: string
+ * @example: 
+  uncompileStr(123) => string
+ */
+export const uncompileStr = function (code) {
+  code = unescape(code)
+  var c = String.fromCharCode(code.charCodeAt(0) - code.length)
+  for (var i = 1; i < code.length; i++) {
+    c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1))
+  }
+  return c
+}
