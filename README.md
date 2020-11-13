@@ -48,20 +48,24 @@ import { isObject, isArray } from 'jcommon'
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 - [arrayToTreeData](#arrayToTreeData)  一维数组转多维树结构数据
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
+###  血液行业相关
+
+- [calCheckChar](#calCheckChar)  根据序列号计算校验位
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -75,6 +79,10 @@ import { isObject, isArray } from 'jcommon'
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+
 ###  移动端相关
 
 - [isQQ](#isQQ)  是否是QQ平台
@@ -82,16 +90,6 @@ import { isObject, isArray } from 'jcommon'
 - [operattelecom](#operattelecom)  获取手机运营商
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
-###  对象相关（Object处理）
-
-- [getV](#getV)  获取多级数据避免出错（超级好用）
-- [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
-- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
 
 ###  字符串处理相关
 
@@ -103,6 +101,12 @@ import { isObject, isArray } from 'jcommon'
 - [ageFormat](#ageFormat)  出生日期计算年龄
 - [compileStr](#compileStr)  对字符串进行加密
 - [uncompileStr](#uncompileStr)  字符串进行解密
+
+###  对象相关（Object处理）
+
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 
 ###  url处理相关
 
@@ -135,6 +139,21 @@ import { isObject, isArray } from 'jcommon'
 - [isEmail](#isEmail)  校验是否为邮箱地址
 
 ## API 说明
+
+### calCheckChar
+             
+ 根据序列号计算校验位
+
+```javascript
+wuxh 
+ * @Date: 2020-05-06 11:37:17
+ * @param {serialNo} 序列号
+ * @return: {CHECK} 校验位
+ * @example: 
+      calCheckChar('0051117014765') ==> M
+      calCheckChar('4401119000060') ==> E
+      calCheckChar('4401119000010') ==> Y
+```
 
 ### doubleRanking
              
@@ -216,18 +235,17 @@ wuxh
   arrayToTreeData(arr, 2) => [{id: 1, parentId: 2, name: 111, children: [{id: 3, parentId: 1, name: 222}]}]
 ```
 
-### getBrowserInfo
+### getCookie
              
- 获取浏览器相关信息
+ 获取cookie值
 
 ```javascript
 wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
  * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
+  getCookie('name') => 123
 ```
 
 ### removeStorage
@@ -286,33 +304,6 @@ wuxh
  * @example: 
   isSupportStorage()
   => true
-```
-
-### getCookie
-             
- 获取cookie值
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
-```
-
-### osInfo
-             
- 获取用户系统平台信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
 ```
 
 ### dateInterval
@@ -393,6 +384,20 @@ wuxh
   timeFormat(new Date()) => '刚刚'
 ```
 
+### osInfo
+             
+ 获取用户系统平台信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
 ### scopeRandom
              
  范围随机整数
@@ -406,6 +411,131 @@ wuxh
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### isQQ
+             
+ 是否是QQ平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+```
+
+### isWX
+             
+ 是否是微信平台
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+```
+
+### operattelecom
+             
+ 获取手机运营商
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return: '移动' | '电信' | '联通' | '未知'
+ * @example: 
+  operattelecom('13419595634') => 移动
+```
+
+### isAndroidMobileDevice
+             
+ 是否是安卓设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+```
+
+### isAppleMobileDevice
+             
+ 是否是苹果设备
+
+```javascript
+wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
+```
+
+### getBrowserInfo
+             
+ 获取浏览器相关信息
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### getV
+             
+ 获取多级数据避免出错（超级好用）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### clone
+             
+ 对象克隆（只包含可遍历属性<常用>）
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### mergeObj
+             
+ 深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+
+```javascript
+wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
 ```
 
 ### trim
@@ -556,117 +686,6 @@ wuxh
  * @example: 
   urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
-```
-
-### getV
-             
- 获取多级数据避免出错（超级好用）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### clone
-             
- 对象克隆（只包含可遍历属性<常用>）
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### mergeObj
-             
- 深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
-### isQQ
-             
- 是否是QQ平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isQQ()
-  => false
-```
-
-### isWX
-             
- 是否是微信平台
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isWX()
-  => false
-```
-
-### operattelecom
-             
- 获取手机运营商
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return: '移动' | '电信' | '联通' | '未知'
- * @example: 
-  operattelecom('13419595634') => 移动
-```
-
-### isAndroidMobileDevice
-             
- 是否是安卓设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:04
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAndroidMobileDevice() => false
-```
-
-### isAppleMobileDevice
-             
- 是否是苹果设备
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:31:55
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAppleMobileDevice() => true
 ```
 
 ### debounce
