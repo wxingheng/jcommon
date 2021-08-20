@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 21:30:23
- * @LastEditTime: 2020-06-09 10:02:15
+ * @LastEditTime: 2021-08-20 09:30:36
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/auto-md.js
@@ -22,11 +22,13 @@ const regDes = new RegExp('(?<=@description:)(.|\n)*?(?=(\n.\\*.@author))', 'g')
 // const regExample = new RegExp('(?<=@author:)(.|\n)*?(?=(\\*/))', 'g')
 const regExample = new RegExp('(?<=@author:)(.|\n)*?(?=(\\*/))', 'g')
 
-
-
 fs.unlinkSync(outputFile)
 
-const baseContent = fs.readFileSync(path.join(path.resolve(rootPath, 'pack'), 'base.md'), 'utf-8') + '\n'
+const baseContent =
+  fs.readFileSync(
+    path.join(path.resolve(rootPath, 'pack'), 'base.md'),
+    'utf-8'
+  ) + '\n'
 
 fs.appendFileSync(outputFile, baseContent)
 
@@ -35,23 +37,24 @@ fs.readdir(remotePath, function (err, files) {
     console.log(err)
     return
   }
-  const filterFiles = files.filter(v => v !== 'index.js')
+  const filterFiles = files.filter(v => v !== 'index.ts')
   fs.appendFileSync(outputFile, `## API 目录` + '\n')
   filterFiles.forEach(function (filename) {
-    const filedir = path.join(remotePath, `${filename}/index.js`)
+    const filedir = path.join(remotePath, `${filename}/index.ts`)
     fs.stat(filedir, function (err, stats) {
-      if (err) throw err
-      if (stats.isFile()) {
-        let content = fs.readFileSync(filedir, 'utf-8') + '\n\n'
-        const catalogue = '\n' + `### ${content.match(reg)[0]}` + '\n\n'
-        const names = content.match(regName)
-        const des = content.match(regDes)
-        fs.appendFileSync(outputFile, catalogue)
-        names.forEach((v, i) => {
-          fs.appendFileSync(outputFile, `- [${v}](#${v}) ${des[i]}` + '\n')
-        })
-      } else if (stats.isDirectory()) {
-        return false
+      if (!err) {
+        if (stats.isFile()) {
+          let content = fs.readFileSync(filedir, 'utf-8') + '\n\n'
+          const catalogue = '\n' + `### ${content.match(reg)[0]}` + '\n\n'
+          const names = content.match(regName)
+          const des = content.match(regDes)
+          fs.appendFileSync(outputFile, catalogue)
+          names.forEach((v, i) => {
+            fs.appendFileSync(outputFile, `- [${v}](#${v}) ${des[i]}` + '\n')
+          })
+        } else if (stats.isDirectory()) {
+          return false
+        }
       }
     })
   })
@@ -60,34 +63,35 @@ fs.readdir(remotePath, function (err, files) {
   }, 1000 * 2)
   setTimeout(() => {
     filterFiles.forEach(function (filename) {
-      const filedir = path.join(remotePath, `${filename}/index.js`)
+      const filedir = path.join(remotePath, `${filename}/index.ts`)
       fs.stat(filedir, function (err, stats) {
-        if (err) throw err
-        if (stats.isFile()) {
-          let content = fs.readFileSync(filedir, 'utf-8') + '\n\n'
-          const catalogue = '\n' + `### ${content.match(reg)[0]}` + '\n\n'
-          const names = content.match(regName)
-          const des = content.match(regDes)
-          const examples = content.match(regExample)
-          names.forEach((v, i) => {
-            fs.appendFileSync(
-              outputFile,
-              '\n' +
-                `### ${v}
-             
-${des[i]}
-
-` +
-                '```javascript' +
-                `
-${examples[i].trim()}` +
+        if (!err) {
+          if (stats.isFile()) {
+            let content = fs.readFileSync(filedir, 'utf-8') + '\n\n'
+            const catalogue = '\n' + `### ${content.match(reg)[0]}` + '\n\n'
+            const names = content.match(regName)
+            const des = content.match(regDes)
+            const examples = content.match(regExample)
+            names.forEach((v, i) => {
+              fs.appendFileSync(
+                outputFile,
                 '\n' +
-                '```' +
-                '\n'
-            )
-          })
-        } else if (stats.isDirectory()) {
-          return false
+                  `### ${v}
+               
+  ${des[i]}
+  
+  ` +
+                  '```javascript' +
+                  `
+  ${examples[i].trim()}` +
+                  '\n' +
+                  '```' +
+                  '\n'
+              )
+            })
+          } else if (stats.isDirectory()) {
+            return false
+          }
         }
       })
     })
@@ -103,4 +107,3 @@ ${examples[i].trim()}` +
     )
   }, 1000 * 6)
 })
-

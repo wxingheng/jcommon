@@ -4,3 +4,5 @@ test002
 test003
 script
 pack
+src/
+.npmignore

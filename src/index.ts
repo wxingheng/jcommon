@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2021-08-19 23:55:06
+ * @LastEditTime: 2021-08-20 10:17:03
  * @LastEditors: wuxh
  * @Description: 数组方法 Array
- * @FilePath: /jcommon/src/array/index.ts
+ * @FilePath: /jcommon/src/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
