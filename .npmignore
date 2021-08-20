@@ -6,3 +6,5 @@ script
 pack
 src/
 .npmignore
+.scripts
+docs
