@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2020-05-08 09:25:19
+ * @LastEditTime: 2021-08-21 23:43:22
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -22,11 +22,27 @@ JavaScript 常用纯函数工具库 （当前版本已在项目中使用，后�
 在 jcommon 应用于大型项目时推荐使用 NPM 安装。NPM 能很好地和 webpack 模块打包器配合使用。`完全的按需引用`。
 
 ```bash
-# 最新稳定版
+# 安装
 $ npm install jcommon
+```
 
-# 比如判断数据类型是不是对象（所有的方法都是这样引用...）
+```bash
+# 使用
+
 import { isObject, isArray } from 'jcommon'
+
+or
+
+const { isObject, isArray } = require('jcommon')
+
+or
+
+<script type="text/javascript" src="./dist/jcommon.js"></script>
+
+<script>
+    jcommon.isObject({})
+</script>
+
 ```
 
 ## 项目特点
@@ -34,7 +50,6 @@ import { isObject, isArray } from 'jcommon'
 - [x] 完全的按需引用，我们只导出纯函数
 - [x] 不同于传统 js 工具库导出一整个大模块（moment, utils, ...）
 - [x] 支持 npm 安装方式
-- [ ] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
-- [ ] 持续丰富方法库
-- [ ] 集成一些 node 的常用方法（完全的按需引入，可以不用担心库的大小）
-- [ ] 对 TS 支持友好
+- [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
+- [x] 对 TS 支持友好
+- [ ] dom 相关

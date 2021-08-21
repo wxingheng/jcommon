@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2020-06-09 09:57:05
+ * @LastEditTime: 2021-08-21 21:42:54
  * @LastEditors: wuxh
  * @Description: 校验相关
- * @FilePath: /jcommon/src/validate/index.js
+ * @FilePath: /jcommon/src/validate/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -18,7 +18,7 @@
   isUserId('421182199409274710') => ''
   isUserId('421182199409') => '身份证号码长度应该为18位'
  */
-export const isUserId = function (e) {
+export const isUserId = function (e: string) {
   let i,
     t,
     a,
@@ -29,7 +29,7 @@ export const isUserId = function (e) {
     d,
     l,
     c,
-    p = {
+    p: { [key: string]: string } = {
       11: '北京',
       12: '天津',
       13: '河北',
@@ -67,8 +67,7 @@ export const isUserId = function (e) {
       91: '国外'
     }
   if (
-    ('',
-    (s = ['1', '0', 'x', '9', '8', '7', '6', '5', '4', '3', '2']),
+    ((s = ['1', '0', 'x', '9', '8', '7', '6', '5', '4', '3', '2']),
     (o = [
       '7',
       '9',
@@ -104,21 +103,24 @@ export const isUserId = function (e) {
     ((t = i.substring(6, 10)),
     (a = i.substring(10, 12)),
     (n = i.substring(12, 14)),
-    0 ==
+    false ===
       /[1-9]\d{3}\-(0[1-9]|1[0-2])\-([0-2]\d|3[0-1])/.test(
         t + '-' + a + '-' + n
       ))
   )
     return '身份证生日无效。'
   if (
-    new Date().getFullYear() - t > 150 ||
-    new Date().getTime() - new Date(t, a - 1, n).getTime() < 0
+    new Date().getFullYear() - Number(t) > 150 ||
+    new Date().getTime() -
+      new Date(Number(t), Number(a) - 1, Number(n)).getTime() <
+      0
   )
     return '身份证生日不在有效范围'
-  if (a > 12 || 0 == a) return '身份证月份无效'
-  if (n > 31 || 0 == n) return '身份证日期无效'
+  if (Number(a) > 12 || 0 === Number(a)) return '身份证月份无效'
+  if (Number(n) > 31 || 0 == Number(n)) return '身份证日期无效'
   if (!p[i.substring(0, 2)]) return '身份证地区编码错误'
-  for (d = 0, r = 0; r < 17; r++) d += i.charAt(r) * o[r]
+
+  for (d = 0, r = 0; r < 17; r++) d += Number(i.charAt(r)) * Number(o[r])
   return (
     (l = d % 11),
     (c = s[l]),
@@ -138,7 +140,7 @@ export const isUserId = function (e) {
   isType(123, 'String') => false
   isType('123', 'String') => true
  */
-export const isType = function (data, type) {
+export const isType = function (data: any, type: string): boolean {
   return Object.prototype.toString.call(data) === `[object ${type}]`
 }
 /**
@@ -151,7 +153,7 @@ export const isType = function (data, type) {
   isString(123) => false
   isString('') => true
  */
-export const isString = function (data) {
+export const isString = function (data: any): boolean {
   return isType(data, 'String')
 }
 
@@ -165,7 +167,7 @@ export const isString = function (data) {
   isNumber(123) => true
   isNumber('') => false
  */
-export const isNumber = function (data) {
+export const isNumber = function (data: any): boolean {
   return isType(data, 'Number')
 }
 
@@ -179,7 +181,7 @@ export const isNumber = function (data) {
   isBoolean(false) => true
   isBoolean('false') => false
  */
-export const isBoolean = function (data) {
+export const isBoolean = function (data: any): boolean {
   return isType(data, 'Boolean')
 }
 
@@ -193,7 +195,7 @@ export const isBoolean = function (data) {
   isUndefined(undefined) => true
   isUndefined('undefined') => false
  */
-export const isUndefined = function (data) {
+export const isUndefined = function (data: any): boolean {
   return isType(data, 'Undefined')
 }
 
@@ -207,7 +209,7 @@ export const isUndefined = function (data) {
   isNull(null) => true
   isNull('null') => false
  */
-export const isNull = function (data) {
+export const isNull = function (data: string): boolean {
   return isType(data, 'Null')
 }
 
@@ -221,7 +223,7 @@ export const isNull = function (data) {
   isFunc(() => 123) => true
   isFunc(123) => false
  */
-export const isFunc = function (data) {
+export const isFunc = function (data: any): boolean {
   return isType(data, 'Function')
 }
 
@@ -235,7 +237,7 @@ export const isFunc = function (data) {
   isDate(() => new Date()) => false
   isDate(new Date()) => true
  */
-export const isDate = function (data) {
+export const isDate = function (data: any): boolean {
   return isType(data, 'Date')
 }
 
@@ -249,7 +251,7 @@ export const isDate = function (data) {
   isArray([]) => true
   isArray(![]) => false
  */
-export const isArray = function (data) {
+export const isArray = function (data: any): boolean {
   return isType(data, 'Array')
 }
 
@@ -263,7 +265,7 @@ export const isArray = function (data) {
   isReg(new RegExp()) => true
   isReg(![]) => false
  */
-export const isReg = function (data) {
+export const isReg = function (data: any): boolean {
   return isType(data, 'RegExp')
 }
 
@@ -277,7 +279,7 @@ export const isReg = function (data) {
   isError(new Error()) => true
   isError(![]) => false
  */
-export const isError = function (data) {
+export const isError = function (data: any): boolean {
   return isType(data, 'Error')
 }
 
@@ -291,7 +293,7 @@ export const isError = function (data) {
   isObject({}) => true
   isObject(![]) => false
  */
-export const isObject = function (data) {
+export const isObject = function (data: any): boolean {
   return isType(data, 'Object')
 }
 
@@ -304,7 +306,7 @@ export const isObject = function (data) {
  * @example: 
   isPhone('13419595634') => true
  */
-export const isPhone = function (phone) {
+export const isPhone = function (phone: string): boolean {
   if (!phone) {
     return false
   }
@@ -321,6 +323,6 @@ export const isPhone = function (phone) {
  * @example: 
   isEmail('wxingheng@outlook.com') => true
  */
-export const isEmail = function (str) {
+export const isEmail = function (str: string): boolean {
   return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str)
 }

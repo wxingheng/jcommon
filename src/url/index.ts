@@ -1,12 +1,13 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2020-05-08 09:21:51
+ * @LastEditTime: 2021-08-21 22:27:55
  * @LastEditors: wuxh
  * @Description: url处理相关
- * @FilePath: /jcommon/src/url/index.js
+ * @FilePath: /jcommon/src/url/index.ts
  * @https://github.com/wxingheng/jcommon
  */
+
 
 /**
  * @description: 获取浏览器url中的一个参数
@@ -18,11 +19,33 @@
   getUrlQuery(age)
   => 25
  */
-export const getUrlQuery = function (name) {
+export const getUrlQuery = function (name: string): string {
   const u = arguments[1] || window.location.search,
     reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
     r = u.substr(u.indexOf('?') + 1).match(reg)
   return r != null ? r[2] : ''
+}
+
+/**
+ * @description: 去除值类型为string的前后空格
+ * @author: wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+ */
+export const everyTrim = function (data: Array<any> | Object) {
+  const temp = cloneObj(data)
+  for (const key in temp) {
+    if (typeof temp[key] === 'object') {
+      temp[key] = everyTrim(temp[key])
+    } else {
+      if (typeof temp[key] === 'string') {
+        temp[key] = trim(temp[key])
+      }
+    }
+  }
+  return temp
 }
 
 /**
@@ -32,26 +55,28 @@ export const getUrlQuery = function (name) {
  * @param {obj}
  * @return: String
  * @example: 
-  objByUrlStr({name: 1, value: 123})
+  formatQueryParam({name: 1, value: 123})
   =>  "name=1&value=123"
  */
-export const objByUrlStr = function (obj) {
-  let str = ''
+export const formatQueryParam = function (obj: {[key: string]: any}) {
+  obj = everyTrim(obj)
+  let temp = ''
   if (Object.prototype.toString.call(obj) === '[object Object]') {
     for (const key in obj) {
       if (Array.isArray(obj[key])) {
-        obj[key].forEach(function (elem) {
-          str = str + key + '=' + elem + '&'
+        obj[key].forEach((elem: any) => {
+          temp += `${key}=${elem}&`
         })
       } else {
-        if (obj[key]) {
-          str = str + key + '=' + obj[key] + '&'
+        if (obj[key] !== null) {
+          temp += `${key}=${obj[key]}&`
         }
       }
     }
   }
-  if (str.length > 0) {
-    return str.substring(0, str.length - 1)
+  if (temp.length > 0) {
+    temp = `?${temp}`
+    return temp.substring(0, temp.length - 1)
   } else {
     return ''
   }
@@ -67,8 +92,8 @@ export const objByUrlStr = function (obj) {
   urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
  */
-export const urlByObj = function (params) {
-  const obj = {}
+export const urlByObj = function (params: string) {
+  const obj: { [key: string]: string } = {}
   const reg = /[?&][^?&]+=[^?&]+/g // 正则匹配 ?&开始 =拼接  非?&结束  的参数
   const arr = params.match(reg) // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
   // arr数组形式 ['?id=12345','&a=b']

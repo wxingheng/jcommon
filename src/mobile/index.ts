@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2020-06-09 09:32:28
+ * @LastEditTime: 2021-08-21 20:18:34
  * @LastEditors: wuxh
  * @Description: 移动端相关
- * @FilePath: /jcommon/src/mobile/index.js
+ * @FilePath: /jcommon/src/mobile/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -18,7 +18,7 @@
   isQQ()
   => false
  */
-export const isQQ = function () {
+export const isQQ = function (): boolean {
   if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
     return true
   }
@@ -35,7 +35,7 @@ export const isQQ = function () {
   isWX()
   => false
  */
-export const isWX = function () {
+export const isWX = function (): boolean {
   if (/MicroMessenger/i.test(navigator.userAgent)) {
     return true
   }
@@ -51,7 +51,7 @@ export const isWX = function () {
  * @example: 
   operattelecom('13419595634') => 移动
  */
-export const operattelecom = function (e) {
+export const operattelecom = function (e: string) {
   var i =
       '134,135,136,137,138,139,150,151,152,157,158,159,187,188,147,182,183,184,178',
     n = '130,131,132,155,156,185,186,145,176',
@@ -82,7 +82,7 @@ export const operattelecom = function (e) {
  * @example: 
   isAndroidMobileDevice() => false
  */
-export const isAndroidMobileDevice = function () {
+export const isAndroidMobileDevice = function (): boolean {
   return /android/i.test(navigator.userAgent.toLowerCase())
 }
 
@@ -95,6 +95,6 @@ export const isAndroidMobileDevice = function () {
  * @example: 
   isAppleMobileDevice() => true
  */
-export const isAppleMobileDevice = function () {
+export const isAppleMobileDevice = function (): boolean {
   return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase())
 }

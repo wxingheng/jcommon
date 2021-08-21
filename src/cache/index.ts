@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
- * @LastEditTime: 2020-05-08 09:17:00
+ * @LastEditTime: 2021-08-21 20:00:11
  * @LastEditors: wuxh
  * @Description: 数据持久化，缓存
- * @FilePath: /jcommon/src/cache/index.js
+ * @FilePath: /jcommon/src/cache/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -18,7 +18,7 @@
   removeStorage('test')
   => undefined
  */
-export const removeStorage = function (key) {
+export const removeStorage = function (key: any) {
   window.localStorage.removeItem(key)
 }
 /**
@@ -33,9 +33,9 @@ export const removeStorage = function (key) {
   saveStorage('test', '001')
   => undefined
  */
-export const saveStorage = function (key, value, isJson) {
+export const saveStorage = function (key: string, value: string): void {
   try {
-    window.localStorage.setItem(key, isJson ? JSON.stringify(value) : value)
+    window.localStorage.setItem(key, JSON.stringify(value))
   } catch (e) {
     console.error(e)
   }
@@ -50,7 +50,7 @@ export const saveStorage = function (key, value, isJson) {
   getStorage('test')
   => '001'
  */
-export const getStorage = function (key) {
+export const getStorage = function (key: string): string | null {
   return window.localStorage.getItem(key)
 }
 /**
@@ -68,7 +68,7 @@ export const isSupportStorage = function () {
     return false
   }
   try {
-    window.localStorage.setItem('JUTILS_STOARGE_TEST', true)
+    window.localStorage.setItem('JUTILS_STOARGE_TEST', 'true')
     window.localStorage.removeItem('JUTILS_STOARGE_TEST')
     return true
   } catch (e) {

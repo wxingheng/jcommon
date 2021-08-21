@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2020-06-09 09:56:47
+ * @LastEditTime: 2021-08-21 22:25:47
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
- * @FilePath: /jcommon/src/string/index.js
+ * @FilePath: /jcommon/src/string/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -19,7 +19,7 @@
   trim('   1 1 1   ') => '1 1 1'
   trim('   1 1 1   ', true) => '111'
  */
-export const trim = function (str, global) {
+export const trim = function (str: string, global: boolean = false) {
   let result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (global) {
     result = result.replace(/\s/g, '')
@@ -36,11 +36,11 @@ export const trim = function (str, global) {
  * @example: 
    getSexByIdNO('421182199409274710') => MALE
  */
-export const getSexByIdNO = function (IdNO) {
+export const getSexByIdNO = function (IdNO: string): 'FEMALE' | 'MALE' | '' {
   if (IdNO.length == 18) {
-    return IdNO.charAt(16) % 2 == 0 ? 'FEMALE' : 'MALE'
+    return Number(IdNO.charAt(16)) % 2 == 0 ? 'FEMALE' : 'MALE'
   } else if (IdNO.length == 15) {
-    return IdNO.charAt(14) % 2 == 0 ? 'FEMALE' : 'MALE'
+    return Number(IdNO.charAt(14)) % 2 == 0 ? 'FEMALE' : 'MALE'
   } else {
     return ''
   }
@@ -55,7 +55,7 @@ export const getSexByIdNO = function (IdNO) {
  * @example: 
   getBirthdatByIdNo('421182199409274710') => '1994-09-27'
  */
-export const getBirthdatByIdNo = function (iIdNo) {
+export const getBirthdatByIdNo = function (iIdNo: string): string {
   let tmpStr = ''
   if (iIdNo.length == 15) {
     tmpStr = iIdNo.substring(6, 12)
@@ -88,12 +88,12 @@ export const getBirthdatByIdNo = function (iIdNo) {
  * @example: 
   hideIdNum('421182199409274710') => 4****************0
  */
-export const hideIdNum = function (str) {
+export const hideIdNum = function (str: string) {
   return `${String(str).slice(0, 1)}****************${String(str).slice(17)}`
 }
 
 /**
- * @description: 随机数时间戳
+ * @description: 随机数 + 时间戳
  * @author: wuxh
  * @Date: 2020-06-09 09:47:34
  * @param {type} 
@@ -104,5 +104,10 @@ export const hideIdNum = function (str) {
 export const uniqueId = function () {
   var a = Math.random,
     b = parseInt
-  return Number(new Date()).toString() + b(10 * a()) + b(10 * a()) + b(10 * a())
+  return (
+    Number(new Date()).toString() +
+    b((10 * a()).toString()) +
+    b((10 * a()).toString()) +
+    b((10 * a()).toString())
+  )
 }

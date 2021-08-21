@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2020-05-08 09:15:57
+ * @LastEditTime: 2021-08-21 19:37:30
  * @LastEditors: wuxh
  * @Description: 浏览器相关
- * @FilePath: /jcommon/src/browser/index.js
+ * @FilePath: /jcommon/src/browser/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -18,11 +18,15 @@
   getBrowserInfo()
   => {name: "Chrome", version: "81.0.4044.129"}
  */
-export const getBrowserInfo = function () {
+interface getBrowserInfoResult {
+  name: string | RegExp
+  version: string
+}
+export const getBrowserInfo = function (): getBrowserInfoResult {
   let e,
     t,
     r,
-    o = {
+    o: getBrowserInfoResult = {
       name: 'other',
       version: '0'
     },

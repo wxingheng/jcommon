@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2020-05-08 09:17:49
+ * @LastEditTime: 2021-08-21 20:17:01
  * @LastEditors: wuxh
  * @Description: 用户设备相关（客户端系统）
- * @FilePath: /jcommon/src/devices/index.js
+ * @FilePath: /jcommon/src/devices/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
@@ -18,9 +18,13 @@
   osInfo()
   => {os: "mac", version: "10.15.3"}
  */
-export const osInfo = function (e) {
+interface osInfoResult {
+  os: string | RegExp
+  version: string
+}
+export const osInfo = function (e: string) {
   e = e || navigator.userAgent
-  let t = {
+  let t: osInfoResult = {
       os: 'other',
       version: ''
     },

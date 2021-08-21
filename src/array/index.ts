@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2021-08-19 23:55:06
+ * @LastEditTime: 2021-08-21 23:13:04
  * @LastEditors: wuxh
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -125,6 +125,10 @@ export const arrByObj = function (
   key: string,
   v = ''
 ): { [key: string]: any } {
+  if (Object.prototype.toString.call(arr) !== '[object Array]') {
+    console.error('arrByObj 参数错误，请检查：', arr)
+    return {}
+  }
   const obj: { [key: string]: any } = {}
   arr.forEach(function (d) {
     obj[d[key]] = v ? d[v] : d
