@@ -1,14 +1,1 @@
-**/node_modules
-test001
-test002
-test003
-*/node_modules
-*/yarn.lock
-*/dist
-*/es
-*/lib
-/node_modules
-/yarn.lock
-/dist
-/es
-/lib
+/jcommon/.git
