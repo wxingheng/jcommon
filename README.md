@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2020-05-08 09:25:19
+ * @LastEditTime: 2021-08-21 23:43:22
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -22,11 +22,27 @@ JavaScript 常用纯函数工具库 （当前版本已在项目中使用，后�
 在 jcommon 应用于大型项目时推荐使用 NPM 安装。NPM 能很好地和 webpack 模块打包器配合使用。`完全的按需引用`。
 
 ```bash
-# 最新稳定版
+# 安装
 $ npm install jcommon
+```
 
-# 比如判断数据类型是不是对象（所有的方法都是这样引用...）
+```bash
+# 使用
+
 import { isObject, isArray } from 'jcommon'
+
+or
+
+const { isObject, isArray } = require('jcommon')
+
+or
+
+<script type="text/javascript" src="./dist/jcommon.js"></script>
+
+<script>
+    jcommon.isObject({})
+</script>
+
 ```
 
 ## 项目特点
@@ -34,10 +50,9 @@ import { isObject, isArray } from 'jcommon'
 - [x] 完全的按需引用，我们只导出纯函数
 - [x] 不同于传统 js 工具库导出一整个大模块（moment, utils, ...）
 - [x] 支持 npm 安装方式
-- [ ] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
-- [ ] 持续丰富方法库
-- [ ] 集成一些 node 的常用方法（完全的按需引入，可以不用担心库的大小）
-- [ ] 对 TS 支持友好
+- [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
+- [x] 对 TS 支持友好
+- [ ] dom 相关
 
 ## API 目录
 
@@ -46,7 +61,10 @@ import { isObject, isArray } from 'jcommon'
 - [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
-- [arrayToTreeData](#arrayToTreeData)  一维数组转多维树结构数据
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ###  数据持久化，缓存
 
@@ -54,14 +72,6 @@ import { isObject, isArray } from 'jcommon'
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
-
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-###  血液行业相关
-
-- [calCheckChar](#calCheckChar)  根据序列号计算校验位
 
 ### 
 
@@ -74,6 +84,7 @@ import { isObject, isArray } from 'jcommon'
 - [dateFormat](#dateFormat)   时间的转换（目前支持 年，月，日，时，分，秒，星期）
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
+- [getCountDays](#getCountDays)  获取当前月份天数
 
 ###  用户设备相关（客户端系统）
 
@@ -91,34 +102,26 @@ import { isObject, isArray } from 'jcommon'
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
+###  对象相关（Object处理）
+
+- [cloneObj](#cloneObj)  获取多级数据避免出错（超级好用）
+- [mergeObj](#mergeObj)  对象克隆（只包含可遍历属性<常用>）
+- [isEmptyObject](#isEmptyObject)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
 - [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
 - [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
-- [uniqueId](#uniqueId)  随机数时间戳
-- [ageFormat](#ageFormat)  出生日期计算年龄
-- [compileStr](#compileStr)  对字符串进行加密
-- [uncompileStr](#uncompileStr)  字符串进行解密
-
-###  对象相关（Object处理）
-
-- [getV](#getV)  获取多级数据避免出错（超级好用）
-- [clone](#clone)  对象克隆（只包含可遍历属性<常用>）
-- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+- [uniqueId](#uniqueId)  随机数 + 时间戳
 
 ###  url处理相关
 
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数(兼容browser和hash)
-- [objByUrlStr](#objByUrlStr)  格式化GET请求的请求头
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
 - [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
-
-###  通用工具方法
-
-- [debounce](#debounce)  函数防抖<短时间内多次触发同一事件，只执行最后一次>
-- [throttle](#throttle)  函数节流<指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。节流如字面意思，会稀释函数的执行频率。>
-- [promiseTo](#promiseTo)  await 的简单封装（避免重复的 tray catch ）
 
 ###  校验相关
 
@@ -140,27 +143,84 @@ import { isObject, isArray } from 'jcommon'
 
 ## API 说明
 
-### calCheckChar
-             
- 根据序列号计算校验位
-
-```javascript
-wuxh 
- * @Date: 2020-05-06 11:37:17
- * @param {serialNo} 序列号
- * @return: {CHECK} 校验位
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
  * @example: 
-      calCheckChar('0051117014765') ==> M
-      calCheckChar('4401119000060') ==> E
-      calCheckChar('4401119000010') ==> Y
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### removeStorage
+               
+   删除
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
+ * @example: 
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
 ```
 
 ### doubleRanking
-             
- 处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
-
-```javascript
-wuxh 
+               
+   处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
+  
+  ```javascript
+  wuxh 
  * @Date: 2020-05-06 11:37:17
  * @param {arr} 需要处理的数组
  * @param {options} 额外参数
@@ -189,11 +249,11 @@ wuxh
 ```
 
 ### randomData
-             
- 产生随机数据
-
-```javascript
-wuxh
+               
+   产生随机数据
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 11:41:08
  * @param {num} 数量
  * @param {arr} 每个元素对象的keys
@@ -204,11 +264,11 @@ wuxh
 ```
 
 ### arrByObj
-             
- 数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
-
-```javascript
-wuxh
+               
+   数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 11:51:49
  * @param {arr} 需要转换的数组
  * @param {key} 需要作为转换后对象的key
@@ -220,27 +280,12 @@ wuxh
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### arrayToTreeData
-             
- 一维数组转多维树结构数据
-
-```javascript
-wuxh
- * @Date: 2020-06-22 17:54:54
- * @param {arr} 一维数组
- * @param {id} 根节点id
- * @return: Array
- * @example:
-  const arr = [{id: 1, parentId: 2, name: 111}, {id: 3, parentId: 1, name: 222}]
-  arrayToTreeData(arr, 2) => [{id: 1, parentId: 2, name: 111, children: [{id: 3, parentId: 1, name: 222}]}]
-```
-
 ### getCookie
-             
- 获取cookie值
-
-```javascript
-wuxh
+               
+   获取cookie值
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:28:06
  * @param {type} 
  * @return: string
@@ -248,70 +293,12 @@ wuxh
   getCookie('name') => 123
 ```
 
-### removeStorage
-             
- 删除
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-             
- 保存
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-             
- 获取
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-             
- 是否支持local
-
-```javascript
-wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
-```
-
 ### dateInterval
-             
- 获取两个时间的间隔
-
-```javascript
-wuxh
+               
+   获取两个时间的间隔
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:04:39
  * @param {st}
  * @param {et}
@@ -322,11 +309,11 @@ wuxh
 ```
 
 ### addZero
-             
- 字符串补0，目前提供给dateFormat使用
-
-```javascript
-wuxh
+               
+   字符串补0，目前提供给dateFormat使用
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-11 14:01:20
  * @param {v} 需要处理的数据 String | Number
  * @param {size} 期望得到的总位数
@@ -338,11 +325,11 @@ wuxh
 ```
 
 ### dateFormat
-             
-  时间的转换（目前支持 年，月，日，时，分，秒，星期）
-
-```javascript
-wuxh
+               
+    时间的转换（目前支持 年，月，日，时，分，秒，星期）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:05:28
  * @param {date}
  * @param {formatStr}
@@ -353,11 +340,11 @@ wuxh
 ```
 
 ### dateMonthDays
-             
- 获取当前月份的天数
-
-```javascript
-wuxh
+               
+   获取当前月份的天数
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:06:24
  * @param {str}
  * @return: Number
@@ -367,11 +354,11 @@ wuxh
 ```
 
 ### timeFormat
-             
- 时间个性化输出功能
-
-```javascript
-wuxh
+               
+   时间个性化输出功能
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:44:23
  * @param {type} 
  * @return: string
@@ -384,12 +371,24 @@ wuxh
   timeFormat(new Date()) => '刚刚'
 ```
 
-### osInfo
-             
- 获取用户系统平台信息
+### getCountDays
+               
+   获取当前月份天数
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:43:58
+ * @param {*} str YYYY-MM-DD mm:ss
+ * @return {*} number
+ * @example:
+```
 
-```javascript
-wuxh
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:07:03
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
@@ -399,11 +398,11 @@ wuxh
 ```
 
 ### scopeRandom
-             
- 范围随机整数
-
-```javascript
-wuxh
+               
+   范围随机整数
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:09:34
  * @param {str}
  * @param {end}
@@ -414,11 +413,11 @@ wuxh
 ```
 
 ### isQQ
-             
- 是否是QQ平台
-
-```javascript
-wuxh
+               
+   是否是QQ平台
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:10:41
  * @param
  * @return: Boolean
@@ -428,11 +427,11 @@ wuxh
 ```
 
 ### isWX
-             
- 是否是微信平台
-
-```javascript
-wuxh
+               
+   是否是微信平台
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:10:41
  * @param
  * @return: Boolean
@@ -442,11 +441,11 @@ wuxh
 ```
 
 ### operattelecom
-             
- 获取手机运营商
-
-```javascript
-wuxh
+               
+   获取手机运营商
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:11:39
  * @param {}
  * @return: '移动' | '电信' | '联通' | '未知'
@@ -455,11 +454,11 @@ wuxh
 ```
 
 ### isAndroidMobileDevice
-             
- 是否是安卓设备
-
-```javascript
-wuxh
+               
+   是否是安卓设备
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:31:04
  * @param {type} 
  * @return: boolean
@@ -468,11 +467,11 @@ wuxh
 ```
 
 ### isAppleMobileDevice
-             
- 是否是苹果设备
-
-```javascript
-wuxh
+               
+   是否是苹果设备
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:31:55
  * @param {type} 
  * @return: boolean
@@ -480,40 +479,26 @@ wuxh
   isAppleMobileDevice() => true
 ```
 
-### getBrowserInfo
-             
- 获取浏览器相关信息
-
-```javascript
-wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
-### getV
-             
- 获取多级数据避免出错（超级好用）
-
-```javascript
-wuxh
+### cloneObj
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:13:59
- * @param {...any} args
+ * @param {defaultResult, ...any} args
  * @return: any
  * @example: 
   getV('', {name: {children: 123}}, 'name', 'children')
   => 123
 ```
 
-### clone
-             
- 对象克隆（只包含可遍历属性<常用>）
-
-```javascript
-wuxh
+### mergeObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:14:45
  * @param {obj}
  * @return: Object
@@ -522,12 +507,12 @@ wuxh
   => {name: 123}
 ```
 
-### mergeObj
-             
- 深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
-```javascript
-wuxh
+### isEmptyObject
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 12:15:30
  * @param {oldObj}
  * @param {newObj}
@@ -539,11 +524,11 @@ wuxh
 ```
 
 ### trim
-             
- 去除字符串空格, 默认去除前后空格 （常用）
-
-```javascript
-wuxh
+               
+   去除字符串空格, 默认去除前后空格 （常用）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:43:52
  * @param {str} String
  * @param {global} Boolean
@@ -554,11 +539,11 @@ wuxh
 ```
 
 ### getSexByIdNO
-             
- 身份证号码解析性别
-
-```javascript
-wuxh
+               
+   身份证号码解析性别
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:16:28
  * @param {type} 
  * @return: 'FEMALE' ｜ 'MALE'
@@ -567,11 +552,11 @@ wuxh
 ```
 
 ### getBirthdatByIdNo
-             
- 身份证号码解析出生日期
-
-```javascript
-wuxh
+               
+   身份证号码解析出生日期
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:17:50
  * @param {type} 
  * @return: string
@@ -580,11 +565,11 @@ wuxh
 ```
 
 ### hideIdNum
-             
- 隐藏身份证号码
-
-```javascript
-wuxh
+               
+   隐藏身份证号码
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:19:26
  * @param {type} 
  * @return: string
@@ -593,11 +578,11 @@ wuxh
 ```
 
 ### uniqueId
-             
- 随机数时间戳
-
-```javascript
-wuxh
+               
+   随机数 + 时间戳
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:47:34
  * @param {type} 
  * @return: string
@@ -605,53 +590,12 @@ wuxh
   uniqueId() => '1591667193048544'
 ```
 
-### ageFormat
-             
- 出生日期计算年龄
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:47:34
- * @param {type} 
- * @return: string
- * @example: 
-  ageFormat('1994-09-27') => '25岁'
-  ageFormat('2020-02-27') => '4个月'
-  ageFormat('2020-06-02') => '15天'
-```
-
-### compileStr
-             
- 对字符串进行加密
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:47:34
- * @param {code} 
- * @return: string
- * @example: 
-  compileStr(123) => string
-```
-
-### uncompileStr
-             
- 字符串进行解密
-
-```javascript
-wuxh
- * @Date: 2020-06-09 09:47:34
- * @param {code} 
- * @return: string
- * @example: 
-  uncompileStr(123) => string
-```
-
 ### getUrlQuery
-             
- 获取浏览器url中的一个参数(兼容browser和hash)
-
-```javascript
-wuxh
+               
+   获取浏览器url中的一个参数
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:46:28
  * @param {name}
  * @return: String
@@ -660,26 +604,38 @@ wuxh
   => 25
 ```
 
-### objByUrlStr
-             
- 格式化GET请求的请求头
+### everyTrim
+               
+   去除值类型为string的前后空格
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+```
 
-```javascript
-wuxh
+### formatQueryParam
+               
+   格式化GET请求的请求头
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:47:40
  * @param {obj}
  * @return: String
  * @example: 
-  objByUrlStr({name: 1, value: 123})
+  formatQueryParam({name: 1, value: 123})
   =>  "name=1&value=123"
 ```
 
 ### urlByObj
-             
- 处理url参数(window.location.search)转换为 {key: value}
-
-```javascript
-wuxh
+               
+   处理url参数(window.location.search)转换为 {key: value}
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:48:36
  * @param {params}
  * @return: Object
@@ -688,63 +644,12 @@ wuxh
   => {ie: UTF-8, wd: asd}
 ```
 
-### debounce
-             
- 函数防抖<短时间内多次触发同一事件，只执行最后一次>
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:46:28
- * @param 
- * {func<需要防抖的逻辑方法>, wait<等待时间>, immediate<boolean, 是否需要立即执行一次>}
- * @return: String
- * @example: 
-  // 比如搜索框input需要做输入搜索防抖处理
-  // 使用debounce方法产生一个防抖方法
-  const search = debounce((value) => console.log, 1000, false)
-  // 在你需要的地方进行绑定产生的search方法
-  // 你的逻辑处理func部分将会按照你设置的防抖参数来执行
-  onChange = {search}
-```
-
-### throttle
-             
- 函数节流<指连续触发事件但是在 n 秒中只执行一次函数。即 2n 秒内执行 2 次... 。节流如字面意思，会稀释函数的执行频率。>
-
-```javascript
-wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {func<需要防抖的逻辑方法>, wait<间隔时间>, type< 1 | 2 >}
- * @return: String
- * @example: 
-  // 比如滚动事件需要做节流处理
-  // 使用debounce方法产生一个防抖方法
-  const scroll = throttle((value) => console.log, 1000, 1)
-  // 在你需要的地方进行绑定产生的search方法
-  // 你的逻辑处理func部分将会按照你设置的防抖参数来执行
-  onScroll = {scroll}
-```
-
-### promiseTo
-             
- await 的简单封装（避免重复的 tray catch ）
-
-```javascript
-wuxh
- * @Date: 2020-08-11 16:15:44
- * @param Promise
- * @return: Array
- * @example: 
-  // await 捕获错误则可以这样写
-  let [error, data] = await promiseTo(getUsersMonitor())
-```
-
 ### isUserId
-             
- 身份证号码校验（精准）
-
-```javascript
-wuxh
+               
+   身份证号码校验（精准）
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:49:58
  * @param {e}
  * @return: String<msg> | Boolean
@@ -754,11 +659,11 @@ wuxh
 ```
 
 ### isType
-             
- 精准判断数据类型
-
-```javascript
-wuxh
+               
+   精准判断数据类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:51:50
  * @param {data} any
  * @param {type} type  'String' | 'Number' | 'Boolean' | 'Undefined' | 'Null' | 'Function' | 'Date' | 'Array' | 'RegExp' | 'Error' | 'Object'
@@ -769,11 +674,11 @@ wuxh
 ```
 
 ### isString
-             
- 判断String类型
-
-```javascript
-wuxh
+               
+   判断String类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -783,11 +688,11 @@ wuxh
 ```
 
 ### isNumber
-             
- 判断Number类型
-
-```javascript
-wuxh
+               
+   判断Number类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -797,11 +702,11 @@ wuxh
 ```
 
 ### isBoolean
-             
- 判断Boolean类型
-
-```javascript
-wuxh
+               
+   判断Boolean类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -811,11 +716,11 @@ wuxh
 ```
 
 ### isUndefined
-             
- 判断Undefined类型
-
-```javascript
-wuxh
+               
+   判断Undefined类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -825,11 +730,11 @@ wuxh
 ```
 
 ### isNull
-             
- 判断Null类型
-
-```javascript
-wuxh
+               
+   判断Null类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -839,11 +744,11 @@ wuxh
 ```
 
 ### isFunc
-             
- 判断Function类型
-
-```javascript
-wuxh
+               
+   判断Function类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -853,11 +758,11 @@ wuxh
 ```
 
 ### isDate
-             
- 判断Date类型
-
-```javascript
-wuxh
+               
+   判断Date类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -867,11 +772,11 @@ wuxh
 ```
 
 ### isArray
-             
- 判断Array类型
-
-```javascript
-wuxh
+               
+   判断Array类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -881,11 +786,11 @@ wuxh
 ```
 
 ### isReg
-             
- 判断RegExp类型
-
-```javascript
-wuxh
+               
+   判断RegExp类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -895,11 +800,11 @@ wuxh
 ```
 
 ### isError
-             
- 判断Error类型
-
-```javascript
-wuxh
+               
+   判断Error类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -909,11 +814,11 @@ wuxh
 ```
 
 ### isObject
-             
- 判断Object类型
-
-```javascript
-wuxh
+               
+   判断Object类型
+  
+  ```javascript
+  wuxh
  * @Date: 2020-05-06 13:53:16
  * @param {data} any
  * @return: Boolean
@@ -923,11 +828,11 @@ wuxh
 ```
 
 ### isPhone
-             
- 手机号校验
-
-```javascript
-wuxh
+               
+   手机号校验
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:21:15
  * @param {type} 
  * @return: boolean
@@ -936,11 +841,11 @@ wuxh
 ```
 
 ### isEmail
-             
- 校验是否为邮箱地址
-
-```javascript
-wuxh
+               
+   校验是否为邮箱地址
+  
+  ```javascript
+  wuxh
  * @Date: 2020-06-09 09:49:29
  * @param {type} 
  * @return: boolean
