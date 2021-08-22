@@ -1,10 +1,10 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2021-08-21 23:43:22
+ * @LastEditTime: 2021-08-22 12:35:46
  * @LastEditors: wuxh
  * @Description:
- * @FilePath: /jcommon/pack/base.md
+ * @FilePath: /jcommon/jcommon/pack/base.md
  -->
 
 # jcommon
@@ -17,9 +17,8 @@ JavaScript 常用纯函数工具库 （当前版本已在项目中使用，后�
 
 ## 安装
 
-### NPM
+### 使用
 
-在 jcommon 应用于大型项目时推荐使用 NPM 安装。NPM 能很好地和 webpack 模块打包器配合使用。`完全的按需引用`。
 
 ```bash
 # 安装
@@ -27,7 +26,7 @@ $ npm install jcommon
 ```
 
 ```bash
-# 使用
+# 引入
 
 import { isObject, isArray } from 'jcommon'
 
@@ -51,8 +50,8 @@ or
 - [x] 不同于传统 js 工具库导出一整个大模块（moment, utils, ...）
 - [x] 支持 npm 安装方式
 - [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
-- [x] 对 TS 支持友好
-- [ ] dom 相关
+- [x] TypeScript支持
+- [ ] dom 
 
 ## API 目录
 
@@ -62,16 +61,16 @@ or
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ### 
 
@@ -102,12 +101,6 @@ or
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
-###  对象相关（Object处理）
-
-- [cloneObj](#cloneObj)  获取多级数据避免出错（超级好用）
-- [mergeObj](#mergeObj)  对象克隆（只包含可遍历属性<常用>）
-- [isEmptyObject](#isEmptyObject)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
@@ -116,12 +109,11 @@ or
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数 + 时间戳
 
-###  url处理相关
+###  对象相关（Object处理）
 
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+- [cloneObj](#cloneObj)  获取多级数据避免出错（超级好用）
+- [mergeObj](#mergeObj)  对象克隆（只包含可遍历属性<常用>）
+- [isEmptyObject](#isEmptyObject)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 
 ###  校验相关
 
@@ -141,79 +133,14 @@ or
 - [isPhone](#isPhone)  手机号校验
 - [isEmail](#isEmail)  校验是否为邮箱地址
 
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+
 ## API 说明
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
-### removeStorage
-               
-   删除
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
-```
 
 ### doubleRanking
                
@@ -278,6 +205,78 @@ or
   const arr = arr = [{name: 111, value: 222},{name: 333, value:444}]
   arrByObj(arr, 'name')   =>    {"111":{"name":111,"value":222},"333":{"name":333,"value":444}}
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
+```
+
+### removeStorage
+               
+   删除
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
+ * @example: 
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### getCookie
@@ -479,50 +478,6 @@ or
   isAppleMobileDevice() => true
 ```
 
-### cloneObj
-               
-   获取多级数据避免出错（超级好用）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### mergeObj
-               
-   对象克隆（只包含可遍历属性<常用>）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### isEmptyObject
-               
-   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
 ### trim
                
    去除字符串空格, 默认去除前后空格 （常用）
@@ -588,6 +543,50 @@ or
  * @return: string
  * @example: 
   uniqueId() => '1591667193048544'
+```
+
+### cloneObj
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {defaultResult, ...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### mergeObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### isEmptyObject
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
 ```
 
 ### getUrlQuery
