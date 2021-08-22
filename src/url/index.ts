@@ -1,15 +1,15 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2021-08-22 13:23:07
+ * @LastEditTime: 2021-08-22 14:02:46
  * @LastEditors: wuxh
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
-import { cloneObj } from "../object/index"
-import { trim } from "../string/index"
+import { cloneObj } from '../object/index'
+import { trim } from '../string/index'
 
 
 /**
