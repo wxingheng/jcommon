@@ -7,3 +7,6 @@ test003
 /node_modules
 /yarn.lock
 .vscode/
+/dist
+/lib
+/es
