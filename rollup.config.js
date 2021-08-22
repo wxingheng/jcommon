@@ -1,10 +1,10 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-19 21:43:33
- * @LastEditTime: 2021-08-22 12:34:23
+ * @LastEditTime: 2021-08-22 13:24:12
  * @LastEditors: wuxh
  * @Description:
- * @FilePath: /jcommon/jcommon/rollup.config.js
+ * @FilePath: /jcommon/rollup.config.js
  */
 import path from 'path'
 import { terser } from 'rollup-plugin-terser'

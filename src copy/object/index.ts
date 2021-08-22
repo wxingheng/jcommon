@@ -1,14 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2021-08-22 13:18:35
+ * @LastEditTime: 2021-08-21 23:25:36
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
  * @https://github.com/wxingheng/jcommon
  */
-
-import { isNull, isObject, isUndefined } from '../validate/index'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
