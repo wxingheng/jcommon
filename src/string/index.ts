@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2021-08-21 22:25:47
+ * @LastEditTime: 2021-08-24 13:46:10
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -110,4 +110,19 @@ export const uniqueId = function () {
     b((10 * a()).toString()) +
     b((10 * a()).toString())
   )
+}
+
+
+/**
+ * @description: 版本号累加
+ * @author: wuxh
+ * @Date: 2021-08-24 11:19:07
+ * @param {*} version : string
+ * @return {*} string
+ * @example: versionCount('0.0.1') => '0.0.2'
+ * versionCount('0.2.9') => '0.3.0'
+ * versionCount('0.2.9.1') => '0.2.9.2'
+ */
+export const versionCount = function(version: string): string {
+  return String(parseInt(version.replace(/\./g, ''))+1).padStart(version.split('.').length, '0').split('').join('.');
 }

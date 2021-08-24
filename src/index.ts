@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-08-22 13:22:48
+ * @LastEditTime: 2021-08-24 13:50:37
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -47,7 +47,8 @@ export {
   getSexByIdNO,
   getBirthdatByIdNo,
   hideIdNum,
-  uniqueId
+  uniqueId,
+  versionCount
 } from './string/index'
 
 export { getUrlQuery, everyTrim, formatQueryParam, urlByObj } from './url/index'
