@@ -89,6 +89,9 @@ or
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
+### 
+
+
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
@@ -108,13 +111,6 @@ or
 - [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 - [isEmptyObject](#isEmptyObject)  判断对象是否为空
 
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
-
 ### 
 
 
@@ -126,6 +122,13 @@ or
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数 + 时间戳
 - [versionCount](#versionCount)  版本号累加
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ###  校验相关
 
@@ -212,6 +215,33 @@ or
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### getCookie
+               
+   获取cookie值
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+```
+
 ### removeStorage
                
    删除
@@ -268,33 +298,6 @@ or
  * @example: 
   isSupportStorage()
   => true
-```
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
-### getCookie
-               
-   获取cookie值
-  
-  ```javascript
-  wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
 ```
 
 ### dateInterval
@@ -416,62 +419,6 @@ or
   => 3
 ```
 
-### getV
-               
-   获取多级数据避免出错（超级好用）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### cloneObj
-               
-   对象克隆（只包含可遍历属性<常用>）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### mergeObj
-               
-   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
-### isEmptyObject
-               
-   判断对象是否为空
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 23:08:42
- * @param {string} obj
- * @return {*} boolean
- * @example: isEmptyObject({}) => true
-```
-
 ### isQQ
                
    是否是QQ平台
@@ -537,6 +484,62 @@ or
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
+```
+
+### getV
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {defaultResult, ...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### cloneObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### mergeObj
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+```
+
+### isEmptyObject
+               
+   判断对象是否为空
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 23:08:42
+ * @param {string} obj
+ * @return {*} boolean
+ * @example: isEmptyObject({}) => true
 ```
 
 ### trim

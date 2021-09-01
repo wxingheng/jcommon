@@ -1,64 +1,42 @@
 {
-    "name": "jcommon",
-    "version": "1.4.5",
-    "description": "JavaScript 常用纯函数工具库",
-    "main": "lib/index.js",
-    "module": "es/index.js",
-    "unpkg": "dist/jcommon.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "webpack": "webpack --config webpack.config.js",
-        "rollup": "rollup -c",
-        "merge": "node ./pack/merge.js",
-        "build": "node ./pack/build.js",
-        "merge:dist": "npm run merge && npm run rollup",
-        "build:dist": "npm run build && npm run rollup",
-        "prepublish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,prepublish,postpublish,pub\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
-        "postpublish": "node .scripts/restore-pkg",
-        "pub": "npm run build:dist && jcommon-node -va && npm run prepublish && npm publish"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/wxingheng/jcommon.git"
-    },
-    "keywords": [
-        "jcommon",
-        "util",
-        "utils",
-        "tool",
-        "tools",
-        "common-util"
-    ],
-    "author": {
-        "name": "wxingheng",
-        "email": "wxingheng@outlook.com"
-    },
-    "license": "MIT",
-    "files": [
-        "dist",
-        "es",
-        "lib"
-    ],
-    "bugs": {
-        "url": "https://github.com/wxingheng/jcommon/issues"
-    },
-    "homepage": "https://github.com/wxingheng/jcommon",
-    "devDependencies": {
-        "@babel/core": "^7.9.0",
-        "@rollup/plugin-commonjs": "^11.0.1",
-        "@rollup/plugin-node-resolve": "^7.0.0",
-        "babel-core": "^6.26.3",
-        "babel-loader": "^8.1.0",
-        "babel-plugin-add-module-exports": "^1.0.2",
-        "copy": "^0.3.2",
-        "jcommon-node": "^0.0.6",
-        "rollup": "^1.30.1",
-        "rollup-plugin-terser": "^5.2.0",
-        "rollup-plugin-typescript2": "^0.25.3",
-        "typescript": "^3.7.5",
-        "webpack": "^4.43.0",
-        "webpack-cli": "^3.3.11"
-    },
-    "time": "210901224222",
-    "dependencies": {}
+  "name": "jcommon",
+  "version": "1.4.7",
+  "description": "JavaScript 常用纯函数工具库",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "unpkg": "dist/jcommon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wxingheng/jcommon.git"
+  },
+  "keywords": [
+    "jcommon",
+    "util",
+    "utils",
+    "tool",
+    "tools",
+    "common-util"
+  ],
+  "author": {
+    "name": "wxingheng",
+    "email": "wxingheng@outlook.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "es",
+    "lib"
+  ],
+  "bugs": {
+    "url": "https://github.com/wxingheng/jcommon/issues"
+  },
+  "homepage": "https://github.com/wxingheng/jcommon",
+  "devDependencies": {
+    "jcommon-node": "^0.0.6"
+  },
+  "time": "210901231946",
+  "dependencies": {}
 }
