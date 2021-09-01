@@ -91,6 +91,10 @@ or
 
 ### 
 
+- [download](#download)  下载一个文档
+
+### 
+
 
 ###  数处理相
 
@@ -215,33 +219,6 @@ or
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
-### getCookie
-               
-   获取cookie值
-  
-  ```javascript
-  wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
-```
-
 ### removeStorage
                
    删除
@@ -298,6 +275,47 @@ or
  * @example: 
   isSupportStorage()
   => true
+```
+
+### getCookie
+               
+   获取cookie值
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
 ```
 
 ### dateInterval
@@ -390,18 +408,17 @@ or
  * @example:
 ```
 
-### osInfo
+### download
                
-   获取用户系统平台信息
+   下载一个文档
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
+ * @Date: 2021-09-01 23:27:00
+ * @param {string} link
+ * @param {string} name
+ * @return {*}
+ * @example: download('http://111.229.14.189/file/1.xlsx')
 ```
 
 ### scopeRandom
