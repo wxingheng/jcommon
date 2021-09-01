@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-19 21:43:33
- * @LastEditTime: 2021-08-22 13:24:12
+ * @LastEditTime: 2021-09-01 21:29:12
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/rollup.config.js
@@ -12,27 +12,38 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
+// import { babel } from '@rollup/plugin-babel'
+
 /** @type {import('rollup').RollupOptions} */
 const options = {
   input: 'src/index.ts',
   output: [
     {
       file: path.resolve(__dirname, pkg.main),
-      format: 'cjs',
-      plugins: [terser()]
+      format: 'cjs' // /lib
+      // plugins: [terser()]
     },
     {
       file: path.resolve(__dirname, pkg.module),
-      format: 'es',
-      plugins: [terser()]
+      format: 'es', // es
+      // plugins: [terser()]
     },
     {
       file: path.resolve(__dirname, pkg.unpkg),
-      format: 'umd',
+      format: 'umd', // dist
       name: 'jcommon',
-      plugins: [terser()]
+      plugins: [
+        // terser(),
+        // babel({ babelHelpers: 'bundled' })
+      ]
     }
   ],
-  plugins: [resolve(), commonjs(), typescript()]
+  plugins: [
+    resolve(),
+    commonjs(),
+    typescript(),
+    // terser(),
+    // babel({ babelHelpers: 'bundled' })
+  ]
 }
 export default options

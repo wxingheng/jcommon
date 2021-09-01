@@ -1,17 +1,28 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-31 23:08:54
- * @LastEditTime: 2021-08-31 23:15:27
+ * @LastEditTime: 2021-09-01 21:35:02
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/queue/index.ts
  */
 
-export const Queue = function (items) {
-  this.items = items || []
+import { isArray } from '../validate/index'
+
+/**
+ * @description: Queue 队列 class
+ * @author: wuxh
+ * @Date: 2021-08-24 11:19:07
+ * @example: const queue = new Queue()
+ */
+export class Queue {
+  private items: Array<never> = []
+  constructor (items: Array<never>) {
+    this.items = items || []
+  }
   // 向队列添加元素（一个或多个）
-  this.enqueue = function (element) {
-    if (element instanceof Array) {
+  enqueue (element: never) {
+    if (isArray(element)) {
       this.items = this.items.concat(element)
     } else {
       this.items.push(element)
@@ -19,32 +30,32 @@ export const Queue = function (items) {
   }
 
   // 从队列移除元素
-  this.dequeue = function () {
+  dequeue (): void {
     return this.items.shift()
   }
 
   // 返回队列中的第一个元素
-  this.front = function () {
+  front () {
     return this.items[0]
   }
 
   // 判断队列是否为空
-  this.isEmpty = function () {
+  isEmpty () {
     return this.items.length === 0
   }
 
   // 返回队列的长度
-  this.size = function () {
+  size () {
     return this.items.length
   }
 
   // 清空队列
-  this.clear = function () {
+  clear () {
     this.items = []
   }
 
   // 打印队列内的所有元素
-  this.print = function () {
+  print () {
     console.log(this.items.toString())
   }
 }

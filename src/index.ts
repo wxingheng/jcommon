@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-08-24 13:50:37
+ * @LastEditTime: 2021-09-01 21:05:34
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -70,3 +70,5 @@ export {
   isPhone,
   isEmail
 } from './validate/index'
+
+export { Queue } from './queue/index'

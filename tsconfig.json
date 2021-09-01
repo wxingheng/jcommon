@@ -1,6 +1,6 @@
 {
   "include": [ //包含
-    "src/index.ts"
+    "src"
   ],
   "compilerOptions": {
     /* Basic Options */
