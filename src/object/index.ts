@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2021-08-22 13:18:35
+ * @LastEditTime: 2021-09-01 22:23:54
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -20,7 +20,7 @@ import { isNull, isObject, isUndefined } from '../validate/index'
   getV('', {name: {children: 123}}, 'name', 'children')
   => 123
  */
-export function getV<T> (defaultResult: T, ...args: any): any {
+export const getV = function<T> (defaultResult: T, ...args: any): any {
   return args.length >= 2
     ? args.reduce((a: any, b: any) =>
         a && a.hasOwnProperty(b) ? a[b] : defaultResult

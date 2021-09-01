@@ -65,16 +65,16 @@ or
 
 - [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -101,6 +101,23 @@ or
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
+###  对象相关（Object处理）
+
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [cloneObj](#cloneObj)  对象克隆（只包含可遍历属性<常用>）
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+- [isEmptyObject](#isEmptyObject)  判断对象是否为空
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+
+### 
+
+
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
@@ -109,19 +126,6 @@ or
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数 + 时间戳
 - [versionCount](#versionCount)  版本号累加
-
-###  对象相关（Object处理）
-
-- [cloneObj](#cloneObj)  获取多级数据避免出错（超级好用）
-- [mergeObj](#mergeObj)  对象克隆（只包含可遍历属性<常用>）
-- [isEmptyObject](#isEmptyObject)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ###  校验相关
 
@@ -208,20 +212,6 @@ or
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
 ### removeStorage
                
    删除
@@ -278,6 +268,20 @@ or
  * @example: 
   isSupportStorage()
   => true
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### getCookie
@@ -410,6 +414,62 @@ or
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### getV
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {defaultResult, ...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### cloneObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### mergeObj
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+```
+
+### isEmptyObject
+               
+   判断对象是否为空
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 23:08:42
+ * @param {string} obj
+ * @return {*} boolean
+ * @example: isEmptyObject({}) => true
 ```
 
 ### isQQ
@@ -558,50 +618,6 @@ or
  * @example: versionCount('0.0.1') => '0.0.2'
  * versionCount('0.2.9') => '0.3.0'
  * versionCount('0.2.9.1') => '0.2.9.2'
-```
-
-### cloneObj
-               
-   获取多级数据避免出错（超级好用）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### mergeObj
-               
-   对象克隆（只包含可遍历属性<常用>）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### isEmptyObject
-               
-   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
 ```
 
 ### getUrlQuery

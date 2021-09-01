@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 21:30:23
- * @LastEditTime: 2021-08-21 22:42:46
+ * @LastEditTime: 2021-09-01 22:25:05
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/auto-md.js
@@ -18,6 +18,7 @@ const outputFile = path.join(path.resolve(__dirname, '../'), `README.md`)
 
 const reg = new RegExp('(?<=@Description:)(.|\n)*?(?=(\n.\\*.@FilePath))')
 const regName = new RegExp('(?<=export.const.)(.|\n)*?(?=(.=.function))', 'g')
+// const regName = new RegExp('((?<=export.const.)(.|\n)*?(?=(.=.function))|((?<=export.class.)(.|\n)*?(?(.\{))))', 'g')
 const regDes = new RegExp('(?<=@description:)(.|\n)*?(?=(\n.\\*.@author))', 'g')
 // const regExample = new RegExp('(?<=@author:)(.|\n)*?(?=(\\*/))', 'g')
 const regExample = new RegExp('(?<=@author:)(.|\n)*?(?=(\\*/))', 'g')
@@ -49,9 +50,12 @@ fs.readdir(remotePath, function (err, files) {
           const names = content.match(regName)
           const des = content.match(regDes)
           fs.appendFileSync(outputFile, catalogue)
-          names.forEach((v, i) => {
-            fs.appendFileSync(outputFile, `- [${v}](#${v}) ${des[i]}` + '\n')
-          })
+          console.log(names)
+          if (names) {
+            names.forEach((v, i) => {
+              fs.appendFileSync(outputFile, `- [${v}](#${v}) ${des[i]}` + '\n')
+            })
+          }
         } else if (stats.isDirectory()) {
           return false
         }
@@ -72,7 +76,7 @@ fs.readdir(remotePath, function (err, files) {
             const names = content.match(regName)
             const des = content.match(regDes)
             const examples = content.match(regExample)
-            names.forEach((v, i) => {
+            names && names.forEach((v, i) => {
               fs.appendFileSync(
                 outputFile,
                 '\n' +

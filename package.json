@@ -1,6 +1,6 @@
 {
     "name": "jcommon",
-    "version": "1.4.1",
+    "version": "1.4.5",
     "description": "JavaScript 常用纯函数工具库",
     "main": "lib/index.js",
     "module": "es/index.js",
@@ -15,7 +15,7 @@
         "build:dist": "npm run build && npm run rollup",
         "prepublish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,prepublish,postpublish,pub\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
         "postpublish": "node .scripts/restore-pkg",
-        "pub": "npm run build:dist && jcommon-node -va && npm publish"
+        "pub": "npm run build:dist && jcommon-node -va && npm run prepublish && npm publish"
     },
     "repository": {
         "type": "git",
@@ -45,13 +45,11 @@
     "homepage": "https://github.com/wxingheng/jcommon",
     "devDependencies": {
         "@babel/core": "^7.9.0",
-        "@rollup/plugin-babel": "^5.3.0",
         "@rollup/plugin-commonjs": "^11.0.1",
         "@rollup/plugin-node-resolve": "^7.0.0",
         "babel-core": "^6.26.3",
         "babel-loader": "^8.1.0",
         "babel-plugin-add-module-exports": "^1.0.2",
-        "babel-preset-env": "^1.7.0",
         "copy": "^0.3.2",
         "jcommon-node": "^0.0.6",
         "rollup": "^1.30.1",
@@ -61,5 +59,6 @@
         "webpack": "^4.43.0",
         "webpack-cli": "^3.3.11"
     },
-    "time": "210824140055"
+    "time": "210901224222",
+    "dependencies": {}
 }
