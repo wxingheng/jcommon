@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-29 10:01:50
- * @LastEditTime: 2021-08-22 13:31:03
+ * @LastEditTime: 2021-09-02 21:42:40
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/example/base/src/index.js
@@ -17,6 +17,12 @@
 // console.log('isObject', isObject({}))
 // console.log('isObject', isObject([]))
 
-import { isArray } from 'jcommon'
+import { isArray, debounce } from 'jcommon'
 
 console.log('isArray==>', isArray([]))
+
+function onInput (e) {
+  console.log('11', e, e.target.value)
+}
+const debounceOnInput = debounce(onInput)
+document.getElementById('input').addEventListener('input', debounceOnInput) //在Input中输入，多次调用只会在调用结束之后，等待500ms触发一次

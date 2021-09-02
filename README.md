@@ -61,16 +61,16 @@ or
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ### 
 
@@ -85,13 +85,18 @@ or
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
 
+### 
+
+- [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
+
 ###  用户设备相关（客户端系统）
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
-### 
+###  浏览器 DOM 相关
 
-- [download](#download)  下载一个文档
+- [download](#download)  下载一个链接文档
+- [downloadFile](#downloadFile)  在浏览器中自定义下载一些内容
 
 ### 
 
@@ -277,19 +282,6 @@ or
   => true
 ```
 
-### getCookie
-               
-   获取cookie值
-  
-  ```javascript
-  wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
-```
-
 ### getBrowserInfo
                
    获取浏览器相关信息
@@ -304,18 +296,17 @@ or
   => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
-### osInfo
+### getCookie
                
-   获取用户系统平台信息
+   获取cookie值
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
  * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
+  getCookie('name') => 123
 ```
 
 ### dateInterval
@@ -408,9 +399,22 @@ or
  * @example:
 ```
 
+### debounce
+               
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*}
+ * @return {*}
+ * @example: 
+ *
+```
+
 ### download
                
-   下载一个文档
+   下载一个链接文档
   
   ```javascript
   wuxh
@@ -418,7 +422,40 @@ or
  * @param {string} link
  * @param {string} name
  * @return {*}
- * @example: download('http://111.229.14.189/file/1.xlsx')
+ * @example: 
+ * download('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202008%2F04%2F20200804215427_fc3ff.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633102668&t=5f2cf4e9273be91527efb91ecd5cb6dd')
+ * 下载后端返回的流
+ *
+```
+
+### downloadFile
+               
+   在浏览器中自定义下载一些内容
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-01 23:32:30
+ * @param {string} name
+ * @param {BlobPart} content
+ * @return {*}
+ * @example: 场景：我想下载一些DOM内容，我想下载一个JSON文件
+ * 
+ * downloadFile('1.txt','lalalallalalla')
+   downloadFile('1.json',JSON.stringify({name:'hahahha'}))
+```
+
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
 ```
 
 ### scopeRandom
@@ -434,6 +471,62 @@ or
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### getV
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {defaultResult, ...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### cloneObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### mergeObj
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+```
+
+### isEmptyObject
+               
+   判断对象是否为空
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 23:08:42
+ * @param {string} obj
+ * @return {*} boolean
+ * @example: isEmptyObject({}) => true
 ```
 
 ### isQQ
@@ -501,62 +594,6 @@ or
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
-```
-
-### getV
-               
-   获取多级数据避免出错（超级好用）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### cloneObj
-               
-   对象克隆（只包含可遍历属性<常用>）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### mergeObj
-               
-   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
-### isEmptyObject
-               
-   判断对象是否为空
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 23:08:42
- * @param {string} obj
- * @return {*} boolean
- * @example: isEmptyObject({}) => true
 ```
 
 ### trim
