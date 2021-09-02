@@ -68,13 +68,13 @@ or
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ### 
 
 - [getCookie](#getCookie)  获取cookie值
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ###  时间相关
 
@@ -101,25 +101,6 @@ or
 ### 
 
 
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
-###  对象相关（Object处理）
-
-- [getV](#getV)  获取多级数据避免出错（超级好用）
-- [cloneObj](#cloneObj)  对象克隆（只包含可遍历属性<常用>）
-- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-- [isEmptyObject](#isEmptyObject)  判断对象是否为空
-
 ### 
 
 
@@ -131,6 +112,29 @@ or
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数 + 时间戳
 - [versionCount](#versionCount)  版本号累加
+
+###  对象相关（Object处理）
+
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [cloneObj](#cloneObj)  对象克隆（只包含可遍历属性<常用>）
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+- [isEmptyObject](#isEmptyObject)  判断对象是否为空
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
+
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+
+###  
+
+- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
 
 ###  url处理相关
 
@@ -158,6 +162,20 @@ or
 - [isEmail](#isEmail)  校验是否为邮箱地址
 
 ## API 说明
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
 
 ### doubleRanking
                
@@ -282,20 +300,6 @@ or
   => true
 ```
 
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
 ### getCookie
                
    获取cookie值
@@ -406,9 +410,18 @@ or
   ```javascript
   wuxh
  * @Date: 2021-09-02 21:30:44
- * @param {*}
- * @return {*}
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
  * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
  *
 ```
 
@@ -471,62 +484,6 @@ or
  * @example: 
   scopeRandom(1, 10)
   => 3
-```
-
-### getV
-               
-   获取多级数据避免出错（超级好用）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
- * @example: 
-  getV('', {name: {children: 123}}, 'name', 'children')
-  => 123
-```
-
-### cloneObj
-               
-   对象克隆（只包含可遍历属性<常用>）
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:14:45
- * @param {obj}
- * @return: Object
- * @example: 
-  clone({name: 123})
-  => {name: 123}
-```
-
-### mergeObj
-               
-   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:15:30
- * @param {oldObj}
- * @param {newObj}
- * @param {keys} 强制覆盖属性的key组成的数组
- * @return: Object
- * @example:  
-  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
-  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
-```
-
-### isEmptyObject
-               
-   判断对象是否为空
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 23:08:42
- * @param {string} obj
- * @return {*} boolean
- * @example: isEmptyObject({}) => true
 ```
 
 ### isQQ
@@ -594,6 +551,62 @@ or
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
+```
+
+### getV
+               
+   获取多级数据避免出错（超级好用）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:13:59
+ * @param {defaultResult, ...any} args
+ * @return: any
+ * @example: 
+  getV('', {name: {children: 123}}, 'name', 'children')
+  => 123
+```
+
+### cloneObj
+               
+   对象克隆（只包含可遍历属性<常用>）
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:14:45
+ * @param {obj}
+ * @return: Object
+ * @example: 
+  clone({name: 123})
+  => {name: 123}
+```
+
+### mergeObj
+               
+   深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:15:30
+ * @param {oldObj}
+ * @param {newObj}
+ * @param {keys} 强制覆盖属性的key组成的数组
+ * @return: Object
+ * @example:  
+  mergeObj({name: 111}, {name:333, value: 222}, []) => {name: 111, value: 222}
+  mergeObj({name: 111}, {name:333, value: 222}, ['name']) => {name: 333, value: 222}
+```
+
+### isEmptyObject
+               
+   判断对象是否为空
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 23:08:42
+ * @param {string} obj
+ * @return {*} boolean
+ * @example: isEmptyObject({}) => true
 ```
 
 ### trim
@@ -729,6 +742,27 @@ or
  * @example: 
   urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
+```
+
+### throttle
+               
+   节流 多次调用方法，按照一定的时间间隔执行
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:46:38
+ * @param {*} func
+ * @param {*} wait
+ * @param {*} options: { leading: boolean; trailing: boolean }
+ * @return {*} Function
+ * @example: 
+ *
+leading，函数在每个等待时延的开始被调用，默认值为false
+trailing，函数在每个等待时延的结束被调用，默认值是true
+可以根据不同的值来设置不同的效果：
+leading-false，trailing-true：默认情况，即在延时结束后才会调用函数
+leading-true，trailing-true：在延时开始时就调用，延时结束后也会调用
+leading-true, trailing-false：只在延时开始时调用
 ```
 
 ### isUserId
