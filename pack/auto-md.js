@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 21:30:23
- * @LastEditTime: 2021-09-01 22:25:05
+ * @LastEditTime: 2021-09-02 23:11:21
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/pack/auto-md.js
@@ -50,7 +50,6 @@ fs.readdir(remotePath, function (err, files) {
           const names = content.match(regName)
           const des = content.match(regDes)
           fs.appendFileSync(outputFile, catalogue)
-          console.log(names)
           if (names) {
             names.forEach((v, i) => {
               fs.appendFileSync(outputFile, `- [${v}](#${v}) ${des[i]}` + '\n')

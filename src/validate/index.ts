@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2021-08-21 21:42:54
+ * @LastEditTime: 2021-09-02 22:05:19
  * @LastEditors: wuxh
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.ts
@@ -326,3 +326,35 @@ export const isPhone = function (phone: string): boolean {
 export const isEmail = function (str: string): boolean {
   return /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(str)
 }
+
+/**
+ * @description: 判断 js是否是false， 0除外。
+ * @author: wuxh
+ * @Date: 2021-09-02 22:01:50
+ * @param {any} value
+ * @return {*} value === 0 ? false : !value
+ * @example: 
+ isFalsy('') => true
+ isFalsy(0) => false
+ isFalsy(null) => true
+ isFalsy(undefined) => true
+ */
+export const isFalsy = function (value: any): boolean {
+  return value === 0 ? false : !value
+}
+
+/**
+ * @description: 判断是否为空 undefined || null || ""
+ * @author: wuxh
+ * @Date: 2021-09-02 22:03:36
+ * @param {any} value
+ * @return {*} boolean
+ * @example: 
+ isVoid(0) => false
+ isVoid(undefined) => true
+ isVoid('') => true
+ isVoid(null) => true
+ isVoid() => true
+ */
+export const isVoid = (value: any) =>
+  value === undefined || value === null || value === ''

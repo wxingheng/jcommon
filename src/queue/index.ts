@@ -1,9 +1,9 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-31 23:08:54
- * @LastEditTime: 2021-09-01 21:35:02
+ * @LastEditTime: 2021-09-02 23:04:22
  * @LastEditors: wuxh
- * @Description:
+ * @Description: Queue 队列
  * @FilePath: /jcommon/src/queue/index.ts
  */
 

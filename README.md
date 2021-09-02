@@ -60,6 +60,18 @@ or
 - [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
+- [uniqueArray](#uniqueArray) undefined
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
+###  血袋相关工具函数
+
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  数据持久化，缓存
 
@@ -67,14 +79,6 @@ or
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ###  时间相关
 
@@ -85,7 +89,7 @@ or
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
 
-### 
+###  防抖
 
 - [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
 
@@ -97,11 +101,33 @@ or
 
 - [download](#download)  下载一个链接文档
 - [downloadFile](#downloadFile)  在浏览器中自定义下载一些内容
+- [copyToBoar](#copyToBoar)  复制内容到剪贴板
 
 ### 
 
 
 ### 
+
+- [getFormData](#getFormData)  对象转化为FormData对象
+
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+- [cutNumber](#cutNumber)  保留到小数点以后n位
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
+
+###  休眠
+
+- [sleep](#sleep)  休眠多少毫秒
+
+###  Queue 队列
 
 
 ###  字符串处理相关
@@ -112,36 +138,8 @@ or
 - [hideIdNum](#hideIdNum)  隐藏身份证号码
 - [uniqueId](#uniqueId)  随机数 + 时间戳
 - [versionCount](#versionCount)  版本号累加
-
-###  对象相关（Object处理）
-
-- [getV](#getV)  获取多级数据避免出错（超级好用）
-- [cloneObj](#cloneObj)  对象克隆（只包含可遍历属性<常用>）
-- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-- [isEmptyObject](#isEmptyObject)  判断对象是否为空
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-
-###  
-
-- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
-
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+- [getExt](#getExt)  获取文件后缀名
+- [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 
 ###  校验相关
 
@@ -160,21 +158,86 @@ or
 - [isObject](#isObject)  判断Object类型
 - [isPhone](#isPhone)  手机号校验
 - [isEmail](#isEmail)  校验是否为邮箱地址
+- [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+
+###  节流
+
+- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
+
+###  对象相关（Object处理）
+
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [cloneObj](#cloneObj)  深拷贝，克隆（只包含可遍历属性<常用>）
+- [cloneJson](#cloneJson)  简单的深拷贝
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+- [isEmptyObject](#isEmptyObject)  判断对象是否为空
+- [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 
 ## API 说明
 
-### getBrowserInfo
+### removeStorage
                
-   获取浏览器相关信息
+   删除
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
  * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
 ```
 
 ### doubleRanking
@@ -242,62 +305,17 @@ or
   arrByObj(arr, 'name', value)   =>    {"111":222,"333":444}
 ```
 
-### removeStorage
+### uniqueArray
                
-   删除
+  undefined
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
+  * @Date: 2021-09-02 22:41:08
+  * @param {string} arr
+  * @return {*}
+  * @example: 
+  uniqueArray([1,1,1,1,1]) => [1]
 ```
 
 ### getCookie
@@ -311,6 +329,20 @@ or
  * @return: string
  * @example: 
   getCookie('name') => 123
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### dateInterval
@@ -425,6 +457,20 @@ or
  *
 ```
 
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
 ### download
                
    下载一个链接文档
@@ -435,7 +481,7 @@ or
  * @param {string} link
  * @param {string} name
  * @return {*}
- * @example: 
+ * @example:
  * download('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202008%2F04%2F20200804215427_fc3ff.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1633102668&t=5f2cf4e9273be91527efb91ecd5cb6dd')
  * 下载后端返回的流
  *
@@ -457,18 +503,36 @@ or
    downloadFile('1.json',JSON.stringify({name:'hahahha'}))
 ```
 
-### osInfo
+### copyToBoar
                
-   获取用户系统平台信息
+   复制内容到剪贴板
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
+ * @Date: 2021-09-02 22:22:03
+ * @param {string} value
+ * @return {*} boolean
  * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
+ copyToBoard('lalallala') => true // 如果复制成功返回true
+```
+
+### getFormData
+               
+   对象转化为FormData对象
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:52:34
+ * @param {object} object
+ * @return {FormData}
+ * @example: 
+ let req={
+    file:xxx,
+    userId:1,
+    phone:'15198763636',
+    //...
+}
+fetch(getFormData(req))
 ```
 
 ### scopeRandom
@@ -484,6 +548,20 @@ or
  * @example: 
   scopeRandom(1, 10)
   => 3
+```
+
+### cutNumber
+               
+   保留到小数点以后n位
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:54:36
+ * @param {number} number
+ * @param {*} no
+ * @return {*} Number
+ * @example: 
+ cutNumber('3123.22312') => 3123.22
 ```
 
 ### isQQ
@@ -569,7 +647,7 @@ or
 
 ### cloneObj
                
-   对象克隆（只包含可遍历属性<常用>）
+   深拷贝，克隆（只包含可遍历属性<常用>）
   
   ```javascript
   wuxh
@@ -579,6 +657,20 @@ or
  * @example: 
   clone({name: 123})
   => {name: 123}
+```
+
+### cloneJson
+               
+   简单的深拷贝
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:33:47
+ * @param {any} obj
+ * @return {any} obj
+ * @example: 
+ const person={name:'xiaoming',child:{name:'Jack'}}
+ cloneJson(person) => {name:'xiaoming',child:{name:'Jack'}}
 ```
 
 ### mergeObj
@@ -607,6 +699,41 @@ or
  * @param {string} obj
  * @return {*} boolean
  * @example: isEmptyObject({}) => true
+```
+
+### cleanObject
+               
+   cleanObject 去除对象中value为空(null,undefined,'')的属性
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:07:34
+ * @param {*} { [k: string]: any }
+ * @return {*} { [k: string]: any }
+ * @example: 
+ cleanObject({
+  name: '',
+  pageSize: 10,
+  page: 1
+}) => {
+  pageSize: 10,
+  page: 1
+}
+```
+
+### sleep
+               
+   休眠多少毫秒
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 23:08:19
+ * @param {number} milliseconds
+ * @return {*}
+ * @example: 
+  fetchData = async () => {
+    await sleep(1000)
+  }
 ```
 
 ### trim
@@ -690,58 +817,31 @@ or
  * versionCount('0.2.9.1') => '0.2.9.2'
 ```
 
-### getUrlQuery
+### getExt
                
-   获取浏览器url中的一个参数
+   获取文件后缀名
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### everyTrim
-               
-   去除值类型为string的前后空格
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 22:11:23
- * @param {Array} data
+ * @Date: 2021-09-02 22:17:57
+ * @param {string} filename
  * @return {*}
- * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+ * @example: 
+ getExt("1.mp4") => mp4
 ```
 
-### formatQueryParam
+### uuid
                
-   格式化GET请求的请求头
+   生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
+ * @Date: 2021-09-02 22:29:02
+ * @param {number} length
+ * @param {string} chars
+ * @return {string}
  * @example: 
-  formatQueryParam({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-               
-   处理url参数(window.location.search)转换为 {key: value}
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
+ uuid() => 'ghijklmn'
 ```
 
 ### throttle
@@ -972,6 +1072,76 @@ leading-true, trailing-false：只在延时开始时调用
  * @return: boolean
  * @example: 
   isEmail('wxingheng@outlook.com') => true
+```
+
+### isFalsy
+               
+   判断 js是否是false， 0除外。
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:01:50
+ * @param {any} value
+ * @return {*} value === 0 ? false : !value
+ * @example: 
+ isFalsy('') => true
+ isFalsy(0) => false
+ isFalsy(null) => true
+ isFalsy(undefined) => true
+```
+
+### getUrlQuery
+               
+   获取浏览器url中的一个参数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### everyTrim
+               
+   去除值类型为string的前后空格
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+```
+
+### formatQueryParam
+               
+   格式化GET请求的请求头
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  formatQueryParam({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+               
+   处理url参数(window.location.search)转换为 {key: value}
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈

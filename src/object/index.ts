@@ -1,14 +1,14 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2021-09-01 22:23:54
+ * @LastEditTime: 2021-09-02 23:05:17
  * @LastEditors: wuxh
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
-import { isNull, isObject, isUndefined } from '../validate/index'
+import { isNull, isObject, isUndefined, isVoid } from '../validate/index'
 
 /**
  * @description: 获取多级数据避免出错（超级好用）
@@ -29,7 +29,7 @@ export const getV = function<T> (defaultResult: T, ...args: any): any {
 }
 
 /**
- * @description: 对象克隆（只包含可遍历属性<常用>）
+ * @description: 深拷贝，克隆（只包含可遍历属性<常用>）
  * @author: wuxh
  * @Date: 2020-05-06 12:14:45
  * @param {obj}
@@ -54,6 +54,27 @@ export const cloneObj = function (obj: any): any {
     }
   }
   return newobj
+}
+
+
+/**
+ * @description: 简单的深拷贝
+ * @author: wuxh
+ * @Date: 2021-09-02 22:33:47
+ * @param {any} obj
+ * @return {any} obj
+ * @example: 
+ const person={name:'xiaoming',child:{name:'Jack'}}
+ cloneJson(person) => {name:'xiaoming',child:{name:'Jack'}}
+ */
+export const cloneJson = function (obj: any): any {
+  if (typeof obj != 'object') {
+    return obj
+  }
+  if (obj == null) {
+    return obj
+  }
+  return JSON.parse(JSON.stringify(obj))
 }
 
 /**
@@ -112,4 +133,37 @@ export const isEmptyObject = function (obj: any): boolean {
     }
   }
   return true
+}
+
+/**
+ * @description: cleanObject 去除对象中value为空(null,undefined,'')的属性
+ * @author: wuxh
+ * @Date: 2021-09-02 22:07:34
+ * @param {*} { [k: string]: any }
+ * @return {*} { [k: string]: any }
+ * @example: 
+ cleanObject({
+  name: '',
+  pageSize: 10,
+  page: 1
+}) => {
+  pageSize: 10,
+  page: 1
+}
+ */
+export const cleanObject = function (object: {
+  [k: string]: any
+}): { [k: string]: any } {
+  // Object.assign({}, object)
+  if (!object) {
+    return {}
+  }
+  const result = { ...object }
+  Object.keys(result).forEach(key => {
+    const value = result[key]
+    if (isVoid(value)) {
+      delete result[key]
+    }
+  })
+  return result
 }

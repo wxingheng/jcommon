@@ -1,12 +1,12 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-09-02 21:52:26
+ * @LastEditTime: 2021-09-02 22:57:49
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/index.ts
  */
-export { doubleRanking, randomData, arrByObj } from './array/index'
+export { doubleRanking, randomData, arrByObj, uniqueArray } from './array/index'
 
 export { getBrowserInfo } from './browser/index'
 
@@ -30,7 +30,7 @@ export {
 
 export { osInfo } from './devices/index'
 
-export { scopeRandom } from './math/index'
+export { scopeRandom, cutNumber } from './math/index'
 
 export {
   isQQ,
@@ -40,7 +40,14 @@ export {
   isAppleMobileDevice
 } from './mobile/index'
 
-export { getV, cloneObj, mergeObj, isEmptyObject } from './object/index'
+export {
+  getV,
+  cloneObj,
+  mergeObj,
+  isEmptyObject,
+  cleanObject,
+  cloneJson
+} from './object/index'
 
 export {
   trim,
@@ -48,7 +55,9 @@ export {
   getBirthdatByIdNo,
   hideIdNum,
   uniqueId,
-  versionCount
+  versionCount,
+  getExt,
+  uuid
 } from './string/index'
 
 export { getUrlQuery, everyTrim, formatQueryParam, urlByObj } from './url/index'
@@ -68,11 +77,15 @@ export {
   isError,
   isObject,
   isPhone,
-  isEmail
+  isEmail,
+  isFalsy,
+  isVoid
 } from './validate/index'
 export { debounce } from './debounce/index'
 export { throttle } from './throttle/index'
-
+export { download, downloadFile, copyToBoar } from './dom/index'
+export { sleep } from './sleep/index'
+export { getFormData } from './form/index'
 
 export { Queue } from './queue/index'
 export { EventBus } from './eventBus/index'

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2021-08-21 23:13:04
+ * @LastEditTime: 2021-09-02 22:44:25
  * @LastEditors: wuxh
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -134,4 +134,24 @@ export const arrByObj = function (
     obj[d[key]] = v ? d[v] : d
   })
   return obj
+}
+
+
+ /**
+  * @description: 简单数组去重，Set 处理
+  * @author: wuxh
+  * @Date: 2021-09-02 22:41:08
+  * @param {string} arr
+  * @return {*}
+  * @example: 
+  uniqueArray([1,1,1,1,1]) => [1]
+  */
+ export const uniqueArray = function uniqueArray(arr: string | Iterable<any> | null | undefined) {
+  if (!Array.isArray(arr)) {
+      throw new Error('The first parameter must be an array')
+  }
+  if (arr.length == 1) {
+      return arr
+  }
+  return [...new Set(arr)]
 }
