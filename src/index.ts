@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-09-02 22:57:49
+ * @LastEditTime: 2021-09-07 14:15:20
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -86,6 +86,7 @@ export { throttle } from './throttle/index'
 export { download, downloadFile, copyToBoar } from './dom/index'
 export { sleep } from './sleep/index'
 export { getFormData } from './form/index'
+export { formatRhBloodGroup, sorterCallBack } from './blood/index'
 
 export { Queue } from './queue/index'
 export { EventBus } from './eventBus/index'

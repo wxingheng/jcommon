@@ -68,6 +68,8 @@ or
 
 ###  血袋相关工具函数
 
+- [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
+- [sorterCallBack](#sorterCallBack)  sort []
 
 ### 
 
@@ -97,6 +99,10 @@ or
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
+### 
+
+- [getFormData](#getFormData)  对象转化为FormData对象
+
 ###  浏览器 DOM 相关
 
 - [download](#download)  下载一个链接文档
@@ -106,15 +112,6 @@ or
 ### 
 
 
-### 
-
-- [getFormData](#getFormData)  对象转化为FormData对象
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-- [cutNumber](#cutNumber)  保留到小数点以后n位
-
 ###  移动端相关
 
 - [isQQ](#isQQ)  是否是QQ平台
@@ -123,23 +120,33 @@ or
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
-###  休眠
+###  数处理相
 
-- [sleep](#sleep)  休眠多少毫秒
+- [scopeRandom](#scopeRandom)  范围随机整数
+- [cutNumber](#cutNumber)  保留到小数点以后n位
+
+###  对象相关（Object处理）
+
+- [getV](#getV)  获取多级数据避免出错（超级好用）
+- [cloneObj](#cloneObj)  深拷贝，克隆（只包含可遍历属性<常用>）
+- [cloneJson](#cloneJson)  简单的深拷贝
+- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
+- [isEmptyObject](#isEmptyObject)  判断对象是否为空
+- [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 
 ###  Queue 队列
 
 
-###  字符串处理相关
+###  节流
 
-- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
-- [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
-- [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
-- [hideIdNum](#hideIdNum)  隐藏身份证号码
-- [uniqueId](#uniqueId)  随机数 + 时间戳
-- [versionCount](#versionCount)  版本号累加
-- [getExt](#getExt)  获取文件后缀名
-- [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
+- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ###  校验相关
 
@@ -160,85 +167,22 @@ or
 - [isEmail](#isEmail)  校验是否为邮箱地址
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
 
-###  url处理相关
+###  休眠
 
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+- [sleep](#sleep)  休眠多少毫秒
 
-###  节流
+###  字符串处理相关
 
-- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
-
-###  对象相关（Object处理）
-
-- [getV](#getV)  获取多级数据避免出错（超级好用）
-- [cloneObj](#cloneObj)  深拷贝，克隆（只包含可遍历属性<常用>）
-- [cloneJson](#cloneJson)  简单的深拷贝
-- [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
-- [isEmptyObject](#isEmptyObject)  判断对象是否为空
-- [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
+- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
+- [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
+- [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
+- [hideIdNum](#hideIdNum)  隐藏身份证号码
+- [uniqueId](#uniqueId)  随机数 + 时间戳
+- [versionCount](#versionCount)  版本号累加
+- [getExt](#getExt)  获取文件后缀名
+- [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 
 ## API 说明
-
-### removeStorage
-               
-   删除
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
-```
 
 ### doubleRanking
                
@@ -316,6 +260,91 @@ or
   * @return {*}
   * @example: 
   uniqueArray([1,1,1,1,1]) => [1]
+```
+
+### formatRhBloodGroup
+               
+   转换Rh血型
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+```
+
+### removeStorage
+               
+   删除
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
+ * @example: 
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
 ```
 
 ### getCookie
@@ -865,6 +894,60 @@ leading-true，trailing-true：在延时开始时就调用，延时结束后也�
 leading-true, trailing-false：只在延时开始时调用
 ```
 
+### getUrlQuery
+               
+   获取浏览器url中的一个参数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### everyTrim
+               
+   去除值类型为string的前后空格
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+```
+
+### formatQueryParam
+               
+   格式化GET请求的请求头
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  formatQueryParam({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+               
+   处理url参数(window.location.search)转换为 {key: value}
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
+```
+
 ### isUserId
                
    身份证号码校验（精准）
@@ -1088,60 +1171,6 @@ leading-true, trailing-false：只在延时开始时调用
  isFalsy(0) => false
  isFalsy(null) => true
  isFalsy(undefined) => true
-```
-
-### getUrlQuery
-               
-   获取浏览器url中的一个参数
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### everyTrim
-               
-   去除值类型为string的前后空格
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 22:11:23
- * @param {Array} data
- * @return {*}
- * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
-```
-
-### formatQueryParam
-               
-   格式化GET请求的请求头
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  formatQueryParam({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-               
-   处理url参数(window.location.search)转换为 {key: value}
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈
