@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:17:39
- * @LastEditTime: 2021-08-21 20:00:11
+ * @LastEditTime: 2021-09-07 16:45:27
  * @LastEditors: wuxh
  * @Description: 数据持久化，缓存
  * @FilePath: /jcommon/src/cache/index.ts
@@ -34,10 +34,14 @@ export const removeStorage = function (key: any) {
   => undefined
  */
 export const saveStorage = function (key: string, value: string): void {
-  try {
-    window.localStorage.setItem(key, JSON.stringify(value))
-  } catch (e) {
-    console.error(e)
+  if (typeof value === 'undefined' || typeof value === 'function') {
+    window.localStorage.setItem(key, '')
+  } else {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value))
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 /**
@@ -50,8 +54,13 @@ export const saveStorage = function (key: string, value: string): void {
   getStorage('test')
   => '001'
  */
-export const getStorage = function (key: string): string | null {
-  return window.localStorage.getItem(key)
+export const getStorage = function (key: string): any {
+  const value = window.localStorage.getItem(key) || ''
+  if (typeof value === 'undefined' || typeof value === 'function') {
+    return ''
+  } else {
+    return JSON.parse(value)
+  }
 }
 /**
  * @description: 是否支持local
