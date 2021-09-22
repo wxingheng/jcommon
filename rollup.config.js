@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-19 21:43:33
- * @LastEditTime: 2021-09-01 22:03:45
+ * @LastEditTime: 2021-09-09 09:39:07
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/rollup.config.js
@@ -19,19 +19,37 @@ const options = {
   output: [
     {
       file: path.resolve(__dirname, pkg.main),
-      format: 'cjs' // /lib
+      format: 'cjs', // /lib
+      plugins: [terser()]
+
     },
     {
       file: path.resolve(__dirname, pkg.module),
-      format: 'es' // es
+      format: 'es', // es
+      plugins: [terser()]
+
     },
     {
       file: path.resolve(__dirname, pkg.unpkg),
       format: 'umd', // dist
       name: 'jcommon',
-      
+      plugins: [terser()]
+
+    },
+    {
+      file: path.resolve(__dirname, pkg['main-source']),
+      format: 'cjs', // /lib
+    },
+    {
+      file: path.resolve(__dirname, pkg['module-source']),
+      format: 'es', // es
+    },
+    {
+      file: path.resolve(__dirname, pkg['unpkg-source']),
+      format: 'umd', // dist
+      name: 'jcommon',
     }
   ],
-  plugins: [resolve(), commonjs(), typescript(), terser()]
+  plugins: [resolve(), commonjs(), typescript()]
 }
 export default options

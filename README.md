@@ -71,16 +71,16 @@ or
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
 - [sorterCallBack](#sorterCallBack)  sort []
 
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -99,10 +99,6 @@ or
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
-### 
-
-- [getFormData](#getFormData)  对象转化为FormData对象
-
 ###  浏览器 DOM 相关
 
 - [download](#download)  下载一个链接文档
@@ -111,6 +107,15 @@ or
 
 ### 
 
+- [getFormData](#getFormData)  对象转化为FormData对象
+
+### 
+
+
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+- [cutNumber](#cutNumber)  保留到小数点以后n位
 
 ###  移动端相关
 
@@ -119,11 +124,6 @@ or
 - [operattelecom](#operattelecom)  获取手机运营商
 - [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
 - [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-- [cutNumber](#cutNumber)  保留到小数点以后n位
 
 ###  对象相关（Object处理）
 
@@ -136,6 +136,21 @@ or
 
 ###  Queue 队列
 
+
+###  休眠
+
+- [sleep](#sleep)  休眠多少毫秒
+
+###  字符串处理相关
+
+- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
+- [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
+- [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
+- [hideIdNum](#hideIdNum)  隐藏身份证号码
+- [uniqueId](#uniqueId)  随机数 + 时间戳
+- [versionCount](#versionCount)  版本号累加
+- [getExt](#getExt)  获取文件后缀名
+- [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 
 ###  节流
 
@@ -167,22 +182,48 @@ or
 - [isEmail](#isEmail)  校验是否为邮箱地址
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
 
-###  休眠
-
-- [sleep](#sleep)  休眠多少毫秒
-
-###  字符串处理相关
-
-- [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
-- [getSexByIdNO](#getSexByIdNO)  身份证号码解析性别
-- [getBirthdatByIdNo](#getBirthdatByIdNo)  身份证号码解析出生日期
-- [hideIdNum](#hideIdNum)  隐藏身份证号码
-- [uniqueId](#uniqueId)  随机数 + 时间戳
-- [versionCount](#versionCount)  版本号累加
-- [getExt](#getExt)  获取文件后缀名
-- [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
-
 ## API 说明
+
+### formatRhBloodGroup
+               
+   转换Rh血型
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
 
 ### doubleRanking
                
@@ -262,31 +303,17 @@ or
   uniqueArray([1,1,1,1,1]) => [1]
 ```
 
-### formatRhBloodGroup
+### getCookie
                
-   转换Rh血型
+   获取cookie值
   
   ```javascript
   wuxh
- * @Date: 2021-09-07 13:44:36
- * @param {*}
- * @return {*}
- * @example:  formatRhBloodGroup('**D**') => 阳性
-```
-
-### sorterCallBack
-               
-   sort []
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 14:12:06
- * @param {string} key
- * @return {*}
- * @example:
- * const arr = [{name: '666'}, {name: '333'}]
- * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
- * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
 ```
 
 ### removeStorage
@@ -347,31 +374,26 @@ or
   => true
 ```
 
-### getCookie
+### debounce
                
-   获取cookie值
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
   
   ```javascript
   wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
  * @example: 
-  getCookie('name') => 123
-```
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ *
 ```
 
 ### dateInterval
@@ -464,28 +486,6 @@ or
  * @example:
 ```
 
-### debounce
-               
-   debounce 防抖, 固定时间内持续触发，只执行最后一次
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function
- * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- *
-```
-
 ### osInfo
                
    获取用户系统平台信息
@@ -543,54 +543,6 @@ or
  * @return {*} boolean
  * @example: 
  copyToBoard('lalallala') => true // 如果复制成功返回true
-```
-
-### getFormData
-               
-   对象转化为FormData对象
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:52:34
- * @param {object} object
- * @return {FormData}
- * @example: 
- let req={
-    file:xxx,
-    userId:1,
-    phone:'15198763636',
-    //...
-}
-fetch(getFormData(req))
-```
-
-### scopeRandom
-               
-   范围随机整数
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:09:34
- * @param {str}
- * @param {end}
- * @return: Number
- * @example: 
-  scopeRandom(1, 10)
-  => 3
-```
-
-### cutNumber
-               
-   保留到小数点以后n位
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:54:36
- * @param {number} number
- * @param {*} no
- * @return {*} Number
- * @example: 
- cutNumber('3123.22312') => 3123.22
 ```
 
 ### isQQ
@@ -658,6 +610,25 @@ fetch(getFormData(req))
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
+```
+
+### getFormData
+               
+   对象转化为FormData对象
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:52:34
+ * @param {object} object
+ * @return {FormData}
+ * @example: 
+ let req={
+    file:xxx,
+    userId:1,
+    phone:'15198763636',
+    //...
+}
+fetch(getFormData(req))
 ```
 
 ### getV
@@ -748,6 +719,35 @@ fetch(getFormData(req))
   pageSize: 10,
   page: 1
 }
+```
+
+### scopeRandom
+               
+   范围随机整数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:09:34
+ * @param {str}
+ * @param {end}
+ * @return: Number
+ * @example: 
+  scopeRandom(1, 10)
+  => 3
+```
+
+### cutNumber
+               
+   保留到小数点以后n位
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:54:36
+ * @param {number} number
+ * @param {*} no
+ * @return {*} Number
+ * @example: 
+ cutNumber('3123.22312') => 3123.22
 ```
 
 ### sleep
