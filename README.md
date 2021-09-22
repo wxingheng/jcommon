@@ -62,10 +62,6 @@ or
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 - [uniqueArray](#uniqueArray) undefined
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ###  血袋相关工具函数
 
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
@@ -78,9 +74,17 @@ or
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
 
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
 ### 
 
 - [getCookie](#getCookie)  获取cookie值
+
+###  防抖
+
+- [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
 
 ###  时间相关
 
@@ -90,10 +94,6 @@ or
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
-
-###  防抖
-
-- [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
 
 ###  用户设备相关（客户端系统）
 
@@ -107,10 +107,10 @@ or
 
 ### 
 
-- [getFormData](#getFormData)  对象转化为FormData对象
 
 ### 
 
+- [getFormData](#getFormData)  对象转化为FormData对象
 
 ###  数处理相
 
@@ -137,10 +137,6 @@ or
 ###  Queue 队列
 
 
-###  休眠
-
-- [sleep](#sleep)  休眠多少毫秒
-
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
@@ -151,6 +147,10 @@ or
 - [versionCount](#versionCount)  版本号累加
 - [getExt](#getExt)  获取文件后缀名
 - [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
+
+###  休眠
+
+- [sleep](#sleep)  休眠多少毫秒
 
 ###  节流
 
@@ -183,47 +183,6 @@ or
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
 
 ## API 说明
-
-### formatRhBloodGroup
-               
-   转换Rh血型
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 13:44:36
- * @param {*}
- * @return {*}
- * @example:  formatRhBloodGroup('**D**') => 阳性
-```
-
-### sorterCallBack
-               
-   sort []
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 14:12:06
- * @param {string} key
- * @return {*}
- * @example:
- * const arr = [{name: '666'}, {name: '333'}]
- * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
- * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
-```
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
 
 ### doubleRanking
                
@@ -303,17 +262,45 @@ or
   uniqueArray([1,1,1,1,1]) => [1]
 ```
 
-### getCookie
+### getBrowserInfo
                
-   获取cookie值
+   获取浏览器相关信息
   
   ```javascript
   wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
  * @example: 
-  getCookie('name') => 123
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
+```
+
+### formatRhBloodGroup
+               
+   转换Rh血型
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
 ```
 
 ### removeStorage
@@ -374,26 +361,17 @@ or
   => true
 ```
 
-### debounce
+### getCookie
                
-   debounce 防抖, 固定时间内持续触发，只执行最后一次
+   获取cookie值
   
   ```javascript
   wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
  * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- *
+  getCookie('name') => 123
 ```
 
 ### dateInterval
@@ -486,6 +464,28 @@ or
  * @example:
 ```
 
+### debounce
+               
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ *
+```
+
 ### osInfo
                
    获取用户系统平台信息
@@ -543,6 +543,54 @@ or
  * @return {*} boolean
  * @example: 
  copyToBoard('lalallala') => true // 如果复制成功返回true
+```
+
+### getFormData
+               
+   对象转化为FormData对象
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:52:34
+ * @param {object} object
+ * @return {FormData}
+ * @example: 
+ let req={
+    file:xxx,
+    userId:1,
+    phone:'15198763636',
+    //...
+}
+fetch(getFormData(req))
+```
+
+### scopeRandom
+               
+   范围随机整数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:09:34
+ * @param {str}
+ * @param {end}
+ * @return: Number
+ * @example: 
+  scopeRandom(1, 10)
+  => 3
+```
+
+### cutNumber
+               
+   保留到小数点以后n位
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:54:36
+ * @param {number} number
+ * @param {*} no
+ * @return {*} Number
+ * @example: 
+ cutNumber('3123.22312') => 3123.22
 ```
 
 ### isQQ
@@ -610,25 +658,6 @@ or
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
-```
-
-### getFormData
-               
-   对象转化为FormData对象
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:52:34
- * @param {object} object
- * @return {FormData}
- * @example: 
- let req={
-    file:xxx,
-    userId:1,
-    phone:'15198763636',
-    //...
-}
-fetch(getFormData(req))
 ```
 
 ### getV
@@ -719,35 +748,6 @@ fetch(getFormData(req))
   pageSize: 10,
   page: 1
 }
-```
-
-### scopeRandom
-               
-   范围随机整数
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:09:34
- * @param {str}
- * @param {end}
- * @return: Number
- * @example: 
-  scopeRandom(1, 10)
-  => 3
-```
-
-### cutNumber
-               
-   保留到小数点以后n位
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:54:36
- * @param {number} number
- * @param {*} no
- * @return {*} Number
- * @example: 
- cutNumber('3123.22312') => 3123.22
 ```
 
 ### sleep
@@ -873,27 +873,6 @@ fetch(getFormData(req))
  uuid() => 'ghijklmn'
 ```
 
-### throttle
-               
-   节流 多次调用方法，按照一定的时间间隔执行
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 21:46:38
- * @param {*} func
- * @param {*} wait
- * @param {*} options: { leading: boolean; trailing: boolean }
- * @return {*} Function
- * @example: 
- *
-leading，函数在每个等待时延的开始被调用，默认值为false
-trailing，函数在每个等待时延的结束被调用，默认值是true
-可以根据不同的值来设置不同的效果：
-leading-false，trailing-true：默认情况，即在延时结束后才会调用函数
-leading-true，trailing-true：在延时开始时就调用，延时结束后也会调用
-leading-true, trailing-false：只在延时开始时调用
-```
-
 ### getUrlQuery
                
    获取浏览器url中的一个参数
@@ -946,6 +925,27 @@ leading-true, trailing-false：只在延时开始时调用
  * @example: 
   urlByObj(?ie=UTF-8&wd=asd)
   => {ie: UTF-8, wd: asd}
+```
+
+### throttle
+               
+   节流 多次调用方法，按照一定的时间间隔执行
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:46:38
+ * @param {*} func
+ * @param {*} wait
+ * @param {*} options: { leading: boolean; trailing: boolean }
+ * @return {*} Function
+ * @example: 
+ *
+leading，函数在每个等待时延的开始被调用，默认值为false
+trailing，函数在每个等待时延的结束被调用，默认值是true
+可以根据不同的值来设置不同的效果：
+leading-false，trailing-true：默认情况，即在延时结束后才会调用函数
+leading-true，trailing-true：在延时开始时就调用，延时结束后也会调用
+leading-true, trailing-false：只在延时开始时调用
 ```
 
 ### isUserId

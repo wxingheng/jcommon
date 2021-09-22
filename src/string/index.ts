@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2021-09-02 22:29:10
+ * @LastEditTime: 2021-09-22 22:18:16
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -123,10 +123,24 @@ export const uniqueId = function () {
  * versionCount('0.2.9.1') => '0.2.9.2'
  */
 export const versionCount = function (version: string): string {
-  return String(parseInt(version.replace(/\./g, '')) + 1)
-    .padStart(version.split('.').length, '0')
-    .split('')
-    .join('.')
+  let s = version.split('.').map(v => Number(v))
+  const nan = s.some(v => isNaN(v))
+  let c = true
+  if (nan) {
+    return version
+  }
+  s = s.reverse()
+  s.forEach((v, i) => {
+    if (c) {
+      if (v >= 99) {
+        s[i] = 0
+      } else {
+        c = false
+        s[i] = s[i] + 1
+      }
+    }
+  })
+  return s.reverse().join('.')
 }
 
 /**
@@ -151,7 +165,6 @@ export const getExt = function (filename: string) {
  * @param {*} length
  * @param {*} chars
  */
-
 
 /**
  * @description: 生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
