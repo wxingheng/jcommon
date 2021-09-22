@@ -1,11 +1,14 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 22:49:28
- * @LastEditTime: 2021-09-01 23:16:37
+ * @LastEditTime: 2021-09-22 23:17:05
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/eventBus/index.ts
  */
+
+import { decoratorNonenumerable } from '../decorator/index'
+
 
 /**
  * @description: EventBus  class
@@ -13,7 +16,7 @@
  * @Date: 2021-08-24 11:19:07
  * @example: const eventBus = new EventBus()
  */
-export class EventBus {
+ export class EventBus {
   private listeners: { [x: string]: any }
   private maxListener: number
 
@@ -38,6 +41,7 @@ export class EventBus {
   }
 
   // 触发监听函数
+  @decoratorNonenumerable
   emit (event: string) {
     const args = Array.prototype.slice.call(arguments)
     args.shift()
@@ -82,3 +86,6 @@ export class EventBus {
     this.addListener(event, fn)
   }
 }
+
+// console.log('EventBus', new EventBus().emit)
+
