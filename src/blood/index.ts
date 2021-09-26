@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-21 22:30:51
- * @LastEditTime: 2021-09-07 14:15:10
+ * @LastEditTime: 2021-09-26 10:59:50
  * @LastEditors: wuxh
  * @Description: 血袋相关工具函数
  * @FilePath: /jcommon/src/blood/index.ts
@@ -27,12 +27,18 @@ export const formatRhBloodGroup = function (
     S: {
       '**d**': '阴性',
       阴性: '阴性',
-      '-': '阴性'
+      '-': '阴性',
+      '**D**': '阳性',
+      阳性: '阳性',
+      '+': '阳性'
     },
     Z: {
       '**D**': '阳性',
       阳性: '阳性',
-      '+': '阳性'
+      '+': '阳性',
+      '**d**': '阴性',
+      阴性: '阴性',
+      '-': '阴性'
     }
   }
   return getV(normal, def, format, value)
