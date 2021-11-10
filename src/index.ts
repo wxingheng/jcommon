@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-09-07 14:15:20
+ * @LastEditTime: 2021-11-10 11:59:48
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -57,7 +57,8 @@ export {
   uniqueId,
   versionCount,
   getExt,
-  uuid
+  uuid,
+  endWith
 } from './string/index'
 
 export { getUrlQuery, everyTrim, formatQueryParam, urlByObj } from './url/index'

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2021-09-22 22:18:16
+ * @LastEditTime: 2021-11-10 11:35:33
  * @LastEditors: wuxh
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -184,4 +184,18 @@ export const uuid = function (length: number, chars: string | any[]): string {
   for (var i = length; i > 0; --i)
     result += chars[Math.floor(Math.random() * chars.length)]
   return result
+}
+
+/**
+ * @description: 字符串判断结尾
+ * @author: wuxh
+ * @Date: 2021-11-10 11:35:30
+ * @param {string} str
+ * @param {string} endStr
+ * @return {*}
+ * @example: endWith('1231231', '21') => false ;  endWith('1231231', '31') => true 
+ */
+export const endWith = function(str: string, endStr: string):boolean {
+  var d = str.length - endStr.length
+  return d >= 0 && str.lastIndexOf(endStr) == d
 }
