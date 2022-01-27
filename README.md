@@ -67,20 +67,9 @@ or
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
 - [sorterCallBack](#sorterCallBack)  sort []
 
-###  数据持久化，缓存
-
-- [removeStorage](#removeStorage)  删除
-- [saveStorage](#saveStorage)  保存
-- [getStorage](#getStorage)  获取
-- [isSupportStorage](#isSupportStorage)  是否支持local
-
 ###  浏览器相关
 
 - [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -94,6 +83,17 @@ or
 ###  防抖
 
 - [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
+
+###  数据持久化，缓存
+
+- [removeStorage](#removeStorage)  删除
+- [saveStorage](#saveStorage)  保存
+- [getStorage](#getStorage)  获取
+- [isSupportStorage](#isSupportStorage)  是否支持local
 
 ### 
 
@@ -111,23 +111,10 @@ or
 
 ### 
 
+- [getFormData](#getFormData)  对象转化为FormData对象
 
 ### 
 
-- [getFormData](#getFormData)  对象转化为FormData对象
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-- [cutNumber](#cutNumber)  保留到小数点以后n位
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  对象相关（Object处理）
 
@@ -138,8 +125,21 @@ or
 - [isEmptyObject](#isEmptyObject)  判断对象是否为空
 - [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+- [cutNumber](#cutNumber)  保留到小数点以后n位
+
 ###  Queue 队列
 
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  休眠
 
@@ -277,6 +277,8 @@ or
  * @param {*}
  * @return {*}
  * @example:  formatRhBloodGroup('**D**') => 阳性
+ * formatRhBloodGroup('+') => 阳性
+ *
 ```
 
 ### sorterCallBack

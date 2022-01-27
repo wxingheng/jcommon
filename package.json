@@ -1,6 +1,6 @@
 {
     "name": "jcommon",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "description": "JavaScript 常用纯函数工具库",
     "main": "lib/index.js",
     "module": "es/index.js",
@@ -62,6 +62,6 @@
         "webpack": "^4.46.0",
         "webpack-cli": "^3.3.12"
     },
-    "time": "211110120006",
+    "time": "220117220732",
     "dependencies": {}
 }
