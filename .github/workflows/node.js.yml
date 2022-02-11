@@ -14,9 +14,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         with:
-          registry-url: https://registry.npmjs.org/ # https://npm.pkg.github.com/
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -26,8 +24,15 @@ jobs:
       - name: Init Node.js
         run: |
           npm install
-          npm run pub
           echo "install..."
+
+      - name: Publish to NPM
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+          npm run auto-pub || true
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   result:
     runs-on: ubuntu-latest
