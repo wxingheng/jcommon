@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-20 10:35:31
- * @LastEditTime: 2021-08-20 10:35:47
+ * @LastEditTime: 2022-02-11 14:17:16
  * @LastEditors: wuxh
  * @Description:
  * @FilePath: /jcommon/.scripts/cleanse-pkg.js
@@ -11,7 +11,7 @@ const path = require('path')
 
 // Define absolute paths for original pkg and temporary pkg.
 const ORIG_PKG_PATH = path.resolve(__dirname, '../package.json')
-const CACHED_PKG_PATH = path.resolve(__dirname, '../../cached-package.json')
+const CACHED_PKG_PATH = path.resolve(__dirname, '../cached-package.json')
 
 // Obtain original `package.json` contents.
 const pkgData = require(ORIG_PKG_PATH)
@@ -38,7 +38,6 @@ scriptsToRemove.forEach(function (scriptName) {
 devDepsToRemove.forEach(function (pkgName) {
   delete pkgData.devDependencies[pkgName]
 })
-
 // Overwrite original `package.json` with new data (i.e. minus the specific data).
 fs.writeFile(ORIG_PKG_PATH, JSON.stringify(pkgData, null, 2), function (err) {
   if (err) throw err
