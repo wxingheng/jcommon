@@ -16,7 +16,7 @@
     "build": "node ./pack/build.js",
     "merge:dist": "npm run merge && npm run rollup",
     "build:dist": "npm run build && npm run rollup",
-    "before:publish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,prepublish,before:publish,pub\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
+    "before:publish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish"
