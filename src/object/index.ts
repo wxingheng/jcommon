@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2022-04-10 22:22:25
+ * @LastEditTime: 2022-04-10 22:43:02
  * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -55,7 +55,6 @@ export const cloneObj = function (obj: any): any {
   }
   return newobj
 }
-
 
 /**
  * @description: 简单的深拷贝
@@ -168,7 +167,6 @@ export const cleanObject = function (object: {
   return result
 }
 
-
 const regexpTag = '[object RegExp]'
 
 /**
@@ -180,63 +178,35 @@ const regexpTag = '[object RegExp]'
  * @return {*}
  * @example: deepClone(obj) => new obj
  */
-export const deepClone = function(value: any, stack = new WeakMap()) {
-  if (!iSObject(value)) {
-    return value
+export const deepClone = function (target: any) {
+  // 定义一个变量
+  let result: any
+  // 如果当前需要深拷贝的是一个对象的话
+  if (typeof target === 'object') {
+    // 如果是一个数组的话
+    if (Array.isArray(target)) {
+      result = [] // 将result赋值为一个数组，并且执行遍历
+      for (let i in target) {
+        // 递归克隆数组中的每一项
+        result.push(deepClone(target[i]))
+      }
+      // 判断如果当前的值是null的话；直接赋值为null
+    } else if (target === null) {
+      result = null
+      // 判断如果当前的值是一个RegExp对象的话，直接赋值
+    } else if (target.constructor === RegExp) {
+      result = target
+    } else {
+      // 否则是普通对象，直接for in循环，递归赋值对象的所有值
+      result = {}
+      for (let i in target) {
+        result[i] = deepClone(target[i])
+      }
+    }
+    // 如果不是对象的话，就是基本数据类型，那么直接赋值
+  } else {
+    result = target
   }
-
-  let result: any = Array.isArray(value) ? [] : {}
-
-  // 函数直接返回
-  if (typeof value === 'function') {
-    return value
-  }
-
-  // 处理引用类型的拷贝
-  result = initCloneByTag(value, getTag(value))
-
-  // 处理循环引用
-  if (stack.has(value)) {
-    return stack.get(value)
-  }
-  stack.set(value, result)
-
-  // 这里没有处理key是Symbol的情况
-  // for in 不会枚举Symbol的key
-  // 可以通过Object.getOwnPropertySymbols获取所有Symbol的key
-  for (let key in value) {
-    result[key] = deepClone(value[key], stack)
-  }
+  // 返回最终结果
   return result
-}
-
-function iSObject (value: any) {
-  const type = typeof value
-  return value != null && (type === 'object' || type === 'function')
-}
-
-function getTag(value: any) {
-  if (value == null) {
-    return value === undefined ? '[object Undefined]' : '[object Null]'
-  }
-  return Object.prototype.toString.call(value)
-}
-
-function cloneRegExp(regexp: any) {
-  const result = new regexp.constructor(regexp.source, /\w*$/.exec(regexp))
-  result.lastIndex = regexp.lastIndex
-  return result
-}
-
-function initCloneByTag(object: any, tag: any) {
-  const Ctor = object.constructor
-  // 可以在这里处理
-  // arrayBuffer, int32array, dataview等情况
-  switch (tag) {
-    case regexpTag:
-      return cloneRegExp(object)
-
-    default:
-      return {}
-  }
 }

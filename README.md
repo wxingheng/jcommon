@@ -62,16 +62,16 @@ or
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 - [uniqueArray](#uniqueArray) undefined
 
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
 ###  血袋相关工具函数
 
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
 - [isRhNegative](#isRhNegative)  是否阴性
 - [isRhPositive](#isRhPositive)  是否阳性
 - [sorterCallBack](#sorterCallBack)  sort []
-
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ###  数据持久化，缓存
 
@@ -93,13 +93,13 @@ or
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
 
-###  防抖
-
-- [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
-
 ### 
 
 - [decoratorNonenumerable](#decoratorNonenumerable)  decoratorNonenumerable
+
+###  防抖
+
+- [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
 
 ###  用户设备相关（客户端系统）
 
@@ -141,13 +141,6 @@ or
 - [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 - [deepClone](#deepClone)  深克隆 deepClone
 
-###  Queue 队列
-
-
-###  休眠
-
-- [sleep](#sleep)  休眠多少毫秒
-
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
@@ -159,6 +152,13 @@ or
 - [getExt](#getExt)  获取文件后缀名
 - [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 - [endWith](#endWith)  字符串判断结尾
+
+###  Queue 队列
+
+
+###  休眠
+
+- [sleep](#sleep)  休眠多少毫秒
 
 ###  节流
 
@@ -191,6 +191,117 @@ or
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
 
 ## API 说明
+
+### formatRhBloodGroup
+               
+   转换Rh血型
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+ * formatRhBloodGroup('+') => 阳性
+ *
+```
+
+### isRhNegative
+               
+   是否阴性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:31
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### isRhPositive
+               
+   是否阳性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:19
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+```
+
+### removeStorage
+               
+   删除
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
+ * @example: 
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
+```
 
 ### doubleRanking
                
@@ -270,59 +381,6 @@ or
   uniqueArray([1,1,1,1,1]) => [1]
 ```
 
-### formatRhBloodGroup
-               
-   转换Rh血型
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 13:44:36
- * @param {*}
- * @return {*}
- * @example:  formatRhBloodGroup('**D**') => 阳性
- * formatRhBloodGroup('+') => 阳性
- *
-```
-
-### isRhNegative
-               
-   是否阴性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:31
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### isRhPositive
-               
-   是否阳性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:19
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### sorterCallBack
-               
-   sort []
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 14:12:06
- * @param {string} key
- * @return {*}
- * @example:
- * const arr = [{name: '666'}, {name: '333'}]
- * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
- * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
-```
-
 ### getBrowserInfo
                
    获取浏览器相关信息
@@ -350,26 +408,18 @@ or
   getCookie('name') => 123
 ```
 
-### debounce
+### osInfo
                
-   debounce 防抖, 固定时间内持续触发，只执行最后一次
+   获取用户系统平台信息
   
   ```javascript
   wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
  * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- *
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
 ```
 
 ### dateInterval
@@ -462,6 +512,28 @@ or
  * @example:
 ```
 
+### debounce
+               
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ *
+```
+
 ### decoratorNonenumerable
                
    decoratorNonenumerable
@@ -472,64 +544,6 @@ or
  * @param {*}
  * @return {*}
  * @example:
-```
-
-### removeStorage
-               
-   删除
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
 ```
 
 ### download
@@ -575,20 +589,6 @@ or
  * @return {*} boolean
  * @example: 
  copyToBoard('lalallala') => true // 如果复制成功返回true
-```
-
-### osInfo
-               
-   获取用户系统平台信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
 ```
 
 ### getFormData
