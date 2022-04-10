@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2021-11-10 11:59:48
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-04-10 22:25:48
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/index.ts
  */
@@ -46,7 +46,8 @@ export {
   mergeObj,
   isEmptyObject,
   cleanObject,
-  cloneJson
+  cloneJson,
+  deepClone
 } from './object/index'
 
 export {

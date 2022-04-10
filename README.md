@@ -65,11 +65,24 @@ or
 ###  血袋相关工具函数
 
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
+- [isRhNegative](#isRhNegative)  是否阴性
+- [isRhPositive](#isRhPositive)  是否阳性
 - [sorterCallBack](#sorterCallBack)  sort []
 
 ###  浏览器相关
 
 - [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
+###  数据持久化，缓存
+
+- [removeStorage](#removeStorage)  删除
+- [saveStorage](#saveStorage)  保存
+- [getStorage](#getStorage)  获取
+- [isSupportStorage](#isSupportStorage)  是否支持local
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -83,17 +96,6 @@ or
 ###  防抖
 
 - [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
-###  数据持久化，缓存
-
-- [removeStorage](#removeStorage)  删除
-- [saveStorage](#saveStorage)  保存
-- [getStorage](#getStorage)  获取
-- [isSupportStorage](#isSupportStorage)  是否支持local
 
 ### 
 
@@ -111,10 +113,23 @@ or
 
 ### 
 
-- [getFormData](#getFormData)  对象转化为FormData对象
 
 ### 
 
+- [getFormData](#getFormData)  对象转化为FormData对象
+
+###  数处理相
+
+- [scopeRandom](#scopeRandom)  范围随机整数
+- [cutNumber](#cutNumber)  保留到小数点以后n位
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  对象相关（Object处理）
 
@@ -124,22 +139,10 @@ or
 - [mergeObj](#mergeObj)  深度合并对象(当前用于合并系统配置文件 app-data.json) 已存在的属性默认不覆盖
 - [isEmptyObject](#isEmptyObject)  判断对象是否为空
 - [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
-
-###  数处理相
-
-- [scopeRandom](#scopeRandom)  范围随机整数
-- [cutNumber](#cutNumber)  保留到小数点以后n位
+- [deepClone](#deepClone)  深克隆 deepClone
 
 ###  Queue 队列
 
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  休眠
 
@@ -281,6 +284,30 @@ or
  *
 ```
 
+### isRhNegative
+               
+   是否阴性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:31
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### isRhPositive
+               
+   是否阳性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:19
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
 ### sorterCallBack
                
    sort []
@@ -310,64 +337,6 @@ or
   => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
-### removeStorage
-               
-   删除
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
- * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
-```
-
 ### getCookie
                
    获取cookie值
@@ -379,6 +348,28 @@ or
  * @return: string
  * @example: 
   getCookie('name') => 123
+```
+
+### debounce
+               
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ *
 ```
 
 ### dateInterval
@@ -471,28 +462,6 @@ or
  * @example:
 ```
 
-### debounce
-               
-   debounce 防抖, 固定时间内持续触发，只执行最后一次
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function
- * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- *
-```
-
 ### decoratorNonenumerable
                
    decoratorNonenumerable
@@ -505,18 +474,62 @@ or
  * @example:
 ```
 
-### osInfo
+### removeStorage
                
-   获取用户系统平台信息
+   删除
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
  * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
 ```
 
 ### download
@@ -562,6 +575,20 @@ or
  * @return {*} boolean
  * @example: 
  copyToBoard('lalallala') => true // 如果复制成功返回true
+```
+
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
 ```
 
 ### getFormData
@@ -767,6 +794,19 @@ fetch(getFormData(req))
   pageSize: 10,
   page: 1
 }
+```
+
+### deepClone
+               
+   深克隆 deepClone
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-04-10 22:19:43
+ * @param {any} value
+ * @param {*} stack
+ * @return {*}
+ * @example: deepClone(obj) => new obj
 ```
 
 ### sleep

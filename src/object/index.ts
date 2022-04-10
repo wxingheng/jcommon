@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2021-09-02 23:05:17
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-04-10 22:22:25
+ * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -166,4 +166,77 @@ export const cleanObject = function (object: {
     }
   })
   return result
+}
+
+
+const regexpTag = '[object RegExp]'
+
+/**
+ * @description: 深克隆 deepClone
+ * @author: wxingheng
+ * @Date: 2022-04-10 22:19:43
+ * @param {any} value
+ * @param {*} stack
+ * @return {*}
+ * @example: deepClone(obj) => new obj
+ */
+export const deepClone = function(value: any, stack = new WeakMap()) {
+  if (!iSObject(value)) {
+    return value
+  }
+
+  let result: any = Array.isArray(value) ? [] : {}
+
+  // 函数直接返回
+  if (typeof value === 'function') {
+    return value
+  }
+
+  // 处理引用类型的拷贝
+  result = initCloneByTag(value, getTag(value))
+
+  // 处理循环引用
+  if (stack.has(value)) {
+    return stack.get(value)
+  }
+  stack.set(value, result)
+
+  // 这里没有处理key是Symbol的情况
+  // for in 不会枚举Symbol的key
+  // 可以通过Object.getOwnPropertySymbols获取所有Symbol的key
+  for (let key in value) {
+    result[key] = deepClone(value[key], stack)
+  }
+  return result
+}
+
+function iSObject (value: any) {
+  const type = typeof value
+  return value != null && (type === 'object' || type === 'function')
+}
+
+function getTag(value: any) {
+  if (value == null) {
+    return value === undefined ? '[object Undefined]' : '[object Null]'
+  }
+  return Object.prototype.toString.call(value)
+}
+
+function cloneRegExp(regexp: any) {
+  const result = new regexp.constructor(regexp.source, /\w*$/.exec(regexp))
+  result.lastIndex = regexp.lastIndex
+  return result
+}
+
+function initCloneByTag(object: any, tag: any) {
+  const Ctor = object.constructor
+  // 可以在这里处理
+  // arrayBuffer, int32array, dataview等情况
+  switch (tag) {
+    case regexpTag:
+      return cloneRegExp(object)
+
+    default:
+      return {}
+  }
 }
