@@ -62,17 +62,6 @@ or
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 - [uniqueArray](#uniqueArray) undefined
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-###  血袋相关工具函数
-
-- [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
-- [isRhNegative](#isRhNegative)  是否阴性
-- [isRhPositive](#isRhPositive)  是否阳性
-- [sorterCallBack](#sorterCallBack)  sort []
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
@@ -84,6 +73,17 @@ or
 
 - [getCookie](#getCookie)  获取cookie值
 
+###  血袋相关工具函数
+
+- [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
+- [isRhNegative](#isRhNegative)  是否阴性
+- [isRhPositive](#isRhPositive)  是否阳性
+- [sorterCallBack](#sorterCallBack)  sort []
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
 ###  时间相关
 
 - [dateInterval](#dateInterval)  获取两个时间的间隔
@@ -93,17 +93,13 @@ or
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
 
-### 
-
-- [decoratorNonenumerable](#decoratorNonenumerable)  decoratorNonenumerable
-
 ###  防抖
 
 - [debounce](#debounce)  debounce 防抖, 固定时间内持续触发，只执行最后一次
 
-###  用户设备相关（客户端系统）
+### 
 
-- [osInfo](#osInfo)  获取用户系统平台信息
+- [decoratorNonenumerable](#decoratorNonenumerable)  decoratorNonenumerable
 
 ###  浏览器 DOM 相关
 
@@ -113,6 +109,10 @@ or
 
 ### 
 
+
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
 
 ### 
 
@@ -141,6 +141,17 @@ or
 - [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 - [deepClone](#deepClone)  深克隆 deepClone
 
+### 
+
+- [oneClickToMoreClick](#oneClickToMoreClick)  单击事件转换为多击事件
+
+###  Queue 队列
+
+
+###  休眠
+
+- [sleep](#sleep)  休眠多少毫秒
+
 ###  字符串处理相关
 
 - [trim](#trim)  去除字符串空格, 默认去除前后空格 （常用）
@@ -153,23 +164,9 @@ or
 - [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 - [endWith](#endWith)  字符串判断结尾
 
-###  Queue 队列
-
-
-###  休眠
-
-- [sleep](#sleep)  休眠多少毫秒
-
 ###  节流
 
 - [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
-
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ###  校验相关
 
@@ -189,6 +186,13 @@ or
 - [isPhone](#isPhone)  手机号校验
 - [isEmail](#isEmail)  校验是否为邮箱地址
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
+
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
 
 ## API 说明
 
@@ -245,62 +249,18 @@ or
  * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
 ```
 
-### removeStorage
+### getBrowserInfo
                
-   删除
+   获取浏览器相关信息
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @return: undefined
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
  * @example: 
-  removeStorage('test')
-  => undefined
-```
-
-### saveStorage
-               
-   保存
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:56:29
- * @param {key}
- * @param {value}
- * @param {isJson}
- * @return: undefined
- * @example: 
-  saveStorage('test', '001')
-  => undefined
-```
-
-### getStorage
-               
-   获取
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:00:37
- * @param {key}
- * @return: String
- * @example: 
-  getStorage('test')
-  => '001'
-```
-
-### isSupportStorage
-               
-   是否支持local
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:01:43
- * @param 
- * @return: Boolean
- * @example: 
-  isSupportStorage()
-  => true
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### doubleRanking
@@ -381,18 +341,62 @@ or
   uniqueArray([1,1,1,1,1]) => [1]
 ```
 
-### getBrowserInfo
+### removeStorage
                
-   获取浏览器相关信息
+   删除
   
   ```javascript
   wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @return: undefined
  * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
+  removeStorage('test')
+  => undefined
+```
+
+### saveStorage
+               
+   保存
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:56:29
+ * @param {key}
+ * @param {value}
+ * @param {isJson}
+ * @return: undefined
+ * @example: 
+  saveStorage('test', '001')
+  => undefined
+```
+
+### getStorage
+               
+   获取
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:00:37
+ * @param {key}
+ * @return: String
+ * @example: 
+  getStorage('test')
+  => '001'
+```
+
+### isSupportStorage
+               
+   是否支持local
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:01:43
+ * @param 
+ * @return: Boolean
+ * @example: 
+  isSupportStorage()
+  => true
 ```
 
 ### getCookie
@@ -406,20 +410,6 @@ or
  * @return: string
  * @example: 
   getCookie('name') => 123
-```
-
-### osInfo
-               
-   获取用户系统平台信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
 ```
 
 ### dateInterval
@@ -544,6 +534,20 @@ or
  * @param {*}
  * @return {*}
  * @example:
+```
+
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
 ```
 
 ### download
@@ -809,6 +813,19 @@ fetch(getFormData(req))
  * @example: deepClone(obj) => new obj
 ```
 
+### oneClickToMoreClick
+               
+   单击事件转换为多击事件
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-05-04 14:20:22
+ * @param {*} wait
+ * @param {array} events
+ * @return {*}
+ * @example: oneClickToMoreClick(300, clickOneCallBack, clickTwoCallBack, clickThreeCallBack, clickFourCallBack, ...)
+```
+
 ### sleep
                
    休眠多少毫秒
@@ -964,60 +981,6 @@ trailing，函数在每个等待时延的结束被调用，默认值是true
 leading-false，trailing-true：默认情况，即在延时结束后才会调用函数
 leading-true，trailing-true：在延时开始时就调用，延时结束后也会调用
 leading-true, trailing-false：只在延时开始时调用
-```
-
-### getUrlQuery
-               
-   获取浏览器url中的一个参数
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### everyTrim
-               
-   去除值类型为string的前后空格
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 22:11:23
- * @param {Array} data
- * @return {*}
- * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
-```
-
-### formatQueryParam
-               
-   格式化GET请求的请求头
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  formatQueryParam({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-               
-   处理url参数(window.location.search)转换为 {key: value}
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
 ```
 
 ### isUserId
@@ -1243,6 +1206,60 @@ leading-true, trailing-false：只在延时开始时调用
  isFalsy(0) => false
  isFalsy(null) => true
  isFalsy(undefined) => true
+```
+
+### getUrlQuery
+               
+   获取浏览器url中的一个参数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### everyTrim
+               
+   去除值类型为string的前后空格
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+```
+
+### formatQueryParam
+               
+   格式化GET请求的请求头
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  formatQueryParam({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+               
+   处理url参数(window.location.search)转换为 {key: value}
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈

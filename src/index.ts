@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2022-04-10 22:29:15
+ * @LastEditTime: 2022-05-04 14:21:32
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -116,6 +116,8 @@ export * from "./dom/index";
 export * from "./sleep/index";
 export * from "./form/index";
 export * from "./blood/index";
+export * from "./other/index";
+
 
 export { Queue } from './queue/index'
 export { EventBus } from './eventBus/index'
