@@ -62,17 +62,6 @@ or
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
 - [uniqueArray](#uniqueArray) undefined
 
-###  数据持久化，缓存
-
-- [removeStorage](#removeStorage)  删除
-- [saveStorage](#saveStorage)  保存
-- [getStorage](#getStorage)  获取
-- [isSupportStorage](#isSupportStorage)  是否支持local
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
-
 ###  血袋相关工具函数
 
 - [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
@@ -83,6 +72,17 @@ or
 ###  浏览器相关
 
 - [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
+
+###  数据持久化，缓存
+
+- [removeStorage](#removeStorage)  删除
+- [saveStorage](#saveStorage)  保存
+- [getStorage](#getStorage)  获取
+- [isSupportStorage](#isSupportStorage)  是否支持local
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -101,6 +101,10 @@ or
 
 - [decoratorNonenumerable](#decoratorNonenumerable)  decoratorNonenumerable
 
+###  用户设备相关（客户端系统）
+
+- [osInfo](#osInfo)  获取用户系统平台信息
+
 ###  浏览器 DOM 相关
 
 - [download](#download)  下载一个链接文档
@@ -109,10 +113,6 @@ or
 
 ### 
 
-
-###  用户设备相关（客户端系统）
-
-- [osInfo](#osInfo)  获取用户系统平台信息
 
 ### 
 
@@ -168,6 +168,13 @@ or
 
 - [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
 
+###  url处理相关
+
+- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
+- [everyTrim](#everyTrim)  去除值类型为string的前后空格
+- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
+- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
+
 ###  校验相关
 
 - [isUserId](#isUserId)  身份证号码校验（精准）
@@ -187,81 +194,7 @@ or
 - [isEmail](#isEmail)  校验是否为邮箱地址
 - [isFalsy](#isFalsy)  判断 js是否是false， 0除外。
 
-###  url处理相关
-
-- [getUrlQuery](#getUrlQuery)  获取浏览器url中的一个参数
-- [everyTrim](#everyTrim)  去除值类型为string的前后空格
-- [formatQueryParam](#formatQueryParam)  格式化GET请求的请求头
-- [urlByObj](#urlByObj)  处理url参数(window.location.search)转换为 {key: value}
-
 ## API 说明
-
-### formatRhBloodGroup
-               
-   转换Rh血型
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 13:44:36
- * @param {*}
- * @return {*}
- * @example:  formatRhBloodGroup('**D**') => 阳性
- * formatRhBloodGroup('+') => 阳性
- *
-```
-
-### isRhNegative
-               
-   是否阴性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:31
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### isRhPositive
-               
-   是否阳性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:19
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### sorterCallBack
-               
-   sort []
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 14:12:06
- * @param {string} key
- * @return {*}
- * @example:
- * const arr = [{name: '666'}, {name: '333'}]
- * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
- * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
-```
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
 
 ### doubleRanking
                
@@ -341,6 +274,59 @@ or
   uniqueArray([1,1,1,1,1]) => [1]
 ```
 
+### formatRhBloodGroup
+               
+   转换Rh血型
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+ * formatRhBloodGroup('+') => 阳性
+ *
+```
+
+### isRhNegative
+               
+   是否阴性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:31
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### isRhPositive
+               
+   是否阳性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:19
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+```
+
 ### removeStorage
                
    删除
@@ -410,6 +396,20 @@ or
  * @return: string
  * @example: 
   getCookie('name') => 123
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### dateInterval
@@ -983,6 +983,60 @@ leading-true，trailing-true：在延时开始时就调用，延时结束后也�
 leading-true, trailing-false：只在延时开始时调用
 ```
 
+### getUrlQuery
+               
+   获取浏览器url中的一个参数
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:46:28
+ * @param {name}
+ * @return: String
+ * @example: 
+  getUrlQuery(age)
+  => 25
+```
+
+### everyTrim
+               
+   去除值类型为string的前后空格
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-08-21 22:11:23
+ * @param {Array} data
+ * @return {*}
+ * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
+```
+
+### formatQueryParam
+               
+   格式化GET请求的请求头
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:47:40
+ * @param {obj}
+ * @return: String
+ * @example: 
+  formatQueryParam({name: 1, value: 123})
+  =>  "name=1&value=123"
+```
+
+### urlByObj
+               
+   处理url参数(window.location.search)转换为 {key: value}
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 13:48:36
+ * @param {params}
+ * @return: Object
+ * @example: 
+  urlByObj(?ie=UTF-8&wd=asd)
+  => {ie: UTF-8, wd: asd}
+```
+
 ### isUserId
                
    身份证号码校验（精准）
@@ -1206,60 +1260,6 @@ leading-true, trailing-false：只在延时开始时调用
  isFalsy(0) => false
  isFalsy(null) => true
  isFalsy(undefined) => true
-```
-
-### getUrlQuery
-               
-   获取浏览器url中的一个参数
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:46:28
- * @param {name}
- * @return: String
- * @example: 
-  getUrlQuery(age)
-  => 25
-```
-
-### everyTrim
-               
-   去除值类型为string的前后空格
-  
-  ```javascript
-  wuxh
- * @Date: 2021-08-21 22:11:23
- * @param {Array} data
- * @return {*}
- * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
-```
-
-### formatQueryParam
-               
-   格式化GET请求的请求头
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:47:40
- * @param {obj}
- * @return: String
- * @example: 
-  formatQueryParam({name: 1, value: 123})
-  =>  "name=1&value=123"
-```
-
-### urlByObj
-               
-   处理url参数(window.location.search)转换为 {key: value}
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 13:48:36
- * @param {params}
- * @return: Object
- * @example: 
-  urlByObj(?ie=UTF-8&wd=asd)
-  => {ie: UTF-8, wd: asd}
 ```
 
 ## 建议，交流，推荐，反馈

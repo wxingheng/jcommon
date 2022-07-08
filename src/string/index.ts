@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2021-11-10 11:35:33
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-07-08 13:54:21
+ * @LastEditors: wxingheng
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -122,7 +122,7 @@ export const uniqueId = function () {
  * versionCount('0.2.9') => '0.3.0'
  * versionCount('0.2.9.1') => '0.2.9.2'
  */
-export const versionCount = function (version: string): string {
+export const versionCount = function (version: string, maxNum = 99): string {
   let s = version.split('.').map(v => Number(v))
   const nan = s.some(v => isNaN(v))
   let c = true
@@ -132,7 +132,7 @@ export const versionCount = function (version: string): string {
   s = s.reverse()
   s.forEach((v, i) => {
     if (c) {
-      if (v >= 99) {
+      if (v >= maxNum) {
         s[i] = 0
       } else {
         c = false
