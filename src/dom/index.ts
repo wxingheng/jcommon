@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 23:24:46
- * @LastEditTime: 2021-09-02 22:22:13
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-07-25 18:34:22
+ * @LastEditors: wxingheng
  * @Description: 浏览器 DOM 相关
  * @FilePath: /jcommon/src/dom/index.ts
  */
@@ -19,7 +19,7 @@
  * 下载后端返回的流
  *
  */
-export const download = function (link: string, name: string) {
+export const download = function (link: string, name: string): any {
   if (!name) {
     name = link.slice(link.lastIndexOf('/') + 1)
   }
@@ -44,7 +44,7 @@ export const download = function (link: string, name: string) {
  * downloadFile('1.txt','lalalallalalla')
    downloadFile('1.json',JSON.stringify({name:'hahahha'}))
  */
-export const downloadFile = function (name: string, content: BlobPart) {
+export const downloadFile = function (name: string, content: BlobPart): any {
   if (typeof name == 'undefined') {
     throw new Error('The first parameter name is a must')
   }
@@ -80,3 +80,46 @@ export const copyToBoar = function (value: string): boolean {
   document.body.removeChild(element)
   return false
 }
+
+
+/**
+ * @description: 拖拽滚动
+ * @author: wxingheng
+ * @Date: 2022-07-15 18:16:15
+ * @param {*} scrollDom
+ * @return {*}
+ * @example: 待增加惯性效果
+ */
+ export const dragScroll = function(scrollDom: any): object {
+  let startX = 0;
+  let startY = 0;
+  let gapX = 0;
+  let gapY = 0;
+  scrollDom.addEventListener("mousedown", start);
+  function start(event: { button: number; clientX: number; clientY: number }) {
+    if (event.button === 0) {
+      gapX = event.clientX;
+      gapY = event.clientY;
+      startX = scrollDom.scrollLeft || 0;
+      startY = scrollDom.scrollTop || 0;
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", stop);
+      scrollDom.style.cursor = "grab";
+    }
+    return false;
+  }
+  function move(event: { clientX: number; clientY: number }) {
+    scrollDom.scrollTo(startX - (event.clientX - gapX), startY - (event.clientY - gapY));
+    return false;
+  }
+  function stop() {
+    document.removeEventListener("mousemove", move);
+    document.removeEventListener("mouseup", stop);
+  }
+  return {
+    destroy: () => {
+      scrollDom.removeEventListener("mousedown", start);
+      scrollDom.style.cursor = "";
+    },
+  };
+};

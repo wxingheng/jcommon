@@ -1,10 +1,10 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2021-08-22 12:35:46
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-07-25 18:40:05
+ * @LastEditors: wxingheng
  * @Description:
- * @FilePath: /jcommon/jcommon/pack/base.md
+ * @FilePath: /jcommon/pack/base.md
  -->
 
 # jcommon
@@ -51,7 +51,9 @@ or
 - [x] 支持 npm 安装方式
 - [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
 - [x] TypeScript支持
-- [ ] dom 
+- [x] dom
+- [ ] 增加单元测试
+
 
 ## API 目录
 
@@ -60,7 +62,28 @@ or
 - [doubleRanking](#doubleRanking)  处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
 - [randomData](#randomData)  产生随机数据
 - [arrByObj](#arrByObj)  数值转对象 （常用于处理后台返回的枚举转换，工作中很常用）
-- [uniqueArray](#uniqueArray) undefined
+- [uniqueArray](#uniqueArray)  简单数组去重，Set 处理
+  * @author: wuxh
+  * @Date: 2021-09-02 22:41:08
+  * @param {string} arr
+  * @return {*}
+  * @example: 
+  uniqueArray([1,1,1,1,1]) => [1]; uniqueArray([1,2,3,4,5]) => [1,2,3,4,5]; 
+  */
+ export const uniqueArray = function uniqueArray(arr: string | Iterable<any> | null | undefined) {
+  if (!Array.isArray(arr)) {
+      throw new Error('The first parameter must be an array')
+  }
+  if (arr.length == 1) {
+      return arr
+  }
+  return [...new Set(arr)]
+}
+
+
+/**
+ * @description: 数组交集
+- [difference](#difference)  数组元素是否相同
 
 ###  血袋相关工具函数
 
@@ -69,16 +92,16 @@ or
 - [isRhPositive](#isRhPositive)  是否阳性
 - [sorterCallBack](#sorterCallBack)  sort []
 
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ### 
 
@@ -110,6 +133,7 @@ or
 - [download](#download)  下载一个链接文档
 - [downloadFile](#downloadFile)  在浏览器中自定义下载一些内容
 - [copyToBoar](#copyToBoar)  复制内容到剪贴板
+- [dragScroll](#dragScroll)  拖拽滚动
 
 ### 
 
@@ -140,8 +164,9 @@ or
 - [isEmptyObject](#isEmptyObject)  判断对象是否为空
 - [cleanObject](#cleanObject)  cleanObject 去除对象中value为空(null,undefined,'')的属性
 - [deepClone](#deepClone)  深克隆 deepClone
+- [isEqual](#isEqual)  判断两个对象是否相等
 
-### 
+###  暂时未归类的方法
 
 - [oneClickToMoreClick](#oneClickToMoreClick)  单击事件转换为多击事件
 
@@ -151,6 +176,10 @@ or
 ###  休眠
 
 - [sleep](#sleep)  休眠多少毫秒
+
+###  节流
+
+- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
 
 ###  字符串处理相关
 
@@ -163,10 +192,7 @@ or
 - [getExt](#getExt)  获取文件后缀名
 - [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 - [endWith](#endWith)  字符串判断结尾
-
-###  节流
-
-- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
+- [similar](#similar)  计算两个字符串相似度
 
 ###  url处理相关
 
@@ -263,7 +289,27 @@ or
 
 ### uniqueArray
                
-  undefined
+   简单数组去重，Set 处理
+  * @author: wuxh
+  * @Date: 2021-09-02 22:41:08
+  * @param {string} arr
+  * @return {*}
+  * @example: 
+  uniqueArray([1,1,1,1,1]) => [1]; uniqueArray([1,2,3,4,5]) => [1,2,3,4,5]; 
+  */
+ export const uniqueArray = function uniqueArray(arr: string | Iterable<any> | null | undefined) {
+  if (!Array.isArray(arr)) {
+      throw new Error('The first parameter must be an array')
+  }
+  if (arr.length == 1) {
+      return arr
+  }
+  return [...new Set(arr)]
+}
+
+
+/**
+ * @description: 数组交集
   
   ```javascript
   wuxh
@@ -271,7 +317,34 @@ or
   * @param {string} arr
   * @return {*}
   * @example: 
-  uniqueArray([1,1,1,1,1]) => [1]
+  uniqueArray([1,1,1,1,1]) => [1]; uniqueArray([1,2,3,4,5]) => [1,2,3,4,5];
+```
+
+### difference
+               
+   数组元素是否相同
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-05-18 10:56:47
+ * @param {*} a
+ * @param {*} b
+ * @return {*} Array
+ * @example: difference([2,3,4,5], [1,2,3,4]) => [5, 1] ; difference([1,2,3,4], [2,3,4,5]) => [1, 5]; difference([1,2,3,4], [1,2,3,4]) => []; difference([1,2,3,4], []) => [1, 2, 3, 4]
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### formatRhBloodGroup
@@ -385,33 +458,6 @@ or
   => true
 ```
 
-### getCookie
-               
-   获取cookie值
-  
-  ```javascript
-  wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
-```
-
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
 ### dateInterval
                
    获取两个时间的间隔
@@ -500,6 +546,19 @@ or
  * @param {*} str YYYY-MM-DD mm:ss
  * @return {*} number
  * @example:
+```
+
+### getCookie
+               
+   获取cookie值
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
 ```
 
 ### debounce
@@ -593,6 +652,18 @@ or
  * @return {*} boolean
  * @example: 
  copyToBoard('lalallala') => true // 如果复制成功返回true
+```
+
+### dragScroll
+               
+   拖拽滚动
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-07-15 18:16:15
+ * @param {*} scrollDom
+ * @return {*}
+ * @example: 待增加惯性效果
 ```
 
 ### getFormData
@@ -710,6 +781,19 @@ fetch(getFormData(req))
   isAppleMobileDevice() => true
 ```
 
+### oneClickToMoreClick
+               
+   单击事件转换为多击事件
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-05-04 14:20:22
+ * @param {*} wait
+ * @param {array} events
+ * @return {*}
+ * @example: oneClickToMoreClick(300, clickOneCallBack, clickTwoCallBack, clickThreeCallBack, clickFourCallBack, ...)
+```
+
 ### getV
                
    获取多级数据避免出错（超级好用）
@@ -813,17 +897,17 @@ fetch(getFormData(req))
  * @example: deepClone(obj) => new obj
 ```
 
-### oneClickToMoreClick
+### isEqual
                
-   单击事件转换为多击事件
+   判断两个对象是否相等
   
   ```javascript
   wxingheng
- * @Date: 2022-05-04 14:20:22
- * @param {*} wait
- * @param {array} events
+ * @Date: 2022-05-13 16:35:33
+ * @param {any} a
+ * @param {any} b
  * @return {*}
- * @example: oneClickToMoreClick(300, clickOneCallBack, clickTwoCallBack, clickThreeCallBack, clickFourCallBack, ...)
+ * @example: isEqual({a: 1}, {a: 1}) => true; isEqual({a: 1}, {a: 2}) => false; isEqual({a: 1}, {b: 1}) => false
 ```
 
 ### sleep
@@ -960,6 +1044,20 @@ fetch(getFormData(req))
  * @param {string} endStr
  * @return {*}
  * @example: endWith('1231231', '21') => false ;  endWith('1231231', '31') => true
+```
+
+### similar
+               
+   计算两个字符串相似度
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-07-25 10:07:23
+ * @param s 文本1
+ * @param t 文本2
+ * @param f 小数位精确度，默认2位
+ * @returns {string|number|*} 百分数前的数值，最大100. 比如 ：90.32
+ * @example: similar("12", "12") => 100 ; similar("12", "123") => 75 ; similar("12", "1234") => 50
 ```
 
 ### throttle

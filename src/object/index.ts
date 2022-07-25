@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2022-04-10 22:43:02
+ * @LastEditTime: 2022-07-25 18:31:18
  * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -210,3 +210,16 @@ export const deepClone = function (target: any) {
   // 返回最终结果
   return result
 }
+
+/**
+ * @description: 判断两个对象是否相等
+ * @author: wxingheng
+ * @Date: 2022-05-13 16:35:33
+ * @param {any} a
+ * @param {any} b
+ * @return {*}
+ * @example: isEqual({a: 1}, {a: 1}) => true; isEqual({a: 1}, {a: 2}) => false; isEqual({a: 1}, {b: 1}) => false
+ */
+ export const isEqual = function(a: any, b: any): boolean {
+  return JSON.stringify(a) === JSON.stringify(b);
+};

@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2021-09-02 22:44:25
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-07-25 18:32:52
+ * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -144,7 +144,7 @@ export const arrByObj = function (
   * @param {string} arr
   * @return {*}
   * @example: 
-  uniqueArray([1,1,1,1,1]) => [1]
+  uniqueArray([1,1,1,1,1]) => [1]; uniqueArray([1,2,3,4,5]) => [1,2,3,4,5]; 
   */
  export const uniqueArray = function uniqueArray(arr: string | Iterable<any> | null | undefined) {
   if (!Array.isArray(arr)) {
@@ -155,3 +155,34 @@ export const arrByObj = function (
   }
   return [...new Set(arr)]
 }
+
+
+/**
+ * @description: 数组交集
+ * @author: wxingheng
+ * @Date: 2022-05-18 10:56:47
+ * @param {*} a
+ * @param {*} b
+ * @return {*} Array
+ * @example: difference([2,3,4,5], [1,2,3,4]) => [5, 1] ; difference([1,2,3,4], [2,3,4,5]) => [1, 5]; difference([1,2,3,4], [1,2,3,4]) => []; difference([1,2,3,4], []) => [1, 2, 3, 4]
+ */
+ export const difference = function(a: Iterable<unknown> | null | undefined, b: Iterable<unknown> | null | undefined): Array<any> {
+  const set1 = new Set(a),
+    set2 = new Set(b);
+  return [...new Set([...set1].filter((x) => !set2.has(x))), ...new Set([...set2].filter((x) => !set1.has(x)))];
+};
+
+/**
+ * @description: 数组元素是否相同
+ * @author: wxingheng
+ * @Date: 2022-05-18 10:56:04
+ * @param {*} arr1
+ * @param {*} arr2
+ * @return {*}
+ * @example: arrayCompare([2,3,4,5], [5,4,3,2]) => true ; arrayCompare([2,3,4,5], [5,4,3,2,1]) => false; arrayCompare([2,3,4,5], []) => true; arrayCompare([], [1,2,3,4]) => false; arrayCompare([1,2,3,4], []) => true;
+ */
+ export const arrayCompare =function (arr1: any[], arr2: any[]): boolean{
+  return arr1.length === arr2.length &&
+  arr1.every((a: any) => arr2.some((b: any) => a === b)) &&
+  arr2.every((_b: any) => arr1.some((_a: any) => _a === _b));
+ }

@@ -1,9 +1,9 @@
 /*
  * @Author: wxingheng
  * @Date: 2022-05-04 11:40:27
- * @LastEditTime: 2022-05-04 14:22:31
+ * @LastEditTime: 2022-07-25 18:38:16
  * @LastEditors: wxingheng
- * @Description:
+ * @Description: 暂时未归类的方法
  * @FilePath: /jcommon/src/other/index.ts
  */
 

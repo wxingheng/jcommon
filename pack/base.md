@@ -1,10 +1,10 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2021-08-22 12:35:46
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-07-25 18:40:05
+ * @LastEditors: wxingheng
  * @Description:
- * @FilePath: /jcommon/jcommon/pack/base.md
+ * @FilePath: /jcommon/pack/base.md
  -->
 
 # jcommon
@@ -51,4 +51,6 @@ or
 - [x] 支持 npm 安装方式
 - [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
 - [x] TypeScript支持
-- [ ] dom 
+- [x] dom
+- [ ] 增加单元测试
+
