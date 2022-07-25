@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-07-25 18:40:05
+ * @LastEditTime: 2022-07-25 18:42:49
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -53,4 +53,6 @@ or
 - [x] TypeScript支持
 - [x] dom
 - [ ] 增加单元测试
+- [ ] 根据 .d.ts 文件自动生成文档
+
 
