@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-07-29 11:42:44
+ * @LastEditTime: 2022-07-29 18:00:17
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/README.md
@@ -54,6 +54,10 @@ or
 - [x] dom
 - [ ] 增加单元测试
 - [ ] 根据 .d.ts 文件自动生成文档
+- [ ] lint
+- [ ] typedoc
+
+
 
 
 
