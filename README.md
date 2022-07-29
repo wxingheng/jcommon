@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-07-25 18:40:05
+ * @LastEditTime: 2022-07-25 18:42:49
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -53,6 +53,8 @@ or
 - [x] TypeScript支持
 - [x] dom
 - [ ] 增加单元测试
+- [ ] 根据 .d.ts 文件自动生成文档
+
 
 
 ## API 目录
@@ -128,6 +130,9 @@ or
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
+### 
+
+
 ###  浏览器 DOM 相关
 
 - [download](#download)  下载一个链接文档
@@ -137,23 +142,12 @@ or
 
 ### 
 
-
-### 
-
 - [getFormData](#getFormData)  对象转化为FormData对象
 
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
 - [cutNumber](#cutNumber)  保留到小数点以后n位
-
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  对象相关（Object处理）
 
@@ -166,6 +160,14 @@ or
 - [deepClone](#deepClone)  深克隆 deepClone
 - [isEqual](#isEqual)  判断两个对象是否相等
 
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
+
 ###  暂时未归类的方法
 
 - [oneClickToMoreClick](#oneClickToMoreClick)  单击事件转换为多击事件
@@ -176,10 +178,6 @@ or
 ###  休眠
 
 - [sleep](#sleep)  休眠多少毫秒
-
-###  节流
-
-- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
 
 ###  字符串处理相关
 
@@ -193,6 +191,10 @@ or
 - [uuid](#uuid)  生成随机字符串,第一个参数指定位数，第二个字符串指定字符，都是可选参数，如果都不传，默认生成8位
 - [endWith](#endWith)  字符串判断结尾
 - [similar](#similar)  计算两个字符串相似度
+
+###  节流
+
+- [throttle](#throttle)  节流 多次调用方法，按照一定的时间间隔执行
 
 ###  url处理相关
 
@@ -333,20 +335,6 @@ or
  * @example: difference([2,3,4,5], [1,2,3,4]) => [5, 1] ; difference([1,2,3,4], [2,3,4,5]) => [1, 5]; difference([1,2,3,4], [1,2,3,4]) => []; difference([1,2,3,4], []) => [1, 2, 3, 4]
 ```
 
-### getBrowserInfo
-               
-   获取浏览器相关信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 11:53:35
- * @param {} 
- * @return: Object
- * @example: 
-  getBrowserInfo()
-  => {name: "Chrome", version: "81.0.4044.129"}
-```
-
 ### formatRhBloodGroup
                
    转换Rh血型
@@ -398,6 +386,20 @@ or
  * const arr = [{name: '666'}, {name: '333'}]
  * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
  * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+```
+
+### getBrowserInfo
+               
+   获取浏览器相关信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 11:53:35
+ * @param {} 
+ * @return: Object
+ * @example: 
+  getBrowserInfo()
+  => {name: "Chrome", version: "81.0.4044.129"}
 ```
 
 ### removeStorage
@@ -456,6 +458,19 @@ or
  * @example: 
   isSupportStorage()
   => true
+```
+
+### getCookie
+               
+   获取cookie值
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
 ```
 
 ### dateInterval
@@ -546,19 +561,6 @@ or
  * @param {*} str YYYY-MM-DD mm:ss
  * @return {*} number
  * @example:
-```
-
-### getCookie
-               
-   获取cookie值
-  
-  ```javascript
-  wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
 ```
 
 ### debounce
@@ -666,25 +668,6 @@ or
  * @example: 待增加惯性效果
 ```
 
-### getFormData
-               
-   对象转化为FormData对象
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:52:34
- * @param {object} object
- * @return {FormData}
- * @example: 
- let req={
-    file:xxx,
-    userId:1,
-    phone:'15198763636',
-    //...
-}
-fetch(getFormData(req))
-```
-
 ### scopeRandom
                
    范围随机整数
@@ -712,6 +695,25 @@ fetch(getFormData(req))
  * @return {*} Number
  * @example: 
  cutNumber('3123.22312') => 3123.22
+```
+
+### getFormData
+               
+   对象转化为FormData对象
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:52:34
+ * @param {object} object
+ * @return {FormData}
+ * @example: 
+ let req={
+    file:xxx,
+    userId:1,
+    phone:'15198763636',
+    //...
+}
+fetch(getFormData(req))
 ```
 
 ### isQQ

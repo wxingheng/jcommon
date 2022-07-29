@@ -1,0 +1,9 @@
+{
+    "name": "jcommon文档库",
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "out": "doc",
+    "includeVersion": true,
+    "disableSources": true
+}

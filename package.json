@@ -19,7 +19,8 @@
     "before:publish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
-    "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish"
+    "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
+    "typedoc": "typedoc"
   },
   "repository": {
     "type": "git",
@@ -58,13 +59,11 @@
     "jcommon-node": "^0.0.6",
     "rollup": "^1.30.1",
     "rollup-plugin-terser": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.25.3",
-    "typescript": "^3.7.5",
-    "webpack": "^4.46.0",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "typedoc": "^0.22.18",
+    "typescript": "^4.2.3",
+    "webpack": "^5.74.0",
     "webpack-cli": "^3.3.12"
   },
-  "time": "220725184019",
-  "dependencies": {
-    "jcommon": "^1.8.8"
-  }
+  "time": "220725184019"
 }
