@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-07-29 18:00:39
+ * @LastEditTime: 2022-08-09 09:36:48
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -56,4 +56,6 @@ or
 - [ ] 根据 .d.ts 文件自动生成文档
 - [ ] lint
 - [ ] typedoc
+- [ ] 文档自动部署，Github page
+
 

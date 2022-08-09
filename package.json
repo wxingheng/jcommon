@@ -20,7 +20,9 @@
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
-    "typedoc": "typedoc"
+    "typedoc": "typedoc",
+    "typedoc:dev": "typedoc  --watch"
+
   },
   "repository": {
     "type": "git",
