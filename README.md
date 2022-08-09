@@ -1,10 +1,10 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-07-29 18:00:17
+ * @LastEditTime: 2022-08-09 09:36:48
  * @LastEditors: wxingheng
  * @Description:
- * @FilePath: /jcommon/README.md
+ * @FilePath: /jcommon/pack/base.md
  -->
 
 # jcommon
@@ -56,12 +56,22 @@ or
 - [ ] 根据 .d.ts 文件自动生成文档
 - [ ] lint
 - [ ] typedoc
-
-
+- [ ] 文档自动部署，Github page
 
 
 
 ## API 目录
+
+###  血袋相关工具函数
+
+- [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
+- [isRhNegative](#isRhNegative)  是否阴性
+- [isRhPositive](#isRhPositive)  是否阳性
+- [sorterCallBack](#sorterCallBack)  sort []
+
+###  浏览器相关
+
+- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
 
 ###  数组方法 Array
 
@@ -91,27 +101,12 @@ or
  * @description: 数组交集
 - [difference](#difference)  数组元素是否相同
 
-###  血袋相关工具函数
-
-- [formatRhBloodGroup](#formatRhBloodGroup)  转换Rh血型
-- [isRhNegative](#isRhNegative)  是否阴性
-- [isRhPositive](#isRhPositive)  是否阳性
-- [sorterCallBack](#sorterCallBack)  sort []
-
 ###  数据持久化，缓存
 
 - [removeStorage](#removeStorage)  删除
 - [saveStorage](#saveStorage)  保存
 - [getStorage](#getStorage)  获取
 - [isSupportStorage](#isSupportStorage)  是否支持local
-
-###  浏览器相关
-
-- [getBrowserInfo](#getBrowserInfo)  获取浏览器相关信息
-
-### 
-
-- [getCookie](#getCookie)  获取cookie值
 
 ###  时间相关
 
@@ -121,6 +116,10 @@ or
 - [dateMonthDays](#dateMonthDays)  获取当前月份的天数
 - [timeFormat](#timeFormat)  时间个性化输出功能
 - [getCountDays](#getCountDays)  获取当前月份天数
+
+### 
+
+- [getCookie](#getCookie)  获取cookie值
 
 ###  防抖
 
@@ -134,9 +133,6 @@ or
 
 - [osInfo](#osInfo)  获取用户系统平台信息
 
-### 
-
-
 ###  浏览器 DOM 相关
 
 - [download](#download)  下载一个链接文档
@@ -146,12 +142,23 @@ or
 
 ### 
 
-- [getFormData](#getFormData)  对象转化为FormData对象
 
 ###  数处理相
 
 - [scopeRandom](#scopeRandom)  范围随机整数
 - [cutNumber](#cutNumber)  保留到小数点以后n位
+
+### 
+
+- [getFormData](#getFormData)  对象转化为FormData对象
+
+###  移动端相关
+
+- [isQQ](#isQQ)  是否是QQ平台
+- [isWX](#isWX)  是否是微信平台
+- [operattelecom](#operattelecom)  获取手机运营商
+- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
+- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
 
 ###  对象相关（Object处理）
 
@@ -164,17 +171,10 @@ or
 - [deepClone](#deepClone)  深克隆 deepClone
 - [isEqual](#isEqual)  判断两个对象是否相等
 
-###  移动端相关
-
-- [isQQ](#isQQ)  是否是QQ平台
-- [isWX](#isWX)  是否是微信平台
-- [operattelecom](#operattelecom)  获取手机运营商
-- [isAndroidMobileDevice](#isAndroidMobileDevice)  是否是安卓设备
-- [isAppleMobileDevice](#isAppleMobileDevice)  是否是苹果设备
-
 ###  暂时未归类的方法
 
 - [oneClickToMoreClick](#oneClickToMoreClick)  单击事件转换为多击事件
+- [moreClick](#moreClick)  单击事件转换为多击事件
 
 ###  Queue 队列
 
@@ -339,57 +339,17 @@ or
  * @example: difference([2,3,4,5], [1,2,3,4]) => [5, 1] ; difference([1,2,3,4], [2,3,4,5]) => [1, 5]; difference([1,2,3,4], [1,2,3,4]) => []; difference([1,2,3,4], []) => [1, 2, 3, 4]
 ```
 
-### formatRhBloodGroup
+### getCookie
                
-   转换Rh血型
+   获取cookie值
   
   ```javascript
   wuxh
- * @Date: 2021-09-07 13:44:36
- * @param {*}
- * @return {*}
- * @example:  formatRhBloodGroup('**D**') => 阳性
- * formatRhBloodGroup('+') => 阳性
- *
-```
-
-### isRhNegative
-               
-   是否阴性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:31
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### isRhPositive
-               
-   是否阳性
-  
-  ```javascript
-  wuxh
- * @Date: 2022-01-17 23:57:19
- * @param {string} input
- * @return {*}
- * @example:
-```
-
-### sorterCallBack
-               
-   sort []
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-07 14:12:06
- * @param {string} key
- * @return {*}
- * @example:
- * const arr = [{name: '666'}, {name: '333'}]
- * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
- * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
+ * @Date: 2020-06-09 09:28:06
+ * @param {type} 
+ * @return: string
+ * @example: 
+  getCookie('name') => 123
 ```
 
 ### getBrowserInfo
@@ -464,17 +424,57 @@ or
   => true
 ```
 
-### getCookie
+### formatRhBloodGroup
                
-   获取cookie值
+   转换Rh血型
   
   ```javascript
   wuxh
- * @Date: 2020-06-09 09:28:06
- * @param {type} 
- * @return: string
- * @example: 
-  getCookie('name') => 123
+ * @Date: 2021-09-07 13:44:36
+ * @param {*}
+ * @return {*}
+ * @example:  formatRhBloodGroup('**D**') => 阳性
+ * formatRhBloodGroup('+') => 阳性
+ *
+```
+
+### isRhNegative
+               
+   是否阴性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:31
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### isRhPositive
+               
+   是否阳性
+  
+  ```javascript
+  wuxh
+ * @Date: 2022-01-17 23:57:19
+ * @param {string} input
+ * @return {*}
+ * @example:
+```
+
+### sorterCallBack
+               
+   sort []
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-07 14:12:06
+ * @param {string} key
+ * @return {*}
+ * @example:
+ * const arr = [{name: '666'}, {name: '333'}]
+ * arr.sorterCallBackString('name') => [{name: '333'}, {name: '666'}]
+ * arr.sorterCallBackString('name', false) => [{name: '666'}, {name: '333'}]
 ```
 
 ### dateInterval
@@ -567,54 +567,6 @@ or
  * @example:
 ```
 
-### debounce
-               
-   debounce 防抖, 固定时间内持续触发，只执行最后一次
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function
- * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- *
-```
-
-### decoratorNonenumerable
-               
-   decoratorNonenumerable
-  
-  ```javascript
-  wuxh
- * @Date: 2021-11-10 11:43:45
- * @param {*}
- * @return {*}
- * @example:
-```
-
-### osInfo
-               
-   获取用户系统平台信息
-  
-  ```javascript
-  wuxh
- * @Date: 2020-05-06 12:07:03
- * @param {e}
- * @return: {os: "mac", version: "10.15.3"}
- * @example: 
-  osInfo()
-  => {os: "mac", version: "10.15.3"}
-```
-
 ### download
                
    下载一个链接文档
@@ -672,6 +624,73 @@ or
  * @example: 待增加惯性效果
 ```
 
+### debounce
+               
+   debounce 防抖, 固定时间内持续触发，只执行最后一次
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ *
+```
+
+### decoratorNonenumerable
+               
+   decoratorNonenumerable
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-11-10 11:43:45
+ * @param {*}
+ * @return {*}
+ * @example:
+```
+
+### osInfo
+               
+   获取用户系统平台信息
+  
+  ```javascript
+  wuxh
+ * @Date: 2020-05-06 12:07:03
+ * @param {e}
+ * @return: {os: "mac", version: "10.15.3"}
+ * @example: 
+  osInfo()
+  => {os: "mac", version: "10.15.3"}
+```
+
+### getFormData
+               
+   对象转化为FormData对象
+  
+  ```javascript
+  wuxh
+ * @Date: 2021-09-02 22:52:34
+ * @param {object} object
+ * @return {FormData}
+ * @example: 
+ let req={
+    file:xxx,
+    userId:1,
+    phone:'15198763636',
+    //...
+}
+fetch(getFormData(req))
+```
+
 ### scopeRandom
                
    范围随机整数
@@ -699,25 +718,6 @@ or
  * @return {*} Number
  * @example: 
  cutNumber('3123.22312') => 3123.22
-```
-
-### getFormData
-               
-   对象转化为FormData对象
-  
-  ```javascript
-  wuxh
- * @Date: 2021-09-02 22:52:34
- * @param {object} object
- * @return {FormData}
- * @example: 
- let req={
-    file:xxx,
-    userId:1,
-    phone:'15198763636',
-    //...
-}
-fetch(getFormData(req))
 ```
 
 ### isQQ
@@ -785,19 +785,6 @@ fetch(getFormData(req))
  * @return: boolean
  * @example: 
   isAppleMobileDevice() => true
-```
-
-### oneClickToMoreClick
-               
-   单击事件转换为多击事件
-  
-  ```javascript
-  wxingheng
- * @Date: 2022-05-04 14:20:22
- * @param {*} wait
- * @param {array} events
- * @return {*}
- * @example: oneClickToMoreClick(300, clickOneCallBack, clickTwoCallBack, clickThreeCallBack, clickFourCallBack, ...)
 ```
 
 ### getV
@@ -1064,6 +1051,47 @@ fetch(getFormData(req))
  * @param f 小数位精确度，默认2位
  * @returns {string|number|*} 百分数前的数值，最大100. 比如 ：90.32
  * @example: similar("12", "12") => 100 ; similar("12", "123") => 75 ; similar("12", "1234") => 50
+```
+
+### oneClickToMoreClick
+               
+   单击事件转换为多击事件
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-05-04 14:20:22
+ * @param {*} wait
+ * @param {array} events
+ * @return {*}
+ * @example: 
+ *    // 连续点击一次触发，连续点击两次触发，连续点击三次触发
+        var oneClickToMoreClickCallBack = jcommon.oneClickToMoreClick(300, () => {
+            console.log(111)
+        }, () => {
+            console.log(222)
+        }, ()=> {
+            console.log(333)
+        })
+        dom.addEventListener('click', oneClickToMoreClickCallBack);
+```
+
+### moreClick
+               
+   单击事件转换为多击事件
+  
+  ```javascript
+  wxingheng
+ * @Date: 2022-08-09 14:03:34
+ * @param {Function} fun 回调函数
+ * @param {*} n 连续几次触发才触发回调函数
+ * @param {*} wait 两次之间的间隔时间
+ * @return {*}
+ * @example:  const dobuleClick = moreClick(handleClick)
+    // 连续点击三次触发
+        var moreClickCallBack = jcommon.moreClick(() => {
+            console.log("moreClickCallBack")
+        }, 3)
+        dom.addEventListener('click', moreClickCallBack);
 ```
 
 ### throttle

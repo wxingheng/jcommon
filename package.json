@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.9.13",
+  "version": "1.9.15",
   "description": "JavaScript 常用纯函数工具库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -22,7 +22,6 @@
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
     "typedoc": "typedoc",
     "typedoc:dev": "typedoc  --watch"
-
   },
   "repository": {
     "type": "git",
@@ -67,5 +66,5 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^3.3.12"
   },
-  "time": "220725184019"
+  "time": "220809142507"
 }
