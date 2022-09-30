@@ -1,14 +1,13 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 22:49:28
- * @LastEditTime: 2021-09-22 23:17:05
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-09-30 11:05:29
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/eventBus/index.ts
  */
 
 import { decoratorNonenumerable } from '../decorator/index'
-
 
 /**
  * @description: EventBus  class
@@ -16,7 +15,7 @@ import { decoratorNonenumerable } from '../decorator/index'
  * @Date: 2021-08-24 11:19:07
  * @example: const eventBus = new EventBus()
  */
- export class EventBus {
+export class EventBus {
   private listeners: { [x: string]: any }
   private maxListener: number
 
@@ -88,4 +87,3 @@ import { decoratorNonenumerable } from '../decorator/index'
 }
 
 // console.log('EventBus', new EventBus().emit)
-

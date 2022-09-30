@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2022-08-09 09:36:48
+ * @LastEditTime: 2022-09-30 14:42:07
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -59,3 +59,6 @@ or
 - [ ] 文档自动部署，Github page
 
 
+## 建议，交流，推荐，反馈
+
+联系我 wxingheng@outlook.com

@@ -1,13 +1,13 @@
 /*
  * @Author: wxingheng
  * @Date: 2022-05-04 11:40:27
- * @LastEditTime: 2022-08-09 14:22:48
+ * @LastEditTime: 2022-09-30 11:33:43
  * @LastEditors: wxingheng
  * @Description: 暂时未归类的方法
  * @FilePath: /jcommon/src/other/index.ts
  */
 
-import { isFunc } from "../index";
+import { isFunc, sleep } from '../index'
 
 /**
  * @description: 单击事件转换为多击事件
@@ -27,29 +27,31 @@ import { isFunc } from "../index";
         })
         dom.addEventListener('click', oneClickToMoreClickCallBack);
  */
-export const oneClickToMoreClick = function(wait = 300, ...events: Array<Function>): Function {
-  let timer: any = null;
-  let lastTime = 0;
-  let count = 0;
+export const oneClickToMoreClick = function (
+  wait = 300,
+  ...events: Array<Function>
+): Function {
+  let timer: any = null
+  let lastTime = 0
+  let count = 0
   return (...args: any[]) => {
-    clearTimeout(timer);
-    const currentTime = new Date().getTime();
-    count = currentTime - lastTime < wait ? count + 1 : 0;
-    lastTime = new Date().getTime();
+    clearTimeout(timer)
+    const currentTime = new Date().getTime()
+    count = currentTime - lastTime < wait ? count + 1 : 0
+    lastTime = new Date().getTime()
     events.forEach((event, i) => {
-      if(i === count){
+      if (i === count) {
         timer = setTimeout(() => {
-          count = 0;
-          lastTime = 0;
-          if(isFunc(event)){
-            event(...args);
-         } 
-        }, wait);
+          count = 0
+          lastTime = 0
+          if (isFunc(event)) {
+            event(...args)
+          }
+        }, wait)
       }
     })
-  };
-};
-
+  }
+}
 
 /**
  * @description: 单击事件转换为多击事件
@@ -66,23 +68,73 @@ export const oneClickToMoreClick = function(wait = 300, ...events: Array<Functio
         }, 3)
         dom.addEventListener('click', moreClickCallBack);
  */
-export const moreClick = function(fun: Function, n = 2,  wait = 300) {
-  let timer:any = null;
-  let lastTime = 0;
-  let count = 0;
+export const moreClick = function (fun: Function, n = 2, wait = 300) {
+  let timer: any = null
+  let lastTime = 0
+  let count = 0
   return (...args: any[]) => {
-    clearTimeout(timer);
-    const currentTime = new Date().getTime();
-    count = currentTime - lastTime < wait ? count + 1 : 0;
-    lastTime = new Date().getTime();
-    if(count === n){
+    clearTimeout(timer)
+    const currentTime = new Date().getTime()
+    count = currentTime - lastTime < wait ? count + 1 : 0
+    lastTime = new Date().getTime()
+    if (count === n) {
       timer = setTimeout(() => {
-        count = 0;
-        lastTime = 0;
-       if(isFunc(fun)){
-          fun(...args);
-       } 
-    }, wait);
+        count = 0
+        lastTime = 0
+        if (isFunc(fun)) {
+          fun(...args)
+        }
+      }, wait)
     }
   }
 }
+
+/**
+ * @description: 产生一个随机颜色
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:13:13
+ * @return {*}
+ * @example: randomColor() => "rgba(107, 35, 72, 1)";
+ */
+export const randomColor = function (): any {
+  return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    Math.random() * 255
+  )}, ${Math.floor(Math.random() * 255)}, 1)`
+}
+
+/**
+ * @description: 比例计算
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:13:27
+ * @param {number} value 当前值
+ * @param {number} source  当前值所在的区间
+ * @param {number} target 目标区间
+ * @param {any} toFixedLength 保留小数位数
+ * @return {*}
+ * @example:  scaleLinear(50, 100, 10, 2) => 5; scaleLinear(50, 100, 10, 0) => 5;
+ */
+export const scaleLinear = function (
+  value: number,
+  source: number,
+  target: number,
+  toFixedLength: any = 2
+): any {
+  return ((value / source) * target).toFixed(toFixedLength)
+}
+
+
+/**
+ * @description: 转换请求为慢响应
+ * @param {*} func 请求函数
+ * @param {*} fastestTime 最快响应时间
+ * @return {*}
+ * @example: const data = await fetchToSlow(1000 * 2)(getKgDetail(kg_id));
+ */
+ export const fetchToSlow = function(fastestTime: number | undefined): Function{
+  return (func: any): any =>
+    new Promise((resolve) => {
+    Promise.all([func, sleep(fastestTime)]).then((args) => {
+      resolve(args[0]);
+    });
+  });
+ }

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 23:24:46
- * @LastEditTime: 2022-07-25 18:34:22
+ * @LastEditTime: 2022-09-30 11:34:13
  * @LastEditors: wxingheng
  * @Description: 浏览器 DOM 相关
  * @FilePath: /jcommon/src/dom/index.ts
@@ -123,3 +123,80 @@ export const copyToBoar = function (value: string): boolean {
     },
   };
 };
+
+/**
+ * @description: 获取图片的 base64
+ * @author: wxingheng
+ * @Date: 2022-09-30 10:53:33
+ * @param {File} file
+ * @return {*}
+ * @example: getBase64(file).then(res => console.log(res))
+ */
+export const getBase64 = function(file: File): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+/**
+ * @description: 前端文件导入，JSON文件导入
+ * @author: wxingheng
+ * @Date: 2022-09-30 10:57:58
+ * @param {*} Object
+ * @return {*}
+ * @example: importJson() => {name: 'wxh'}
+ */
+export const importJson = function(): Object{
+return new Promise((resolve) => {
+  let input: any = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json";
+  input.onchange = (event: any) => {
+    let files = event.target.files;
+    if (!files || !files.length) {
+      input = null;
+      throw new Error("No files");
+    }
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      try {
+        let config = JSON.parse(event.target.result);
+        console.log(config);
+        input = null;
+        resolve(config);
+      } catch (e) {
+        input = null;
+        resolve(false);
+      }
+    };
+    reader.readAsText(files[0]);
+  };
+  input.click();
+});
+}
+  
+
+
+  /**
+   * @description: JSON 对象导出为.json文件
+   * @author: wxingheng
+   * @Date: 2022-09-30 11:00:54
+   * @param {any} data
+   * @param {*} name
+   * @return {*}
+   * @example: 
+   */
+  export const exportJson = function(data: any, name = "data"): any {
+    let a: any = document.createElement("a");
+    try {
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: "application/json" }));
+      a.download = `${name}.json`;
+      a.click();
+      a = null;
+    } catch (error) {
+      a = null;
+    }
+  }

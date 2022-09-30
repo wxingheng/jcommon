@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2022-07-25 18:19:41
+ * @LastEditTime: 2022-09-30 11:34:36
  * @LastEditors: wxingheng
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -193,9 +193,9 @@ export const uuid = function (length: number, chars: string | any[]): string {
  * @param {string} str
  * @param {string} endStr
  * @return {*}
- * @example: endWith('1231231', '21') => false ;  endWith('1231231', '31') => true 
+ * @example: endWith('1231231', '21') => false ;  endWith('1231231', '31') => true
  */
-export const endWith = function(str: string, endStr: string):boolean {
+export const endWith = function (str: string, endStr: string): boolean {
   var d = str.length - endStr.length
   return d >= 0 && str.lastIndexOf(endStr) == d
 }
@@ -210,43 +210,64 @@ export const endWith = function(str: string, endStr: string):boolean {
  * @returns {string|number|*} 百分数前的数值，最大100. 比如 ：90.32
  * @example: similar("12", "12") => 100 ; similar("12", "123") => 75 ; similar("12", "1234") => 50
  */
- export const similar = function(s: string, t: string, f = 2): number {
+export const similar = function (s: string, t: string, f = 2): number {
   if (!s || !t) {
-    return 0;
+    return 0
   }
   if (s === t) {
-    return 100;
+    return 100
   }
-  var l = s.length > t.length ? s.length : t.length;
-  var n = s.length;
-  var m = t.length;
-  var d: any = [];
+  var l = s.length > t.length ? s.length : t.length
+  var n = s.length
+  var m = t.length
+  var d: any = []
   var min = function (a: number, b: number, c: string | number) {
-    return a < b ? (a < c ? a : c) : b < c ? b : c;
-  };
-  let i: number, j: number, si: any, tj: any, cost: number;
-  if (n === 0) return m;
-  if (m === 0) return n;
+    return a < b ? (a < c ? a : c) : b < c ? b : c
+  }
+  let i: number, j: number, si: any, tj: any, cost: number
+  if (n === 0) return m
+  if (m === 0) return n
   for (i = 0; i <= n; i++) {
-    d[i] = [];
-    d[i][0] = i;
+    d[i] = []
+    d[i][0] = i
   }
   for (j = 0; j <= m; j++) {
-    d[0][j] = j;
+    d[0][j] = j
   }
   for (i = 1; i <= n; i++) {
-    si = s.charAt(i - 1);
+    si = s.charAt(i - 1)
     for (j = 1; j <= m; j++) {
-      tj = t.charAt(j - 1);
+      tj = t.charAt(j - 1)
       if (si === tj) {
-        cost = 0;
+        cost = 0
       } else {
-        cost = 1;
+        cost = 1
       }
-      d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost)
     }
   }
-  let res = (1 - d[n][m] / l) * 100;
+  let res = (1 - d[n][m] / l) * 100
 
-  return Number(res.toFixed(f));
-};
+  return Number(res.toFixed(f))
+}
+
+/**
+ * @description: 计算文本长度（中文算两个字符，英文算一个字符）
+ * @author: wxingheng
+ * @Date: 2022-09-30 10:49:41
+ * @param {string} str
+ * @return {number}
+ * @example: getStringLen("阿斯顿发123") => 11 ; getStringLen("asd123") => 6 ; getStringLen("asd123顿发") => 10
+ */
+export const getStringLen = function (str: string): number {
+  if (!str) {
+    return 0
+  }
+  const len = str.length
+  str = str.toString()
+  let realLen = 0
+  for (let i = 0; i < len; i++) {
+    realLen += str.charCodeAt(i) < 0 || str.charCodeAt(i) > 255 ? 2 : 1
+  }
+  return realLen
+}

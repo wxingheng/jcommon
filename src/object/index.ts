@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2022-07-25 18:31:18
+ * @LastEditTime: 2022-09-30 11:58:10
  * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -220,6 +220,90 @@ export const deepClone = function (target: any) {
  * @return {*}
  * @example: isEqual({a: 1}, {a: 1}) => true; isEqual({a: 1}, {a: 2}) => false; isEqual({a: 1}, {b: 1}) => false
  */
+
  export const isEqual = function(a: any, b: any): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
 };
+
+
+/**
+ * @description: 将list转换为树结构
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:37:32
+ * @return {*}
+ * @example: convertDataToTree(data) => treeData
+ */
+export const convertDataToTree = (
+  data: any[],
+  id: string = "id",
+  pid: string = "pid",
+  children: string = "children"
+): any[] => {
+  const result: any[] = [];
+  if (!Array.isArray(data)) {
+    return result;
+  }
+  const map: any = {};
+  data.forEach((item) => {
+    map[item[id]] = item;
+  });
+  data.forEach((item) => {
+    const parent = map[item[pid]];
+    if (parent) {
+      (parent[children] || (parent[children] = [])).push(item);
+    } else {
+      result.push(item);
+    }
+  });
+  return result;
+};
+
+/**
+ * @description: 将树结构转换为list
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:40:43
+ * @param {any} tree 树结构
+ * @param {string} children 子节点字段
+ * @return {*}
+ * @example: convertTreeToList (treeData) => listData
+ */
+export const convertTreeToList = (tree: any[], children: string = "children"): any[] => {
+  let list: any[] = [];
+  let index = 1;
+  function loop(tree: any[]) {
+    tree.forEach((item) => {
+      list.push({ ...item, [children]: undefined, index });
+      index++;
+      if (item[children]) {
+        loop(item[children]);
+      }
+    });
+  }
+  loop(tree);
+  return list;
+};
+
+/**
+ * @description:  数组的分类，根据某个字段分类，返回一个对象，key为字段值，value为数组
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:53:38
+ * @param {any} arr
+ * @param {string} key
+ * @return {*}
+ * @example: 
+ * const arr = [
+ * {type: 1, name: 'a'},
+ * {type: 2, name: 'b'},
+ * {type: 1, name: 'c'},
+ * {type: 2, name: 'd'},
+ * {type: 1, name: 'e'},
+ * {type: 2, name: 'f'},
+ * ]
+ * groupBy(arr, 'type') => {1: [{type: 1, name: 'a'}, {type: 1, name: 'c'}, {type: 1, name: 'e'}], 2: [{type: 2, name: 'b'}, {type: 2, name: 'd'}, {type: 2, name: 'f'}]}
+ */
+export const groupBy = (arr: any[], key: string): any => {
+  return arr.reduce((prev, cur) => {
+    (prev[cur[key]] = prev[cur[key]] || []).push(cur);
+    return prev;
+  }, {});
+}

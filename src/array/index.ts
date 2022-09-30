@@ -1,12 +1,14 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2022-07-25 18:32:52
+ * @LastEditTime: 2022-09-30 11:52:35
  * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
  * @https://github.com/wxingheng/jcommon
  */
+
+import { convertDateToStandard } from "../index"
 
 /**
  * @description: 处理复杂数组的两级排序（一级按照自定义顺序，二级可正序倒序）
@@ -186,3 +188,49 @@ export const arrByObj = function (
   arr1.every((a: any) => arr2.some((b: any) => a === b)) &&
   arr2.every((_b: any) => arr1.some((_a: any) => _a === _b));
  }
+
+
+ 
+ /** 
+  * @description:  数组排序的回调函数，用于sort方法，按照对象的某个属性进行中文排序
+  * @author: wxingheng
+  * @Date: 2022-09-30 11:43:11
+  * @param {string} key 排序的属性
+  * @return {*}
+  * @example: arr.sort(sortCallBackChinese('name')) => [{name: '张三'}, {name: '李四'}]
+  */
+ export const sortCallBackChinese = (key: string): Function => (a: { [x: string]: string }, b: { [x: string]: any }) => {
+  return a[key].localeCompare(b[key], "zh");
+};
+
+/**
+ * @description: 
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:45:04
+ * @param {string} key  对象的key
+ * @param {boolean} desc 是否倒序, 默认是正序
+ * @return {*}
+ * @example: 
+ */
+export const sortCallBackTime = (key: string, desc: boolean = false): Function => (a: { [x: string]: string | number | Date }, b: { [x: string]: string | number | Date }) => {
+  const ratio = desc ? 1 : -1;
+  return new Date(convertDateToStandard(b[key])).getTime() - new Date(convertDateToStandard(a[key])).getTime() > 0
+    ? 1 * ratio
+    : -1 * ratio;
+};
+
+/**
+ * @description:  reduce方法，用于数组对象的求和
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:51:39
+ * @param {string} key
+ * @return {*}
+ * @example: arr.reduce(reduceCallBackNumber("count")) => 10
+ */
+export const reduceCallBackNumber = (key: string): Function => (acc: any, cur: { [x: string]: number }) => {
+  let value = cur[key] || 0;
+  if (typeof value === "string") {
+    value = isNaN(Number(value)) ? 0 : Number(value);
+  }
+  return acc + value;
+};

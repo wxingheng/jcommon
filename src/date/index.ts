@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2021-08-21 22:46:31
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-09-30 11:50:17
+ * @LastEditors: wxingheng
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -55,10 +55,7 @@ export const dateInterval = function (st: number, et: number) {
   addZero(12, 3) => 012 
  */
 export const addZero = function addZero (v: string | number, size: number) {
-  for (let i = 0, len = size - (v + '').length; i < len; i++) {
-    v = '0' + v
-  }
-  return v + ''
+  return v.toString().padStart(size, '0')
 }
 
 /**
@@ -72,7 +69,7 @@ export const addZero = function addZero (v: string | number, size: number) {
   dateFormat(new Date(), '当前时间 YY-MM-DD HH:II:SS 星期W')
   => "当前时间 20-05-11 14:07:02 星期一"
  */
-export const dateFormat = function (date: Date, formatStr: string) {
+export const dateFormat = function (date: Date, formatStr: string): string {
   const arrWeek = ['日', '一', '二', '三', '四', '五', '六'],
     str = formatStr
       .replace(/yyyy|YYYY/, date.getFullYear().toString())
@@ -91,6 +88,66 @@ export const dateFormat = function (date: Date, formatStr: string) {
       .replace(/W/g, arrWeek[date.getDay()])
   return str
 }
+
+/**
+ * @description:  时间的转换（目前支持 年，月，日，时，分，秒，星期）, 与dateFormat的区别是，这个方法可以传入时间戳
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:46:22
+ * @return {date} 
+ * @example:  convertDateToView(new Date(), '当前时间 YY-MM-DD HH:II:SS 星期W')
+ */
+export const convertDateToView = (
+  date: string | Date | number,
+  template = "YYYY-MM-DD HH:II:SS",
+  defaultResult = ""
+): string => {
+  if (!!!date) return defaultResult;
+  try {
+    if (typeof date === "string") {
+      date = isNaN(Number(date)) ? new Date(date) : Number(date);
+    }
+    if (typeof date === "number") {
+      date = new Date(date);
+    }
+    if (date instanceof Date) {
+      return dateFormat(date, template);
+    }
+    return "";
+  } catch (error) {
+    return "";
+  }
+};
+
+/**
+ * @description:  时间的转换 "YYYY-MM-DD HH:II:SS"
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:48:15
+ * @param {string} date
+ * @return {*}
+ * @example: convertDateToStandard(new Date()) => "2021-09-30 11:48:15"
+ */
+export const convertDateToStandard = (date: string | Date | number): string => convertDateToView(date);
+
+/**
+ * @description:  时间的转换 "YYYY-MM-DD"
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:49:14
+ * @param {string} date
+ * @return {*}
+ * @example: convertDateToStandardDay(new Date()) => "2021-09-30"
+ */
+export const convertDateToStandardDay = (date: string | Date | number): string => convertDateToView(date, "YYYY-MM-DD");
+
+/**
+ * @description: 时间的转换 "YYYY-MM-DD HH"
+ * @author: wxingheng
+ * @Date: 2022-09-30 11:49:37
+ * @param {string} date
+ * @return {*}
+ * @example: convertDateToStandardHours(new Date()) => "2021-09-30 11"
+ */
+export const convertDateToStandardHours = (date: string | Date | number): string =>
+  convertDateToView(date, "YYYY-MM-DD HH");
 
 /**
  * @description: 获取当前月份的天数
