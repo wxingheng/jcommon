@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2021-08-21 20:17:01
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-10-12 10:31:07
+ * @LastEditors: wxingheng
  * @Description: 用户设备相关（客户端系统）
  * @FilePath: /jcommon/src/devices/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -15,10 +15,12 @@
  * @param {e}
  * @return: {os: "mac", version: "10.15.3"}
  * @example: 
+```
   osInfo()
   => {os: "mac", version: "10.15.3"}
+```
  */
-interface osInfoResult {
+export type osInfoResult =  {
   os: string | RegExp
   version: string
 }

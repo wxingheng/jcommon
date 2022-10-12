@@ -1,13 +1,18 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2021-08-21 19:37:30
- * @LastEditors: wuxh
+ * @LastEditTime: 2022-10-12 13:44:00
+ * @LastEditors: wxingheng
  * @Description: 浏览器相关
  * @FilePath: /jcommon/src/browser/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
+
+export type getBrowserInfoResult =  {
+  name: string | RegExp
+  version: string
+}
 /**
  * @description: 获取浏览器相关信息
  * @author: wuxh
@@ -15,13 +20,11 @@
  * @param {} 
  * @return: Object
  * @example: 
+```
   getBrowserInfo()
   => {name: "Chrome", version: "81.0.4044.129"}
+```
  */
-interface getBrowserInfoResult {
-  name: string | RegExp
-  version: string
-}
 export const getBrowserInfo = function (): getBrowserInfoResult {
   let e,
     t,
