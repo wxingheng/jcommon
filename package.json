@@ -20,7 +20,7 @@
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
-    "typedoc": "typedoc",
+    "typedoc": "typedoc --options ./typedoc.json",
     "typedoc:dev": "typedoc  --watch"
   },
   "repository": {
@@ -64,7 +64,8 @@
     "typedoc": "^0.22.18",
     "typescript": "^4.2.3",
     "webpack": "^5.74.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "typedoc-plugin-markdown": "^3.11.13"
   },
   "time": "220930144400"
 }

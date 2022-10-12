@@ -3,7 +3,7 @@
     "entryPoints": [
         "src/index.ts"
     ],
-    "out": "doc",
+    "out": "docs",
     "includeVersion": true,
     "disableSources": true,
     "readme": "./pack/base.md",
