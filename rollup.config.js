@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-19 21:43:33
- * @LastEditTime: 2021-09-22 22:21:47
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-11 17:12:54
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/rollup.config.js
  */
@@ -11,6 +11,7 @@ import { terser } from 'rollup-plugin-terser'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
+// import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json'
 
 /** @type {import('rollup').RollupOptions} */
