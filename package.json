@@ -8,10 +8,11 @@
   "main-source": "lib/index.source.js",
   "module-source": "es/index.source.js",
   "unpkg-source": "dist/jcommon.source.js",
+  " ":"module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --config webpack.config.js",
-    "rollup": "rollup -c",
+    "rollup": "rollup -c --bundleConfigAsCjs",
     "merge": "node ./pack/merge.js",
     "build": "node ./pack/build.js",
     "merge:dist": "npm run merge && npm run rollup",
@@ -21,6 +22,7 @@
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
     "typedoc": "typedoc --tsconfig tsconfig.json --options typedoc.js",
+    "typedoc:markdown": "typedoc --tsconfig tsconfig.json --options typedoc.js --plugin typedoc-plugin-markdown",
     "typedoc:dev": "typedoc  --watch"
   },
   "repository": {
@@ -50,22 +52,23 @@
   },
   "homepage": "https://github.com/wxingheng/jcommon",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@rollup/plugin-commonjs": "^11.0.1",
-    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@babel/core": "^7.21.8",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^9.1.2",
     "babel-plugin-add-module-exports": "^1.0.4",
     "copy": "^0.3.2",
-    "jcommon-node": "^0.0.6",
-    "rollup": "^1.30.1",
-    "rollup-plugin-terser": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.32.1",
-    "typedoc": "^0.22.18",
-    "typescript": "^4.2.3",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^3.3.12"
+    "jcommon-node": "^1.0.1",
+    "rollup": "^3.21.6",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "typedoc": "^0.24.7",
+    "typedoc-plugin-markdown": "^3.15.3",
+    "typescript": "^5.0.4",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
   },
   "time": "220930144400"
 }

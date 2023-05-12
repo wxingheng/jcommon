@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2022-09-30 11:34:36
+ * @LastEditTime: 2023-05-11 18:21:57
  * @LastEditors: wxingheng
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -217,14 +217,14 @@ export const similar = function (s: string, t: string, f = 2): number {
   if (s === t) {
     return 100
   }
-  var l = s.length > t.length ? s.length : t.length
-  var n = s.length
-  var m = t.length
-  var d: any = []
-  var min = function (a: number, b: number, c: string | number) {
+  let l = s.length > t.length ? s.length : t.length
+  let n = s.length
+  let m = t.length
+  let d: number[][] = []
+  let min = function (a: number, b: number, c: number) {
     return a < b ? (a < c ? a : c) : b < c ? b : c
   }
-  let i: number, j: number, si: any, tj: any, cost: number
+  let i: number, j: number, si: string, tj: string, cost: number
   if (n === 0) return m
   if (m === 0) return n
   for (i = 0; i <= n; i++) {
