@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-22 23:13:40
- * @LastEditTime: 2021-11-10 11:43:50
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-19 19:58:57
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/decorator/index.ts
  */
@@ -21,7 +21,6 @@ export const decoratorNonenumerable = function (
   _name: any,
   descriptor: any
 ) {
-  console.log('decoratorNonenumerable', '--')
   descriptor.enumerable = false
   return descriptor
 }

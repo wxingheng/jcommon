@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2022-10-12 11:26:10
+ * @LastEditTime: 2023-05-19 22:05:34
  * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -17,16 +17,16 @@ export type DoubleRankingOption = {
   /**
    * 一级过滤和排序的key
    */
-  filterRuleKey: string 
+  filterRuleKey?: string
   /**
    * 一级排序规则
    */
-  rule: string[]
+  rule?: string[]
   /**
    * 二级正常排序的key
    */
-  sortKey: string
-  sortOrder: number
+  sortKey?: string
+  sortOrder?: number
 }
 /**
  * @category Array
@@ -69,9 +69,18 @@ export const doubleRanking = function (
     sortKey: '', // 二级正常排序的key
     sortOrder: 1 // 二级排序规则
   }
-  const { sortKey, filterRuleKey, rule, sortOrder } = {
+  const {
+    sortKey = '',
+    filterRuleKey = '',
+    rule = [],
+    sortOrder = 1
+  } = {
     ...defOptions,
     ...options
+  }
+
+  if (rule.length === 0) {
+    return arr
   }
 
   arr = arr.filter((d: any) => !rule || rule.indexOf(d[filterRuleKey]) !== -1)
@@ -243,12 +252,11 @@ export const arrayCompare = function (arr1: any[], arr2: any[]): boolean {
  *  arr.sort(sortCallBackChinese('name')) => [{name: '张三'}, {name: '李四'}]
  * ```
  */
-export const sortCallBackChinese = (key: string): Function => (
-  a: { [x: string]: string },
-  b: { [x: string]: any }
-) => {
-  return a[key].localeCompare(b[key], 'zh')
-}
+export const sortCallBackChinese =
+  (key: string): Function =>
+  (a: { [x: string]: string }, b: { [x: string]: any }) => {
+    return a[key].localeCompare(b[key], 'zh')
+  }
 
 /**
  * @category Array
@@ -263,20 +271,19 @@ export const sortCallBackChinese = (key: string): Function => (
  * arr.sort(sortCallBackNumber('age', true)) => [{age: 20}, {age: 18}]
  * ```
  */
-export const sortCallBackTime = (
-  key: string,
-  desc: boolean = false
-): Function => (
-  a: { [x: string]: string | number | Date },
-  b: { [x: string]: string | number | Date }
-) => {
-  const ratio = desc ? 1 : -1
-  return new Date(convertDateToStandard(b[key])).getTime() -
-    new Date(convertDateToStandard(a[key])).getTime() >
-    0
-    ? 1 * ratio
-    : -1 * ratio
-}
+export const sortCallBackTime =
+  (key: string, desc: boolean = false): Function =>
+  (
+    a: { [x: string]: string | number | Date },
+    b: { [x: string]: string | number | Date }
+  ) => {
+    const ratio = desc ? 1 : -1
+    return new Date(convertDateToStandard(b[key])).getTime() -
+      new Date(convertDateToStandard(a[key])).getTime() >
+      0
+      ? 1 * ratio
+      : -1 * ratio
+  }
 
 /**
  * @category Array
@@ -289,13 +296,12 @@ export const sortCallBackTime = (
  * arr.reduce(reduceSum('num'), 0) => 10
  * ```
  */
-export const reduceCallBackNumber = (key: string): Function => (
-  acc: any,
-  cur: { [x: string]: number }
-) => {
-  let value = cur[key] || 0
-  if (typeof value === 'string') {
-    value = isNaN(Number(value)) ? 0 : Number(value)
+export const reduceCallBackNumber =
+  (key: string): Function =>
+  (acc: any, cur: { [x: string]: number }) => {
+    let value = cur[key] || 0
+    if (typeof value === 'string') {
+      value = isNaN(Number(value)) ? 0 : Number(value)
+    }
+    return acc + value
   }
-  return acc + value
-}
