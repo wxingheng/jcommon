@@ -1,7 +1,7 @@
 <!--
  * @Author: wuxh
  * @Date: 2020-05-07 10:09:44
- * @LastEditTime: 2023-05-12 10:48:38
+ * @LastEditTime: 2023-05-19 22:30:58
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/base.md
@@ -52,7 +52,7 @@ or
 - [x] 支持 script 标签直接引入（考虑通过全局一个模块的方式，jcommon，避免全局命名空间污染）
 - [x] TypeScript支持
 - [x] dom
-- [ ] 增加单元测试
+- [x] 增加单元测试
 - [x] 根据 .d.ts 文件自动生成文档
 - [ ] lint
 - [x] typedoc
