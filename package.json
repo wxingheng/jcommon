@@ -65,6 +65,7 @@
     "babel-plugin-add-module-exports": "^1.0.4",
     "copy": "^0.3.2",
     "eslint": "^8.40.0",
+    "husky": "^8.0.3",
     "jcommon-node": "^1.0.1",
     "jest": "^29.5.0",
     "rollup": "^3.21.6",
@@ -76,6 +77,11 @@
     "typescript": "^5.0.4",
     "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint src/**/*{.js,.ts}"
+    }
   },
   "time": "220930144400"
 }

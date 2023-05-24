@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2023-05-24 15:06:07
+ * @LastEditTime: 2023-05-24 15:47:50
  * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -106,7 +106,7 @@ export const doubleRanking = function (
       result = result.concat(temp[rule[i]])
     }
   }
-  return result
+  return result;
 }
 
 /**
