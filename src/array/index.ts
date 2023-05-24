@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2023-05-24 15:48:53
+ * @LastEditTime: 2023-05-24 15:50:11
  * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -122,7 +122,7 @@ export const doubleRanking = function (
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
   ```
  */
-export const randomData =  (num: Number, arr: Array<string>): Array<any> => {
+export const randomData =  (num: number, arr: Array<string>): Array<any> => {
   const result = []
   for (let i = 0; i < num; i++) {
     const obj: { [key: string]: any } = {}
