@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 23:24:46
- * @LastEditTime: 2022-09-30 11:34:13
+ * @LastEditTime: 2023-05-19 23:50:44
  * @LastEditors: wxingheng
  * @Description: 浏览器 DOM 相关
  * @FilePath: /jcommon/src/dom/index.ts
@@ -23,7 +23,7 @@ export const download = function (link: string, name: string): any {
   if (!name) {
     name = link.slice(link.lastIndexOf('/') + 1)
   }
-  let eleLink = document.createElement('a')
+  const eleLink = document.createElement('a')
   eleLink.download = name
   eleLink.style.display = 'none'
   eleLink.href = link
@@ -149,21 +149,21 @@ export const getBase64 = function(file: File): Promise<any> {
  * @return {*}
  * @example: importJson() => {name: 'wxh'}
  */
-export const importJson = function(): Object{
+export const importJson = function(): object{
 return new Promise((resolve) => {
   let input: any = document.createElement("input");
   input.type = "file";
   input.accept = "application/json";
   input.onchange = (event: any) => {
-    let files = event.target.files;
+    const files = event.target.files;
     if (!files || !files.length) {
       input = null;
       throw new Error("No files");
     }
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = (event: any) => {
       try {
-        let config = JSON.parse(event.target.result);
+        const config = JSON.parse(event.target.result);
         console.log(config);
         input = null;
         resolve(config);

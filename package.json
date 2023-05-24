@@ -23,7 +23,8 @@
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
     "typedoc": "typedoc --tsconfig tsconfig.json --options typedoc.js",
     "typedoc:markdown": "typedoc --tsconfig tsconfig.json --options typedoc.js --plugin typedoc-plugin-markdown",
-    "typedoc:dev": "typedoc  --watch"
+    "typedoc:dev": "typedoc  --watch",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -57,10 +58,13 @@
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jest": "^29.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
     "babel-core": "^6.26.3",
     "babel-loader": "^9.1.2",
     "babel-plugin-add-module-exports": "^1.0.4",
     "copy": "^0.3.2",
+    "eslint": "^8.40.0",
     "jcommon-node": "^1.0.1",
     "jest": "^29.5.0",
     "rollup": "^3.21.6",

@@ -1,7 +1,7 @@
 /*
  * @Author: wxingheng
  * @Date: 2022-05-04 11:40:27
- * @LastEditTime: 2022-09-30 11:33:43
+ * @LastEditTime: 2023-05-24 15:28:04
  * @LastEditors: wxingheng
  * @Description: 暂时未归类的方法
  * @FilePath: /jcommon/src/other/index.ts
@@ -29,8 +29,8 @@ import { isFunc, sleep } from '../index'
  */
 export const oneClickToMoreClick = function (
   wait = 300,
-  ...events: Array<Function>
-): Function {
+  ...events: Array<(...args: any[]) => void>
+): () => void {
   let timer: any = null
   let lastTime = 0
   let count = 0
@@ -68,7 +68,7 @@ export const oneClickToMoreClick = function (
         }, 3)
         dom.addEventListener('click', moreClickCallBack);
  */
-export const moreClick = function (fun: Function, n = 2, wait = 300) {
+export const moreClick = function (fun: (...args: any) => void, n = 2, wait = 300) {
   let timer: any = null
   let lastTime = 0
   let count = 0
@@ -130,7 +130,7 @@ export const scaleLinear = function (
  * @return {*}
  * @example: const data = await fetchToSlow(1000 * 2)(getKgDetail(kg_id));
  */
- export const fetchToSlow = function(fastestTime: number | undefined): Function{
+ export const fetchToSlow = function(fastestTime: number | undefined): (func: any) => any {
   return (func: any): any =>
     new Promise((resolve) => {
     Promise.all([func, sleep(fastestTime)]).then((args) => {

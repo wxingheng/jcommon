@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-06-09 09:27:33
- * @LastEditTime: 2021-08-21 20:02:34
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-24 15:07:09
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/cookie/index.ts
  */
@@ -18,7 +18,7 @@
  */
 
 export const getCookie = function (name: string): string | null {
-  var arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
+  const arr = document.cookie.match(new RegExp('(^| )' + name + '=([^;]*)(;|$)'))
   if (arr != null) return unescape(arr[2])
   return null
 }

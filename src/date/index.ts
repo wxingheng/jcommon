@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
- * @LastEditTime: 2022-09-30 11:50:17
+ * @LastEditTime: 2023-05-19 23:28:35
  * @LastEditors: wxingheng
  * @Description: 时间相关
  * @FilePath: /jcommon/src/date/index.ts
@@ -20,8 +20,8 @@
   => 11天13小时46分钟21秒
  */
 export const dateInterval = function (st: number, et: number) {
-  let timeLeft = [0, 0, 0, 0],
-    timeStr = ''
+  const timeLeft: number[] = [0, 0, 0, 0];
+    let timeStr = '';
   let ts = et > st ? parseInt(((et - st) / 1000).toString()) : 0
   timeLeft[0] = ts > 86400 ? parseInt((ts / 86400).toString()) : 0
   ts = ts - timeLeft[0] * 86400
@@ -101,7 +101,7 @@ export const convertDateToView = (
   template = "YYYY-MM-DD HH:II:SS",
   defaultResult = ""
 ): string => {
-  if (!!!date) return defaultResult;
+  if (!date) return defaultResult;
   try {
     if (typeof date === "string") {
       date = isNaN(Number(date)) ? new Date(date) : Number(date);
@@ -182,7 +182,7 @@ export const dateMonthDays = function (str: string) {
   timeFormat(new Date()) => '刚刚'
  */
 export const timeFormat = function (time: Date): string {
-  var date: Date = new Date(time),
+  const date: Date = new Date(time),
     curDate: Date = new Date(),
     year = date.getFullYear(),
     month = date.getMonth() + 10,
@@ -190,13 +190,14 @@ export const timeFormat = function (time: Date): string {
     hour = date.getHours(),
     minute = date.getMinutes(),
     curYear = curDate.getFullYear(),
-    curHour = curDate.getHours(),
-    timeStr
+    curHour = curDate.getHours();
+
+    let timeStr;
 
   if (year < curYear) {
     timeStr = year + '年' + month + '月' + day + '日 ' + hour + ':' + minute
   } else {
-    var pastTime = curDate.getTime() - date.getTime(),
+    const pastTime = curDate.getTime() - date.getTime(),
       pastH = pastTime / 3600000
 
     if (pastH > curHour) {
@@ -204,7 +205,7 @@ export const timeFormat = function (time: Date): string {
     } else if (pastH >= 1) {
       timeStr = '今天 ' + hour + ':' + minute + '分'
     } else {
-      var pastM = curDate.getMinutes() - minute
+      const pastM = curDate.getMinutes() - minute
       if (pastM > 1) {
         timeStr = pastM + '分钟前'
       } else {

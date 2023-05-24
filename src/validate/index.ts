@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:08:11
- * @LastEditTime: 2021-09-02 22:05:19
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-19 22:57:22
+ * @LastEditors: wxingheng
  * @Description: 校验相关
  * @FilePath: /jcommon/src/validate/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -28,8 +28,8 @@ export const isUserId = function (e: string) {
     r,
     d,
     l,
-    c,
-    p: { [key: string]: string } = {
+    c;
+    const p: { [key: string]: string } = {
       11: '北京',
       12: '天津',
       13: '河北',
@@ -104,7 +104,7 @@ export const isUserId = function (e: string) {
     (a = i.substring(10, 12)),
     (n = i.substring(12, 14)),
     false ===
-      /[1-9]\d{3}\-(0[1-9]|1[0-2])\-([0-2]\d|3[0-1])/.test(
+      /[1-9]\d{3}-(0[1-9]|1[0-2])-([0-2]\d|3[0-1])/.test(
         t + '-' + a + '-' + n
       ))
   )

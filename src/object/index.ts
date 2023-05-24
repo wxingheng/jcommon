@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2022-09-30 11:58:10
+ * @LastEditTime: 2023-05-24 15:19:09
  * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -11,21 +11,22 @@
 import { isNull, isObject, isUndefined, isVoid } from '../validate/index'
 
 /**
- * @description: 获取多级数据避免出错（超级好用）
+ * @description: 获取嵌套数据,处理空值异常
  * @author: wuxh
  * @Date: 2020-05-06 12:13:59
- * @param {defaultResult, ...any} args
- * @return: any
+ * @param defaultResult 默认值 
+ * @param args 属性访问路径
+ * @returns 目标值或默认值
  * @example: 
   getV('', {name: {children: 123}}, 'name', 'children')
   => 123
  */
-export const getV = function<T> (defaultResult: T, ...args: any): any {
-  return args.length >= 2
-    ? args.reduce((a: any, b: any) =>
-        a && a.hasOwnProperty(b) ? a[b] : defaultResult
-      )
-    : defaultResult
+export const getV = function getV<T> (
+  defaultResult: T,
+  ...args: any[]
+): T | any {
+  if (!args.length) return defaultResult
+  return args.reduce((a, b) => a?.[b] ?? defaultResult)
 }
 
 /**
@@ -43,17 +44,17 @@ export const cloneObj = function (obj: any): any {
     return ''
   }
   let str,
-    newobj: any = obj.constructor === Array ? [] : {}
+    newObj: any = obj.constructor === Array ? [] : {}
   if (typeof obj !== 'object') {
     return
   } else if (JSON) {
-    ;(str = JSON.stringify(obj)), (newobj = JSON.parse(str))
+    ;(str = JSON.stringify(obj)), (newObj = JSON.parse(str))
   } else {
     for (const i in obj) {
-      newobj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i]
+      newObj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i]
     }
   }
-  return newobj
+  return newObj
 }
 
 /**
@@ -97,6 +98,7 @@ export const mergeObj = function (
     if (isObject(newObj[key]) && isObject(oldObj[key])) {
       oldObj[key] = mergeObj(oldObj[key], newObj[key], keys)
     } else if (Object.keys(oldObj).includes(key) && !keys.includes(key)) {
+      continue
     } else {
       oldObj[key] = newObj[key]
     }
@@ -126,7 +128,7 @@ export const isEmptyObject = function (obj: any): boolean {
   if (Array.isArray(obj)) {
     return !obj.length
   }
-  for (let i in obj) {
+  for (const i in obj) {
     if (Object.hasOwnProperty.call(obj, i)) {
       return false
     }
@@ -150,9 +152,9 @@ export const isEmptyObject = function (obj: any): boolean {
   page: 1
 }
  */
-export const cleanObject = function (object: {
+export const cleanObject = function (object: { [k: string]: any }): {
   [k: string]: any
-}): { [k: string]: any } {
+} {
   // Object.assign({}, object)
   if (!object) {
     return {}
@@ -167,7 +169,6 @@ export const cleanObject = function (object: {
   return result
 }
 
-const regexpTag = '[object RegExp]'
 
 /**
  * @description: 深克隆 deepClone
@@ -186,7 +187,7 @@ export const deepClone = function (target: any) {
     // 如果是一个数组的话
     if (Array.isArray(target)) {
       result = [] // 将result赋值为一个数组，并且执行遍历
-      for (let i in target) {
+      for (const i in target) {
         // 递归克隆数组中的每一项
         result.push(deepClone(target[i]))
       }
@@ -199,7 +200,7 @@ export const deepClone = function (target: any) {
     } else {
       // 否则是普通对象，直接for in循环，递归赋值对象的所有值
       result = {}
-      for (let i in target) {
+      for (const i in target) {
         result[i] = deepClone(target[i])
       }
     }
@@ -221,10 +222,9 @@ export const deepClone = function (target: any) {
  * @example: isEqual({a: 1}, {a: 1}) => true; isEqual({a: 1}, {a: 2}) => false; isEqual({a: 1}, {b: 1}) => false
  */
 
- export const isEqual = function(a: any, b: any): boolean {
-  return JSON.stringify(a) === JSON.stringify(b);
-};
-
+export const isEqual = function (a: any, b: any): boolean {
+  return JSON.stringify(a) === JSON.stringify(b)
+}
 
 /**
  * @description: 将list转换为树结构
@@ -235,28 +235,28 @@ export const deepClone = function (target: any) {
  */
 export const convertDataToTree = (
   data: any[],
-  id: string = "id",
-  pid: string = "pid",
-  children: string = "children"
+  id = 'id',
+  pid = 'pid',
+  children = 'children'
 ): any[] => {
-  const result: any[] = [];
+  const result: any[] = []
   if (!Array.isArray(data)) {
-    return result;
+    return result
   }
-  const map: any = {};
-  data.forEach((item) => {
-    map[item[id]] = item;
-  });
-  data.forEach((item) => {
-    const parent = map[item[pid]];
+  const map: any = {}
+  data.forEach(item => {
+    map[item[id]] = item
+  })
+  data.forEach(item => {
+    const parent = map[item[pid]]
     if (parent) {
-      (parent[children] || (parent[children] = [])).push(item);
+      (parent[children] || (parent[children] = [])).push(item)
     } else {
-      result.push(item);
+      result.push(item)
     }
-  });
-  return result;
-};
+  })
+  return result
+}
 
 /**
  * @description: 将树结构转换为list
@@ -267,21 +267,24 @@ export const convertDataToTree = (
  * @return {*}
  * @example: convertTreeToList (treeData) => listData
  */
-export const convertTreeToList = (tree: any[], children: string = "children"): any[] => {
-  let list: any[] = [];
-  let index = 1;
-  function loop(tree: any[]) {
-    tree.forEach((item) => {
-      list.push({ ...item, [children]: undefined, index });
-      index++;
+export const convertTreeToList = (
+  tree: any[],
+  children = 'children'
+): any[] => {
+  const list: any[] = []
+  let index = 1
+  function loop (tree: any[]) {
+    tree.forEach(item => {
+      list.push({ ...item, [children]: undefined, index })
+      index++
       if (item[children]) {
-        loop(item[children]);
+        loop(item[children])
       }
-    });
+    })
   }
-  loop(tree);
-  return list;
-};
+  loop(tree)
+  return list
+}
 
 /**
  * @description:  数组的分类，根据某个字段分类，返回一个对象，key为字段值，value为数组
@@ -290,7 +293,7 @@ export const convertTreeToList = (tree: any[], children: string = "children"): a
  * @param {any} arr
  * @param {string} key
  * @return {*}
- * @example: 
+ * @example:
  * const arr = [
  * {type: 1, name: 'a'},
  * {type: 2, name: 'b'},
@@ -303,7 +306,7 @@ export const convertTreeToList = (tree: any[], children: string = "children"): a
  */
 export const groupBy = (arr: any[], key: string): any => {
   return arr.reduce((prev, cur) => {
-    (prev[cur[key]] = prev[cur[key]] || []).push(cur);
-    return prev;
-  }, {});
+    (prev[cur[key]] = prev[cur[key]] || []).push(cur)
+    return prev
+  }, {})
 }

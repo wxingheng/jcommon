@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:10:41
- * @LastEditTime: 2023-05-11 18:21:57
+ * @LastEditTime: 2023-05-24 15:29:53
  * @LastEditors: wxingheng
  * @Description: 字符串处理相关
  * @FilePath: /jcommon/src/string/index.ts
@@ -19,7 +19,7 @@
   trim('   1 1 1   ') => '1 1 1'
   trim('   1 1 1   ', true) => '111'
  */
-export const trim = function (str: string, global: boolean = false) {
+export const trim = function (str: string, global = false) {
   let result = str.replace(/(^\s+)|(\s+$)/g, '')
   if (global) {
     result = result.replace(/\s/g, '')
@@ -102,7 +102,7 @@ export const hideIdNum = function (str: string) {
   uniqueId() => '1591667193048544'
  */
 export const uniqueId = function () {
-  var a = Math.random,
+  const a = Math.random,
     b = parseInt
   return (
     Number(new Date()).toString() +
@@ -180,8 +180,8 @@ export const uuid = function (length: number, chars: string | any[]): string {
   chars =
     chars || '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   length = length || 8
-  var result = ''
-  for (var i = length; i > 0; --i)
+  let result = ''
+  for (let i = length; i > 0; --i)
     result += chars[Math.floor(Math.random() * chars.length)]
   return result
 }
@@ -196,7 +196,7 @@ export const uuid = function (length: number, chars: string | any[]): string {
  * @example: endWith('1231231', '21') => false ;  endWith('1231231', '31') => true
  */
 export const endWith = function (str: string, endStr: string): boolean {
-  var d = str.length - endStr.length
+  const d = str.length - endStr.length
   return d >= 0 && str.lastIndexOf(endStr) == d
 }
 
@@ -217,11 +217,11 @@ export const similar = function (s: string, t: string, f = 2): number {
   if (s === t) {
     return 100
   }
-  let l = s.length > t.length ? s.length : t.length
-  let n = s.length
-  let m = t.length
-  let d: number[][] = []
-  let min = function (a: number, b: number, c: number) {
+  const l = s.length > t.length ? s.length : t.length
+  const n = s.length
+  const m = t.length
+  const d: number[][] = []
+  const min = function (a: number, b: number, c: number) {
     return a < b ? (a < c ? a : c) : b < c ? b : c
   }
   let i: number, j: number, si: string, tj: string, cost: number
@@ -246,7 +246,7 @@ export const similar = function (s: string, t: string, f = 2): number {
       d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost)
     }
   }
-  let res = (1 - d[n][m] / l) * 100
+  const res = (1 - d[n][m] / l) * 100
 
   return Number(res.toFixed(f))
 }

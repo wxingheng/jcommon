@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:07:39
- * @LastEditTime: 2023-05-19 22:05:34
+ * @LastEditTime: 2023-05-24 15:06:07
  * @LastEditors: wxingheng
  * @Description: 数组方法 Array
  * @FilePath: /jcommon/src/array/index.ts
@@ -87,11 +87,11 @@ export const doubleRanking = function (
   const temp: {
     [key: string]: any
   } = {}
-  for (let i = 0; i < arr.length; i++) {
-    if (temp.hasOwnProperty(arr[i][filterRuleKey])) {
-      temp[arr[i][filterRuleKey]].push(arr[i])
+  for (const element of arr) {
+    if (Object.prototype.hasOwnProperty.call(temp, element[filterRuleKey])) {
+      temp[element[filterRuleKey]].push(element)
     } else {
-      temp[arr[i][filterRuleKey]] = [arr[i]]
+      temp[element[filterRuleKey]] = [element]
     }
   }
   for (const k in temp) {
@@ -102,7 +102,7 @@ export const doubleRanking = function (
   }
   let result: any[] = []
   for (let i = 0; i < rule.length; i++) {
-    if (temp.hasOwnProperty(rule[i])) {
+    if (Object.prototype.hasOwnProperty.call(temp, rule[i])) {
       result = result.concat(temp[rule[i]])
     }
   }
@@ -122,7 +122,7 @@ export const doubleRanking = function (
   => [{"name":"name323","value":"value699"},{"name":"name573","value":"value393"}]
   ```
  */
-export const randomData = function (num: number, arr: Array<string>) {
+export const randomData =  (num: number, arr: Array<string>): Array<any> => {
   const result = []
   for (let i = 0; i < num; i++) {
     const obj: { [key: string]: any } = {}
@@ -253,8 +253,8 @@ export const arrayCompare = function (arr1: any[], arr2: any[]): boolean {
  * ```
  */
 export const sortCallBackChinese =
-  (key: string): Function =>
-  (a: { [x: string]: string }, b: { [x: string]: any }) => {
+  (key: string): ((a: any, b: any) => void) =>
+  (a: any, b: any) => {
     return a[key].localeCompare(b[key], 'zh')
   }
 
@@ -272,7 +272,7 @@ export const sortCallBackChinese =
  * ```
  */
 export const sortCallBackTime =
-  (key: string, desc: boolean = false): Function =>
+  (key: string, desc = false): (a: any, b: any) => void =>
   (
     a: { [x: string]: string | number | Date },
     b: { [x: string]: string | number | Date }
@@ -297,7 +297,7 @@ export const sortCallBackTime =
  * ```
  */
 export const reduceCallBackNumber =
-  (key: string): Function =>
+  (key: string): (acc: any, cur: any) => void =>
   (acc: any, cur: { [x: string]: number }) => {
     let value = cur[key] || 0
     if (typeof value === 'string') {

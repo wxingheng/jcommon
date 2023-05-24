@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:49:34
- * @LastEditTime: 2022-10-12 10:31:07
+ * @LastEditTime: 2023-05-19 23:49:17
  * @LastEditors: wxingheng
  * @Description: 用户设备相关（客户端系统）
  * @FilePath: /jcommon/src/devices/index.ts
@@ -26,7 +26,7 @@ export type osInfoResult =  {
 }
 export const osInfo = function (e: string) {
   e = e || navigator.userAgent
-  let t: osInfoResult = {
+  const t: osInfoResult = {
       os: 'other',
       version: ''
     },
@@ -43,13 +43,13 @@ export const osInfo = function (e: string) {
       ['symbianos', /SymbianOS\/([\d.]+)?/],
       ['bb', /BlackBerry|BB10|RIM Tablet OS\s([\d.]+)?/],
       ['linux', /linux/i]
-    ],
-    o = 0
+    ];
+    let o = 0
   for (; o < r.length; o++) {
     const i = r[o],
       a = e.match(i[1])
     if (a) {
-      ;(t.os = i[0]), (t.version = (a[1] || '').replace(/_/g, '.'))
+      (t.os = i[0]), (t.version = (a[1] || '').replace(/_/g, '.'))
       break
     }
   }

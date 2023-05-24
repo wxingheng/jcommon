@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2021-09-02 22:57:22
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-24 15:11:02
+ * @LastEditors: wxingheng
  * @Description: 数处理相
  * @FilePath: /jcommon/src/math/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -33,7 +33,7 @@ export const scopeRandom = function (str: number, end: number) {
  * @example: 
  cutNumber('3123.22312') => 3123.22
  */
-export const cutNumber = function (number: number, no = 2): Number {
+export const cutNumber = function (number: number, no = 2): number {
   if (typeof number != 'number') {
     number = Number(number)
   }

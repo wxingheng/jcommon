@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2021-08-21 20:18:34
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-24 15:12:14
+ * @LastEditors: wxingheng
  * @Description: 移动端相关
  * @FilePath: /jcommon/src/mobile/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -52,7 +52,7 @@ export const isWX = function (): boolean {
   operattelecom('13419595634') => 移动
  */
 export const operattelecom = function (e: string) {
-  var i =
+  const i =
       '134,135,136,137,138,139,150,151,152,157,158,159,187,188,147,182,183,184,178',
     n = '130,131,132,155,156,185,186,145,176',
     a = '133,153,180,181,189,177,173,170',

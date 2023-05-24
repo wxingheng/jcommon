@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-02 21:21:04
- * @LastEditTime: 2021-09-02 21:55:52
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-19 23:40:58
+ * @LastEditors: wxingheng
  * @Description: 防抖
  * @FilePath: /jcommon/src/debounce/index.ts
  */
@@ -26,26 +26,22 @@
  * 
  */
 export const debounce = function (
-  func: Function,
+  func: (...rest: any) => void,
   wait = 500,
   immediate = false
-): Function {
-  let timeout: NodeJS.Timeout | null
-  return function () {
-    // var context = null
-    const args = arguments
-
+) {
+  let timeout: any = null;
+  return function (...args: any) {
     if (timeout) clearTimeout(timeout)
     if (immediate) {
-      // 如果已经执行过，不再执行
       const callNow = !timeout
-      timeout = setTimeout(function () {
+      timeout = setTimeout(() => {
         timeout = null
       }, wait)
-      if (callNow) func.apply(null, args)
+      if (callNow) func(...args)
     } else {
-      timeout = setTimeout(function () {
-        func.apply(null, args)
+      timeout = setTimeout(() => {
+        func(...args)
       }, wait)
     }
   }

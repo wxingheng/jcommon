@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-05 15:02:02
- * @LastEditTime: 2021-08-22 14:02:46
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-19 23:03:24
+ * @LastEditors: wxingheng
  * @Description: url处理相关
  * @FilePath: /jcommon/src/url/index.ts
  * @https://github.com/wxingheng/jcommon
@@ -23,7 +23,7 @@ import { trim } from '../string/index'
   => 25
  */
 export const getUrlQuery = function (name: string): string {
-  const u = arguments[1] || window.location.search,
+  const u =  window.location.search,
     reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)'),
     r = u.substr(u.indexOf('?') + 1).match(reg)
   return r != null ? r[2] : ''
@@ -37,7 +37,7 @@ export const getUrlQuery = function (name: string): string {
  * @return {*}
  * @example: everyTrim({name: '  123  ', arr: [' 33 ']}) => {name: '123': arr: ['33']}
  */
-export const everyTrim = function (data: Array<any> | Object) {
+export const everyTrim = function (data: Array<any> | object) {
   const temp = cloneObj(data)
   for (const key in temp) {
     if (typeof temp[key] === 'object') {

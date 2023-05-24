@@ -1,15 +1,14 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-04 21:14:00
- * @LastEditTime: 2022-10-12 13:44:00
+ * @LastEditTime: 2023-05-19 23:25:47
  * @LastEditors: wxingheng
  * @Description: 浏览器相关
  * @FilePath: /jcommon/src/browser/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
-
-export type getBrowserInfoResult =  {
+export type getBrowserInfoResult = {
   name: string | RegExp
   version: string
 }
@@ -26,10 +25,8 @@ export type getBrowserInfoResult =  {
 ```
  */
 export const getBrowserInfo = function (): getBrowserInfoResult {
-  let e,
-    t,
-    r,
-    o: getBrowserInfoResult = {
+  let e, t, r
+  const o: getBrowserInfoResult = {
       name: 'other',
       version: '0'
     },
@@ -68,7 +65,7 @@ export const getBrowserInfo = function (): getBrowserInfoResult {
     e++
   )
     if ((r = i.match(t[e][1]))) {
-      ;(o.name = t[e][0]), (o.version = r[1] || '0')
+      (o.name = t[e][0]), (o.version = r[1] || '0')
       break
     }
   return o
