@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2020-04-30 09:09:20
- * @LastEditTime: 2023-05-24 15:19:09
+ * @LastEditTime: 2023-05-24 15:36:20
  * @LastEditors: wxingheng
  * @Description: 对象相关（Object处理）
  * @FilePath: /jcommon/src/object/index.ts
@@ -48,7 +48,7 @@ export const cloneObj = function (obj: any): any {
   if (typeof obj !== 'object') {
     return
   } else if (JSON) {
-    ;(str = JSON.stringify(obj)), (newObj = JSON.parse(str))
+    (str = JSON.stringify(obj)), (newObj = JSON.parse(str))
   } else {
     for (const i in obj) {
       newObj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i]
