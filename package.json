@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.9.17",
+  "version": "1.9.18",
   "description": "JavaScript 常用纯函数工具库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -16,7 +16,7 @@
     "merge": "node ./pack/merge.js",
     "build": "node ./pack/build.js",
     "merge:dist": "npm run merge && npm run rollup",
-    "build:dist": "npm run rollup",
+    "build:dist": "npm run rollup && node ./pack/merge.typedoc.markdown.js",
     "before:publish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub,typedoc,typedoc:dev\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,webpack-cli\" ",
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",

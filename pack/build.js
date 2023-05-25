@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-07 11:13:00
- * @LastEditTime: 2021-11-10 11:44:56
- * @LastEditors: wuxh
+ * @LastEditTime: 2023-05-25 17:36:21
+ * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/pack/build.js
  */
@@ -11,4 +11,4 @@
 // require('./merge.js')
 
 
-require('./auto-md.js')
+// require('./auto-md.js')
