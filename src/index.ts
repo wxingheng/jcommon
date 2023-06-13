@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-08-22 12:46:08
- * @LastEditTime: 2022-05-04 14:21:32
+ * @LastEditTime: 2023-06-13 16:13:13
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/index.ts
@@ -121,3 +121,4 @@ export * from "./other/index";
 
 export { Queue } from './queue/index'
 export { EventBus } from './eventBus/index'
+export { Typewriter } from './Typewriter/index'

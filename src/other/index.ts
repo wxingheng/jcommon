@@ -1,7 +1,7 @@
 /*
  * @Author: wxingheng
  * @Date: 2022-05-04 11:40:27
- * @LastEditTime: 2023-05-24 15:28:04
+ * @LastEditTime: 2023-06-13 16:14:18
  * @LastEditors: wxingheng
  * @Description: 暂时未归类的方法
  * @FilePath: /jcommon/src/other/index.ts
@@ -68,7 +68,11 @@ export const oneClickToMoreClick = function (
         }, 3)
         dom.addEventListener('click', moreClickCallBack);
  */
-export const moreClick = function (fun: (...args: any) => void, n = 2, wait = 300) {
+export const moreClick = function (
+  fun: (...args: any) => void,
+  n = 2,
+  wait = 300
+) {
   let timer: any = null
   let lastTime = 0
   let count = 0
@@ -122,7 +126,6 @@ export const scaleLinear = function (
   return ((value / source) * target).toFixed(toFixedLength)
 }
 
-
 /**
  * @description: 转换请求为慢响应
  * @param {*} func 请求函数
@@ -130,11 +133,71 @@ export const scaleLinear = function (
  * @return {*}
  * @example: const data = await fetchToSlow(1000 * 2)(getKgDetail(kg_id));
  */
- export const fetchToSlow = function(fastestTime: number | undefined): (func: any) => any {
+export const fetchToSlow = function (
+  fastestTime: number | undefined
+): (func: any) => any {
   return (func: any): any =>
-    new Promise((resolve) => {
-    Promise.all([func, sleep(fastestTime)]).then((args) => {
-      resolve(args[0]);
-    });
-  });
- }
+    new Promise(resolve => {
+      Promise.all([func, sleep(fastestTime)]).then(args => {
+        resolve(args[0])
+      })
+    })
+}
+
+/**
+ * @description:  处理流响应数据
+ * @author: wxingheng
+ * @Date: 2023-06-13 16:14:34
+ * @param {any} response
+ * @param {object} typewriter
+ * @return {*}
+ * @example:
+ */
+export const processStreamResponse = async (
+  response: any,
+  typewriter: { start: () => void; done: () => void; add: (arg0: any) => void }
+) => {
+  const decoder = new TextDecoder('utf-8')
+  const reader = response.body.getReader()
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read()
+
+      if (done) {
+        typewriter.done()
+        break
+      }
+      const chunk = decoder.decode(value)
+
+      const lines = chunk.split(/(\n){2}/)
+
+      const parsedLines = lines
+        .map(line => line.replace(/(\n)?^data:\s*/, '').trim())
+        .filter(line => line !== '' && line !== '[DONE]')
+        .map(line => {
+          try {
+            return JSON.parse(line)
+          } catch (error) {
+            console.log(error)
+            return {
+              choices: [
+                {
+                  delta: {
+                    content: ''
+                  }
+                }
+              ]
+            }
+          }
+        })
+      for (const parsedLine of parsedLines) {
+        let chunkContent = parsedLine.choices[0].delta.content ?? ''
+        chunkContent = chunkContent.replace(/^`\s*/, '`')
+        typewriter.add(chunkContent)
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
