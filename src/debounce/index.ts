@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-02 21:21:04
- * @LastEditTime: 2023-05-19 23:40:58
+ * @LastEditTime: 2023-09-13 11:14:51
  * @LastEditors: wxingheng
  * @Description: 防抖
  * @FilePath: /jcommon/src/debounce/index.ts
@@ -14,7 +14,7 @@
  * @param {*} Function 要进行debouce的函数
  * @param {*} wait 等待时间,默认500ms
  * @param {*} immediate 是否立即执行
- * @return {*} Function
+ * @return {*} Function 
  * @example: 
  * function onInput() {
                 console.log('1111')
@@ -31,18 +31,26 @@ export const debounce = function (
   immediate = false
 ) {
   let timeout: any = null;
-  return function (...args: any) {
-    if (timeout) clearTimeout(timeout)
+
+  const debouncedFunc = function (...args: any) {
+    if (timeout) clearTimeout(timeout);
     if (immediate) {
-      const callNow = !timeout
+      const callNow = !timeout;
       timeout = setTimeout(() => {
-        timeout = null
-      }, wait)
-      if (callNow) func(...args)
+        timeout = null;
+      }, wait);
+      if (callNow) func(...args);
     } else {
       timeout = setTimeout(() => {
-        func(...args)
-      }, wait)
+        func(...args);
+      }, wait);
     }
-  }
-}
+  };
+
+  debouncedFunc.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+
+  return debouncedFunc;
+};
