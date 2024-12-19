@@ -11,13 +11,12 @@
   " ": "module",
   "scripts": {
     "test": "yarn jest",
-    "webpack": "webpack --config webpack.config.js",
     "rollup": "rollup -c",
     "merge": "node ./pack/merge.js",
     "build": "node ./pack/build.js",
     "merge:dist": "npm run merge && npm run rollup",
     "build:dist": "npm run rollup && node ./pack/merge.typedoc.markdown.js",
-    "before:publish": "node .scripts/cleanse-pkg \"webpack,rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub,typedoc,typedoc:dev,typedoc:markdown,test,lint\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,@babel/preset-env,@rollup/plugin-babel,webpack-cli,@rollup/plugin-terser,@rollup/plugin-typescript,@types/jest,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint,husky,jest,rollup-plugin-minification,ts-jest,typedoc,typedoc-plugin-markdown\" ",
+    "before:publish": "node .scripts/cleanse-pkg \"rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub,typedoc,typedoc:dev,typedoc:markdown,test,lint\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,@babel/preset-env,@rollup/plugin-babel,webpack-cli,@rollup/plugin-terser,@rollup/plugin-typescript,@types/jest,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint,husky,jest,rollup-plugin-minification,ts-jest,typedoc,typedoc-plugin-markdown\" ",
     "after:publish": "node .scripts/restore-pkg",
     "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
     "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
@@ -78,9 +77,7 @@
     "ts-jest": "^29.1.0",
     "typedoc": "^0.24.7",
     "typedoc-plugin-markdown": "^3.15.3",
-    "typescript": "^5.0.4",
-    "webpack": "^5.82.1",
-    "webpack-cli": "^5.1.1"
+    "typescript": "^5.0.4"
   },
   "husky": {
     "hooks": {
