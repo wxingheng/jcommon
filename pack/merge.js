@@ -1,8 +1,8 @@
 /*
  * @Author: wuxh
  * @Date: 2020-05-01 17:47:13
- * @LastEditTime: 2021-11-10 11:40:02
- * @LastEditors: wuxh
+ * @LastEditTime: 2024-12-19 17:06:33
+ * @LastEditors: wxingheng
  * @Description: 遍历src目录下的index.ts文件，进行合并到一个文件中 merge.js
  * @FilePath: /jcommon/pack/merge.js
  */
@@ -15,8 +15,9 @@ const toPatch = path.join(path.resolve(rootPath, 'src'), `merge.ts`)
 const regDes = new RegExp('import.*?index\'', 'g')
 
 
-// fs.unlinkSync(path.join(remotePath, `index.js`))
-fs.unlinkSync(toPatch)
+if (fs.existsSync(toPatch)) {
+  fs.unlinkSync(toPatch)
+}
 
 fs.readdir(remotePath, function (err, files) {
   if (err) {

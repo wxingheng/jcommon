@@ -1414,6 +1414,11 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
+jcommon@^1.9.30:
+  version "1.9.30"
+  resolved "https://registry.yarnpkg.com/jcommon/-/jcommon-1.9.30.tgz#4483787a593769084b696fc8ba2742b9ff5058e8"
+  integrity sha512-yGU5MxDtcbGmjarIH/RIqDTBiBTG6IkD0qLo72dWPZdR9UfvQdT6YhqcbG5GHMBk1jlIA/qxMi6FpXn19w/M5g==
+
 json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"

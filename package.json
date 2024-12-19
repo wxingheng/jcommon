@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.9.23",
+  "version": "1.9.30",
   "description": "JavaScript 常用纯函数工具库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -13,7 +13,6 @@
     "test": "yarn jest",
     "rollup": "rollup -c",
     "merge": "node ./pack/merge.js",
-    "build": "node ./pack/build.js",
     "merge:dist": "npm run merge && npm run rollup",
     "build:dist": "npm run rollup && node ./pack/merge.typedoc.markdown.js",
     "before:publish": "node .scripts/cleanse-pkg \"rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub,typedoc,typedoc:dev,typedoc:markdown,test,lint\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,@babel/preset-env,@rollup/plugin-babel,webpack-cli,@rollup/plugin-terser,@rollup/plugin-typescript,@types/jest,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint,husky,jest,rollup-plugin-minification,ts-jest,typedoc,typedoc-plugin-markdown\" ",
@@ -75,9 +74,9 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^29.1.0",
-    "typedoc": "^0.24.7",
+    "typedoc": "^0.24.8",
     "typedoc-plugin-markdown": "^3.15.3",
-    "typescript": "^5.0.4"
+    "typescript": "~5.1.0"
   },
   "husky": {
     "hooks": {

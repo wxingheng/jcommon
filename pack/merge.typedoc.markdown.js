@@ -1,7 +1,7 @@
 /*
  * @Author: wxingheng
  * @Date: 2023-05-25 15:54:22
- * @LastEditTime: 2023-05-25 17:26:53
+ * @LastEditTime: 2024-12-19 17:10:45
  * @LastEditors: wxingheng
  * @Description: 遍历 docs 目录下的.md 文件，进行合并输出到根目录下的 README.md 文件中
  * @FilePath: /jcommon/pack/merge.typedoc.markdown.js
@@ -20,8 +20,10 @@ const remotePathList = [
   "classes/Queue.md",
 ];
 
-fs.unlinkSync(toPatch);
-
+if (fs.existsSync(toPatch)) {
+  fs.unlinkSync(toPatch);
+}
+console.log(`开始合并文件`);
 remotePathList.forEach((filename) => {
   const fielder = path.join(remotePath, `${filename}`);
   fs.stat(fielder, function (err, stats) {
@@ -29,9 +31,13 @@ remotePathList.forEach((filename) => {
       if (stats.isFile()) {
         let content = fs.readFileSync(fielder, "utf-8") + "\n\n\n\n";
         fs.appendFileSync(toPatch, content);
+        console.log(`${filename} 合并成功`);
       } else if (stats.isDirectory()) {
+        console.log(`${filename} 是目录，跳过`);
         return false;
       }
+    } else {
+      console.log(`${filename} 文件不存在`);
     }
   });
 });
