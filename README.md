@@ -66,9 +66,9 @@ or
 
 
 
-[jcommon文档库 - v1.9.30](README.md) / Exports
+[jcommon文档库 - v1.9.36](README.md) / Exports
 
-# jcommon文档库 - v1.9.30
+# jcommon文档库 - v1.9.36
 
 ## Table of contents
 
@@ -86,6 +86,10 @@ or
 
 - [getBrowserInfoResult](modules.md#getbrowserinforesult)
 - [osInfoResult](modules.md#osinforesult)
+
+### Variables
+
+- [globalCache](modules.md#globalcache)
 
 ### Array
 @description:
@@ -296,6 +300,12 @@ ___
 | :------ | :------ |
 | `os` | `string` \| `RegExp` |
 | `version` | `string` |
+
+## Variables
+
+### globalCache
+
+• `Const` **globalCache**: `GlobalCache`
 
 ## Array
 @description:
@@ -2579,7 +2589,7 @@ versionCount('0.2.9.1') => '0.2.9.2'
 
 
 
-[jcommon文档库 - v1.9.30](../README.md) / [Exports](../modules.md) / EventBus
+[jcommon文档库 - v1.9.36](../README.md) / [Exports](../modules.md) / EventBus
 
 # Class: EventBus
 
@@ -2729,7 +2739,7 @@ ___
 
 
 
-[jcommon文档库 - v1.9.30](../README.md) / [Exports](../modules.md) / Queue
+[jcommon文档库 - v1.9.36](../README.md) / [Exports](../modules.md) / Queue
 
 # Class: Queue
 

@@ -1,6 +1,6 @@
 {
   "name": "jcommon",
-  "version": "1.9.30",
+  "version": "1.9.36",
   "description": "JavaScript 常用纯函数工具库",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -17,8 +17,8 @@
     "build:dist": "npm run rollup && node ./pack/merge.typedoc.markdown.js",
     "before:publish": "node .scripts/cleanse-pkg \"rollup,merge,build,merge:dist,build:dist,auto-pub,before:publish,pub,typedoc,typedoc:dev,typedoc:markdown,test,lint\"  \"@babel/core,@rollup/plugin-commonjs,@rollup/plugin-node-resolve,babel-core,babel-loader,babel-plugin-add-module-exports,babel-preset-env,copy,rollup,rollup-plugin-terser,rollup-plugin-typescript2,typescript,webpack,@babel/preset-env,@rollup/plugin-babel,webpack-cli,@rollup/plugin-terser,@rollup/plugin-typescript,@types/jest,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint,husky,jest,rollup-plugin-minification,ts-jest,typedoc,typedoc-plugin-markdown\" ",
     "after:publish": "node .scripts/restore-pkg",
-    "pub": "npm run build:dist && jcommon-node -va && npm run before:publish && npm publish && npm run after:publish",
-    "auto-pub": "npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
+    "pub": "npm run build:dist && jcommon-node -va && npm run typedoc:markdown && npm run merge:dist && npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
+    "auto-pub": "npm run build:dist && npm run typedoc:markdown && npm run merge:dist && npm run build:dist && npm run before:publish && npm publish && npm run after:publish",
     "typedoc": "typedoc --tsconfig tsconfig.json --options typedoc.js",
     "typedoc:markdown": "typedoc --tsconfig tsconfig.json --options typedoc.js --plugin typedoc-plugin-markdown",
     "typedoc:dev": "typedoc  --watch",
