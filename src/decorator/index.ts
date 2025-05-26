@@ -1,15 +1,15 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-22 23:13:40
- * @LastEditTime: 2023-05-19 19:58:57
+ * @LastEditTime: 2025-05-26 16:53:03
  * @LastEditors: wxingheng
- * @Description:
+ * @Description: 
  * @FilePath: /jcommon/src/decorator/index.ts
  */
 
 
 /**
- * @description: decoratorNonenumerable
+ * @description: decoratorNonenumerable  
  * @author: wuxh
  * @Date: 2021-11-10 11:43:45
  * @param {*}

@@ -66,9 +66,9 @@ or
 
 
 
-[jcommon文档库 - v1.9.39](README.md) / Exports
+[jcommon文档库 - v1.9.40](README.md) / Exports
 
-# jcommon文档库 - v1.9.39
+# jcommon文档库 - v1.9.40
 
 ## Table of contents
 
@@ -2589,7 +2589,7 @@ versionCount('0.2.9.1') => '0.2.9.2'
 
 
 
-[jcommon文档库 - v1.9.39](../README.md) / [Exports](../modules.md) / EventBus
+[jcommon文档库 - v1.9.40](../README.md) / [Exports](../modules.md) / EventBus
 
 # Class: EventBus
 
@@ -2658,7 +2658,7 @@ ___
 
 ### getListeners
 
-▸ **getListeners**(`event`): `any`
+▸ **getListeners**(`event`): (...`args`: `any`[]) => `any`[]
 
 #### Parameters
 
@@ -2668,7 +2668,7 @@ ___
 
 #### Returns
 
-`any`
+(...`args`: `any`[]) => `any`[]
 
 ___
 
@@ -2739,7 +2739,7 @@ ___
 
 
 
-[jcommon文档库 - v1.9.39](../README.md) / [Exports](../modules.md) / Queue
+[jcommon文档库 - v1.9.40](../README.md) / [Exports](../modules.md) / Queue
 
 # Class: Queue
 

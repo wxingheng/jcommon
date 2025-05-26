@@ -676,66 +676,6 @@ export const getCookie = function (name: string): string | null {
 
 /*
  * @Author: wuxh
- * @Date: 2021-09-02 21:21:04
- * @LastEditTime: 2023-09-13 11:14:51
- * @LastEditors: wxingheng
- * @Description: 防抖
- * @FilePath: /jcommon/src/debounce/index.ts
- */
-
-/**
- * @description: debounce 防抖, 固定时间内持续触发，只执行最后一次
- * @author: wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function 
- * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- * 
- */
-export const debounce = function (
-  func: (...rest: any) => void,
-  wait = 500,
-  immediate = false
-) {
-  let timeout: any = null;
-
-  const debouncedFunc = function (...args: any) {
-    if (timeout) clearTimeout(timeout);
-    if (immediate) {
-      const callNow = !timeout;
-      timeout = setTimeout(() => {
-        timeout = null;
-      }, wait);
-      if (callNow) func(...args);
-    } else {
-      timeout = setTimeout(() => {
-        func(...args);
-      }, wait);
-    }
-  };
-
-  debouncedFunc.cancel = function () {
-    clearTimeout(timeout);
-    timeout = null;
-  };
-
-  return debouncedFunc;
-};
-
-
-
-
-/*
- * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
  * @LastEditTime: 2023-05-19 23:28:35
  * @LastEditors: wxingheng
@@ -968,6 +908,66 @@ export const getCountDays = function (str: string | number | Date): number {
   curDate.setDate(0)
   return curDate.getDate()
 }
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2021-09-02 21:21:04
+ * @LastEditTime: 2023-09-13 11:14:51
+ * @LastEditors: wxingheng
+ * @Description: 防抖
+ * @FilePath: /jcommon/src/debounce/index.ts
+ */
+
+/**
+ * @description: debounce 防抖, 固定时间内持续触发，只执行最后一次
+ * @author: wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function 
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ * 
+ */
+export const debounce = function (
+  func: (...rest: any) => void,
+  wait = 500,
+  immediate = false
+) {
+  let timeout: any = null;
+
+  const debouncedFunc = function (...args: any) {
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      const callNow = !timeout;
+      timeout = setTimeout(() => {
+        timeout = null;
+      }, wait);
+      if (callNow) func(...args);
+    } else {
+      timeout = setTimeout(() => {
+        func(...args);
+      }, wait);
+    }
+  };
+
+  debouncedFunc.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+
+  return debouncedFunc;
+};
 
 
 
@@ -1271,7 +1271,7 @@ return new Promise((resolve) => {
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 22:49:28
- * @LastEditTime: 2023-05-24 15:10:30
+ * @LastEditTime: 2025-05-26 16:43:50
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/eventBus/index.ts
@@ -1286,7 +1286,7 @@ return new Promise((resolve) => {
  * @example: const eventBus = new EventBus()
  */
 export class EventBus {
-  private listeners: { [x: string]: any }
+  private listeners: { [x: string]: Array<(...args: any[]) => any> }
   private maxListener: number
 
   constructor () {
@@ -1298,7 +1298,7 @@ export class EventBus {
   addListener (event: string, cb: (...args: any[]) => any) {
     const listeners = this.listeners
     if (listeners[event] && listeners[event].length >= this.maxListener) {
-      throw console.error('监听器的最大数量是%d,您已超出限制', this.maxListener)
+      throw new Error(`监听器的最大数量是${this.maxListener},您已超出限制`)
     }
     if (listeners[event] instanceof Array) {
       if (listeners[event].indexOf(cb) === -1) {
@@ -1312,13 +1312,14 @@ export class EventBus {
   // 触发监听函数
   @decoratorNonenumerable
   emit (event: string, ...args: any[]) {
+    if (!this.listeners[event]) return;
     this.listeners[event].forEach((cb: (...args: any[]) => any) => {
       cb(...args)
     })
   }
 
   //  获取监听列表
-  getListeners (event: string) {
+  getListeners (event: string): Array<(...args: any[]) => any> {
     return this.listeners[event]
   }
 
@@ -1328,7 +1329,7 @@ export class EventBus {
   }
 
   //   删除一个事件的一个方法
-  removeListener (event: string, listener: (...args: any[]) => any) {
+  removeListener (event: string, listener: (...args: any[]) => any): void {
     const listeners = this.listeners
     const arr = listeners[event] || []
     const i = arr.indexOf(listener)
@@ -1339,18 +1340,16 @@ export class EventBus {
 
   //  删除一个事件的所有方法
   removeAllListener (event: string) {
-    this.listeners[event] = []
+    delete this.listeners[event];
   }
 
   //  只出发一次的方法
   once (event: string, cb: (...args: any[]) => any) {
-    (() => {
-      const fn =  (...args: any[]) => {
-        cb(...args)
-        this.removeListener(event, fn)  // 使用this而不是self
-      }
-      this.addListener(event, fn)
-    })()  // 立即执行函数表达式(IIFE)
+    const fn = (...args: any[]) => {
+      cb(...args);
+      this.removeListener(event, fn);
+    };
+    this.addListener(event, fn);
   }
 }
 
@@ -1396,51 +1395,6 @@ export const getFormData = function (object: {
     }
   })
   return formData
-}
-
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2023-05-24 15:11:02
- * @LastEditors: wxingheng
- * @Description: 数处理相
- * @FilePath: /jcommon/src/math/index.ts
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 范围随机整数
- * @author: wuxh
- * @Date: 2020-05-06 12:09:34
- * @param {str}
- * @param {end}
- * @return: Number
- * @example: 
-  scopeRandom(1, 10)
-  => 3
- */
-export const scopeRandom = function (str: number, end: number) {
-  return Math.floor(Math.random() * (end - str) + str)
-}
-
-/**
- * @description: 保留到小数点以后n位
- * @author: wuxh
- * @Date: 2021-09-02 22:54:36
- * @param {number} number
- * @param {*} no
- * @return {*} Number
- * @example: 
- cutNumber('3123.22312') => 3123.22
- */
-export const cutNumber = function (number: number, no = 2): number {
-  if (typeof number != 'number') {
-    number = Number(number)
-  }
-  return Number(number.toFixed(no))
 }
 
 
@@ -1497,103 +1451,44 @@ export { globalCache }
 
 /*
  * @Author: wuxh
- * @Date: 2020-05-05 14:52:11
- * @LastEditTime: 2023-05-24 15:12:14
+ * @Date: 2020-05-06 10:16:25
+ * @LastEditTime: 2023-05-24 15:11:02
  * @LastEditors: wxingheng
- * @Description: 移动端相关
- * @FilePath: /jcommon/src/mobile/index.ts
+ * @Description: 数处理相
+ * @FilePath: /jcommon/src/math/index.ts
  * @https://github.com/wxingheng/jcommon
  */
 
 /**
- * @description: 是否是QQ平台
+ * @description: 范围随机整数
  * @author: wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
+ * @Date: 2020-05-06 12:09:34
+ * @param {str}
+ * @param {end}
+ * @return: Number
  * @example: 
-  isQQ()
-  => false
+  scopeRandom(1, 10)
+  => 3
  */
-export const isQQ = function (): boolean {
-  if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
-    return true
+export const scopeRandom = function (str: number, end: number) {
+  return Math.floor(Math.random() * (end - str) + str)
+}
+
+/**
+ * @description: 保留到小数点以后n位
+ * @author: wuxh
+ * @Date: 2021-09-02 22:54:36
+ * @param {number} number
+ * @param {*} no
+ * @return {*} Number
+ * @example: 
+ cutNumber('3123.22312') => 3123.22
+ */
+export const cutNumber = function (number: number, no = 2): number {
+  if (typeof number != 'number') {
+    number = Number(number)
   }
-  return false
-}
-
-/**
- * @description: 是否是微信平台
- * @author: wuxh
- * @Date: 2020-05-06 12:10:41
- * @param
- * @return: Boolean
- * @example: 
-  isWX()
-  => false
- */
-export const isWX = function (): boolean {
-  if (/MicroMessenger/i.test(navigator.userAgent)) {
-    return true
-  }
-  return false
-}
-
-/**
- * @description: 获取手机运营商
- * @author: wuxh
- * @Date: 2020-05-06 12:11:39
- * @param {}
- * @return: '移动' | '电信' | '联通' | '未知'
- * @example: 
-  operattelecom('13419595634') => 移动
- */
-export const operattelecom = function (e: string) {
-  const i =
-      '134,135,136,137,138,139,150,151,152,157,158,159,187,188,147,182,183,184,178',
-    n = '130,131,132,155,156,185,186,145,176',
-    a = '133,153,180,181,189,177,173,170',
-    o = e || '',
-    r = o.substring(0, 3),
-    d = o.substring(0, 4),
-    s =
-      !!/^1\d{10}$/.test(o) &&
-      (n.indexOf(r) >= 0
-        ? '联通'
-        : a.indexOf(r) >= 0
-        ? '电信'
-        : '1349' == d
-        ? '电信'
-        : i.indexOf(r) >= 0
-        ? '移动'
-        : '未知')
-  return s
-}
-
-/**
- * @description: 是否是安卓设备
- * @author: wuxh
- * @Date: 2020-06-09 09:31:04
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAndroidMobileDevice() => false
- */
-export const isAndroidMobileDevice = function (): boolean {
-  return /android/i.test(navigator.userAgent.toLowerCase())
-}
-
-/**
- * @description: 是否是苹果设备
- * @author: wuxh
- * @Date: 2020-06-09 09:31:55
- * @param {type} 
- * @return: boolean
- * @example: 
-  isAppleMobileDevice() => true
- */
-export const isAppleMobileDevice = function (): boolean {
-  return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase())
+  return Number(number.toFixed(no))
 }
 
 
@@ -2182,6 +2077,110 @@ export class Queue {
   print () {
     console.log(this.items.toString())
   }
+}
+
+
+
+
+/*
+ * @Author: wuxh
+ * @Date: 2020-05-05 14:52:11
+ * @LastEditTime: 2023-05-24 15:12:14
+ * @LastEditors: wxingheng
+ * @Description: 移动端相关
+ * @FilePath: /jcommon/src/mobile/index.ts
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 是否是QQ平台
+ * @author: wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isQQ()
+  => false
+ */
+export const isQQ = function (): boolean {
+  if (/qq\/([\d\.]+)*/i.test(navigator.userAgent)) {
+    return true
+  }
+  return false
+}
+
+/**
+ * @description: 是否是微信平台
+ * @author: wuxh
+ * @Date: 2020-05-06 12:10:41
+ * @param
+ * @return: Boolean
+ * @example: 
+  isWX()
+  => false
+ */
+export const isWX = function (): boolean {
+  if (/MicroMessenger/i.test(navigator.userAgent)) {
+    return true
+  }
+  return false
+}
+
+/**
+ * @description: 获取手机运营商
+ * @author: wuxh
+ * @Date: 2020-05-06 12:11:39
+ * @param {}
+ * @return: '移动' | '电信' | '联通' | '未知'
+ * @example: 
+  operattelecom('13419595634') => 移动
+ */
+export const operattelecom = function (e: string) {
+  const i =
+      '134,135,136,137,138,139,150,151,152,157,158,159,187,188,147,182,183,184,178',
+    n = '130,131,132,155,156,185,186,145,176',
+    a = '133,153,180,181,189,177,173,170',
+    o = e || '',
+    r = o.substring(0, 3),
+    d = o.substring(0, 4),
+    s =
+      !!/^1\d{10}$/.test(o) &&
+      (n.indexOf(r) >= 0
+        ? '联通'
+        : a.indexOf(r) >= 0
+        ? '电信'
+        : '1349' == d
+        ? '电信'
+        : i.indexOf(r) >= 0
+        ? '移动'
+        : '未知')
+  return s
+}
+
+/**
+ * @description: 是否是安卓设备
+ * @author: wuxh
+ * @Date: 2020-06-09 09:31:04
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAndroidMobileDevice() => false
+ */
+export const isAndroidMobileDevice = function (): boolean {
+  return /android/i.test(navigator.userAgent.toLowerCase())
+}
+
+/**
+ * @description: 是否是苹果设备
+ * @author: wuxh
+ * @Date: 2020-06-09 09:31:55
+ * @param {type} 
+ * @return: boolean
+ * @example: 
+  isAppleMobileDevice() => true
+ */
+export const isAppleMobileDevice = function (): boolean {
+  return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase())
 }
 
 
