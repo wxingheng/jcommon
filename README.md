@@ -66,9 +66,9 @@ or
 
 
 
-[jcommon文档库 - v1.9.36](README.md) / Exports
+[jcommon文档库 - v1.9.39](README.md) / Exports
 
-# jcommon文档库 - v1.9.36
+# jcommon文档库 - v1.9.39
 
 ## Table of contents
 
@@ -2589,7 +2589,7 @@ versionCount('0.2.9.1') => '0.2.9.2'
 
 
 
-[jcommon文档库 - v1.9.36](../README.md) / [Exports](../modules.md) / EventBus
+[jcommon文档库 - v1.9.39](../README.md) / [Exports](../modules.md) / EventBus
 
 # Class: EventBus
 
@@ -2739,7 +2739,7 @@ ___
 
 
 
-[jcommon文档库 - v1.9.36](../README.md) / [Exports](../modules.md) / Queue
+[jcommon文档库 - v1.9.39](../README.md) / [Exports](../modules.md) / Queue
 
 # Class: Queue
 

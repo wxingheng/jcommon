@@ -676,6 +676,66 @@ export const getCookie = function (name: string): string | null {
 
 /*
  * @Author: wuxh
+ * @Date: 2021-09-02 21:21:04
+ * @LastEditTime: 2023-09-13 11:14:51
+ * @LastEditors: wxingheng
+ * @Description: 防抖
+ * @FilePath: /jcommon/src/debounce/index.ts
+ */
+
+/**
+ * @description: debounce 防抖, 固定时间内持续触发，只执行最后一次
+ * @author: wuxh
+ * @Date: 2021-09-02 21:30:44
+ * @param {*} Function 要进行debouce的函数
+ * @param {*} wait 等待时间,默认500ms
+ * @param {*} immediate 是否立即执行
+ * @return {*} Function 
+ * @example: 
+ * function onInput() {
+                console.log('1111')
+            }
+            const debounceOnInput = debounce(onInput)
+            document
+                .getElementById('input')
+                .addEventListener('input', debounceOnInput)
+ * 
+ */
+export const debounce = function (
+  func: (...rest: any) => void,
+  wait = 500,
+  immediate = false
+) {
+  let timeout: any = null;
+
+  const debouncedFunc = function (...args: any) {
+    if (timeout) clearTimeout(timeout);
+    if (immediate) {
+      const callNow = !timeout;
+      timeout = setTimeout(() => {
+        timeout = null;
+      }, wait);
+      if (callNow) func(...args);
+    } else {
+      timeout = setTimeout(() => {
+        func(...args);
+      }, wait);
+    }
+  };
+
+  debouncedFunc.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  };
+
+  return debouncedFunc;
+};
+
+
+
+
+/*
+ * @Author: wuxh
  * @Date: 2020-05-04 21:24:53
  * @LastEditTime: 2023-05-19 23:28:35
  * @LastEditors: wxingheng
@@ -908,66 +968,6 @@ export const getCountDays = function (str: string | number | Date): number {
   curDate.setDate(0)
   return curDate.getDate()
 }
-
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2021-09-02 21:21:04
- * @LastEditTime: 2023-09-13 11:14:51
- * @LastEditors: wxingheng
- * @Description: 防抖
- * @FilePath: /jcommon/src/debounce/index.ts
- */
-
-/**
- * @description: debounce 防抖, 固定时间内持续触发，只执行最后一次
- * @author: wuxh
- * @Date: 2021-09-02 21:30:44
- * @param {*} Function 要进行debouce的函数
- * @param {*} wait 等待时间,默认500ms
- * @param {*} immediate 是否立即执行
- * @return {*} Function 
- * @example: 
- * function onInput() {
-                console.log('1111')
-            }
-            const debounceOnInput = debounce(onInput)
-            document
-                .getElementById('input')
-                .addEventListener('input', debounceOnInput)
- * 
- */
-export const debounce = function (
-  func: (...rest: any) => void,
-  wait = 500,
-  immediate = false
-) {
-  let timeout: any = null;
-
-  const debouncedFunc = function (...args: any) {
-    if (timeout) clearTimeout(timeout);
-    if (immediate) {
-      const callNow = !timeout;
-      timeout = setTimeout(() => {
-        timeout = null;
-      }, wait);
-      if (callNow) func(...args);
-    } else {
-      timeout = setTimeout(() => {
-        func(...args);
-      }, wait);
-    }
-  };
-
-  debouncedFunc.cancel = function () {
-    clearTimeout(timeout);
-    timeout = null;
-  };
-
-  return debouncedFunc;
-};
 
 
 
@@ -1402,6 +1402,51 @@ export const getFormData = function (object: {
 
 
 /*
+ * @Author: wuxh
+ * @Date: 2020-05-06 10:16:25
+ * @LastEditTime: 2023-05-24 15:11:02
+ * @LastEditors: wxingheng
+ * @Description: 数处理相
+ * @FilePath: /jcommon/src/math/index.ts
+ * @https://github.com/wxingheng/jcommon
+ */
+
+/**
+ * @description: 范围随机整数
+ * @author: wuxh
+ * @Date: 2020-05-06 12:09:34
+ * @param {str}
+ * @param {end}
+ * @return: Number
+ * @example: 
+  scopeRandom(1, 10)
+  => 3
+ */
+export const scopeRandom = function (str: number, end: number) {
+  return Math.floor(Math.random() * (end - str) + str)
+}
+
+/**
+ * @description: 保留到小数点以后n位
+ * @author: wuxh
+ * @Date: 2021-09-02 22:54:36
+ * @param {number} number
+ * @param {*} no
+ * @return {*} Number
+ * @example: 
+ cutNumber('3123.22312') => 3123.22
+ */
+export const cutNumber = function (number: number, no = 2): number {
+  if (typeof number != 'number') {
+    number = Number(number)
+  }
+  return Number(number.toFixed(no))
+}
+
+
+
+
+/*
  * @Author: wxingheng
  * @Date: 2024-12-19 17:55:54
  * @LastEditTime: 2024-12-19 18:11:00
@@ -1447,51 +1492,6 @@ const globalCache = GlobalCache.getInstance()
 Object.freeze(globalCache)
 
 export { globalCache }
-
-
-
-/*
- * @Author: wuxh
- * @Date: 2020-05-06 10:16:25
- * @LastEditTime: 2023-05-24 15:11:02
- * @LastEditors: wxingheng
- * @Description: 数处理相
- * @FilePath: /jcommon/src/math/index.ts
- * @https://github.com/wxingheng/jcommon
- */
-
-/**
- * @description: 范围随机整数
- * @author: wuxh
- * @Date: 2020-05-06 12:09:34
- * @param {str}
- * @param {end}
- * @return: Number
- * @example: 
-  scopeRandom(1, 10)
-  => 3
- */
-export const scopeRandom = function (str: number, end: number) {
-  return Math.floor(Math.random() * (end - str) + str)
-}
-
-/**
- * @description: 保留到小数点以后n位
- * @author: wuxh
- * @Date: 2021-09-02 22:54:36
- * @param {number} number
- * @param {*} no
- * @return {*} Number
- * @example: 
- cutNumber('3123.22312') => 3123.22
- */
-export const cutNumber = function (number: number, no = 2): number {
-  if (typeof number != 'number') {
-    number = Number(number)
-  }
-  return Number(number.toFixed(no))
-}
-
 
 
 

@@ -1,7 +1,7 @@
 /*
  * @Author: wuxh
  * @Date: 2021-09-01 22:49:28
- * @LastEditTime: 2023-05-24 15:10:30
+ * @LastEditTime: 2025-05-26 16:43:50
  * @LastEditors: wxingheng
  * @Description:
  * @FilePath: /jcommon/src/eventBus/index.ts
@@ -16,7 +16,7 @@ import { decoratorNonenumerable } from '../decorator/index'
  * @example: const eventBus = new EventBus()
  */
 export class EventBus {
-  private listeners: { [x: string]: any }
+  private listeners: { [x: string]: Array<(...args: any[]) => any> }
   private maxListener: number
 
   constructor () {
@@ -28,7 +28,7 @@ export class EventBus {
   addListener (event: string, cb: (...args: any[]) => any) {
     const listeners = this.listeners
     if (listeners[event] && listeners[event].length >= this.maxListener) {
-      throw console.error('监听器的最大数量是%d,您已超出限制', this.maxListener)
+      throw new Error(`监听器的最大数量是${this.maxListener},您已超出限制`)
     }
     if (listeners[event] instanceof Array) {
       if (listeners[event].indexOf(cb) === -1) {
@@ -42,13 +42,14 @@ export class EventBus {
   // 触发监听函数
   @decoratorNonenumerable
   emit (event: string, ...args: any[]) {
+    if (!this.listeners[event]) return;
     this.listeners[event].forEach((cb: (...args: any[]) => any) => {
       cb(...args)
     })
   }
 
   //  获取监听列表
-  getListeners (event: string) {
+  getListeners (event: string): Array<(...args: any[]) => any> {
     return this.listeners[event]
   }
 
@@ -58,7 +59,7 @@ export class EventBus {
   }
 
   //   删除一个事件的一个方法
-  removeListener (event: string, listener: (...args: any[]) => any) {
+  removeListener (event: string, listener: (...args: any[]) => any): void {
     const listeners = this.listeners
     const arr = listeners[event] || []
     const i = arr.indexOf(listener)
@@ -69,18 +70,16 @@ export class EventBus {
 
   //  删除一个事件的所有方法
   removeAllListener (event: string) {
-    this.listeners[event] = []
+    delete this.listeners[event];
   }
 
   //  只出发一次的方法
   once (event: string, cb: (...args: any[]) => any) {
-    (() => {
-      const fn =  (...args: any[]) => {
-        cb(...args)
-        this.removeListener(event, fn)  // 使用this而不是self
-      }
-      this.addListener(event, fn)
-    })()  // 立即执行函数表达式(IIFE)
+    const fn = (...args: any[]) => {
+      cb(...args);
+      this.removeListener(event, fn);
+    };
+    this.addListener(event, fn);
   }
 }
 
