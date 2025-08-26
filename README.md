@@ -1,4 +1,4 @@
-jcommon文档库 / [Exports](modules.md)
+jcommon文档库 / [Exports](https://wxingheng.github.io/jcommon)
 
 <!--
  * @Author: wuxh
