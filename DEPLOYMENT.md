@@ -2,7 +2,7 @@
 
 ## 概述
 
-本项目已配置自动部署到 GitHub Pages，文档位于 `docs/` 目录中。
+本项目已配置自动部署到 GitHub Pages，文档通过 TypeDoc 自动生成并部署。
 
 ## 设置步骤
 
@@ -30,16 +30,37 @@
 ### 触发条件
 
 - 推送到 `main` 或 `master` 分支
-- `docs/` 目录中的文件发生更改
+- `src/` 目录中的源代码发生更改
+- TypeDoc 配置文件发生更改
 - 手动触发（workflow_dispatch）
 
 ### 部署步骤
 
 1. **Checkout**: 检出代码
-2. **Setup Pages**: 配置 GitHub Pages 环境
-3. **Upload artifact**: 上传 `docs/` 目录作为构建产物
-4. **Deploy**: 部署到 GitHub Pages
-5. **Status**: 显示部署状态和 URL
+2. **Setup Node.js**: 设置 Node.js 环境
+3. **Install dependencies**: 安装项目依赖
+4. **Build documentation**: 使用 TypeDoc 生成文档
+5. **Setup Pages**: 配置 GitHub Pages 环境
+6. **Upload artifact**: 上传生成的 `docs/` 目录作为构建产物
+7. **Deploy**: 部署到 GitHub Pages
+8. **Status**: 显示部署状态和 URL
+
+## 文档生成
+
+### TypeDoc 配置
+
+文档通过 TypeDoc 自动生成，配置文件位于 `typedoc.js`：
+
+- 入口点：`src/index.ts`
+- 输出目录：`docs/`
+- 包含版本信息
+- 排除私有和受保护的成员
+
+### 生成命令
+
+```bash
+npm run typedoc:markdown
+```
 
 ## 自定义配置
 
@@ -54,29 +75,25 @@
     path: './your-custom-path'  # 修改这里
 ```
 
-### 添加构建步骤
+### 修改触发条件
 
-如果需要在部署前构建文档，可以在 "Upload artifact" 步骤前添加构建步骤：
+如果只想在特定文件更改时触发部署，修改 `paths` 部分：
 
 ```yaml
-- name: Build docs
-  run: |
-    npm install
-    npm run build-docs
-    
-- name: Upload artifact
-  uses: actions/upload-pages-artifact@v3
-  with:
-    path: './dist/docs'  # 构建后的路径
+paths:
+  - 'src/**'
+  - 'docs/**'
+  - 'typedoc.js'
 ```
 
 ## 故障排除
 
 ### 常见问题
 
-1. **部署失败**: 检查 Actions 标签中的错误信息
-2. **页面不显示**: 确保 `docs/` 目录包含 `index.html`
-3. **权限错误**: 检查仓库设置中的 Pages 权限
+1. **构建失败**: 检查 TypeScript 编译错误
+2. **依赖安装失败**: 检查 `package-lock.json` 是否最新
+3. **部署失败**: 检查 Actions 标签中的错误信息
+4. **页面不显示**: 确保 TypeDoc 成功生成了 `docs/` 目录
 
 ### 手动部署
 
@@ -86,9 +103,21 @@
 2. 选择 "Deploy Docs to GitHub Pages" 工作流
 3. 点击 "Run workflow" 手动触发
 
+### 本地测试
+
+在推送前，可以在本地测试文档生成：
+
+```bash
+npm install
+npm run typedoc:markdown
+cd docs
+python -m http.server 8000  # 或其他本地服务器
+```
+
 ## 注意事项
 
 - 部署可能需要几分钟时间
-- 确保 `docs/` 目录包含有效的 HTML 文件
+- 每次推送都会重新生成文档并部署
+- 确保 TypeScript 代码能够正常编译
 - `.nojekyll` 文件确保 GitHub Pages 不会使用 Jekyll 处理
-- 每次推送都会触发新的部署
+- 文档基于 `src/index.ts` 中的导出内容生成
