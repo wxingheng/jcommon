@@ -38,7 +38,7 @@
 
 1. **Checkout**: 检出代码
 2. **Setup Node.js**: 设置 Node.js 环境
-3. **Install dependencies**: 安装项目依赖
+3. **Install dependencies**: 安装项目依赖（使用 `npm install`）
 4. **Build documentation**: 使用 TypeDoc 生成文档
 5. **Setup Pages**: 配置 GitHub Pages 环境
 6. **Upload artifact**: 上传生成的 `docs/` 目录作为构建产物
@@ -61,6 +61,21 @@
 ```bash
 npm run typedoc:markdown
 ```
+
+## 依赖管理
+
+### 安装策略
+
+工作流使用 `npm install` 而不是 `npm ci`，原因如下：
+
+- **兼容性**: 更好地处理 `package-lock.json` 版本不匹配的情况
+- **灵活性**: 自动更新 lockfile 以匹配 `package.json`
+- **稳定性**: 避免因版本差异导致的安装失败
+
+### 缓存优化
+
+- 使用 GitHub Actions 的 npm 缓存
+- 减少重复安装的时间
 
 ## 自定义配置
 
@@ -91,7 +106,7 @@ paths:
 ### 常见问题
 
 1. **构建失败**: 检查 TypeScript 编译错误
-2. **依赖安装失败**: 检查 `package-lock.json` 是否最新
+2. **依赖安装失败**: 检查网络连接和 npm 配置
 3. **部署失败**: 检查 Actions 标签中的错误信息
 4. **页面不显示**: 确保 TypeDoc 成功生成了 `docs/` 目录
 
@@ -121,3 +136,4 @@ python -m http.server 8000  # 或其他本地服务器
 - 确保 TypeScript 代码能够正常编译
 - `.nojekyll` 文件确保 GitHub Pages 不会使用 Jekyll 处理
 - 文档基于 `src/index.ts` 中的导出内容生成
+- 使用 `npm install` 确保依赖版本兼容性
